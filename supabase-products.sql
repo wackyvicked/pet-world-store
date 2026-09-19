@@ -24,7 +24,25 @@ create policy "Public can view active products"
 on public.products for select to anon, authenticated
 using (active = true);
 
--- IMPORTANT: Admin writes must be protected by Supabase Auth.
--- Do not add an anonymous insert/update/delete policy.
--- Create an admin user in Supabase Auth and add authenticated-only
--- policies after the admin login is wired.
+-- Admin writes are allowed only for authenticated users whose Supabase Auth
+-- user_metadata contains {"role":"admin"}. Do NOT create anon write policies.
+drop policy if exists "Admins can insert products" on public.products;
+drop policy if exists "Admins can update products" on public.products;
+drop policy if exists "Admins can delete products" on public.products;
+
+create policy "Admins can insert products"
+on public.products for insert to authenticated
+with check ((select auth.jwt()->'user_metadata'->>'role') = 'admin');
+
+create policy "Admins can update products"
+on public.products for update to authenticated
+using ((select auth.jwt()->'user_metadata'->>'role') = 'admin')
+with check ((select auth.jwt()->'user_metadata'->>'role') = 'admin');
+
+create policy "Admins can delete products"
+on public.products for delete to authenticated
+using ((select auth.jwt()->'user_metadata'->>'role') = 'admin');
+
+-- After creating your admin user in Supabase Auth, set its user metadata role to:
+-- {"role":"admin"}
+-- Then /admin.html can sign in and manage products.
