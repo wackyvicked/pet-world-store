@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pet World Admin</title>
+<style>
+body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width:1100px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:18px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}input,textarea,select{padding:11px;border:1px solid #ccc;border-radius:7px;font:inherit}.btn{border:0;border-radius:7px;padding:11px 16px;font-weight:bold;cursor:pointer;background:#ffd21c}.danger{background:#e74c3c;color:#fff}.muted{color:#666}.status{padding:10px;border-radius:8px;background:#fff5b8;margin:12px 0}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left}.actions{display:flex;gap:6px;flex-wrap:wrap}@media(max-width:700px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.table{font-size:13px}.wrap{padding:14px}.table-wrap{overflow:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="top"><div><h1>Pet World Admin</h1><div class="muted">Products control panel</div></div><a class="btn" href="./index.html">Open Store</a></div>
+<div id="status" class="status">Loading…</div>
+<div class="card">
+<h2 id="formTitle">Add Product</h2>
+<form id="productForm">
+<input type="hidden" id="editId">
+<div class="grid">
+<label class="field">Product name *<input id="name" required></label>
+<label class="field">SKU *<input id="sku" required></label>
+<label class="field">Price (PKR) *<input id="price" type="number" min="0" required></label>
+<label class="field">Category *<input id="category" required placeholder="Dogs, Cats, Grooming…"></label>
+<label class="field">Stock<input id="stock" type="number" min="0" value="0"></label>
+<label class="field">Image URL<input id="image_url" placeholder="https://…"></label>
+<label class="field full">Description<textarea id="description" rows="3"></textarea></label>
+<label class="field"><span>Active</span><input id="active" type="checkbox" checked style="width:20px;height:20px"></label>
+</div>
+<div class="actions" style="margin-top:14px"><button class="btn" type="submit">Save Product</button><button class="btn" type="button" onclick="resetForm()">Clear</button></div>
+</form>
+</div>
+<div class="card">
+<h2>Products</h2><div class="table-wrap"><table class="table"><thead><tr><th>Product</th><th>SKU</th><th>Price</th><th>Category</th><th>Stock</th><th>Actions</th></tr></thead><tbody id="rows"></tbody></table></div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
+const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let products=[];
+const $=id=>document.getElementById(id);
+function setStatus(t,ok=false){$("status").textContent=t;$("status").style.background=ok?"#dff5e3":"#fff5b8"}
+function pick(p,...keys){for(const k of keys)if(p[k]!==undefined&&p[k]!==null)return p[k];return ""}
+async function load(){
+  setStatus("Loading products…");
+  const {data,error}=await sb.from("products").select("*").order("created_at",{ascending:false});
+  if(error){setStatus("Database error: "+error.message);return}
+  products=data||[]; render(); setStatus("Connected to Supabase. "+products.length+" product(s).",true);
+}
+function render(){
+  $("rows").innerHTML=products.map((p,i)=>{const id=pick(p,"id","product_id");return "<tr><td>"+esc(pick(p,"name","product_name","title"))+"</td><td>"+esc(pick(p,"sku"))+"</td><td>PKR "+Number(pick(p,"price","sale_price")||0).toLocaleString()+"</td><td>"+esc(pick(p,"category","category_name"))+"</td><td>"+esc(pick(p,"stock","quantity","inventory")||0)+"</td><td><div class='actions'><button class='btn' onclick='editProduct("+i+")'>Edit</button><button class='btn danger' onclick='removeProduct("+JSON.stringify(id)+")'>Delete</button></div></td></tr>"}).join("")||"<tr><td colspan='6'>No products yet.</td></tr>";
+}
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[m]));}
+function editProduct(i){
+ const p=products[i];$("editId").value=pick(p,"id","product_id");$("name").value=pick(p,"name","product_name","title");$("sku").value=pick(p,"sku");$("price").value=pick(p,"price","sale_price");$("category").value=pick(p,"category","category_name");$("stock").value=pick(p,"stock","quantity","inventory")||0;$("image_url").value=pick(p,"image_url","image","imageUrl");$("description").value=pick(p,"description","details");$("active").checked=pick(p,"active","is_active")!==false;$("formTitle").textContent="Edit Product";scrollTo({top:0,behavior:"smooth"});
+}
+function resetForm(){$("productForm").reset();$("editId").value="";$("active").checked=true;$("formTitle").textContent="Add Product"}
+async function save(e){
+ e.preventDefault(); setStatus("Saving…");
+ const id=$("editId").value;
+ const payload={name:$("name").value.trim(),sku:$("sku").value.trim(),price:Number($("price").value),category:$("category").value.trim(),stock:Number($("stock").value||0),image_url:$("image_url").value.trim()||null,description:$("description").value.trim()||null,active:$("active").checked};
+ let q=id?sb.from("products").update(payload).eq("id",id):sb.from("products").insert(payload);
+ const {error}=await q;
+ if(error){setStatus("Save failed: "+error.message);return}
+ resetForm();await load();
+}
+async function removeProduct(id){if(!confirm("Delete this product?"))return;setStatus("Deleting…");const {error}=await sb.from("products").delete().eq("id",id);if(error){setStatus("Delete failed: "+error.message);return}await load()}
+$("productForm").addEventListener("submit",save);load();
+</script>
+</body></html>
