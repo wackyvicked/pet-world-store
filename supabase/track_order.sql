@@ -25,10 +25,11 @@ as $$
     o.created_at::timestamptz,
     o.items::jsonb
   from public.orders o
-  where trim(o.order_number::text) = trim(p_order_number)
-    and right(regexp_replace(coalesce(o.phone::text,''),'[^0-9]','','g'),10)
-        = right(regexp_replace(coalesce(p_phone,''),'[^0-9]','','g'),10)
-  limit 1;
+  where (p_order_number is not null and trim(o.order_number::text) = trim(p_order_number))
+     or (p_order_number is null and p_phone is not null
+         and right(regexp_replace(coalesce(o.phone::text,''),'[^0-9]','','g'),10)
+             = right(regexp_replace(coalesce(p_phone,''),'[^0-9]','','g'),10))
+  order by o.created_at desc;
 $$;
 
 revoke execute on function public.track_order(text,text) from public;
