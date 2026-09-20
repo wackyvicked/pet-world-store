@@ -65,12 +65,12 @@ body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width
 <script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
 const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"pet-world-admin-auth"}});
 let products=[], photoBlob=null, originalImage=null, originalImageSource=null, rotation=0, cropStart=null, cropEnd=null, originalProductImageUrl=null, galleryUrls=[], galleryEditingIndex=-1, allOrders=[], orderFilter="All";
 const $=id=>document.getElementById(id);
 function setStatus(t,ok=false){$("status").textContent=t;$("status").style.background=ok?"#dff5e3":"#fff5b8"}
 function pick(p,...keys){for(const k of keys)if(p[k]!==undefined&&p[k]!==null)return p[k];return ""}
-async function login(){const email=$("email").value.trim();const password=$("password").value;if(!email||!password){setStatus("Enter your email and password.");return}setStatus("Signing in…");const {error}=await sb.auth.signInWithPassword({email,password});if(error){setStatus("Login failed: "+error.message);return}showApp()}
+async function login(){const email=$("email").value.trim();const password=$("password").value;if(!email||!password){setStatus("Enter your email and password.");return}setStatus("Signing in…");try{const {data,error}=await sb.auth.signInWithPassword({email,password});if(error){setStatus("Login failed: "+error.message);return}if(!data||!data.session){setStatus("Login did not create a session. Please try again.");return}await showApp()}catch(e){setStatus("Login failed: "+(e.message||e))}}
 async function logout(){await sb.auth.signOut();location.reload()}
 function applyAdminSection(){const h=location.hash.replace("#","");if(!h)return;const ids=["dashboard","productForm","bannersSection","ordersSection","productsSection"];ids.forEach(id=>{const el=$(id);if(el)el.style.display=id===h?"block":"none"});const nav=document.querySelectorAll(".navBtn");nav.forEach(b=>b.style.display="none");const map={dashboard:0,productForm:1,productsSection:2,ordersSection:4,bannersSection:5};if(map[h]!==undefined&&nav[map[h]])nav[map[h]].style.display="block"}
 async function showApp(){const {data:{user}}=await sb.auth.getUser();if(!user){$("login").style.display="block";$("app").style.display="none";setStatus("Please sign in.");return}$("login").style.display="none";$("app").style.display="block";$("top").innerHTML="<div class='actions'><button class='btn mobileMenuBtn' type='button' onclick='toggleAdminMenu()'>☰ MENU</button><div><h1>Pet World Admin</h1><div class='muted'>Signed in as "+esc(user.email)+"</div></div></div><div class='actions'><button class='btn' onclick='logout()'>Sign Out</button><a class='btn' href='./index.html'>Open Store</a></div>";await load()}
