@@ -10,7 +10,7 @@ body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width
 <body>
 <div class="wrap">
 <div class="top" id="top"></div>
-<div id="login" class="card"><h2>Admin Login</h2><p class="muted">Only the Pet World admin account can change products.</p><div class="grid"><label class="field">Email<input id="email" type="email" autocomplete="username"></label><label class="field">Password<input id="password" type="password" autocomplete="current-password"></label></div><button class="btn" style="margin-top:12px" onclick="login()">Sign In</button></div><div id="status" class="status">Please sign in.</div><div id="app" style="display:none">
+<div id="login" class="card"><h2>Admin Login</h2><p class="muted">Sign in without a password. We'll send a secure login link to your admin email.</p><div class="grid"><label class="field full">Admin email<input id="email" type="email" autocomplete="email" required></label></div><button class="btn" style="margin-top:12px" onclick="login()">Send Login Link</button></div><div id="status" class="status">Please sign in.</div><div id="app" style="display:none">
 <div class="card">
 <h2 id="formTitle">Add Product</h2>
 <form id="productForm">
@@ -41,7 +41,7 @@ let products=[];
 const $=id=>document.getElementById(id);
 function setStatus(t,ok=false){$("status").textContent=t;$("status").style.background=ok?"#dff5e3":"#fff5b8"}
 function pick(p,...keys){for(const k of keys)if(p[k]!==undefined&&p[k]!==null)return p[k];return ""}
-async function login(){setStatus("Signing in…");const {error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error){setStatus("Login failed: "+error.message);return}showApp()}
+async function login(){const email=$("email").value.trim();if(!email){setStatus("Enter your admin email.");return}setStatus("Sending secure login link…");const {error}=await sb.auth.signInWithOtp({email,options:{shouldCreateUser:false}});if(error){setStatus("Login link failed: "+error.message);return}setStatus("Login link sent. Check your email and tap the link to sign in.",true)}
 async function logout(){await sb.auth.signOut();location.reload()}
 async function showApp(){const {data:{user}}=await sb.auth.getUser();if(!user){$("login").style.display="block";$("app").style.display="none";setStatus("Please sign in.");return}$("login").style.display="none";$("app").style.display="block";$("top").innerHTML="<div><h1>Pet World Admin</h1><div class='muted'>Signed in as "+esc(user.email)+"</div></div><div class='actions'><button class='btn' onclick='logout()'>Sign Out</button><a class='btn' href='./index.html'>Open Store</a></div>";await load()}
 async function load(){
