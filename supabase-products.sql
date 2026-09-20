@@ -18,6 +18,10 @@ create unique index if not exists products_sku_unique on public.products(sku);
 
 alter table public.products enable row level security;
 
+-- Make sure Supabase Data API roles have table privileges.
+grant select on table public.products to anon, authenticated;
+grant insert, update, delete on table public.products to authenticated;
+
 -- Public storefront: read active products.
 drop policy if exists "Public can view active products" on public.products;
 create policy "Public can view active products"
