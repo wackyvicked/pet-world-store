@@ -6,7 +6,7 @@ body{margin:0;font-family:Arial;color:#171717}header{position:sticky;top:0;backg
 .menu-btn span{font-size:12px;margin-left:3px}
 .menu-label{font-size:13px;font-weight:bold}
 @media(min-width:701px){.mobile-menu-bar{display:none}}
-@media(max-width:700px){.nav{display:none;flex-direction:column;gap:0;padding:0 14px 10px;overflow:visible}.nav.open{display:flex}.nav a{padding:11px 5px;border-bottom:1px solid #eee}.mobile-menu-bar{display:flex}}.hero{background:#ffe56a;padding:45px 18px}.hero div{max-width:1100px;margin:auto}.hero h1{font-size:44px;margin:0 0 10px}.section{max-width:1100px;margin:35px auto;padding:0 14px}.cats,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.cat,.card{border:1px solid #eee;border-radius:12px;background:#fafafa;overflow:hidden}.cat{text-align:center;padding:25px;font-weight:bold}.cat b{display:block;font-size:42px}.pic{height:150px;background:#f1f1f1;display:grid;place-items:center;font-size:65px}.info{padding:13px}.price{font-weight:bold;font-size:18px;margin:8px 0}.btn{border-radius:6px}.green{background:#39a852;color:white}
+@media(max-width:700px){.nav{display:none;flex-direction:column;gap:0;padding:0 14px 10px;overflow:visible}.nav.open{display:flex}.nav a{padding:11px 5px;border-bottom:1px solid #eee}.mobile-menu-bar{display:flex}}.hero{background:#ffe56a;padding:45px 18px}.hero div{max-width:1100px;margin:auto}.hero h1{font-size:44px;margin:0 0 10px}.section{max-width:1100px;margin:35px auto;padding:0 14px}.cats,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.cat,.card{border:1px solid #eee;border-radius:12px;background:#fafafa;overflow:hidden}.cat{text-align:center;padding:25px;font-weight:bold}.cat b{display:block;font-size:42px}.pic{height:150px;background:#f1f1f1;display:grid;place-items:center;font-size:65px}.info{padding:13px}.price{font-weight:bold;font-size:18px;margin:8px 0}.old-price{text-decoration:line-through;color:#777;font-size:14px;margin-right:6px}.sale-price{color:#d71920;font-weight:900;font-size:20px}.sale-badge{display:inline-block;background:#d71920;color:white;padding:4px 8px;border-radius:5px;font-size:11px;font-weight:900;margin-bottom:5px}.sale-banner{background:linear-gradient(135deg,#d71920,#ffb000);color:white;padding:24px 18px}.sale-banner div{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.sale-banner h2{margin:0;font-size:30px}.sale-banner p{margin:5px 0 0}.sale-banner .btn{background:white;color:#171717}@media(max-width:700px){.sale-banner{padding:20px 14px}.sale-banner div{display:block}.sale-banner h2{font-size:25px}.sale-banner .btn{display:inline-block;margin-top:12px}}.btn{border-radius:6px}.green{background:#39a852;color:white}
 .product-detail{display:grid;grid-template-columns:1fr 1.2fr;gap:25px;align-items:center}
 .product-detail .bigpic{height:300px;background:#f1f1f1;border-radius:12px;display:grid;place-items:center;font-size:120px}
 .product-detail h2{font-size:30px;margin:0 0 8px}
@@ -40,6 +40,7 @@ body{margin:0;font-family:Arial;color:#171717}header{position:sticky;top:0;backg
 <a href="#">HOME</a><a href="#shop">ALL PRODUCTS</a><a href="#shop">CATS</a><a href="#shop">DOGS</a><a href="#shop">BIRDS</a><a href="#shop">FISH</a><a href="#shop">PET FOOD</a><a href="#shop">GROOMING</a><a href="#shop">MEDICAL</a><a href="#shop">ACCESSORIES</a>
 </nav></header>
 <section class="hero"><div><h1>Everything Your Pet Loves 🐾</h1><p>Pet food, accessories, grooming products and medical supplies.</p><a class="btn" href="#shop">SHOP NOW</a></div></section>
+<section class="sale-banner"><div><div><h2>🔥 SPECIAL SALE</h2><p>Save on selected Pet World products — limited-time offers!</p></div><a class="btn" href="#shop">SHOP SALE</a></div></section>
 <section class="section" id="categories">
 <h2>Shop Categories</h2>
 <div class="cats">
@@ -97,13 +98,13 @@ const FALLBACK_P=[
 ["Pet Medical Supplies",2000,"🩺","Medical Supplies"]
 ];
 let P=[...FALLBACK_P],cart=[];
-function productRow(r){return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),r.image_url||r.image||r.imageUrl||"🐾",r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit];}
+function productRow(r){return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),r.image_url||r.image||r.imageUrl||"🐾",r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit,r.sale_price];}
 async function loadProducts(){try{const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(!error&&Array.isArray(data)&&data.length){P=data.map(productRow);render();update();return;}}catch(e){}P=[...FALLBACK_P];render();update();}
 function productVisual(p){return String(p[2]).startsWith("http")?'<img src="'+p[2]+'" alt="'+String(p[0]).replace(/"/g,"&quot;")+'" style="max-width:100%;max-height:100%;object-fit:contain">':p[2]}
 
-function render(a=P){products.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic">${productVisual(p)}</div><div class="info"><b>${p[0]}</b><div class="price">PKR ${p[1].toLocaleString()}</div><button class="btn" onclick="viewProduct(${i})">VIEW DETAILS</button><button class="btn yellow" style="margin-left:5px" onclick="add(${i})">ADD TO CART</button></div></div>`).join("")}
+function render(a=P){products.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic">${productVisual(p)}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="sale-badge">SALE</span>`:""}<b>${p[0]}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button class="btn" onclick="viewProduct(${i})">VIEW DETAILS</button><button class="btn yellow" style="margin-left:5px" onclick="add(${i})">ADD TO CART</button></div></div>`).join("")}
 function add(i){let x=cart.find(x=>x.i==i);x?x.q++:cart.push({i,q:1});update();openCart()}
-function update(){count.textContent=cart.reduce((a,x)=>a+x.q,0);items.innerHTML=cart.map(x=>`<div class="row"><span>${P[x.i][2]}</span><div style="flex:1"><b>${P[x.i][0]}</b><br>PKR ${P[x.i][1].toLocaleString()} × ${x.q}<br><button onclick="chg(${x.i},-1)">−</button> <button onclick="chg(${x.i},1)">+</button></div></div>`).join("")||"<p>Cart is empty.</p>";total.textContent=cart.reduce((a,x)=>a+P[x.i][1]*x.q,0).toLocaleString()}
+function update(){count.textContent=cart.reduce((a,x)=>a+x.q,0);items.innerHTML=cart.map(x=>`<div class="row"><span>${P[x.i][2]}</span><div style="flex:1"><b>${P[x.i][0]}</b><br>PKR ${(P[x.i][9]&&Number(P[x.i][9])>0&&Number(P[x.i][9])<Number(P[x.i][1])?Number(P[x.i][9]):Number(P[x.i][1])).toLocaleString()} × ${x.q}<br><button onclick="chg(${x.i},-1)">−</button> <button onclick="chg(${x.i},1)">+</button></div></div>`).join("")||"<p>Cart is empty.</p>";total.textContent=cart.reduce((a,x)=>a+(P[x.i][9]&&Number(P[x.i][9])>0&&Number(P[x.i][9])<Number(P[x.i][1])?Number(P[x.i][9]):Number(P[x.i][1]))*x.q,0).toLocaleString()}
   let bc=document.getElementById('bottomCount'); if(bc) bc.textContent=cart.reduce((a,x)=>a+x.q,0);
 function chg(i,n){let x=cart.find(x=>x.i==i);x.q+=n;if(x.q<1)cart=cart.filter(y=>y.i!=i);update()}
 function openCart(){setBottomActive('Cart');overlay.style.display="block";cartEl=document.getElementById("cart");cartEl.style.display="block";update()}function closeCart(){overlay.style.display="none";document.getElementById("cart").style.display="none"}
@@ -138,7 +139,7 @@ function viewProduct(i){
       <div>
         <span class="category">${p[3]}</span>
         <h2>${p[0]}</h2>
-        <div class="detail-price">PKR ${p[1].toLocaleString()}</div>
+        <div class="detail-price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div>
         <p>${p[5]||"Quality pet product from Pet World."}</p>${p[6]?`<p><b>SKU:</b> ${p[6]}</p>`:""}${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
         <p><b>Category:</b> ${p[3]}</p>
         <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
