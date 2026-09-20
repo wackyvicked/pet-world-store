@@ -5,8 +5,8 @@
 body{margin:0;font-family:Arial;color:#171717;background:#f7f7f7}.top{background:#171717;color:#fff;text-align:center;padding:8px;font-size:12px}.wrap{max-width:650px;margin:0 auto;padding:20px 14px}.card{background:#fff;border:1px solid #ddd;border-radius:14px;padding:22px;box-shadow:0 4px 18px #0000000d}h1{margin:0 0 8px}.muted{color:#666}.grid{display:grid;gap:12px}label{font-weight:bold}input{box-sizing:border-box;width:100%;padding:13px;border:1px solid #ccc;border-radius:8px;margin-top:6px;font-size:16px}.btn{width:100%;border:0;border-radius:8px;padding:13px;background:#ffd21c;font-weight:900;font-size:16px;cursor:pointer}.status{margin:14px 0;padding:11px;border-radius:8px;background:#fff5b8}.result{display:none;margin-top:18px}.orderhead{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #eee;padding-bottom:12px}.pill{display:inline-block;padding:7px 11px;border-radius:20px;background:#eee;font-weight:900}.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:22px 0}.step{text-align:center;font-size:11px;color:#999}.dot{width:25px;height:25px;border-radius:50%;background:#ddd;margin:0 auto 6px;display:grid;place-items:center;font-weight:900}.step.done{color:#171717;font-weight:bold}.step.done .dot{background:#39a852;color:#fff}.step.current .dot{background:#ffd21c;color:#171717}.info{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}.box{background:#f7f7f7;border-radius:9px;padding:12px}.items{margin-top:16px;border-top:1px solid #eee}.item{padding:10px 0;border-bottom:1px solid #eee;display:flex;justify-content:space-between;gap:10px}@media(max-width:500px){.steps{grid-template-columns:1fr;gap:8px}.step{text-align:left;display:flex;align-items:center;gap:8px}.dot{margin:0}.info{grid-template-columns:1fr}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
 <body><div class="top">PET WORLD • ORDER TRACKING</div><main class="wrap"><div class="card">
-<h1>Track Your Order</h1><p class="muted">Enter your order number and the phone number used at checkout.</p>
-<div class="grid"><label>Order Number<input id="order" placeholder="e.g. PW-123456" autocomplete="off"></label><label>Phone Number<input id="phone" placeholder="03XXXXXXXXX" autocomplete="tel"></label><button class="btn" onclick="track()">TRACK ORDER</button></div>
+<h1>Track Your Order</h1><p class="muted">Enter either your tracking number or the mobile number used at checkout.</p>
+<div class="grid"><label>Tracking Number<input id="order" placeholder="e.g. PW-123456" autocomplete="off"></label><div style="text-align:center;font-weight:bold;color:#777">OR</div><label>Mobile Number<input id="phone" placeholder="03XXXXXXXXX" autocomplete="tel"></label><button class="btn" onclick="track()">TRACK ORDER</button></div>
 <div id="status" class="status">Enter your details above to check your order.</div>
 <div id="result" class="result"></div>
 <p style="margin-top:20px"><a href="./index.html">← Back to Pet World Store</a></p>
@@ -30,11 +30,12 @@ function render(o){
 async function track(){
  const order=$("order").value.trim(), phone=normalizePhone($("phone").value);
  $("result").style.display="none";
- if(!order||!phone){$("status").textContent="Enter both your order number and phone number.";return}
+ if(!order&&!phone){$("status").textContent="Enter your tracking number or mobile number.";return}
  $("status").textContent="Checking your order…";
- const {data,error}=await sb.rpc("track_order",{p_order_number:order,p_phone:phone});
+ const {data,error}=await sb.rpc("track_order",{p_order_number:order||null,p_phone:phone||null});
  if(error){$("status").textContent="Tracking is not available yet. Please try again after the store tracking setup is completed.";console.error(error);return}
- if(!data||!data.length){$("status").textContent="No matching order found. Check your order number and phone number.";return}
- $("status").textContent="Order found.";render(data[0]);
+ if(!data||!data.length){$("status").textContent="No matching order found. Check your tracking number or mobile number.";return}
+ $("status").textContent=data.length===1?"Order found.":data.length+" orders found.";
+ render(data[0]);
 }
 </script></body></html>
