@@ -87,6 +87,8 @@ body{margin:0;font-family:Arial;color:#171717}header{position:sticky;top:0;backg
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
 const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
 const sb=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+const $=id=>document.getElementById(id);
+const products=$("products"),count=$("count"),items=$("items"),total=$("total"),overlay=$("overlay"),cartEl=$("cart"),ord=$("ord"),form=$("form"),success=$("success"),wa=$("wa");
 const FALLBACK_P=[
 ["Premium Pet Food",2500,"🥫","Pet Food"],
 ["Cat Litter",1800,"🐱","Cats"],
