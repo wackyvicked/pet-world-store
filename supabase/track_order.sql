@@ -13,7 +13,7 @@ returns table(
 )
 language sql
 security definer
-set search_path = public
+set search_path = ''
 as $$
   select
     o.order_number::text,
