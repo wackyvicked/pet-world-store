@@ -36,10 +36,10 @@ body{margin:0;font-family:Arial;color:#171717}header{position:sticky;top:0;backg
 <div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu()">☰ <span>MENU</span></button>
   <div class="menu-label">Shop Categories</div>
-  <button class="sale-menu-btn" onclick="showBundles();">BUNDLE</button>
+  <button class="sale-menu-btn" onclick="document.getElementById('search').value='';showSale();">SALE 🔥</button>
 </div>
 <nav class="nav" id="mainNav">
-<a href="./track-order.html">TRACK ORDER</a><a href="#shop" onclick="document.getElementById('search').value='';showSale();return false">SALE 🔥</a><a href="#shop">CATS</a><a href="#shop">DOGS</a><a href="#shop">BIRDS</a><a href="#shop">FISH</a><a href="#shop">PET FOOD</a><a href="#shop">GROOMING</a><a href="#shop">MEDICAL</a><a href="#shop">ACCESSORIES</a></nav></header>
+<a href="./track-order.html">TRACK ORDER</a><a href="#shop" onclick="showBundles();return false">BUNDLES</a><a href="#shop">CATS</a><a href="#shop">DOGS</a><a href="#shop">BIRDS</a><a href="#shop">FISH</a><a href="#shop">PET FOOD</a><a href="#shop">GROOMING</a><a href="#shop">MEDICAL</a><a href="#shop">ACCESSORIES</a></nav></header>
 <section class="hero"><div><h1>Everything Your Pet Loves 🐾</h1><p>Pet food, accessories, grooming products and medical supplies.</p><a class="btn" href="#shop">SHOP NOW</a></div></section>
 <section class="sale-banner"><div><div><h2>🔥 SPECIAL SALE</h2><p>Save on selected Pet World products — limited-time offers!</p></div><a class="btn" href="#shop">SHOP SALE</a></div></section>
 <section class="section" id="categories">
