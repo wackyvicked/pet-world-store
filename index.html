@@ -107,7 +107,7 @@ const FALLBACK_P=[
 let P=[...FALLBACK_P],cart=[];
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
 async function loadBanners(){try{const {data,error}=await sb.from("site_banners").select("*").eq("active",true).order("sort_order",{ascending:true});const el=document.getElementById("homeBanners");if(!el)return;if(error){console.error("Banner load error:",error);return}if(!Array.isArray(data)||!data.length){el.innerHTML="";return}el.innerHTML=data.map(b=>{const title=String(b.title||"").replace(/</g,"&lt;");const text=String(b.banner_text||"").replace(/</g,"&lt;");const button=b.button_text?'<a class="btn" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'">'+String(b.button_text).replace(/</g,"&lt;")+"</a>":"";const image=b.image_url?'<img src="'+String(b.image_url).replace(/"/g,"&quot;")+'" alt="'+title.replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:cover;display:block">':"";if(image)return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"><div class="banner-media">'+image+'</div></section>';return b.type==="sale"?'<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>':'<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>'}).join("")}catch(e){console.error("Banner load error:",e)}}
-async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(!error&&Array.isArray(data)&&data.length){P=data.map(productRow);render();update();loadBanners();return;}}catch(e){}P=[...FALLBACK_P];render();update();loadBanners();}
+async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(!error&&Array.isArray(data)&&data.length){P=data.map(productRow);render();update();loadBanners();loadDeliveryConfig();return;}}catch(e){}P=[...FALLBACK_P];render();update();loadBanners();loadDeliveryConfig();}
 function productVisual(p){
   const src=String(p[2]||"");
   if(src.startsWith("http")){
@@ -131,7 +131,18 @@ const DELIVERY_RATES=[
  {max:3,nearby:400,major:500,other:600,remote:700},
  {max:5,nearby:550,major:650,other:750,remote:900}
 ];
-const EXTRA_KG_RATES={nearby:150,major:170,other:200,remote:250};
+const DEFAULT_EXTRA_KG_RATES={nearby:150,major:170,other:200,remote:250};
+let DELIVERY_RATES=[
+ {max:0.5,nearby:150,major:200,other:250,remote:300},
+ {max:1,nearby:200,major:250,other:300,remote:350},
+ {max:2,nearby:300,major:350,other:400,remote:500},
+ {max:3,nearby:400,major:500,other:600,remote:700},
+ {max:5,nearby:550,major:650,other:750,remote:900}
+];
+let EXTRA_KG_RATES={...DEFAULT_EXTRA_KG_RATES};
+let deliveryConfigLoaded=false;
+async function loadDeliveryConfig(){try{const {data,error}=await sb.from("site_banners").select("id,banner_text").eq("type","shipping_config").eq("active",true).limit(1).maybeSingle();if(!error&&data&&data.banner_text){const cfg=JSON.parse(data.banner_text);if(Array.isArray(cfg.rates)&&cfg.rates.length)DELIVERY_RATES=cfg.rates;if(cfg.extra&&typeof cfg.extra==="object")EXTRA_KG_RATES={...DEFAULT_EXTRA_KG_RATES,...cfg.extra}}}catch(e){console.warn("Delivery config fallback:",e)}deliveryConfigLoaded=true;if(typeof updateCheckoutTotal==="function")updateCheckoutTotal()}
+
 const CITY_ZONES={
  nearby:["wah","wah cantt","taxila","rawalpindi","islamabad","hassan abdal","attock","fateh jang"],
  major:["lahore","karachi","faisalabad","multan","peshawar","gujranwala","sialkot","hyderabad","quetta","bahawalpur","sargodha","abbottabad","gujrat","sheikhupura","rahim yar khan","sukkur","mardan","dera ghazi khan","nawabshah"],
