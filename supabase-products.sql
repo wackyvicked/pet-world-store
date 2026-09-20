@@ -50,3 +50,7 @@ using ((select auth.jwt()->'user_metadata'->>'role') = 'admin');
 -- After creating your admin user in Supabase Auth, set its user metadata role to:
 -- {"role":"admin"}
 -- Then /admin.html can sign in and manage products.
+
+
+-- Sale pricing
+alter table public.products add column if not exists sale_price numeric;
