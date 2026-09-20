@@ -109,7 +109,7 @@ function productVisual(p){
   const src=String(p[2]||"");
   if(src.startsWith("http")){
     const alt=String(p[0]).replace(/"/g,"&quot;");
-    return '<img src="'+src+'" alt="'+alt+'" style="width:100%;height:100%;object-fit:contain;display:block" onerror="this.style.display=\\\'none\\\';this.parentElement.innerHTML=\\\'<span style=\\\'font-size:52px\\\'>🐾</span>\\\'">';
+    return '<img src="'+src+'" alt="'+alt+'" style="width:100%;height:100%;object-fit:contain;display:block">';
   }
   return src;
 }
