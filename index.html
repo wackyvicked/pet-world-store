@@ -138,7 +138,7 @@ const CITY_ZONES={
  remote:["gwadar","skardu","gilgit","chitral","khuzdar","turbat","astore","hunza","chilas","muzaffarabad","neelum","parachinar"]
 };
 function normalizeCity(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g," ")}
-function getCityZone(city){const c=normalizeCity(city);for(const z of ["nearby","major","remote"]){if(CITY_ZONES[z].some(x=>c===x||c.includes(x)||x.includes(c)))return z}return "other"}
+function getCityZone(city){const c=normalizeCity(city);if(!c)return "other";for(const z of ["nearby","major","remote"]){if(CITY_ZONES[z].some(x=>c===x||c.includes(x)||x.includes(c)))return z}return "other"}
 function weightToKg(value,unit){const n=Number(value);if(!Number.isFinite(n)||n<=0)return 0;const u=String(unit||"").toLowerCase();if(u==="kg")return n;if(u==="g")return n/1000;if(u==="l")return n;if(u==="ml")return n/1000;return 0}
 function getCartWeightKg(){return cart.reduce((sum,x)=>sum+weightToKg(P[x.i][7],P[x.i][8])*x.q,0)}
 function getMissingWeightItems(){return cart.filter(x=>weightToKg(P[x.i][7],P[x.i][8])<=0).map(x=>P[x.i][0])}
