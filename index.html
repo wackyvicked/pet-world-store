@@ -101,7 +101,14 @@ const FALLBACK_P=[
 let P=[...FALLBACK_P],cart=[];
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
 async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(!error&&Array.isArray(data)&&data.length){P=data.map(productRow);render();update();return;}}catch(e){}P=[...FALLBACK_P];render();update();}
-function productVisual(p){const src=String(p[2]||"");if(src.startsWith("http"))return '<img src="'+src+'" alt="'+String(p[0]).replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<span style="font-size:52px">🐾</span>\'">';return src}
+function productVisual(p){
+  const src=String(p[2]||"");
+  if(src.startsWith("http")){
+    const alt=String(p[0]).replace(/"/g,"&quot;");
+    return '<img src="'+src+'" alt="'+alt+'" style="width:100%;height:100%;object-fit:contain;display:block" onerror="this.style.display=\\\'none\\\';this.parentElement.innerHTML=\\\'<span style=\\\'font-size:52px\\\'>🐾</span>\\\'">';
+  }
+  return src;
+}
 
 function render(a=P){products.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic">${productVisual(p)}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="sale-badge">SALE</span>`:""}<b>${p[0]}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button class="btn" onclick="viewProduct(${i})">VIEW DETAILS</button><button class="btn yellow" style="margin-left:5px" onclick="add(${i})">ADD TO CART</button></div></div>`).join("")}
 function add(i){let x=cart.find(x=>x.i==i);x?x.q++:cart.push({i,q:1});update();openCart()}
