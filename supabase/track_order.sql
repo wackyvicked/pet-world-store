@@ -1,5 +1,6 @@
 -- Pet World customer order tracking
 -- Run this once in Supabase SQL Editor.
+drop function if exists public.track_order(text, text);
 create or replace function public.track_order(p_order_number text, p_phone text)
 returns table(
   order_number text,
