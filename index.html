@@ -147,7 +147,7 @@ function viewProduct(i){
     <div class="product-detail">
       <div>
         <div class="bigpic" id="mainProductImage">${productVisual(p)}</div>
-        ${images.length>1?`<div class="product-gallery"><div class="product-gallery-thumbs">${images.map((u,k)=>`<button type="button" onclick="selectProductImage(${JSON.stringify(u)})"><img src="${u}" alt="Product image ${k+1}"></button>`).join("")}</div></div>`:""}
+        ${images.length>1?`<div class="product-gallery"><div class="product-gallery-thumbs">${images.map((u,k)=>`<button type="button" onclick="selectProductImage(decodeURIComponent('${encodeURIComponent(u)}'))"><img src="${u}" alt="Product image ${k+1}"></button>`).join("")}</div></div>`:""}
       </div>
       <div>
         <span class="category">${p[3]}</span>
