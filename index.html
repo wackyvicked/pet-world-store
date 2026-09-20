@@ -12,7 +12,7 @@ body{margin:0;font-family:Arial;color:#171717}header{position:sticky;top:0;backg
 .product-detail h2{font-size:30px;margin:0 0 8px}
 .product-detail .detail-price{font-size:25px;font-weight:900;margin:12px 0}
 .product-detail .category{display:inline-block;background:#fff0a5;padding:6px 10px;border-radius:20px;font-size:13px;font-weight:bold}.related-products{margin-top:28px;padding-top:20px;border-top:1px solid #eee}.related-products h3{font-size:19px;margin:0 0 14px}.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.related-grid .card .pic{height:100px;font-size:48px}@media(max-width:700px){.related-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:700px){.product-detail{grid-template-columns:1fr}.product-detail .bigpic{height:220px}}
+@media(max-width:700px){.product-detail{grid-template-columns:1fr}.product-detail .bigpic{height:220px}}\n.product-gallery{margin-top:10px}.product-gallery-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px}.product-gallery-thumbs button{border:1px solid #ddd;background:#fff;border-radius:8px;padding:2px;cursor:pointer;flex:0 0 auto}.product-gallery-thumbs img{width:62px;height:62px;object-fit:contain;display:block;border-radius:6px}.product-detail .bigpic{overflow:hidden}.product-detail .bigpic img{max-width:100%;max-height:100%;object-fit:contain;display:block}.product-detail h2,.product-detail .detail-price,.product-detail p{position:relative;z-index:2}.product-detail .category{position:relative;z-index:2}
 .cart{position:fixed;right:0;top:0;width:min(420px,100%);height:100%;background:white;z-index:20;padding:22px;box-sizing:border-box;overflow:auto;box-shadow:0 0 20px #777}.overlay{display:none;position:fixed;inset:0;background:#0007;z-index:19}.row{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eee}.modal{max-width:650px;background:white;margin:30px auto;padding:22px;border-radius:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field input,.field textarea{padding:11px;border:1px solid #ccc;border-radius:6px}.checkout{display:none;position:fixed;inset:0;background:#0008;z-index:1000;overflow:auto}.notice{padding:12px;background:#fff5b8;margin:15px 0}.success{display:none;text-align:center}.order{font-size:25px;font-weight:bold}@media(max-width:700px){.hero h1{font-size:34px}.cats,.products{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
 
 /* Mobile design matched to the approved Pet World reference */
@@ -154,7 +154,7 @@ function viewProduct(i){
   renderRelatedProducts(i);
   document.getElementById("productModal").style.display="block";
 }
-function renderRelatedProducts(currentIndex){
+function selectProductImage(url){const el=document.getElementById("mainProductImage");if(!el)return;el.innerHTML=productVisual(["Product",0,url]);}\n\nfunction renderRelatedProducts(currentIndex){
   let current=P[currentIndex];
   let related=P.map((p,i)=>({p,i})).filter(x=>x.i!==currentIndex&&x.p[3]===current[3]);
   if(related.length<4) related=related.concat(P.map((p,i)=>({p,i})).filter(x=>x.i!==currentIndex&&x.p[3]!==current[3]));
