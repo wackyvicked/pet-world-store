@@ -140,7 +140,7 @@ function viewProduct(i){
         <span class="category">${p[3]}</span>
         <h2>${p[0]}</h2>
         <div class="detail-price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div>
-        <p>${p[5]||"Quality pet product from Pet World."}</p>${p[6]?`<p><b>SKU:</b> ${p[6]}</p>`:""}${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
+        <p>${p[5]||"Quality pet product from Pet World."}</p>${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
         <p><b>Category:</b> ${p[3]}</p>
         <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
 <button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
