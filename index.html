@@ -99,7 +99,7 @@ const FALLBACK_P=[
 ["Pet Medical Supplies",2000,"🩺","Medical Supplies"]
 ];
 let P=[...FALLBACK_P],cart=[];
-function productRow(r){return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),r.image_url||r.image||r.imageUrl||"🐾",r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit,r.sale_price];}
+function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
 async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(!error&&Array.isArray(data)&&data.length){P=data.map(productRow);render();update();return;}}catch(e){}P=[...FALLBACK_P];render();update();}
 function productVisual(p){const src=String(p[2]||"");if(src.startsWith("http"))return '<img src="'+src+'" alt="'+String(p[0]).replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<span style="font-size:52px">🐾</span>\'">';return src}
 
