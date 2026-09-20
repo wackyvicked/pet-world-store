@@ -97,7 +97,7 @@ const FALLBACK_P=[
 ["Pet Medical Supplies",2000,"🩺","Medical Supplies"]
 ];
 let P=[...FALLBACK_P],cart=[];
-function productRow(r){return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),r.image_url||r.image||r.imageUrl||"🐾",r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku];}
+function productRow(r){return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),r.image_url||r.image||r.imageUrl||"🐾",r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from Pet World.",r.sku,r.weight,r.weight_unit];}
 async function loadProducts(){try{const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(!error&&Array.isArray(data)&&data.length){P=data.map(productRow);render();update();return;}}catch(e){}P=[...FALLBACK_P];render();update();}
 function productVisual(p){return String(p[2]).startsWith("http")?'<img src="'+p[2]+'" alt="'+String(p[0]).replace(/"/g,"&quot;")+'" style="max-width:100%;max-height:100%;object-fit:contain">':p[2]}
 
@@ -139,7 +139,7 @@ function viewProduct(i){
         <span class="category">${p[3]}</span>
         <h2>${p[0]}</h2>
         <div class="detail-price">PKR ${p[1].toLocaleString()}</div>
-        <p>${p[5]||"Quality pet product from Pet World."}</p>${p[6]?`<p><b>SKU:</b> ${p[6]}</p>`:""}
+        <p>${p[5]||"Quality pet product from Pet World."}</p>${p[6]?`<p><b>SKU:</b> ${p[6]}</p>`:""}${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
         <p><b>Category:</b> ${p[3]}</p>
         <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
 <button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
