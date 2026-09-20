@@ -38,7 +38,7 @@ body{margin:0;font-family:Arial;color:#171717}header{position:sticky;top:0;backg
   <div class="menu-label">Shop Categories</div>
 </div>
 <nav class="nav" id="mainNav">
-<a href="./track-order.html">TRACK ORDER</a><a href="#shop" onclick="showSale();return false">SALE 🔥</a><a href="#shop">CATS</a><a href="#shop">DOGS</a><a href="#shop">BIRDS</a><a href="#shop">FISH</a><a href="#shop">PET FOOD</a><a href="#shop">GROOMING</a><a href="#shop">MEDICAL</a><a href="#shop">ACCESSORIES</a></nav></header>
+<a href="./track-order.html">TRACK ORDER</a><a href="#shop" onclick="document.getElementById('search').value='';showSale();return false">SALE 🔥</a><a href="#shop">CATS</a><a href="#shop">DOGS</a><a href="#shop">BIRDS</a><a href="#shop">FISH</a><a href="#shop">PET FOOD</a><a href="#shop">GROOMING</a><a href="#shop">MEDICAL</a><a href="#shop">ACCESSORIES</a></nav></header>
 <section class="hero"><div><h1>Everything Your Pet Loves 🐾</h1><p>Pet food, accessories, grooming products and medical supplies.</p><a class="btn" href="#shop">SHOP NOW</a></div></section>
 <section class="sale-banner"><div><div><h2>🔥 SPECIAL SALE</h2><p>Save on selected Pet World products — limited-time offers!</p></div><a class="btn" href="#shop">SHOP SALE</a></div></section>
 <section class="section" id="categories">
@@ -212,7 +212,7 @@ function search(){
   document.getElementById("searchResult").textContent=q?(result.length+" product"+(result.length===1?"":"s")+" found for “"+q+"”"):"";
 }
  
-function showSale(){let q=document.getElementById("search").value.trim().toLowerCase();let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1])&&(!q||p[0].toLowerCase().includes(q)));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
+function showSale(){let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function filterCategory(cat){
   let q=document.getElementById("search").value.trim().toLowerCase();
   let result=P.filter(p=>(cat==="All"||p[3]===cat)&&(!q||p[0].toLowerCase().includes(q)||p[3].toLowerCase().includes(q)));
