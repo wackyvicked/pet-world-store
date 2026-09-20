@@ -132,10 +132,15 @@ function addWithQty(i){
 function viewProduct(i){
   let p=P[i];
   selectedQty[i]=1;
+  const gallery=Array.isArray(p[10])?p[10].filter(u=>String(u).startsWith("http")):[];
+  const images=[String(p[2]||"")].concat(gallery).filter((u,k,a)=>String(u).startsWith("http")&&a.indexOf(u)===k);
   document.getElementById("productDetails").innerHTML=`
     <button onclick="closeProduct()" style="float:right;border:0;background:none;font-size:24px">✕</button>
     <div class="product-detail">
-      <div class="bigpic">${productVisual(p)}</div>
+      <div>
+        <div class="bigpic" id="mainProductImage">${productVisual(p)}</div>
+        ${images.length>1?`<div class="product-gallery"><div class="product-gallery-thumbs">${images.map((u,k)=>`<button type="button" onclick="selectProductImage(${JSON.stringify(u)})"><img src="${u}" alt="Product image ${k+1}"></button>`).join("")}</div></div>`:""}
+      </div>
       <div>
         <span class="category">${p[3]}</span>
         <h2>${p[0]}</h2>
@@ -143,18 +148,23 @@ function viewProduct(i){
         <p>${p[5]||"Quality pet product from Pet World."}</p>${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
         <p><b>Category:</b> ${p[3]}</p>
         <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
-<button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
-<span id="qty-${i}" style="min-width:30px;text-align:center;font-weight:bold">1</span>
-<button class="btn" onclick="adjustProductQty(${i},1)">+</button>
-</div>
-<button class="btn yellow" onclick="addWithQty(${i})">🛒 ADD TO CART</button>
+          <button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
+          <span id="qty-${i}" style="min-width:30px;text-align:center;font-weight:bold">1</span>
+          <button class="btn" onclick="adjustProductQty(${i},1)">+</button>
+        </div>
+        <button class="btn yellow" onclick="addWithQty(${i})">🛒 ADD TO CART</button>
       </div>
     </div>
     <div class="related-products"><h3>RELATED PRODUCTS</h3><div id="relatedProductGrid" class="related-grid"></div></div>`;
   renderRelatedProducts(i);
   document.getElementById("productModal").style.display="block";
 }
-function selectProductImage(url){const el=document.getElementById("mainProductImage");if(!el)return;el.innerHTML=productVisual(["Product",0,url]);}\n\nfunction renderRelatedProducts(currentIndex){
+function selectProductImage(url){
+  const el=document.getElementById("mainProductImage");
+  if(!el)return;
+  el.innerHTML=productVisual(["Product",0,url]);
+}
+function renderRelatedProducts(currentIndex){
   let current=P[currentIndex];
   let related=P.map((p,i)=>({p,i})).filter(x=>x.i!==currentIndex&&x.p[3]===current[3]);
   if(related.length<4) related=related.concat(P.map((p,i)=>({p,i})).filter(x=>x.i!==currentIndex&&x.p[3]!==current[3]));
