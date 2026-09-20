@@ -5,6 +5,7 @@ returns table(
   order_number text,
   customer_name text,
   city text,
+  address text,
   phone text,
   total numeric,
   status text,
@@ -19,13 +20,14 @@ as $$
     o.order_number::text,
     o.customer_name::text,
     o.city::text,
+    o.address::text,
     o.phone::text,
     o.total::numeric,
     coalesce(o.status,'New')::text,
     o.created_at::timestamptz,
     o.items::jsonb
   from public.orders o
-  where (p_order_number is not null and trim(o.order_number::text) = trim(p_order_number))
+  where (p_order_number is not null and lower(trim(o.order_number::text)) = lower(trim(p_order_number)))
      or (p_order_number is null and p_phone is not null
          and right(regexp_replace(coalesce(o.phone::text,''),'[^0-9]','','g'),10)
              = right(regexp_replace(coalesce(p_phone,''),'[^0-9]','','g'),10))
