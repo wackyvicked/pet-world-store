@@ -310,9 +310,9 @@ function showBundles(){currentCategory="All";currentSearch="";document.getElemen
 function showSale(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function categoryMatches(productCategory, selectedCategory){
   if(selectedCategory==="All")return true;
-  const c=String(productCategory||"").trim().toLowerCase();
+  const cats=String(productCategory||"").split(",").map(v=>v.trim().toLowerCase()).filter(Boolean);
   const selected=String(selectedCategory||"").trim().toLowerCase();
-  if(c===selected)return true;
+  if(cats.includes(selected))return true;
   const aliases={
     "grooming":["shampoo","grooming supplies","grooming"],
     "medical supplies":["medical","medical supplies","medicines","medicine"],
