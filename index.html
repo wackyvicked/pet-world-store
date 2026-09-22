@@ -266,8 +266,12 @@ function applyProductFilters(){
   document.getElementById("searchResult").textContent=(currentCategory!=="All"||q)?(result.length+" product"+(result.length===1?"":"s")+" found"+(q?" for “"+q+"”":"")):"";
 }
 function handleSearch(){
-  currentSearch=document.getElementById("search").value||"";
+  const input=document.getElementById("search");
+  currentSearch=input?String(input.value||""):"";
+  if(currentSearch.trim()) currentCategory="All";
   applyProductFilters();
+  const shop=document.getElementById("shop");
+  if(shop && currentSearch.trim()) shop.scrollIntoView({behavior:"smooth",block:"start"});
 }
  
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
