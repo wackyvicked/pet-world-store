@@ -269,19 +269,16 @@ function applyProductFilters(){
 }
 function handleSearch(){
   const input=document.getElementById("search");
-  currentSearch=input?String(input.value||""):"";
-  if(currentSearch.trim()){
-    currentCategory="All";
-    applyProductFilters();
-    window.location.hash="search-results";
-    const shop=document.getElementById("shop");
-    if(shop)shop.scrollIntoView({behavior:"smooth",block:"start"});
-  }else{
-    applyProductFilters();
-    window.location.hash="shop";
-  }
+  const q=input?String(input.value||"").trim():"";
   const nav=document.getElementById("mainNav");
   if(nav)nav.classList.remove("open");
+  if(q){
+    window.location.href="./search.html?q="+encodeURIComponent(q);
+    return;
+  }
+  currentSearch="";
+  currentCategory="All";
+  applyProductFilters();
 }
  
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
