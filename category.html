@@ -84,10 +84,10 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .pic{min-height:250px!important;height:250px!important;display:flex!important;align-items:center!important;justify-content:center!important;overflow:hidden!important;}
 .pic img{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;display:block!important;}
 .info{padding:12px 12px 14px!important;}
-.info .btn{height:40px!important;min-height:40px!important;border-radius:9px!important;padding:0 10px!important;font-size:12px!important;font-weight:700!important;letter-spacing:.1px!important;line-height:40px!important;vertical-align:middle!important;box-sizing:border-box!important;}
-.info .view-product,.info .add-product{width:calc(50% - 3px)!important;margin:8px 0 0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;line-height:1!important;white-space:nowrap!important;}
-.info .view-product{margin-right:6px!important;}
-@media(max-width:700px){.pic{min-height:220px!important;height:220px!important;}.info .btn{height:38px!important;min-height:38px!important;font-size:11.5px!important;}.info .view-product,.info .add-product{width:calc(50% - 3px)!important;}}
+.info .btn{height:40px!important;min-height:40px!important;border-radius:9px!important;padding:0 8px!important;font-size:12px!important;font-weight:700!important;letter-spacing:.1px!important;line-height:40px!important;vertical-align:middle!important;box-sizing:border-box!important;}
+.info .add-product{width:100%!important;margin:8px 0 0!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;line-height:1!important;white-space:nowrap!important;}
+.info .add-product{margin-left:0!important;}
+@media(max-width:700px){.pic{min-height:220px!important;height:220px!important;}.info .btn{height:38px!important;min-height:38px!important;font-size:11.5px!important;}.info .add-product{width:100%!important;}}
 </style>
 </head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
@@ -169,7 +169,7 @@ function productVisual(p){
   return src;
 }
 
-function render(a=P){products.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="sale-badge" style="display:block;text-align:center;width:100%;">SALE 🔥</span>`:""}<b>${p[0]}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn view-product" data-product-index="${P.indexOf(p)}">VIEW DETAILS</button><button type="button" class="btn yellow add-product" style="margin-left:5px" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
+function render(a=P){products.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="sale-badge" style="display:block;text-align:center;width:100%;">SALE 🔥</span>`:""}<b>${p[0]}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn yellow add-product" style="margin-left:5px" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
 function wireProductCardClicks(){
   if(window.__wowPetsProductClicks)return;
   window.__wowPetsProductClicks=true;
