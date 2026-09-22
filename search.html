@@ -1,0 +1,332 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WOW Pets — Search Results</title>
+<style>
+/* Dedicated global search-results page */
+body.search-page .hero,body.search-page #categories,body.search-page #homeBanners,body.search-page .filter-bar{display:none!important}
+body.search-page .section#shop{padding-top:24px}
+body.search-page .section#shop h2{font-size:28px}
+body.search-page .nav a[href*="track-order"],body.search-page .nav a[href*="#shop"]{opacity:.9}
+body{margin:0;font-family:Arial;color:#171717}header{position:relative;background:white;border-bottom:1px solid #ddd;z-index:5}.top{background:#171717;color:white;text-align:center;padding:7px;font-size:12px}.head{max-width:1100px;margin:auto;padding:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}.logo{font-weight:900;font-size:25px}.logo small{display:block;font-size:9px;letter-spacing:1px}.search{flex:1;display:flex;border:1px solid #ccc;border-radius:24px;overflow:hidden;min-width:200px}.search input{flex:1;border:0;padding:12px}.search button,.btn{border:0;background:#ffd21c;padding:12px 18px;font-weight:bold;cursor:pointer}.nav{max-width:1100px;margin:auto;padding:0 14px 12px;display:flex;gap:20px;overflow:auto;font-size:13px;font-weight:bold}
+.mobile-menu-bar{max-width:1100px;margin:auto;padding:0 14px 10px;display:flex;align-items:center;gap:12px}
+.menu-btn{border:0;background:#171717;color:#fff;border-radius:6px;padding:9px 13px;font-weight:bold;cursor:pointer}
+.menu-btn span{font-size:12px;margin-left:3px}
+.menu-label{font-size:13px;font-weight:bold}
+@media(min-width:701px){.mobile-menu-bar{display:none}}
+@media(max-width:700px){.nav{display:none;flex-direction:column;gap:0;padding:0 14px 10px;overflow:visible}.nav.open{display:flex}.nav a{padding:11px 5px;border-bottom:1px solid #eee}.mobile-menu-bar{display:flex}}.hero{background:#ffe56a;padding:45px 18px}.hero div{max-width:1100px;margin:auto}.hero h1{font-size:44px;margin:0 0 10px}.section{max-width:1100px;margin:35px auto;padding:0 14px}.cats,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.cat,.card{border:1px solid #eee;border-radius:12px;background:#fafafa;overflow:hidden}.cat{text-align:center;padding:25px;font-weight:bold}.cat b{display:block;font-size:42px}.pic{height:150px;background:#f1f1f1;display:grid;place-items:center;font-size:65px}.info{padding:13px}.info{display:flex;flex-direction:column;align-items:stretch}.info>b{display:block;line-height:1.3;min-height:2.6em;margin-bottom:2px}.price{font-weight:bold;font-size:18px;margin:8px 0;display:flex;align-items:center;gap:7px;flex-wrap:nowrap;white-space:nowrap;min-height:26px}.info>.btn{margin-top:4px}.info>.btn:last-child{margin-bottom:0}
+.old-price{white-space:nowrap}.sale-price{white-space:nowrap}.old-price{text-decoration:line-through;color:#777;font-size:14px;margin-right:6px}.sale-price{color:#d71920;font-weight:900;font-size:20px}.sale-badge{display:inline-block;background:#d71920;color:white;padding:4px 8px;border-radius:5px;font-size:11px;font-weight:900;margin-bottom:5px}.sale-banner{background:linear-gradient(135deg,#d71920,#ffb000);color:white;padding:24px 18px}.sale-banner div{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.sale-banner h2{margin:0;font-size:30px}.sale-banner p{margin:5px 0 0}.sale-banner .btn{background:white;color:#171717}@media(max-width:700px){.sale-banner{padding:20px 14px}.sale-banner div{display:block}.sale-banner h2{font-size:25px}.sale-banner .btn{display:inline-block;margin-top:12px}}.btn{border-radius:6px}.green{background:#39a852;color:white}
+.product-detail{display:grid;grid-template-columns:1fr 1.2fr;gap:25px;align-items:center}
+.product-detail .bigpic{height:300px;background:#f1f1f1;border-radius:12px;display:grid;place-items:center;font-size:120px}
+.product-detail h2{font-size:30px;margin:0 0 8px}
+.product-detail .detail-price{font-size:25px;font-weight:900;margin:12px 0}
+.product-detail .category{display:inline-block;background:#fff0a5;padding:6px 10px;border-radius:20px;font-size:13px;font-weight:bold}.related-products{margin-top:28px;padding-top:20px;border-top:1px solid #eee}.related-products h3{font-size:19px;margin:0 0 14px}.related-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.related-grid .card .pic{height:100px;font-size:48px}@media(max-width:700px){.related-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.product-detail{grid-template-columns:1fr}.product-detail .bigpic{height:220px}}\n.product-gallery{margin-top:10px}.product-gallery-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px}.product-gallery-thumbs button{border:1px solid #ddd;background:#fff;border-radius:8px;padding:2px;cursor:pointer;flex:0 0 auto}.product-gallery-thumbs img{width:62px;height:62px;object-fit:contain;display:block;border-radius:6px}.product-detail .bigpic{overflow:hidden}.product-detail .bigpic img{max-width:100%;max-height:100%;object-fit:contain;display:block}.product-detail h2,.product-detail .detail-price,.product-detail p{position:relative;z-index:2}.product-detail .category{position:relative;z-index:2}
+.cart{position:fixed;right:0;top:0;width:min(420px,100%);height:100%;background:white;z-index:20;padding:22px;box-sizing:border-box;overflow:auto;box-shadow:0 0 20px #777}.overlay{display:none;position:fixed;inset:0;background:#0007;z-index:19}.row{display:flex;gap:10px;padding:12px 0;border-bottom:1px solid #eee}.modal{max-width:650px;background:white;margin:30px auto;padding:22px;border-radius:12px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px}.field.full{grid-column:1/-1}.field input,.field textarea{padding:11px;border:1px solid #ccc;border-radius:6px}.checkout{display:none;position:fixed;inset:0;background:#0008;z-index:1000;overflow:auto}.notice{padding:12px;background:#fff5b8;margin:15px 0}.success{display:none;text-align:center}.order{font-size:25px;font-weight:bold}@media(max-width:700px){.hero h1{font-size:34px}.cats,.products{grid-template-columns:repeat(2,1fr)}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}}
+
+/* Header alignment: menu, logo and cart share the same normal flex row */
+@media(min-width:701px){
+  header{position:relative}
+  .head{position:relative;justify-content:center}
+  .mobile-menu-bar{display:none}
+}
+@media(max-width:700px){
+  header{position:relative}
+  .head{padding:10px 12px 12px;gap:10px;flex-wrap:wrap;align-items:center}
+  .mobile-menu-bar{display:flex;position:static;order:0;flex:0 0 42px;align-items:center;justify-content:center;padding:0;background:transparent;overflow:visible;z-index:6}
+  .brand{position:static;order:1;flex:1;min-width:0;transform:none;z-index:auto;display:flex;align-items:center;justify-content:center}
+  .head-actions{order:2;margin-left:0;flex:0 0 auto}
+  .search{order:3;margin-top:2px}
+  .mobile-menu-bar .menu-btn{background:transparent;color:#171717;border-radius:0;padding:0;font-size:0}
+}
+/* Mobile design matched to the approved Pet World reference */
+.brand{display:flex;align-items:center;gap:8px;min-width:0}.brand-title{font-weight:900;font-size:34px;line-height:1;letter-spacing:-1px;white-space:nowrap}.brand-title .pet{color:#20242b}.brand-title .world{color:#f7b900}.brand-logo{display:block!important;width:200px!important;height:auto!important;max-width:200px!important;max-height:none!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important}.head-actions{display:flex;align-items:center;gap:10px;margin-left:auto}.icon-btn{position:relative;width:42px;height:42px;border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer}.icon-btn .badge{position:absolute;right:-1px;top:-4px;background:#f7b900;color:#111;border-radius:50%;min-width:20px;height:20px;font-size:12px;font-weight:900;display:grid;place-items:center}.menu-icon{font-size:32px}.search{order:3;flex-basis:100%;height:48px}.search button{min-width:64px;font-size:0}.search button:after{content:'🔍';font-size:24px}.mobile-menu-bar{display:none}
+@media(max-width:700px){header{position:relative}.head{padding:10px 12px 12px;gap:10px;flex-wrap:wrap;align-items:center}.brand{flex:1;min-width:0}.brand-title{font-size:28px}.brand-logo{width:210px!important;height:auto!important;max-width:210px!important;max-height:none!important;object-fit:contain!important;object-position:center!important}.head-actions{gap:4px}.icon-btn{width:38px;height:42px;font-size:27px}.menu-icon{font-size:30px}.search{order:3;margin-top:2px;height:50px;border-radius:15px}.search input{font-size:16px;padding:12px 14px}.mobile-menu-bar{display:flex;background:#171717;color:#fff;padding:10px 12px;overflow-x:auto;gap:10px}.mobile-menu-bar .menu-btn{background:#ffd21c;color:#171717;border-radius:12px;padding:10px 14px;font-size:15px;white-space:nowrap}.menu-label{display:none}.nav{display:none!important;flex-direction:column!important;gap:0!important;padding:0!important;background:#171717;color:#fff;overflow:hidden!important;white-space:normal}.nav.open{display:flex!important}.nav a{display:block!important;padding:13px 18px;color:#fff;border:0;border-bottom:1px solid #333;text-decoration:none}.nav a:before{margin-right:4px}.nav a:nth-child(1):before{content:'🏠 ';}.nav a:nth-child(2):before{content:'🛍️ ';}.nav a:nth-child(3):before{content:'🐱 ';}.nav a:nth-child(4):before{content:'🐶 ';}.nav a:nth-child(5):before{content:'🦜 ';}.nav a:nth-child(6):before{content:'🐠 ';}.nav a:nth-child(7):before{content:'🍖 ';}.nav a:nth-child(8):before{content:'✂️ ';}.nav a:nth-child(9):before{content:'🩺 ';}.nav a:nth-child(10):before{content:'🏠 ';}.hero{padding:28px 14px}.hero h1{font-size:34px}.section{margin:28px auto;padding:0 12px}.cats,.products{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+
+/* Mobile bottom navigation */
+.bottom-nav{display:none}
+@media(max-width:700px){
+ body{padding-bottom:72px}
+ .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:72px;background:#fff;border-top:1px solid #eee;z-index:999;display:grid;grid-template-columns:repeat(5,1fr);padding:6px 0 env(safe-area-inset-bottom);box-shadow:0 -1px 5px rgba(0,0,0,.04)}
+ .bottom-item{border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#222;font-size:11px;font-weight:400;line-height:1.15}
+ .bottom-item.active{color:#222}
+ .bottom-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+ .bottom-item .badge{position:absolute;transform:translate(11px,-8px);width:18px;min-width:18px;height:18px;padding:0;border-radius:50%;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500}
+}
+ .cart-checkout-bar{position:sticky;bottom:-22px;background:#fff;padding:12px 0 2px;margin-top:10px;border-top:1px solid #eee;z-index:2}@media(max-width:700px){.cart-checkout-bar{position:fixed;left:0;right:0;bottom:72px;background:#fff;padding:10px 14px;border-top:1px solid #ddd;box-shadow:0 -4px 14px rgba(0,0,0,.12);z-index:25}.cart{padding-bottom:95px}}
+.hero:has(.banner-media img),.sale-banner:has(.banner-media img){padding:0!important;overflow:hidden;position:relative}.hero:has(.banner-media img):not([style*="height:"]),.sale-banner:has(.banner-media img):not([style*="height:"]){height:auto!important}.banner-media{position:relative;width:100%;overflow:hidden;border-radius:inherit;z-index:0;background:#f7f7f7}.banner-media img{display:block;width:100%;height:auto;object-fit:contain}.hero[style*="height:"][style*="px"] .banner-media,.sale-banner[style*="height:"][style*="px"] .banner-media{height:100%}.hero[style*="height:"][style*="px"] .banner-media img,.sale-banner[style*="height:"][style*="px"] .banner-media img{width:100%;height:100%;object-fit:contain}.banner-image-button{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:3;box-shadow:0 3px 12px rgba(0,0,0,.25);white-space:nowrap}.banner-image-button:hover{transform:translateX(-50%) scale(1.03)}
+
+
+/* Menu button — match bottom navigation icon sizing and visual weight */
+.menu-btn{width:42px!important;height:42px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#171717!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:none!important;font-size:0!important;line-height:1!important;cursor:pointer!important;}
+.menu-btn .hamburger-lines{width:26px;height:24px;display:flex;flex-direction:column;justify-content:center;gap:5px;align-items:center;}
+.menu-btn .hamburger-lines i{display:block;width:25px;height:2.5px;background:currentColor;border-radius:2px;}
+@media(max-width:700px){.mobile-menu-bar{padding:0 10px!important;background:transparent!important;overflow:visible!important}.mobile-menu-bar .menu-btn{width:42px!important;height:42px!important;background:transparent!important;color:#171717!important;box-shadow:none!important}.menu-btn .hamburger-lines{width:26px;height:24px;gap:5px}.menu-btn .hamburger-lines i{width:25px;height:2.5px;}}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body class="search-page">
+<header><div class="head"><div class="mobile-menu-bar">
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
+</div><div class="brand"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" placeholder="Search for products..." oninput="handleSearch()" aria-label="Search products"><button onclick="handleSearch()">SEARCH</button></div></div>
+<nav class="nav" id="mainNav">
+<a href="./track-order.html">TRACK ORDER</a><a href="#shop" onclick="showBundles();return false">BUNDLES</a><a href="#shop" onclick="filterCategory('Cats');return false">CATS</a><a href="#shop" onclick="filterCategory('Dogs');return false">DOGS</a><a href="#shop" onclick="filterCategory('Birds');return false">BIRDS</a><a href="#shop" onclick="filterCategory('Fish');return false">FISH</a><a href="#shop" onclick="filterCategory('Pet Food');return false">PET FOOD</a><a href="#shop" onclick="filterCategory('Grooming');return false">GROOMING</a><a href="#shop" onclick="filterCategory('Medical Supplies');return false">MEDICAL</a><a href="#shop" onclick="filterCategory('Accessories');return false">ACCESSORIES</a></nav></header>
+<div id="homeBanners"></div>
+<section class="section" id="categories">
+
+<div class="cats">
+<a class="cat" href="#shop" onclick="filterCategory('Dogs')"><b>🐶</b>Dogs</a>
+<a class="cat" href="#shop" onclick="filterCategory('Cats')"><b>🐱</b>Cats</a>
+<a class="cat" href="#shop" onclick="filterCategory('Birds')"><b>🦜</b>Birds</a>
+<a class="cat" href="#shop" onclick="filterCategory('Fish')"><b>🐠</b>Fish</a>
+<a class="cat" href="#shop" onclick="filterCategory('Pet Food')"><b>🍖</b>Pet Food</a>
+<a class="cat" href="#shop" onclick="filterCategory('Toys')"><b>🧸</b>Toys</a>
+<a class="cat" href="#shop" onclick="filterCategory('Grooming')"><b>✂️</b>Grooming</a>
+<a class="cat" href="#shop" onclick="filterCategory('Medical Supplies')"><b>🩺</b>Medical Supplies</a>
+<a class="cat" href="#shop" onclick="filterCategory('Accessories')"><b>🏠</b>Accessories</a>
+</div></section>
+<section class="section" id="shop"><h2>Featured Products</h2><div id="searchResult" style="margin:-8px 0 15px;color:#666;font-size:14px"></div><div class="filter-bar" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
+<button class="btn yellow filter-active" onclick="filterCategory('All')">All</button>
+<button class="btn" onclick="filterCategory('Dogs')">Dogs</button>
+<button class="btn" onclick="filterCategory('Cats')">Cats</button>
+<button class="btn" onclick="filterCategory('Birds')">Birds</button>
+<button class="btn" onclick="filterCategory('Fish')">Fish</button>
+<button class="btn" onclick="filterCategory('Pet Food')">Pet Food</button>
+<button class="btn" onclick="filterCategory('Toys')">Toys</button>
+<button class="btn" onclick="filterCategory('Grooming')">Grooming</button>
+<button class="btn" onclick="filterCategory('Medical Supplies')">Medical Supplies</button>
+<button class="btn" onclick="filterCategory('Accessories')">Accessories</button>
+</div><div class="products" id="products"></div></section>
+<footer style="background:#171717;color:white;padding:30px 18px"><b>WOW PETS</b><p>📱 +92 346 5771099</p><p>📍 Commercial Market, Rawalpindi, Pakistan</p><p>Orders are confirmed on WhatsApp. Home delivery and free store pickup are available.</p></footer>
+<div class="overlay" id="overlay" onclick="closeCart()"></div><div class="cart" id="cart" style="display:none"><button onclick="closeCart()">✕</button><h2>Your Cart</h2><div id="items"></div><h3>Total: PKR <span id="total">0</span></h3><div class="cart-checkout-bar"><button class="btn green" style="width:100%;font-size:18px;padding:15px" onclick="checkout()">PLACE ORDER</button></div></div>
+<div class="checkout" id="productModal"><div class="modal" id="productDetails"></div></div>
+<div class="checkout" id="checkout"><div class="modal" style="position:relative"><div id="form"><button onclick="closeCheckout()">✕</button><h2>Place Your Order</h2><p>Delivery is calculated automatically from city and total shipment weight. We will contact you on WhatsApp to confirm your order.</p><div class="formgrid">
+<label class="field">Full Name *<input id="name"></label><label class="field">WhatsApp Number *<input id="phone" placeholder="03XXXXXXXXX"></label><label class="field">Alternate Phone<input id="alt"></label><label class="field">City *<input id="city"></label><label class="field full">Complete Delivery Address *<textarea id="address" rows="3"></textarea></label><label class="field full">Order Notes<textarea id="notes" rows="2"></textarea></label></div>
+<div class="notice"><b>Delivery Method</b><br><label style="display:block;margin-top:8px"><input type="radio" name="deliveryMethod" value="home" checked onchange="syncPaymentOptions()"> 🚚 Home Delivery</label><label style="display:block;margin-top:8px"><input type="radio" name="deliveryMethod" value="pickup" onchange="syncPaymentOptions()"> 🏪 Store Pickup <b style="color:#159447">FREE</b></label><div id="pickupInfo" style="display:none;background:#f5f5f5;padding:10px;border-radius:8px;margin-top:8px;font-size:13px"><b>Store Pickup</b><br>Pickup location: WOW Pets store<br>We will confirm your pickup time after the order is placed.</div><div style="font-weight:bold;margin-top:12px">Payment Method</div><label style="display:block;margin-top:8px"><input type="radio" name="paymentMethod" value="cod" checked onchange="updateCheckoutTotal()"> 💵 Cash on Delivery</label><label style="display:block;margin-top:8px"><input type="radio" name="paymentMethod" value="easypaisa" onchange="updateCheckoutTotal()"> 💳 Easypaisa <b style="color:#159447">10% OFF regular-price items</b></label><label style="display:block;margin-top:8px"><input type="radio" name="paymentMethod" value="jazzcash" onchange="updateCheckoutTotal()"> 💳 JazzCash <b style="color:#159447">10% OFF regular-price items</b></label><label style="display:none;margin-top:8px"><input type="radio" name="paymentMethod" value="store" onchange="updateCheckoutTotal()"> 🏪 Pay at Store <b style="color:#159447">10% OFF regular-price items</b></label><div id="paymentInfo" style="display:block"><small style="display:block;margin-top:8px">Easypaisa: <b>03465771099</b> &nbsp;|&nbsp; JazzCash: <b>03465771099</b>.</small></div><div id="checkoutSummary" style="margin-top:12px;padding-top:10px;border-top:1px solid #ddd"></div><small style="display:block;margin-top:8px">Delivery charges are calculated automatically from city and shipment weight for home delivery.</small></div><button class="btn green" style="width:100%" onclick="place()">SUBMIT ORDER</button></div>
+<div class="success" id="success"><button type="button" aria-label="Close" onclick="document.getElementById('checkout').style.display='none'" style="position:absolute;top:10px;right:12px;border:0;background:none;font-size:28px;line-height:1;cursor:pointer">✕</button><div style="font-size:55px">🎉</div><h2>Order Received!</h2><p>Order number:</p><div class="order" id="ord"></div><p>We will contact you on WhatsApp shortly to confirm your order and delivery details.</p><a class="btn green" id="wa" target="_blank">OPEN WHATSAPP</a></div></div></div>
+
+<div class="checkout" id="accountPanel" style="display:none;z-index:40"><div class="modal" style="max-width:430px;text-align:center"><button onclick="closeAccount()" style="float:right;border:0;background:none;font-size:24px">✕</button><div style="font-size:48px;margin-top:10px">👤</div><h2>WOW Pets Account</h2><p>You can shop and place orders as a guest — no account is required.</p><div class="notice" style="text-align:left"><b>Already placed an order?</b><br>WOW Pets will contact you on WhatsApp with your order confirmation and tracking details.</div><a class="btn green" style="display:block;text-decoration:none;margin-top:12px" href="https://wa.me/923465771099" target="_blank">CONTACT WOW PETS ON WHATSAPP</a><button class="btn" style="width:100%;margin-top:10px" onclick="closeAccount()">CONTINUE SHOPPING</button></div></div>
+
+<nav class="bottom-nav" aria-label="Mobile navigation">
+ <button type="button" class="bottom-item active" onclick="goHome();return false;"><svg viewBox="0 0 48 48"><path d="m6 23 18-15 18 15v19H29V30H19v12H6z"></path></svg><span>Home</span></button>
+ <button type="button" class="bottom-item" onclick="focusSearch();return false;"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="13"></circle><path d="m31 31 10 10"></path></svg><span>Search</span></button>
+ <button type="button" class="bottom-item" onclick="toggleCategories();return false;"><svg viewBox="0 0 48 48"><rect x="6" y="6" width="13" height="13" rx="2"></rect><rect x="29" y="6" width="13" height="13" rx="2"></rect><rect x="6" y="29" width="13" height="13" rx="2"></rect><rect x="29" y="29" width="13" height="13" rx="2"></rect></svg><span>Categories</span></button>
+ <button type="button" class="bottom-item" onclick="openCart();return false;" style="position:relative"><span class="badge" id="bottomCount">0</span><svg viewBox="0 0 48 48"><path d="M6 8h6l4 24h23l4-17H14"></path><circle cx="20" cy="40" r="2.5"></circle><circle cx="36" cy="40" r="2.5"></circle></svg><span>Cart</span></button>
+ <a class="bottom-item" href="https://wa.me/923465771099" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 48 48"><path d="M24 6c-10 0-18 7.8-18 17.5 0 3.2.9 6.2 2.6 8.8L6 42l10.2-2.5c2.3 1.2 4.9 1.8 7.8 1.8 10 0 18-7.8 18-17.5S34 6 24 6Z"></path><path d="M18 16c.5-1 1-1.1 1.7-1.1h1.2c.4 0 .8.2 1 .7l1.6 3.7c.2.5.1.9-.2 1.2l-1.2 1.4c1 1.8 2.5 3.3 4.3 4.3l1.4-1.2c.3-.3.8-.4 1.2-.2l3.7 1.6c.5.2.7.6.7 1v1.2c0 .7-.1 1.2-1.1 1.7-1.1.5-2.4.7-3.6.3-2.8-.9-5.5-2.5-7.6-4.6s-3.7-4.8-4.6-7.6c-.4-1.2-.2-2.5.3-3.6Z"></path></svg><span>WhatsApp</span></a>
+</nav>
+<script>
+const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
+const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+const sb=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+const $=id=>document.getElementById(id);
+const products=$("products"),count=$("count"),items=$("items"),total=$("total"),overlay=$("overlay"),cartEl=$("cart"),ord=$("ord"),form=$("form"),success=$("success"),wa=$("wa");
+const FALLBACK_P=[
+["Premium Pet Food",2500,"🥫","Pet Food"],
+["Cat Litter",1800,"🐱","Cats"],
+["Pet Grooming Kit",2200,"🧴","Grooming"],
+["Dog Collar & Leash",1500,"🐕","Dogs"],
+["Bird Food",1200,"🦜","Birds"],
+["Pet Bowl",850,"🥣","Accessories"],
+["Pet Toy",700,"🧸","Toys"],
+["Pet Medical Supplies",2000,"🩺","Medical Supplies"]
+];
+let P=[],cart=[];
+function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
+async function loadBanners(){try{const {data,error}=await sb.from("site_banners").select("*").eq("active",true).neq("type","shipping_config").neq("type","banner_config").order("sort_order",{ascending:true});const el=document.getElementById("homeBanners");if(!el)return;if(error){console.error("Banner load error:",error);return}let height="auto";try{const cfg=await sb.from("site_banners").select("banner_text").eq("type","banner_config").eq("active",true).limit(1).maybeSingle();if(!cfg.error&&cfg.data&&cfg.data.banner_text){const v=JSON.parse(cfg.data.banner_text).height;if(["180","260","360","480"].includes(String(v)))height=String(v)+"px"}}catch(e){}if(!Array.isArray(data)||!data.length){el.innerHTML="";return}el.innerHTML=data.map(b=>{const title=String(b.title||"").replace(/</g,"&lt;");const text=String(b.banner_text||"").replace(/</g,"&lt;");const button=b.button_text?'<a class="btn" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'">'+String(b.button_text).replace(/</g,"&lt;")+"</a>":"";const image=b.image_url?'<img src="'+String(b.image_url).replace(/"/g,"&quot;")+'" alt="'+title.replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"";if(image){const imageButton=b.button_text?'<a class="btn banner-image-button" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'"'+(String(b.button_link||"")==="#sale"?' onclick="showSale();return false;"':'')+'>'+String(b.button_text).replace(/</g,"&lt;")+'</a>':"";const h=height==="auto"?"":" style=\"height:"+height+";\"";return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"'+h+'><div class="banner-media">'+image+imageButton+'</div></section>';}return b.type==="sale"?'<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>':'<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>'}).join("")}catch(e){console.error("Banner load error:",e)}}
+async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(error)throw error;P=Array.isArray(data)?data.map(productRow):[];render();update();loadBanners();loadDeliveryConfig();}catch(e){console.error("Product load error:",e);P=[];cart=[];update();products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:#b00020"><b>Products could not be loaded right now.</b><br><span style="color:#666">Please try again.</span><br><button class="btn" style="margin-top:12px" onclick="loadProducts()">RETRY</button></div>';loadBanners();loadDeliveryConfig();}}
+function productVisual(p){
+  const src=String(p[2]||"");
+  if(src.startsWith("http")){
+    const alt=String(p[0]).replace(/"/g,"&quot;");
+    return '<img src="'+src+'" alt="'+alt+'" style="width:100%;height:100%;object-fit:contain;display:block">';
+  }
+  return src;
+}
+
+function render(a=P){products.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic">${productVisual(p)}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="sale-badge" style="display:block;text-align:center;width:100%;">SALE 🔥</span>`:""}<b>${p[0]}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button class="btn" onclick="viewProduct(P.indexOf(p))">VIEW DETAILS</button><button class="btn yellow" style="margin-left:5px" onclick="add(P.indexOf(p))">ADD TO CART</button></div></div>`).join("")}
+function add(i){let x=cart.find(x=>x.i==i);x?x.q++:cart.push({i,q:1});update();openCart()}
+function update(){const cartCount=cart.reduce((a,x)=>a+x.q,0);if(count)count.textContent=cartCount;const bottomCountEl=document.getElementById("bottomCount");if(bottomCountEl)bottomCountEl.textContent=cartCount;items.innerHTML=cart.map(x=>`<div class="row"><div style="width:64px;height:64px;flex:0 0 64px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;background:#f7f7f7">${productVisual(P[x.i])}</div><div style="flex:1"><b>${P[x.i][0]}</b><br>PKR ${(P[x.i][9]&&Number(P[x.i][9])>0&&Number(P[x.i][9])<Number(P[x.i][1])?Number(P[x.i][9]):Number(P[x.i][1])).toLocaleString()} × ${x.q}<br><button onclick="chg(${x.i},-1)">−</button> <button onclick="chg(${x.i},1)">+</button></div></div>`).join("")||"<p>Cart is empty.</p>";total.textContent=cart.reduce((a,x)=>a+(P[x.i][9]&&Number(P[x.i][9])>0&&Number(P[x.i][9])<Number(P[x.i][1])?Number(P[x.i][9]):Number(P[x.i][1]))*x.q,0).toLocaleString()}
+function chg(i,n){let x=cart.find(x=>x.i==i);x.q+=n;if(x.q<1)cart=cart.filter(y=>y.i!=i);update()}
+function openCart(){setBottomActive('Cart');if(overlay)overlay.style.display="block";if(cartEl)cartEl.style.display="block";update()}function closeCart(){if(overlay)overlay.style.display="none";if(cartEl)cartEl.style.display="none"}
+function getPaymentMethod(){const r=document.querySelector('input[name="paymentMethod"]:checked');return r?r.value:"cod"}function getDeliveryMethod(){const r=document.querySelector('input[name="deliveryMethod"]:checked');return r?r.value:"home"}function syncPaymentOptions(){const pickup=getDeliveryMethod()==="pickup";document.querySelectorAll('input[name="paymentMethod"]').forEach(r=>{const show=pickup?r.value==="store":r.value!=="store";const label=r.closest("label");if(label)label.style.display=show?"block":"none";r.disabled=!show});const target=document.querySelector('input[name="paymentMethod"][value="'+(pickup?"store":"cod")+'"]');if(target)target.checked=true;const info=document.getElementById("paymentInfo");if(info)info.style.display=pickup?"none":"block";updateCheckoutTotal()}
+function getCartSubtotal(){return cart.reduce((a,x)=>a+(P[x.i][9]&&Number(P[x.i][9])>0&&Number(P[x.i][9])<Number(P[x.i][1])?Number(P[x.i][9]):Number(P[x.i][1]))*x.q,0)}
+const DEFAULT_EXTRA_KG_RATES={nearby:150,major:170,other:200,remote:250};
+let DELIVERY_RATES=[
+ {max:0.5,nearby:150,major:200,other:250,remote:300},
+ {max:1,nearby:200,major:250,other:300,remote:350},
+ {max:2,nearby:300,major:350,other:400,remote:500},
+ {max:3,nearby:400,major:500,other:600,remote:700},
+ {max:5,nearby:550,major:650,other:750,remote:900}
+];
+let EXTRA_KG_RATES={...DEFAULT_EXTRA_KG_RATES};
+let deliveryConfigLoaded=false;
+async function loadDeliveryConfig(){try{const {data,error}=await sb.from("site_banners").select("id,banner_text").eq("type","shipping_config").eq("active",true).limit(1).maybeSingle();if(!error&&data&&data.banner_text){const cfg=JSON.parse(data.banner_text);if(Array.isArray(cfg.rates)&&cfg.rates.length)DELIVERY_RATES=cfg.rates;if(cfg.extra&&typeof cfg.extra==="object")EXTRA_KG_RATES={...DEFAULT_EXTRA_KG_RATES,...cfg.extra}}}catch(e){console.warn("Delivery config fallback:",e)}deliveryConfigLoaded=true;if(typeof updateCheckoutTotal==="function")updateCheckoutTotal()}
+
+const CITY_ZONES={
+ nearby:["wah","wah cantt","taxila","rawalpindi","islamabad","hassan abdal","attock","fateh jang"],
+ major:["lahore","karachi","faisalabad","multan","peshawar","gujranwala","sialkot","hyderabad","quetta","bahawalpur","sargodha","abbottabad","gujrat","sheikhupura","rahim yar khan","sukkur","mardan","dera ghazi khan","nawabshah"],
+ remote:["gwadar","skardu","gilgit","chitral","khuzdar","turbat","astore","hunza","chilas","muzaffarabad","neelum","parachinar"]
+};
+function normalizeCity(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g," ")}
+function getCityZone(city){const c=normalizeCity(city);if(!c)return "other";for(const z of ["nearby","major","remote"]){if(CITY_ZONES[z].some(x=>c===x||c.includes(x)||x.includes(c)))return z}return "other"}
+function weightToKg(value,unit){const n=Number(value);if(!Number.isFinite(n)||n<=0)return 0;const u=String(unit||"").toLowerCase();if(u==="kg")return n;if(u==="g")return n/1000;if(u==="l")return n;if(u==="ml")return n/1000;return 0}
+const DEFAULT_WEIGHT_BY_CATEGORY={"Pet Food":1,"Grooming":0.5,"Shampoo":0.5,"Medical":0.25,"Medical Supplies":0.25,"Accessories":0.5,"Toys":0.5,"Cats":0.5,"Dogs":1,"Birds":0.5,"Fish":0.5};
+const DEFAULT_PRODUCT_WEIGHT_KG=0.5;
+function getProductWeightKg(p){const actual=weightToKg(p&&p[7],p&&p[8]);if(actual>0)return actual;const cat=String(p&&p[3]||"").trim();return DEFAULT_WEIGHT_BY_CATEGORY[cat]||DEFAULT_PRODUCT_WEIGHT_KG}
+function getCartWeightKg(){return cart.reduce((sum,x)=>sum+getProductWeightKg(P[x.i])*x.q,0)}
+function getMissingWeightItems(){return []}
+function getDeliveryInfo(city){const kg=getCartWeightKg(),zone=getCityZone(city);if(!kg)return {kg:0,zone,charge:0,ready:false};let row=DELIVERY_RATES.find(r=>kg<=r.max),charge;if(row)charge=row[zone];else charge=DELIVERY_RATES[DELIVERY_RATES.length-1][zone]+Math.ceil(kg-5)*EXTRA_KG_RATES[zone];return {kg,zone,charge,ready:true}}
+function updateCheckoutTotal(){const el=document.getElementById("checkoutSummary");if(!el)return;const method=getDeliveryMethod(),pickup=method==="pickup",payment=getPaymentMethod(),subtotal=getCartSubtotal(),discountBase=cart.reduce((sum,x)=>{const regular=Number(P[x.i][1])||0,sale=Number(P[x.i][9])||0;const onSale=sale>0&&sale<regular;return sum+(onSale?0:(sale>0?sale:regular))*x.q},0),discount=(payment==="easypaisa"||payment==="jazzcash"||payment==="store")?Math.round(discountBase*0.10):0,afterDiscount=subtotal-discount,info=getDeliveryInfo(document.getElementById("city")?.value||"");const missing=getMissingWeightItems();const pi=document.getElementById("pickupInfo");if(pi)pi.style.display=pickup?"block":"none";let deliveryLine=pickup?"<div>Store Pickup: <b>FREE</b></div>":missing.length?"<div style='color:#b00020;margin-top:8px'><b>Delivery charge pending:</b> weight missing for "+missing.join(", ")+"</div>":info.ready?"<div>Delivery ("+info.zone.replace(/^./,m=>m.toUpperCase())+", "+info.kg.toFixed(2)+" kg): <b>PKR "+info.charge.toLocaleString()+"</b></div>":"<div style='color:#666;margin-top:6px'>Enter your city to calculate delivery.</div>";const deliveryCharge=pickup?0:info.charge,ready=pickup||(info.ready&&!missing.length);el.innerHTML="<div>Products: <b>PKR "+subtotal.toLocaleString()+"</b></div>"+(discount?"<div style='color:#159447'>10% discount on regular-price items: <b>−PKR "+discount.toLocaleString()+"</b></div>":"")+deliveryLine+"<div style='margin-top:6px;font-size:20px'><b>TOTAL: PKR "+(ready?(afterDiscount+deliveryCharge).toLocaleString():"—")+"</b></div>"+(pickup?"<div style='font-size:12px;color:#666;margin-top:4px'>No delivery charge — collect your order from the WOW Pets store.</div>":"<div style='font-size:12px;color:#666;margin-top:4px'>Delivery is calculated automatically from city and total shipment weight.</div>")}
+function checkout(){if(!cart.length)return alert("Your cart is empty.");const missing=getMissingWeightItems();closeCart();document.getElementById("checkout").style.display="block";const cod=document.querySelector('input[name="paymentMethod"][value="cod"]');if(cod)cod.checked=true;const home=document.querySelector('input[name="deliveryMethod"][value="home"]');if(home)home.checked=true;const city=document.getElementById("city");if(city)city.oninput=updateCheckoutTotal;updateCheckoutTotal()}function closeCheckout(){document.getElementById("checkout").style.display="none"}
+async function place(){
+  const btn=document.querySelector('#form .btn.green');
+  if(btn&&btn.disabled)return;
+  let n=document.getElementById("name").value.trim(),ph=document.getElementById("phone").value.trim(),c=document.getElementById("city").value.trim(),a=document.getElementById("address").value.trim();
+  if(!n||!ph||!c||!a)return alert("Please complete all required fields.");
+  if(!cart.length)return alert("Your cart is empty.");
+  if(btn){btn.disabled=true;btn.textContent="SUBMITTING ORDER…";}
+  try{
+    let no="PW-"+Date.now().toString().slice(-8),items=cart.map(x=>({product_id:P[x.i][4]||null,name:P[x.i][0],qty:x.q,price:(P[x.i][9]&&Number(P[x.i][9])>0&&Number(P[x.i][9])<Number(P[x.i][1])?Number(P[x.i][9]):Number(P[x.i][1]))})),subtotal=items.reduce((s,x)=>s+x.price*x.qty,0),paymentMethod=getPaymentMethod(),deliveryMethod=getDeliveryMethod(),discountBase=cart.reduce((sum,x)=>{const regular=Number(P[x.i][1])||0,sale=Number(P[x.i][9])||0;const onSale=sale>0&&sale<regular;return sum+(onSale?0:(sale>0?sale:regular))*x.q},0),discount=(paymentMethod==="easypaisa"||paymentMethod==="jazzcash"||paymentMethod==="store")?Math.round(discountBase*0.10):0,delivery=getDeliveryInfo(c),missing=getMissingWeightItems();if(deliveryMethod!=="pickup"&&(!delivery.ready||delivery.charge<=0))throw new Error("Could not calculate delivery for this order.");let deliveryCharge=deliveryMethod==="pickup"?0:delivery.charge,orderTotal=subtotal-discount+deliveryCharge,altPhone=document.getElementById("alt").value.trim(),notes=document.getElementById("notes").value.trim(),paymentNote="Payment: "+(paymentMethod==="easypaisa"?"Easypaisa — 10% discount on regular-price items":paymentMethod==="jazzcash"?"JazzCash — 10% discount on regular-price items":paymentMethod==="store"?"Pay at Store — 10% discount on regular-price items":"Cash on Delivery")+" | Products: PKR "+subtotal.toLocaleString()+" | Discount: PKR "+discount.toLocaleString()+" | Delivery: PKR "+deliveryCharge.toLocaleString()+" | Weight: "+(deliveryMethod==="pickup"?"N/A":delivery.kg.toFixed(2)+" kg")+" | Zone: "+(deliveryMethod==="pickup"?"Pickup":delivery.zone);
+    let orderPayload={order_number:no,customer_name:n,phone:ph,alternate_phone:altPhone||null,city:c,address:a,notes:(paymentNote+(notes?" | Notes: "+notes:"")),items,total:orderTotal,status:"New"};
+    const {error}=await sb.from("orders").insert(orderPayload);
+    if(error){throw new Error(error.message||"Database error");}
+    let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".\nName: "+n+"\nWhatsApp: "+ph+"\nCity: "+c+"\nAddress: "+a+"\nPayment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"\nProducts: PKR "+subtotal.toLocaleString()+"\nDiscount: PKR "+discount.toLocaleString()+"\nDelivery: "+deliveryMessage+"\nTotal: PKR "+orderTotal.toLocaleString()+"\nItems: "+list;
+    ord.textContent=no;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);cart=[];update();
+    setTimeout(()=>{window.location.href=wa.href},250);
+  }catch(e){
+    alert("We couldn't save your order. Please try again. Error: "+e.message);
+    if(btn){btn.disabled=false;btn.textContent="SUBMIT ORDER";}
+  }
+}
+let selectedQty={};
+function adjustProductQty(i,n){
+  selectedQty[i]=(selectedQty[i]||1)+n;
+  if(selectedQty[i]<1)selectedQty[i]=1;
+  document.getElementById("qty-"+i).textContent=selectedQty[i];
+}
+function addWithQty(i){
+  let q=selectedQty[i]||1;
+  let x=cart.find(x=>x.i==i);
+  x?x.q+=q:cart.push({i:i,q:q});
+  update();
+  let btn=document.querySelector("#productDetails .btn.yellow");
+  if(btn){
+    let old=btn.innerHTML;
+    btn.innerHTML="✓ ADDED TO CART";
+    setTimeout(()=>{btn.innerHTML=old},1000);
+  }
+}
+
+function viewProduct(i){
+  let p=P[i];
+  selectedQty[i]=1;
+  const gallery=Array.isArray(p[10])?p[10].filter(u=>String(u).startsWith("http")):[];
+  const images=[String(p[2]||"")].concat(gallery).filter((u,k,a)=>String(u).startsWith("http")&&a.indexOf(u)===k);
+  document.getElementById("productDetails").innerHTML=`
+    <button onclick="closeProduct()" style="float:right;border:0;background:none;font-size:24px">✕</button>
+    <div class="product-detail">
+      <div>
+        <div class="bigpic" id="mainProductImage">${productVisual(p)}</div>
+        ${images.length>1?`<div class="product-gallery"><div class="product-gallery-thumbs">${images.map((u,k)=>`<button type="button" onclick="selectProductImage(decodeURIComponent('${encodeURIComponent(u)}'))"><img src="${u}" alt="Product image ${k+1}"></button>`).join("")}</div></div>`:""}
+      </div>
+      <div>
+        <span class="category">${p[3]}</span>
+        <h2>${p[0]}</h2>
+        <div class="detail-price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div>
+        <p>${p[5]||"Quality pet product from WOW Pets."}</p>${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
+        <p><b>Category:</b> ${p[3]}</p>
+        <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
+          <button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
+          <span id="qty-${i}" style="min-width:30px;text-align:center;font-weight:bold">1</span>
+          <button class="btn" onclick="adjustProductQty(${i},1)">+</button>
+        </div>
+        <button class="btn yellow" onclick="addWithQty(${i})">🛒 ADD TO CART</button>
+      </div>
+    </div>
+    <div class="related-products"><h3>RELATED PRODUCTS</h3><div id="relatedProductGrid" class="related-grid"></div></div>`;
+  renderRelatedProducts(i);
+  document.getElementById("productModal").style.display="block";
+}
+function selectProductImage(url){
+  const el=document.getElementById("mainProductImage");
+  if(!el)return;
+  const safe=String(url).replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  el.innerHTML='<img src="'+safe+'" alt="Product image" style="width:100%;height:100%;object-fit:contain;display:block">';
+}
+function renderRelatedProducts(currentIndex){
+  let current=P[currentIndex];
+  let related=P.map((p,i)=>({p,i})).filter(x=>x.i!==currentIndex&&x.p[3]===current[3]);
+  if(related.length<4) related=related.concat(P.map((p,i)=>({p,i})).filter(x=>x.i!==currentIndex&&x.p[3]!==current[3]));
+  related=related.slice(0,4);
+  let grid=document.getElementById("relatedProductGrid");
+  if(!grid)return;
+  grid.innerHTML=related.map(x=>`<div class="card"><div class="pic">${productVisual(x.p)}</div><div class="info"><b>${x.p[0]}</b><div class="price">PKR ${x.p[1].toLocaleString()}</div><button class="btn" onclick="viewProduct(${x.i})">VIEW DETAILS</button></div></div>`).join("");
+}
+function closeProduct(){document.getElementById("productModal").style.display="none"}
+
+let currentCategory="All";
+let currentSearch="";
+function applyProductFilters(){
+  const q=currentSearch.trim().toLowerCase();
+  const result=q
+    ? P.filter(p=>p.some(v=>String(v??"").toLowerCase().includes(q)))
+    : P.filter(p=>categoryMatches(p[3],currentCategory));
+  render(result);
+  document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));
+  const active=[...document.querySelectorAll(".filter-bar .btn")].find(b=>b.textContent.trim()===currentCategory);
+  if(active&&!q)active.classList.add("filter-active");
+  document.getElementById("searchResult").textContent=(currentCategory!=="All"||q)?(result.length+" product"+(result.length===1?"":"s")+" found"+(q?" for “"+q+"”":"")):"";
+}
+function handleSearch(){
+  const input=document.getElementById("search");
+  currentSearch=input?String(input.value||""):"";
+  if(currentSearch.trim()){
+    currentCategory="All";
+    applyProductFilters();
+    window.location.hash="search-results";
+    const shop=document.getElementById("shop");
+    if(shop)shop.scrollIntoView({behavior:"smooth",block:"start"});
+  }else{
+    applyProductFilters();
+    window.location.hash="shop";
+  }
+  const nav=document.getElementById("mainNav");
+  if(nav)nav.classList.remove("open");
+}
+ 
+function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
+function showSale(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
+function categoryMatches(productCategory, selectedCategory){
+  if(selectedCategory==="All")return true;
+  const c=String(productCategory||"").trim().toLowerCase();
+  const selected=String(selectedCategory||"").trim().toLowerCase();
+  if(c===selected)return true;
+  const aliases={
+    "grooming":["shampoo","grooming supplies","grooming"],
+    "medical supplies":["medical","medical supplies","medicines","medicine"],
+    "pet food":["food","pet food","petfood"],
+    "toys":["toy","toys","pet toys"],
+    "accessories":["accessory","accessories"]
+  };
+  return (aliases[selected]||[]).includes(c);
+}
+function filterCategory(cat){
+  currentCategory=cat;
+  applyProductFilters();
+  const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
+  window.location.hash="shop";
+}
+function toggleMenu(){let nav=document.getElementById("mainNav");if(!nav)return;nav.classList.toggle("open");let btn=document.querySelector(".menu-btn");if(btn){let open=nav.classList.contains("open");btn.classList.toggle("is-open",open);btn.setAttribute("aria-expanded",open?"true":"false");}}
+
+function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
+function goHome(){setBottomActive('Home');const e=document.querySelector('.hero')||document.body;e.scrollIntoView({behavior:'smooth',block:'start'});}
+function focusSearch(){setBottomActive('Search');const e=document.getElementById('search');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{e.focus();e.click()},350)}}
+function toggleCategories(){setBottomActive('Categories');const e=document.getElementById('categories');if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
+function closeAccount(){document.getElementById('accountPanel').style.display='none'}
+const searchParams=new URLSearchParams(window.location.search);
+currentSearch=String(searchParams.get("q")||"");
+currentCategory="All";
+const searchInput=document.getElementById("search");
+if(searchInput)searchInput.value=currentSearch;
+const shopTitle=document.querySelector("#shop h2");
+if(shopTitle)shopTitle.textContent=currentSearch.trim()?"Search Results":"Search";
+products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';
+update();
+loadProducts().then(()=>applyProductFilters());
+</script></body></html>
