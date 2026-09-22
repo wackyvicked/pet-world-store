@@ -60,6 +60,9 @@ body{margin:0;font-family:Arial;color:#171717}header{position:relative;backgroun
 .menu-btn .hamburger-lines{width:26px;height:24px;display:flex;flex-direction:column;justify-content:center;gap:5px;align-items:center;}
 .menu-btn .hamburger-lines i{display:block;width:25px;height:2.5px;background:currentColor;border-radius:2px;}
 @media(max-width:700px){.mobile-menu-bar{padding:0 10px!important;background:transparent!important;overflow:visible!important}.mobile-menu-bar .menu-btn{width:42px!important;height:42px!important;background:transparent!important;color:#171717!important;box-shadow:none!important}.menu-btn .hamburger-lines{width:26px;height:24px;gap:5px}.menu-btn .hamburger-lines i{width:25px;height:2.5px;}}
+
+/* Prevent persistent blue focus boxes on tap while keeping keyboard focus visible. */
+button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none!important;box-shadow:none!important;}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
