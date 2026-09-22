@@ -258,11 +258,13 @@ let currentCategory="All";
 let currentSearch="";
 function applyProductFilters(){
   const q=currentSearch.trim().toLowerCase();
-  const result=P.filter(p=>categoryMatches(p[3],currentCategory)&&(!q||String(p[0]).toLowerCase().includes(q)||String(p[3]).toLowerCase().includes(q)));
+  const result=q
+    ? P.filter(p=>p.some(v=>String(v??"").toLowerCase().includes(q)))
+    : P.filter(p=>categoryMatches(p[3],currentCategory));
   render(result);
   document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));
   const active=[...document.querySelectorAll(".filter-bar .btn")].find(b=>b.textContent.trim()===currentCategory);
-  if(active)active.classList.add("filter-active");
+  if(active&&!q)active.classList.add("filter-active");
   document.getElementById("searchResult").textContent=(currentCategory!=="All"||q)?(result.length+" product"+(result.length===1?"":"s")+" found"+(q?" for “"+q+"”":"")):"";
 }
 function handleSearch(){
