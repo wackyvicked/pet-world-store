@@ -140,7 +140,7 @@ const CITY_ZONES={
 function normalizeCity(v){return String(v||"").trim().toLowerCase().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g," ")}
 function getCityZone(city){const c=normalizeCity(city);if(!c)return "other";for(const z of ["nearby","major","remote"]){if(CITY_ZONES[z].some(x=>c===x||c.includes(x)||x.includes(c)))return z}return "other"}
 function weightToKg(value,unit){const n=Number(value);if(!Number.isFinite(n)||n<=0)return 0;const u=String(unit||"").toLowerCase();if(u==="kg")return n;if(u==="g")return n/1000;if(u==="l")return n;if(u==="ml")return n/1000;return 0}
-const DEFAULT_WEIGHT_BY_CATEGORY={"Pet Food":1,"Grooming":0.5,"Medical":0.25,"Accessories":0.5,"Cats":0.5,"Dogs":1,"Birds":0.5,"Fish":0.5};
+const DEFAULT_WEIGHT_BY_CATEGORY={"Pet Food":1,"Grooming":0.5,"Shampoo":0.5,"Medical":0.25,"Medical Supplies":0.25,"Accessories":0.5,"Toys":0.5,"Cats":0.5,"Dogs":1,"Birds":0.5,"Fish":0.5};
 const DEFAULT_PRODUCT_WEIGHT_KG=0.5;
 function getProductWeightKg(p){const actual=weightToKg(p&&p[7],p&&p[8]);if(actual>0)return actual;const cat=String(p&&p[3]||"").trim();return DEFAULT_WEIGHT_BY_CATEGORY[cat]||DEFAULT_PRODUCT_WEIGHT_KG}
 function getCartWeightKg(){return cart.reduce((sum,x)=>sum+getProductWeightKg(P[x.i])*x.q,0)}
