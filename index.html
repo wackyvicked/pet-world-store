@@ -292,7 +292,7 @@ function filterCategory(cat){
   const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
   window.location.hash="shop";
 }
-function toggleMenu(){let nav=document.getElementById("mainNav");if(!nav)return;nav.classList.toggle("open");let btn=document.querySelector(".menu-btn");if(btn)btn.innerHTML=nav.classList.contains("open")?"✕ CLOSE":"☰ MENU"}
+function toggleMenu(){let nav=document.getElementById("mainNav");if(!nav)return;nav.classList.toggle("open");let btn=document.querySelector(".menu-btn");if(btn){let open=nav.classList.contains("open");btn.classList.toggle("is-open",open);btn.setAttribute("aria-expanded",open?"true":"false");}}
 
 function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
 function goHome(){setBottomActive('Home');const e=document.querySelector('.hero')||document.body;e.scrollIntoView({behavior:'smooth',block:'start'});}
