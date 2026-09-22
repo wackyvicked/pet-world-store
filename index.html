@@ -4,7 +4,7 @@ body{margin:0;font-family:Arial;color:#171717}header{position:relative;backgroun
 .mobile-menu-bar{max-width:1100px;margin:auto;padding:0 14px 10px;display:flex;align-items:center;gap:12px}
 .menu-btn{border:0;background:#171717;color:#fff;border-radius:6px;padding:9px 13px;font-weight:bold;cursor:pointer}
 .menu-btn span{font-size:12px;margin-left:3px}
-.menu-label{font-size:13px;font-weight:bold}.sale-menu-btn{margin-left:auto;border:0;background:#ffd21c;color:#171717;border-radius:6px;padding:9px 13px;font-weight:bold;cursor:pointer}
+.menu-label{font-size:13px;font-weight:bold}
 @media(min-width:701px){.mobile-menu-bar{display:none}}
 @media(max-width:700px){.nav{display:none;flex-direction:column;gap:0;padding:0 14px 10px;overflow:visible}.nav.open{display:flex}.nav a{padding:11px 5px;border-bottom:1px solid #eee}.mobile-menu-bar{display:flex}}.hero{background:#ffe56a;padding:45px 18px}.hero div{max-width:1100px;margin:auto}.hero h1{font-size:44px;margin:0 0 10px}.section{max-width:1100px;margin:35px auto;padding:0 14px}.cats,.products{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.cat,.card{border:1px solid #eee;border-radius:12px;background:#fafafa;overflow:hidden}.cat{text-align:center;padding:25px;font-weight:bold}.cat b{display:block;font-size:42px}.pic{height:150px;background:#f1f1f1;display:grid;place-items:center;font-size:65px}.info{padding:13px}.info{display:flex;flex-direction:column;align-items:stretch}.info>b{display:block;line-height:1.3;min-height:2.6em;margin-bottom:2px}.price{font-weight:bold;font-size:18px;margin:8px 0;display:flex;align-items:center;gap:7px;flex-wrap:nowrap;white-space:nowrap;min-height:26px}.info>.btn{margin-top:4px}.info>.btn:last-child{margin-bottom:0}
 .old-price{white-space:nowrap}.sale-price{white-space:nowrap}.old-price{text-decoration:line-through;color:#777;font-size:14px;margin-right:6px}.sale-price{color:#d71920;font-weight:900;font-size:20px}.sale-badge{display:inline-block;background:#d71920;color:white;padding:4px 8px;border-radius:5px;font-size:11px;font-weight:900;margin-bottom:5px}.sale-banner{background:linear-gradient(135deg,#d71920,#ffb000);color:white;padding:24px 18px}.sale-banner div{max-width:1100px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}.sale-banner h2{margin:0;font-size:30px}.sale-banner p{margin:5px 0 0}.sale-banner .btn{background:white;color:#171717}@media(max-width:700px){.sale-banner{padding:20px 14px}.sale-banner div{display:block}.sale-banner h2{font-size:25px}.sale-banner .btn{display:inline-block;margin-top:12px}}.btn{border-radius:6px}.green{background:#39a852;color:white}
@@ -202,7 +202,7 @@ function viewProduct(i){
         <span class="category">${p[3]}</span>
         <h2>${p[0]}</h2>
         <div class="detail-price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div>
-        <p>${p[5]||"Quality pet product from Pet World."}</p>${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
+        <p>${p[5]||"Quality pet product from WOW Pets."}</p>${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
         <p><b>Category:</b> ${p[3]}</p>
         <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
           <button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
