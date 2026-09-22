@@ -311,9 +311,9 @@ function filterCategory(cat){
 function toggleMenu(){let nav=document.getElementById("mainNav");if(!nav)return;nav.classList.toggle("open");let btn=document.querySelector(".menu-btn");if(btn){let open=nav.classList.contains("open");btn.classList.toggle("is-open",open);btn.setAttribute("aria-expanded",open?"true":"false");}}
 
 function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
-function goHome(){setBottomActive('Home');const e=document.querySelector('.hero')||document.body;e.scrollIntoView({behavior:'smooth',block:'start'});}
+function goHome(){setBottomActive('Home');window.location.href="./index.html";}
 function focusSearch(){setBottomActive('Search');const e=document.getElementById('search');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{e.focus();e.click()},350)}}
-function toggleCategories(){setBottomActive('Categories');const e=document.getElementById('categories');if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
+function toggleCategories(){setBottomActive('Categories');window.location.href="./index.html#categories";}
 function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 const searchParams=new URLSearchParams(window.location.search);
