@@ -522,7 +522,7 @@ const shopTitle=document.querySelector("#shop h2");
 if(shopTitle){shopTitle.textContent=currentSearch.trim()?"Search Results":"Search";shopTitle.classList.toggle("search-results-title",!!currentSearch.trim());}
 wireSearch();
 wireProductCardClicks();
-products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';
+P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();
 update();
-ensureSb().then(()=>loadProducts().then(()=>applyProductFilters()));
+ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
 </script><script src="./shared-cart.js?v=20260923-3"></script></body></html>
