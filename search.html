@@ -374,7 +374,7 @@ async function place(){
     if(error){throw new Error(error.message||"Database error");}
     let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".\nName: "+n+"\nWhatsApp: "+ph+"\nCity: "+c+"\nAddress: "+a+"\nPayment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"\nProducts: PKR "+subtotal.toLocaleString()+"\nDiscount: PKR "+discount.toLocaleString()+"\nDelivery: "+deliveryMessage+"\nTotal: PKR "+orderTotal.toLocaleString()+"\nItems: "+list;
     ord.textContent=no;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);cart=[];update();
-    setTimeout(()=>{window.location.href=wa.href},250);
+    /* WhatsApp is optional: customer chooses it manually. */
   }catch(e){
     alert("We couldn't save your order. Please try again. Error: "+e.message);
     if(btn){btn.disabled=false;btn.textContent="SUBMIT ORDER";}
@@ -521,4 +521,4 @@ wireProductCardClicks();
 products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';
 update();
 ensureSb().then(()=>loadProducts().then(()=>applyProductFilters()));
-</script></body></html>
+</script><script src="./shared-cart.js?v=20260923-1"></script></body></html>
