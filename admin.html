@@ -81,7 +81,7 @@ body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
-const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2ttcnhodHFyeWZmaXh6a29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MjM1NjQsImV4cCI6MjEwNTM5OTU2NH0.X9TRiy3fSt895Bkvkg1vKRhV_hfwbtNy2jN7g5yQjek";
 const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:"pet-world-admin-auth"}});
 let products=[], photoBlob=null, originalImage=null, originalImageSource=null, rotation=0, cropStart=null, cropEnd=null, originalProductImageUrl=null, galleryUrls=[], galleryEditingIndex=-1, allOrders=[], orderFilter="All";
 const $=id=>document.getElementById(id);
