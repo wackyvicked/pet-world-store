@@ -495,13 +495,20 @@ function handleSearch(){
 function wireSearch(){
   if(window.__wowPetsSearchWired)return;
   window.__wowPetsSearchWired=true;
+  const input=document.getElementById("search");
+  if(input){
+    input.addEventListener("input",function(){
+      currentSearch=String(input.value||"").trim();
+      currentCategory="All";
+      applyProductFilters();
+    });
+    input.addEventListener("keydown",function(event){
+      if(event.key==="Enter"){event.preventDefault();handleSearch();}
+    });
+  }
   document.addEventListener("click",function(event){
     const button=event.target.closest("#searchButton");
     if(button){event.preventDefault();handleSearch();}
-  });
-  document.addEventListener("keydown",function(event){
-    const input=event.target.closest("#search");
-    if(input&&event.key==="Enter"){event.preventDefault();handleSearch();}
   });
 }
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
@@ -538,7 +545,7 @@ const searchParams=new URLSearchParams(window.location.search);
 currentSearch=String(searchParams.get("q")||"").trim();
 currentCategory="All";
 const searchInput=document.getElementById("search");
-if(searchInput)searchInput.value=currentSearch;
+if(searchInput){searchInput.value=currentSearch;searchInput.setAttribute("value",currentSearch);}
 const shopTitle=document.querySelector("#shop h2");
 if(shopTitle){shopTitle.textContent=currentSearch?"Search Results":"Featured Products";shopTitle.classList.toggle("search-results-title",!!currentSearch);}
 wireSearch();
