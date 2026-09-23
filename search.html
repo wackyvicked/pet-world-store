@@ -518,7 +518,7 @@ function toggleCategories(){setBottomActive('Categories');window.location.href="
 function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 const searchParams=new URLSearchParams(window.location.search);
-currentSearch=String(searchParams.get("q")||"");
+currentSearch=String(searchParams.get("q")||"").trim();
 currentCategory="All";
 const searchInput=document.getElementById("search");
 if(searchInput)searchInput.value=currentSearch;
@@ -526,6 +526,6 @@ const shopTitle=document.querySelector("#shop h2");
 if(shopTitle){shopTitle.textContent=currentSearch?"Search Results":"Featured Products";shopTitle.classList.toggle("search-results-title",!!currentSearch);}
 wireSearch();
 wireProductCardClicks();
-P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();update();\nif(currentSearch){const input=document.getElementById("search");if(input)input.value=currentSearch;}
+P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();update();
 ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
 </script><script src="./shared-cart.js?v=20260924-2"></script></body></html>
