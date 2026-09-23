@@ -397,6 +397,8 @@ currentSearch="";
 currentCategory=String(categoryParams.get("cat")||"All").trim()||"All";
 const shopTitle=document.querySelector("#shop h2");
 if(shopTitle)shopTitle.textContent=currentCategory==="All"?"Products":currentCategory+" Products";
+wireSearch();
+wireProductCardClicks();
 products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';
 update();
 loadProducts().then(()=>applyProductFilters());
