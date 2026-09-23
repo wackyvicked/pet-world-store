@@ -387,5 +387,7 @@ function toggleCategories(){setBottomActive('Categories');const e=document.getEl
 function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 wireProductCardClicks();
+wireSearch();
+wireProductCardClicks();
 products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';update();loadProducts();
 </script></body></html>
