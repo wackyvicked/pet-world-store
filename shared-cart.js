@@ -39,7 +39,7 @@
   function badges(){const n=read().reduce((s,x)=>s+Number(x.q||0),0);document.querySelectorAll(".cart-badge,.cart-count,.cart-btn .badge,.bottom-item .badge").forEach(e=>e.textContent=n);const b=document.getElementById("productBottomCount");if(b)b.textContent=n}
   function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open")}
   function close(){const c=document.getElementById("wowSharedCart"),o=document.getElementById("wowCartOverlay");if(c)c.classList.remove("open");if(o)o.classList.remove("open")}
-  function change(i,d){const a=read(),x=a.find(v=>v.i===i);if(x){x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1)}write(a);render()}
+  function change(i,d){const ps=products(),va=available(),shown=va.find(v=>v.i===i),a=read();if(!shown)return;const x=a.find(v=>shown.id!=null?v.id===shown.id:v.i===i);if(x){x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1)}write(a);render()}
   function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){try{window.__sharedCheckoutItems=a;window.checkout()}finally{window.__sharedCheckoutItems=null}return}location.href="./index.html#cart"}
   function whatsapp(){window.open(WA,"_blank","noopener")}
   function add(i,q){const ps=products(),p=ps[Number(i)];if(!p)return;const id=productId(p),a=migrate(),x=a.find(v=>v.id!=null&&v.id===id);if(x)x.q+=Number(q)||1;else a.push({id:id,i:Number(i),q:Number(q)||1});write(a);render();open()}
