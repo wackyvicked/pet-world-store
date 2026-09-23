@@ -180,6 +180,31 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
   border-radius:9px;font-weight:800;font-size:16px;cursor:pointer
 }
 .cart-checkout-bar{display:none!important}
+</style><style>
+/* Product-page cart copied exactly */
+.pcart{
+  position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;
+  height:min(82vh,680px);background:#fafafa;z-index:1201;
+  transform:translateY(105%);opacity:0;
+  transition:transform .3s ease,opacity .3s ease;
+  display:flex;flex-direction:column;
+  border:0;border-top:1px solid #d9d9d9;
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -10px 30px rgba(0,0,0,.22);overflow:hidden
+}
+.pcart.open{transform:translateY(0);opacity:1}
+.pcart.closing{transform:translateY(105%);opacity:0}
+.pcart-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:#fff;border-bottom:1px solid #ddd;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.pcart-head h2{margin:0;font:700 21px "Poppins","Inter",Arial,sans-serif}
+.pcart-head button{width:38px;height:38px;border:1px solid #ddd;background:#f7f7f7;border-radius:50%;font-size:27px;line-height:1;cursor:pointer;color:#222}
+.pcart-items{flex:1;overflow:auto;padding:12px;background:#f6f6f6}
+.pcart-item{display:flex;gap:10px;align-items:center;padding:12px;margin-bottom:9px;background:#fff;border:1px solid #e2e2e2;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.pcart-item img{width:58px;height:58px;object-fit:contain;border-radius:8px;background:#f3f3f3;border:1px solid #eee}
+.pcart-item-info{flex:1;min-width:0}.pcart-item-name{font-weight:700;font-size:14px;line-height:1.25}.pcart-item-price{font-size:13px;margin-top:4px;color:#555}
+.pcart-qty{display:flex;align-items:center;gap:5px}.pcart-qty button{width:30px;height:30px;border:1px solid #d5d5d5;background:#fff;border-radius:7px;font-size:18px;cursor:pointer}.pcart-qty span{min-width:18px;text-align:center;font-weight:700}
+.pcart-empty{text-align:center;color:#777;padding:45px 15px;background:#fff;border:1px dashed #d5d5d5;border-radius:10px}
+.pcart-foot{padding:15px 16px;background:#fff;border-top:1px solid #d8d8d8;box-shadow:0 -2px 8px rgba(0,0,0,.05)}.pcart-total{display:flex;justify-content:space-between;font-weight:800;margin-bottom:12px}.pcart-checkout{width:100%;border:0;background:#f7c600;color:#111;padding:13px;border-radius:9px;font-weight:800;font-size:16px;cursor:pointer}
+.pcart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:none}
 </style></head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
@@ -213,7 +238,7 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 <button class="btn" onclick="filterCategory('Accessories')">Accessories</button>
 </div><div class="products" id="products"></div></section>
 <footer style="background:#171717;color:white;padding:30px 18px"><b>WOW PETS</b><p>📱 +92 346 5771099</p><p>📍 Commercial Market, Rawalpindi, Pakistan</p><p>Orders are confirmed on WhatsApp. Home delivery and free store pickup are available.</p></footer>
-<div class="overlay" id="overlay" onclick="closeCart()"></div><aside class="cart" id="cart" aria-label="Shopping cart"><div class="cart-head"><h2>Your Cart</h2><button type="button" onclick="closeCart()" aria-label="Close cart">×</button></div><div id="items" class="cart-items"></div><div class="cart-foot"><div class="cart-total"><span>Total</span><strong>PKR <span id="total">0</span></strong></div><button type="button" class="cart-checkout" onclick="checkout()">PLACE ORDER</button></div></aside>
+<div class="pcart-overlay" id="overlay" onclick="closeCart()"></div><aside class="pcart" id="cart" aria-label="Shopping cart"><div class="pcart-head"><h2>Your Cart</h2><button type="button" onclick="closeCart()" aria-label="Close cart">×</button></div><div id="items" class="pcart-items"></div><div class="pcart-foot"><div class="pcart-total"><span>Total</span><strong id="total">PKR 0</strong></div><button type="button" class="pcart-checkout" onclick="checkout()">PLACE ORDER</button></div></aside>
 <div class="checkout" id="productModal"><div class="modal" id="productDetails"></div></div>
 <div class="checkout" id="checkout"><div class="modal" style="position:relative"><div id="form"><button onclick="closeCheckout()">✕</button><h2>Place Your Order</h2><p>Delivery is calculated automatically from city and total shipment weight. We will contact you on WhatsApp to confirm your order.</p><div class="formgrid">
 <label class="field">Full Name *<input id="name"></label><label class="field">WhatsApp Number *<input id="phone" placeholder="03XXXXXXXXX"></label><label class="field">Alternate Phone<input id="alt"></label><label class="field">City *<input id="city"></label><label class="field full">Complete Delivery Address *<textarea id="address" rows="3"></textarea></label><label class="field full">Order Notes<textarea id="notes" rows="2"></textarea></label></div>
