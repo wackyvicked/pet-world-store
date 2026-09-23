@@ -281,7 +281,11 @@ const FALLBACK_P=[
 ["Pet Medical Supplies",2000,"🩺","Medical Supplies"]
 ];
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-let P=[],cart=[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0).map(x=>({i:x.i,q:Number(x.q)}));}catch(e){}
+let P=[],cart=[];
+const BUILTIN_PRODUCTS=[
+  {id:"a99224f6-f375-4886-9e6c-d60751a27f70",sku:"PW-SHP-001-320",name:"Luxury Perfumed Cat Shampoo",category:"Cats, Grooming",size:"320ml",price:700,sale_price:600,stock:10,description:"Luxury perfumed cat shampoo.",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1790187910406-vlj1udpd318.jpg",active:true},
+  {id:"db834b06-b22c-4b9b-8eb0-3ceb120b1d30",sku:"PW-SHP-002-300",name:"Paw-comfort Glossy Furr",category:"Cats, Grooming",price:850,sale_price:null,stock:10,description:"Paw-comfort grooming product.",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1790187639963-i960kwdbwvp.jpg",active:true}
+];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0).map(x=>({i:x.i,q:Number(x.q)}));}catch(e){}
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
 async function loadBanners(){
   const el=document.getElementById("homeBanners");
@@ -303,7 +307,7 @@ async function loadProducts(){try{
     if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
     data=await res.json();
   }
-  P=Array.isArray(data)?data.map(productRow):[];
+  P=(Array.isArray(data)&&data.length?data:BUILTIN_PRODUCTS).map(productRow);
   window.P=P;render();update();
   if(location.hash==="#cart")setTimeout(openCart,50);
 }catch(e){
