@@ -128,7 +128,64 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .bottom-nav .bottom-item[aria-label="WhatsApp"] svg{width:22px!important;height:22px!important;display:block!important;stroke:currentColor!important;fill:none!important;stroke-width:2!important;}
 .bottom-nav .bottom-item[aria-label="WhatsApp"]{color:#111!important;text-decoration:none!important;opacity:1!important;}
 </style>
-</head><body class="search-page">
+<style>
+/* Exact product-page cart styling */
+.cart{
+  position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;
+  height:min(82vh,680px);background:#fafafa;z-index:1201;
+  transform:translateY(105%);opacity:0;
+  transition:transform .3s ease,opacity .3s ease;
+  display:flex!important;flex-direction:column;
+  border:0;border-top:1px solid #d9d9d9;
+  border-radius:22px 22px 0 0;
+  box-shadow:0 -10px 30px rgba(0,0,0,.22);overflow:hidden;
+  padding-bottom:0!important;
+}
+.cart.open{transform:translateY(0);opacity:1}
+.cart.closing{transform:translateY(105%);opacity:0}
+.cart-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 18px;background:#fff;border-bottom:1px solid #ddd;
+  box-shadow:0 1px 4px rgba(0,0,0,.05)
+}
+.cart-head h2{margin:0;font:700 21px "Poppins","Inter",Arial,sans-serif}
+.cart-head button{
+  width:38px;height:38px;border:1px solid #ddd;background:#f7f7f7;
+  border-radius:50%;font-size:27px;line-height:1;cursor:pointer;color:#222
+}
+.cart-items{flex:1;overflow:auto;padding:12px;background:#f6f6f6}
+.cart-items .row{
+  display:flex;gap:10px;align-items:center;padding:12px;margin-bottom:9px;
+  background:#fff;border:1px solid #e2e2e2;border-radius:10px;
+  box-shadow:0 1px 3px rgba(0,0,0,.04)
+}
+.cart-item-image{
+  width:58px;height:58px;flex:0 0 58px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;border-radius:8px;background:#f3f3f3;border:1px solid #eee
+}
+.cart-item-image img{width:100%;height:100%;object-fit:contain}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-weight:700;font-size:14px;line-height:1.25}
+.cart-item-price{font-size:13px;margin-top:4px;color:#555}
+.cart-qty{display:flex;align-items:center;gap:5px}
+.cart-qty button{
+  width:30px;height:30px;border:1px solid #d5d5d5;background:#fff;
+  border-radius:7px;font-size:18px;cursor:pointer
+}
+.cart-qty span{min-width:18px;text-align:center;font-weight:700}
+.cart-empty{text-align:center;color:#777;padding:45px 15px;background:#fff;border:1px dashed #d5d5d5;border-radius:10px}
+.cart-foot{
+  padding:15px 16px;background:#fff;border-top:1px solid #d8d8d8;
+  box-shadow:0 -2px 8px rgba(0,0,0,.05)
+}
+.cart-total{display:flex;justify-content:space-between;font-weight:800;margin-bottom:12px}
+.cart-checkout{
+  width:100%;border:0;background:#f7c600;color:#111;padding:13px;
+  border-radius:9px;font-weight:800;font-size:16px;cursor:pointer
+}
+.cart-checkout-bar{display:none!important}
+</style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
