@@ -380,6 +380,9 @@ function updateCheckoutTotal(){const el=document.getElementById("checkoutSummary
 function checkout(){if(window.__sharedCheckoutItems){cart=window.__sharedCheckoutItems.map(x=>({i:x.i,q:Number(x.q)||1}));try{localStorage.setItem("wowPetsCart",JSON.stringify(cart))}catch(e){}}else{try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&Number.isInteger(Number(x.i))&&Number(x.q)>0).map(x=>({i:Number(x.i),q:Number(x.q)}))}catch(e){}}if(!cart.length)return alert("Your cart is empty.");const missing=getMissingWeightItems();closeCart();document.getElementById("checkout").style.display="block";const cod=document.querySelector('input[name="paymentMethod"][value="cod"]');if(cod)cod.checked=true;const home=document.querySelector('input[name="deliveryMethod"][value="home"]');if(home)home.checked=true;const city=document.getElementById("city");if(city)city.oninput=updateCheckoutTotal;updateCheckoutTotal()}function closeCheckout(){document.getElementById("checkout").style.display="none"}
 async function place(){
   const btn=document.querySelector('#form .btn.green');
+  /* The shared cart can open checkout before the Supabase client finishes loading. */
+  if(!sb) await ensureSb();
+  if(!sb){alert("Order service is temporarily unavailable. Please try again.");return}
   if(btn&&btn.disabled)return;
   let n=document.getElementById("name").value.trim(),ph=document.getElementById("phone").value.trim(),c=document.getElementById("city").value.trim(),a=document.getElementById("address").value.trim();
   if(!n||!ph||!c||!a)return alert("Please complete all required fields.");
@@ -391,7 +394,10 @@ async function place(){
     const {error}=await sb.from("orders").insert(orderPayload);
     if(error){throw new Error(error.message||"Database error");}
     let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".\nName: "+n+"\nWhatsApp: "+ph+"\nCity: "+c+"\nAddress: "+a+"\nPayment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"\nProducts: PKR "+subtotal.toLocaleString()+"\nDiscount: PKR "+discount.toLocaleString()+"\nDelivery: "+deliveryMessage+"\nTotal: PKR "+orderTotal.toLocaleString()+"\nItems: "+list;
-    ord.textContent=no;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);cart=[];update();
+    ord.textContent=no;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);
+    cart=[];
+    try{localStorage.removeItem("wowPetsCart")}catch(_e){}
+    update();
     /* WhatsApp is optional: customer chooses it manually. */
   }catch(e){
     alert("We couldn't save your order. Please try again. Error: "+e.message);
