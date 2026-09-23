@@ -312,8 +312,9 @@ async function loadProducts(){try{
   if(location.hash==="#cart")setTimeout(openCart,50);
 }catch(e){
   console.error("Product load error:",e);
-  P=[];window.P=P;render();update();
-  if(products)products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:#b00020"><b>Products could not be loaded right now.</b><br><small>Please refresh and try again.</small></div>';
+  /* Never blank the storefront because the API is temporarily unavailable. */
+  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
+  if(location.hash==="#cart")setTimeout(openCart,50);
 }}
 function productVisual(p){
   const src=String(p[2]||"");
@@ -528,7 +529,8 @@ function accountBottom(){setBottomActive('Account');const p=document.getElementB
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 wireProductCardClicks();
 wireSearch();
-products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';update();
+/* Render the verified catalog immediately; Supabase refreshes it in the background. */
+P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
 loadBanners();
 loadProducts();
 ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
