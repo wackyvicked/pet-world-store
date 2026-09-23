@@ -3,9 +3,12 @@
   "use strict";
   const KEY="wowPetsCart";
   const WA="https://api.whatsapp.com/send?phone=923465771099";
-  function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(a)?a.filter(x=>x&&Number.isInteger(Number(x.i))&&Number(x.q)>0).map(x=>({i:Number(x.i),q:Number(x.q)})):[]}catch(e){return[]}}
+  function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(a)?a.filter(x=>x&&Number(x.q)>0&&((x.id!=null&&String(x.id)!=="")||Number.isInteger(Number(x.i)))).map(x=>({id:x.id!=null?String(x.id):null,i:Number.isInteger(Number(x.i))?Number(x.i):null,q:Number(x.q)})):[]}catch(e){return[]}}
   function write(a){try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}
   function products(){return Array.isArray(window.P)?window.P:(Array.isArray(window.productList)?window.productList:[])}
+  function productId(p){const n=norm(p);return n.id!=null?String(n.id):null}
+  function migrate(){const ps=products(),a=read();let changed=false;const out=a.map(x=>{if(x.id==null&&x.i!=null&&ps[x.i]){changed=true;return {id:productId(ps[x.i]),i:x.i,q:x.q}}return x}).filter(x=>x.id!=null||x.i!=null);if(changed)write(out);return out}
+  function resolve(ps,x){if(x.id!=null){const j=ps.findIndex(p=>productId(p)===String(x.id));if(j>=0)return j}return x.i!=null&&ps[x.i]?x.i:-1}
   function norm(p){
     if(Array.isArray(p)) return {id:p[4],name:p[0],price:Number(p[1])||0,sale:Number(p[9])||0,image:p[2]||"",weight:p[7],unit:p[8]};
     return {id:p?.id,name:p?.name||p?.product_name,price:Number(p?.price)||0,sale:Number(p?.sale_price)||0,image:p?.image_url||p?.image||"",weight:p?.weight,unit:p?.unit};
@@ -24,7 +27,7 @@
     document.getElementById("wowCartCheckout").onclick=checkout;
     document.getElementById("wowCartWhatsApp").onclick=whatsapp;
   }
-  function available(){const ps=products(),a=read();const valid=a.filter(x=>ps[x.i]);if(valid.length!==a.length)write(valid);return valid}
+  function available(){const ps=products(),a=migrate(),valid=a.map(x=>{const i=resolve(ps,x);return i>=0?{...x,i}:null}).filter(Boolean);if(valid.length!==a.length)write(valid);return valid}
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
   function render(){
     ensure();const ps=products(),a=available(),box=document.getElementById("wowCartItems"),total=document.getElementById("wowCartTotal");let sum=0;
@@ -37,10 +40,11 @@
   function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open")}
   function close(){const c=document.getElementById("wowSharedCart"),o=document.getElementById("wowCartOverlay");if(c)c.classList.remove("open");if(o)o.classList.remove("open")}
   function change(i,d){const a=read(),x=a.find(v=>v.i===i);if(x){x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1)}write(a);render()}
-  function checkout(){if(!available().length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){window.checkout();return}location.href="./index.html#cart"}
+  function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){try{window.__sharedCheckoutItems=a;window.checkout()}finally{window.__sharedCheckoutItems=null}return}location.href="./index.html#cart"}
   function whatsapp(){window.open(WA,"_blank","noopener")}
-  function add(i,q){const a=read(),x=a.find(v=>v.i===Number(i));if(x)x.q+=Number(q)||1;else a.push({i:Number(i),q:Number(q)||1});write(a);render();open()}
+  function add(i,q){const ps=products(),p=ps[Number(i)];if(!p)return;const id=productId(p),a=migrate(),x=a.find(v=>v.id!=null&&v.id===id);if(x)x.q+=Number(q)||1;else a.push({id:id,i:Number(i),q:Number(q)||1});write(a);render();open()}
   function bind(){
+    migrate();
     ensure();
     document.querySelectorAll(".cart-btn,.head-actions .cart-btn").forEach(b=>{b.onclick=function(e){e.preventDefault();open();return false}});
     document.querySelectorAll("[onclick*='openCart'],[onclick*='openProductCart']").forEach(b=>{b.onclick=function(e){e.preventDefault();open();return false}});
@@ -48,7 +52,7 @@
     document.querySelectorAll(".pcart,.cart,.pcart-overlay,.overlay").forEach(e=>{if(!e.closest("#wowSharedCart"))e.style.display="none"});
     badges();
   }
-  window.WOWSharedCart={open,close,add,render,read};
+  window.WOWSharedCart={open,close,add,render,read,available};
   window.openProductCart=open;
   window.openCart=open;
   window.closeProductCart=close;
