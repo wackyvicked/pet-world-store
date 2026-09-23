@@ -283,7 +283,74 @@ const FALLBACK_P=[
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 let P=[],cart=[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0).map(x=>({i:x.i,q:Number(x.q)}));}catch(e){}
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
-async function loadBanners(){try{const {data,error}=await sb.from("site_banners").select("*").eq("active",true).neq("type","shipping_config").neq("type","banner_config").order("sort_order",{ascending:true});const el=document.getElementById("homeBanners");if(!el)return;if(error){console.error("Banner load error:",error);return}let height="auto";try{const cfg=await sb.from("site_banners").select("banner_text").eq("type","banner_config").eq("active",true).limit(1).maybeSingle();if(!cfg.error&&cfg.data&&cfg.data.banner_text){const v=JSON.parse(cfg.data.banner_text).height;if(["180","260","360","480"].includes(String(v)))height=String(v)+"px"}}catch(e){}if(!Array.isArray(data)||!data.length){el.innerHTML="";return}el.innerHTML=data.map(b=>{const title=String(b.title||"").replace(/</g,"&lt;");const text=String(b.banner_text||"").replace(/</g,"&lt;");const button=b.button_text?'<a class="btn" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'">'+String(b.button_text).replace(/</g,"&lt;")+"</a>":"";const image=b.image_url?'<img src="'+String(b.image_url).replace(/"/g,"&quot;")+'" alt="'+title.replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"";if(image){const imageButton=b.button_text?'<a class="btn banner-image-button" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'"'+(String(b.button_link||"")==="#sale"?' onclick="showSale();return false;"':'')+'>'+String(b.button_text).replace(/</g,"&lt;")+'</a>':"";const h=height==="auto"?"":" style=\"height:"+height+";\"";return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"'+h+'><div class="banner-media">'+image+imageButton+'</div></section>';}return b.type==="sale"?'<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>':'<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>'}).join("")}catch(e){console.error("Banner load error:",e)}}
+async function loadBanners(){
+  const el=document.getElementById("homeBanners");
+  if(!el)return;
+  try{
+    if(!sb)throw new Error("Supabase unavailable");
+    const {data,error}=await sb.from("site_banners")
+      .select("*")
+      .eq("active",true)
+      .neq("type","shipping_config")
+      .neq("type","banner_config")
+      .order("sort_order",{ascending:true});
+    if(error)throw error;
+
+    let height="auto";
+    try{
+      const cfg=await sb.from("site_banners").select("banner_text")
+        .eq("type","banner_config").eq("active",true).limit(1).maybeSingle();
+      if(!cfg.error&&cfg.data&&cfg.data.banner_text){
+        const parsed=JSON.parse(cfg.data.banner_text);
+        const v=parsed&&parsed.height;
+        if(["180","260","360","480"].includes(String(v)))height=String(v)+"px";
+      }
+    }catch(e){console.warn("Banner config unavailable:",e)}
+
+    if(!Array.isArray(data)||!data.length){
+      el.innerHTML="";
+      return;
+    }
+
+    const escAttr=v=>String(v??"").replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    const makePublicUrl=(url)=>{
+      const raw=String(url||"").trim();
+      if(!raw)return "";
+      const match=raw.match(/\/storage\/v1\/object\/public\/([^/]+)\/(.+)$/);
+      if(match&&sb&&sb.storage){
+        try{
+          const out=sb.storage.from(match[1]).getPublicUrl(decodeURIComponent(match[2]));
+          if(out&&out.data&&out.data.publicUrl)return out.data.publicUrl;
+        }catch(e){}
+      }
+      return raw;
+    };
+
+    el.innerHTML=data.map((b)=>{
+      const title=escAttr(b.title||"");
+      const text=escAttr(b.banner_text||"");
+      const imageUrl=makePublicUrl(b.image_url);
+      const cacheKey=String(b.updated_at||b.id||Date.now()).replace(/[^a-zA-Z0-9_-]/g,"");
+      const src=imageUrl?(imageUrl+(imageUrl.includes("?")?"&":"?")+"v="+cacheKey):"";
+      const button=b.button_text
+        ? '<a class="btn" href="'+escAttr(b.button_link||"#shop")+'">'+escAttr(b.button_text)+'</a>'
+        : "";
+      if(src){
+        const imageButton=b.button_text
+          ? '<a class="btn banner-image-button" href="'+escAttr(b.button_link||"#shop")+'"'+(String(b.button_link||"")==="#sale"?' onclick="showSale();return false;"':"")+'>'+escAttr(b.button_text)+'</a>'
+          : "";
+        const h=height==="auto"?"":" style="height:"+height+";";
+        return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"'+h+'><div class="banner-media"><img src="'+src+'" alt="'+title+'" loading="eager" decoding="async" onerror="this.onerror=null;this.closest(\'.banner-media\').innerHTML=\'<div style=&quot;padding:35px 18px;text-align:center;color:#666;font-weight:700&quot;>Banner image could not be loaded.</div>\';">'+imageButton+'</div></section>';
+      }
+      return b.type==="sale"
+        ? '<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>'
+        : '<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>';
+    }).join("");
+  }catch(e){
+    console.error("Banner load error:",e);
+    el.innerHTML='<section class="hero"><div><h1>WOW Pets</h1><p>Welcome to WOW Pets</p></div></section>';
+  }
+}
 async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(error)throw error;P=Array.isArray(data)?data.map(productRow):[];cart=cart.filter(x=>x&&Number.isInteger(x.i)&&x.i>=0&&x.i<P.length&&Number(x.q)>0);render();update();if(location.hash==="#cart")setTimeout(openCart,50);}catch(e){console.error("Product load error:",e);P=[];cart=[];update();wireSearch();
 products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:#b00020"><b>Products could not be loaded right now.</b><br><span style="color:#666">Please try again.</span><br><button class="btn" style="margin-top:12px" onclick="loadProducts()">RETRY</button></div>';loadBanners();loadDeliveryConfig();}}
 function productVisual(p){
