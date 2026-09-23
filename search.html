@@ -281,6 +281,10 @@ async function ensureSb(){
 }
 const $=id=>document.getElementById(id);
 const products=$("products"),count=$("count"),items=$("items"),total=$("total"),overlay=$("overlay"),cartEl=$("cart"),ord=$("ord"),form=$("form"),success=$("success"),wa=$("wa");
+const BUILTIN_PRODUCTS=[
+{name:"Luxury Perfumed Cat Shampoo",price:700,sale_price:600,category:"Cats, Grooming",id:"a99224f6-f375-4886-9e6c-d60751a27f70",description:"Remu + Luxury Perfumed +320ml",sku:"PW-SHP-001-320",weight:320,weight_unit:"ml",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1790187910406-vlj1udpd318.jpg",active:true},
+{name:"Paw-comfort Glossy Furr",price:850,sale_price:null,category:"Cats, Grooming",id:"db834b06-b22c-4b9b-8eb0-3ceb120b1d30",description:"Paw-comfort Glossy Furr",sku:"PW-SHP-002-300",weight:300,weight_unit:"ml",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1790187639963-i960kwdbwvp.jpg",active:true}
+];
 const FALLBACK_P=[
 ["Premium Pet Food",2500,"🥫","Pet Food"],
 ["Cat Litter",1800,"🐱","Cats"],
@@ -304,7 +308,7 @@ async function loadProducts(){try{
   window.P=P;render();update();loadBanners();loadDeliveryConfig();
 }catch(e){
   console.error("Product load error:",e);
-  P=[];cart=[];update();
+  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;cart=[];update();applyProductFilters();
   products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:#b00020"><b>Products could not be loaded right now.</b><br><button class="btn" style="margin-top:12px" onclick="loadProducts()">RETRY</button></div>';
   loadBanners();
 }}
