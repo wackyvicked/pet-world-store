@@ -418,7 +418,7 @@ currentCategory="All";
 const searchInput=document.getElementById("search");
 if(searchInput)searchInput.value=currentSearch;
 const shopTitle=document.querySelector("#shop h2");
-if(shopTitle)shopTitle.textContent=currentSearch.trim()?"Search Results":"Search";
+if(shopTitle){shopTitle.textContent=currentSearch.trim()?"Search Results":"Search";shopTitle.classList.toggle("search-results-title",!!currentSearch.trim());}
 wireSearch();
 wireProductCardClicks();
 products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';
