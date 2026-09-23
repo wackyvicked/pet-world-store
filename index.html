@@ -290,11 +290,14 @@ async function loadBanners(){
 }
 async function loadProducts(){
   try{
-    const url=SUPABASE_URL+"/rest/v1/products?select=*&active=eq.true&order=created_at.desc";
-    const res=await fetch(url,{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY},cache:"no-store"});
+    /* Read the actual public.products table directly, then filter active rows in the browser. */
+    const url=SUPABASE_URL+"/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery";
+    const res=await fetch(url,{method:"GET",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"},cache:"no-store"});
     if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
     const data=await res.json();
-    P=Array.isArray(data)?data.map(productRow):[];
+    const rows=Array.isArray(data)?data.filter(r=>r&&r.active===true):[];
+    rows.sort((a,b)=>new Date(b.created_at||0)-new Date(a.created_at||0));
+    P=rows.map(productRow);
     window.P=P;
     render();update();
     if(location.hash==="#cart")setTimeout(openCart,50);
