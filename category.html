@@ -490,19 +490,15 @@ function wireSearch(){
 }
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function showSale(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
+function normalizeCategoryValue(v){return String(v??"").trim().toLowerCase().replace(/[_-]+/g," ").replace(/\s+/g," ")}
 function categoryMatches(productCategory, selectedCategory){
-  if(selectedCategory==="All")return true;
-  const cats=String(productCategory||"").split(",").map(v=>v.trim().toLowerCase()).filter(Boolean);
-  const selected=String(selectedCategory||"").trim().toLowerCase();
+  const selected=normalizeCategoryValue(selectedCategory);
+  if(!selected||selected==="all")return true;
+  const cats=String(productCategory||"").split(",").map(normalizeCategoryValue).filter(Boolean);
   if(cats.includes(selected))return true;
-  const aliases={
-    "grooming":["shampoo","grooming supplies","grooming"],
-    "medical supplies":["medical","medical supplies","medicines","medicine"],
-    "pet food":["food","pet food","petfood"],
-    "toys":["toy","toys","pet toys"],
-    "accessories":["accessory","accessories"]
-  };
-  return cats.some(c=>(aliases[selected]||[]).includes(c));
+  const aliases={"cat":["cats","cat"],"cats":["cats","cat"],"dog":["dogs","dog"],"dogs":["dogs","dog"],"bird":["birds","bird"],"birds":["birds","bird"],"fish":["fish","fishes"],"grooming":["grooming","shampoo","grooming supplies"],"medical supplies":["medical","medical supplies","medicines","medicine"],"pet food":["food","pet food","petfood"],"toys":["toy","toys","pet toys"],"accessories":["accessory","accessories"]};
+  const allowed=aliases[selected]||[selected];
+  return cats.some(c=>allowed.includes(c));
 }
 function filterCategory(cat){
   currentCategory=cat;
