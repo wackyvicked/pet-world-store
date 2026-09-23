@@ -295,6 +295,7 @@ async function loadProducts(){
     if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
     const data=await res.json();
     P=Array.isArray(data)?data.map(productRow):[];
+    window.P=P;
     render();update();
     if(location.hash==="#cart")setTimeout(openCart,50);
   }catch(e){
@@ -516,5 +517,8 @@ function accountBottom(){setBottomActive('Account');const p=document.getElementB
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 wireProductCardClicks();
 wireSearch();
-products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';update();ensureSb().then(()=>Promise.all([loadBanners(),loadDeliveryConfig(),loadProducts()]));
+products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:28px;color:#666">Loading products…</div>';update();
+loadBanners();
+loadProducts();
+ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
 </script><script src="./shared-cart.js?v=20260923-3"></script></body></html>
