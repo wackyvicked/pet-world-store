@@ -82,23 +82,20 @@ const PRODUCT_FALLBACKS=[
 async function load(){
  const content=document.getElementById("content");
  if(!id){content.textContent="Product not found.";return}
+ /* Always render the verified product first. Supabase is only a background refresh. */
+ window.productList=PRODUCT_FALLBACKS;
+ const fallback=PRODUCT_FALLBACKS.find(p=>String(p.id)===String(id));
+ if(fallback){render(fallback);syncCartBadge()}else{content.textContent="Product not found.";return}
  try{
   sb=await ensureSb();
-  let dataList=[];
-  if(sb){
-   const all=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});
-   if(!all.error&&Array.isArray(all.data))dataList=all.data;
+  if(!sb)return;
+  const all=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});
+  if(!all.error&&Array.isArray(all.data)&&all.data.length){
+    const data=all.data.find(p=>String(p.id)===String(id));
+    if(data){window.productList=all.data;render(data);}
+    syncCartBadge();
   }
-  window.productList=dataList.length?dataList:PRODUCT_FALLBACKS;
-  const data=window.productList.find(p=>String(p.id)===String(id));
-  if(!data){content.textContent="Product not found.";return}
-  render(data);syncCartBadge();
- }catch(e){
-  console.error("Product detail load error:",e);
-  window.productList=PRODUCT_FALLBACKS;
-  const data=PRODUCT_FALLBACKS.find(p=>String(p.id)===String(id));
-  if(data){render(data);syncCartBadge()}else content.textContent="Product not found.";
- }
+ }catch(e){console.warn("Product API unavailable; keeping displayed product:",e)}
 }
 document.getElementById("search").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();handleSearch()}});
 document.getElementById("search").addEventListener("search",handleSearch);
