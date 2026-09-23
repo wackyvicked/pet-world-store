@@ -48,7 +48,7 @@
     ensure();
     document.querySelectorAll(".cart-btn,.head-actions .cart-btn").forEach(b=>{b.onclick=function(e){e.preventDefault();open();return false}});
     document.querySelectorAll("[onclick*='openCart'],[onclick*='openProductCart']").forEach(b=>{b.onclick=function(e){e.preventDefault();open();return false}});
-    document.querySelectorAll(".bottom-item").forEach(b=>{if(/cart/i.test(b.textContent||""))b.onclick=function(e){e.preventDefault();open();return false}});
+    document.querySelectorAll(".bottom-item").forEach(b=>{if(/cart/i.test(b.textContent||""))b.onclick=function(e){e.preventDefault();open();return false}});\n    /* Robust mobile menu binding: do not depend on inline onclick execution. */\n    document.querySelectorAll(".menu-btn").forEach(b=>{\n      if(b.dataset.wowMenuBound==="1")return;\n      b.dataset.wowMenuBound="1";\n      b.addEventListener("click",function(e){\n        e.preventDefault();\n        e.stopPropagation();\n        const nav=(b.closest("header")||document).querySelector(".nav");\n        if(!nav)return;\n        const isOpen=nav.classList.toggle("open");\n        b.setAttribute("aria-expanded",isOpen?"true":"false");\n        b.classList.toggle("is-open",isOpen);\n      });\n    });\n    document.querySelectorAll(".nav a").forEach(a=>{\n      if(a.dataset.wowMenuLinkBound==="1")return;\n      a.dataset.wowMenuLinkBound="1";\n      a.addEventListener("click",function(){\n        const nav=a.closest(".nav");\n        if(nav)nav.classList.remove("open");\n      });\n    });
     document.querySelectorAll(".pcart,.cart,.pcart-overlay,.overlay").forEach(e=>{if(!e.closest("#wowSharedCart"))e.style.display="none"});
     badges();
   }
