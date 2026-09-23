@@ -58,7 +58,7 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
  <a class="bottom-item" href="https://api.whatsapp.com/send?phone=923465771099" target="_blank" rel="noopener"  target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 48 48"><path d="M24 6c-10 0-18 7.8-18 17.5 0 3.2.9 6.2 2.6 8.8L6 42l10.2-2.5c2.3 1.2 4.9 1.8 7.8 1.8 10 0 18-7.8 18-17.5S34 6 24 6Z"></path><path d="M18 16c.5-1 1-1.1 1.7-1.1h1.2c.4 0 .8.2 1 .7l1.6 3.7c.2.5.1.9-.2 1.2l-1.2 1.4c1 1.8 2.5 3.3 4.3 4.3l1.4-1.2c.3-.3.8-.4 1.2-.2l3.7 1.6c.5.2.7.6.7 1v1.2c0 .7-.1 1.2-1.1 1.7-1.1.5-2.4.7-3.6.3-2.8-.9-5.5-2.5-7.6-4.6s-3.7-4.8-4.6-7.6c-.4-1.2-.2-2.5.3-3.6Z"></path></svg><span>WhatsApp</span></a>
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co",SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co",SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2ttcnhodHFyeWZmaXh6a29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MjM1NjQsImV4cCI6MjEwNTM5OTU2NH0.X9TRiy3fSt895Bkvkg1vKRhV_hfwbtNy2jN7g5yQjek";
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);const id=new URLSearchParams(location.search).get("id");let product=null;
 function toggleMenu(){const n=document.getElementById("mainNav");if(!n)return;n.classList.toggle("open");document.body.style.overflow=n.classList.contains("open")?"hidden":""}
 function getStoredCart(){try{const a=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");return Array.isArray(a)?a.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0):[]}catch(e){return []}}
