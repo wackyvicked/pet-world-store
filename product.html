@@ -59,7 +59,7 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 </nav>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co",SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2ttcnhodHFyeWZmaXh6a29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MjM1NjQsImV4cCI6MjEwNTM5OTU2NH0.X9TRiy3fSt895Bkvkg1vKRhV_hfwbtNy2jN7g5yQjek";
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);const id=new URLSearchParams(location.search).get("id");let product=null;
+async function ensureSb(){if(window.supabase?.createClient)return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);return await new Promise(resolve=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>resolve(window.supabase?.createClient?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null);s.onerror=()=>resolve(null);document.head.appendChild(s)})}\nconst sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);const id=new URLSearchParams(location.search).get("id");let product=null;
 function toggleMenu(){const n=document.getElementById("mainNav");if(!n)return;n.classList.toggle("open");document.body.style.overflow=n.classList.contains("open")?"hidden":""}
 function getStoredCart(){try{const a=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");return Array.isArray(a)?a.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0):[]}catch(e){return []}}
 function saveStoredCart(a){try{localStorage.setItem("wowPetsCart",JSON.stringify(a))}catch(e){}}
