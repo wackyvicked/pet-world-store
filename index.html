@@ -286,8 +286,7 @@ function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gall
 async function loadBanners(){
   const el=document.getElementById("homeBanners");
   if(!el)return;
-  const url="https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/banner-1790022963853-tj13e1z10kn.jpg";
-  el.innerHTML='<section class="hero" style="padding:0!important;overflow:hidden"><div class="banner-media" style="width:100%;overflow:hidden;background:#f7f7f7"><img src="'+url+'?v=20260923" alt="WOW Pets banner" loading="eager" decoding="async" style="display:block;width:100%;height:auto;object-fit:contain" onerror="this.onerror=null;this.parentElement.innerHTML=\'<div style="padding:45px 18px;text-align:center;color:#666;font-weight:700">Banner image could not be loaded.</div>\'"></div></section>';
+  el.innerHTML='<section class="hero" style="padding:0!important;overflow:hidden;background:transparent"><img src="./homepage-banner.svg?v=20260923-1" alt="WOW Pets banner" loading="eager" decoding="async" style="display:block;width:100%;height:auto;max-width:100%;object-fit:contain"></section>';
 }
 async function loadProducts(){try{if(!sb)throw new Error("Supabase unavailable");const {data,error}=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});if(error)throw error;P=Array.isArray(data)?data.map(productRow):[];cart=cart.filter(x=>x&&Number.isInteger(x.i)&&x.i>=0&&x.i<P.length&&Number(x.q)>0);render();update();if(location.hash==="#cart")setTimeout(openCart,50);}catch(e){console.error("Product load error:",e);P=[];cart=[];update();wireSearch();
 products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:#b00020"><b>Products could not be loaded right now.</b><br><span style="color:#666">Please try again.</span><br><button class="btn" style="margin-top:12px" onclick="loadProducts()">RETRY</button></div>';loadBanners();loadDeliveryConfig();}}
