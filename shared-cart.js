@@ -71,7 +71,7 @@
         if(nav)nav.classList.remove("open");
       });
     });
-    document.querySelectorAll(".pcart,.cart,.pcart-overlay,.overlay").forEach(e=>{if(!e.closest("#wowSharedCart"))e.style.display="none"});
+    document.querySelectorAll(".pcart,.pcart-overlay").forEach(e=>{if(!e.closest("#wowSharedCart"))e.style.display="none"});
     badges();
   }
   window.toggleMenu=function(){const nav=document.getElementById("mainNav")||document.querySelector(".nav");if(!nav)return;const isOpen=nav.classList.toggle("open");const b=document.querySelector(".menu-btn");if(b){b.setAttribute("aria-expanded",isOpen?"true":"false");b.classList.toggle("is-open",isOpen)}};
