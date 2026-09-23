@@ -308,8 +308,12 @@ async function loadProducts(){try{
     if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
     data=await res.json();
   }
-  P=(Array.isArray(data)&&data.length?data:BUILTIN_PRODUCTS).map(productRow);
-  window.P=P;render();update();
+  const apiProducts=Array.isArray(data)?data.map(productRow):[];
+  const base=BUILTIN_PRODUCTS.map(productRow);
+  const byId=new Map();
+  [...base,...apiProducts].forEach(p=>{if(p&&p[4]!=null)byId.set(String(p[4]),p)});
+  P=[...byId.values()];
+  window.P=P;applyProductFilters();update();
   if(location.hash==="#cart")setTimeout(openCart,50);
 }catch(e){
   console.error("Product load error:",e);
@@ -524,4 +528,4 @@ wireProductCardClicks();
 /* Render verified products immediately. Supabase refreshes in the background. */
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();
 ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
-</script><script src="./shared-cart.js?v=20260924-1"></script></body></html>
+</script><script src="./shared-cart.js?v=20260924-2"></script></body></html>
