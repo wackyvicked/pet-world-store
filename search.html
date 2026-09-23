@@ -304,8 +304,12 @@ async function loadProducts(){try{
   if(!client)throw new Error("Supabase client unavailable");
   const {data,error}=await client.from("products").select("id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery").eq("active",true).order("created_at",{ascending:false});
   if(error)throw error;
-  P=Array.isArray(data)&&data.length?data.map(productRow):BUILTIN_PRODUCTS.map(productRow);
-  window.P=P;render();update();loadBanners();loadDeliveryConfig();
+  const apiProducts=Array.isArray(data)?data.map(productRow):[];
+  const base=BUILTIN_PRODUCTS.map(productRow);
+  const byId=new Map();
+  [...base,...apiProducts].forEach(p=>{if(p&&p[4]!=null)byId.set(String(p[4]),p)});
+  P=[...byId.values()];
+  window.P=P;applyProductFilters();update();loadBanners();loadDeliveryConfig();
 }catch(e){
   console.error("Product load error:",e);
   P=BUILTIN_PRODUCTS.map(productRow);window.P=P;cart=[];update();applyProductFilters();
@@ -525,4 +529,4 @@ wireProductCardClicks();
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();
 update();
 ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
-</script><script src="./shared-cart.js?v=20260924-1"></script></body></html>
+</script><script src="./shared-cart.js?v=20260924-2"></script></body></html>
