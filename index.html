@@ -289,17 +289,27 @@ async function loadBanners(){
   el.innerHTML='<section class="hero" style="padding:0!important;overflow:hidden;background:transparent"><img src="https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/banner-1790022963853-tj13e1z10kn.jpg?v=20260923" alt="WOW Pets banner" loading="eager" decoding="async" style="display:block;width:100%;height:auto;max-width:100%;object-fit:contain"></section>';
 }
 async function loadProducts(){try{
-  const client=await ensureSb();
-  if(!client)throw new Error("Supabase client unavailable");
-  const {data,error}=await client.from("products").select("id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery").eq("active",true).order("created_at",{ascending:false});
-  if(error)throw error;
+  const query=()=>fetch(SUPABASE_URL+"/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery&active=eq.true&order=created_at.desc",{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY}});
+  let data=null;
+  try{
+    const client=await ensureSb();
+    if(client){
+      const result=await client.from("products").select("id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery").eq("active",true).order("created_at",{ascending:false});
+      if(!result.error)data=result.data;
+    }
+  }catch(_e){}
+  if(!Array.isArray(data)){
+    const res=await query();
+    if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
+    data=await res.json();
+  }
   P=Array.isArray(data)?data.map(productRow):[];
   window.P=P;render();update();
   if(location.hash==="#cart")setTimeout(openCart,50);
 }catch(e){
   console.error("Product load error:",e);
-  P=[productRow({id:"a99224f6-f375-4886-9e6c-d60751a27f70",sku:"PW-SHP-001-320",brand:"Remu",name:"Luxury Perfumed Cat Shampoo",category:"Shampoo",size:"320 ml",price:700,stock:10,description:"Luxury perfumed shampoo for cats.",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1789912550424-fmmyww01jcc.jpg",active:true,weight:320,weight_unit:"ml",sale_price:600,image_gallery:[]})];
-  window.P=P;render();update();
+  P=[];window.P=P;render();update();
+  if(products)products.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:32px;color:#b00020"><b>Products could not be loaded right now.</b><br><small>Please refresh and try again.</small></div>';
 }}
 function productVisual(p){
   const src=String(p[2]||"");
