@@ -554,7 +554,22 @@ function toggleMenu(e){
   const nav=document.getElementById("mainNav");
   const btn=document.querySelector(".menu-btn");
   if(!nav)return false;
-  const open=nav.classList.toggle("open");
+  const open=!nav.classList.contains("open");
+  nav.classList.toggle("open",open);
+  if(open){
+    const header=document.querySelector("header");
+    const top=header?Math.round(header.getBoundingClientRect().bottom):0;
+    nav.style.setProperty("display","flex","important");
+    nav.style.setProperty("position","fixed","important");
+    nav.style.setProperty("left","0","important");
+    nav.style.setProperty("right","0","important");
+    nav.style.setProperty("top",top+"px","important");
+    nav.style.setProperty("z-index","1190","important");
+    nav.style.setProperty("max-height","70vh","important");
+    nav.style.setProperty("overflow-y","auto","important");
+  }else{
+    nav.style.setProperty("display","none","important");
+  }
   if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
   return false;
 }
