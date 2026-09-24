@@ -182,16 +182,7 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .cart-checkout-bar{display:none!important}
 </style><style>
 /* Product-page cart copied exactly */
-.pcart{
-  position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;
-  height:min(82vh,680px);background:#fafafa;z-index:1201;
-  transform:translateY(105%);opacity:0;
-  transition:transform .3s ease,opacity .3s ease;
-  display:flex;flex-direction:column;
-  border:0;border-top:1px solid #d9d9d9;
-  border-radius:22px 22px 0 0;
-  box-shadow:0 -10px 30px rgba(0,0,0,.22);overflow:hidden
-}
+.pcart{position:fixed;top:0;right:0;bottom:0;left:auto;width:min(380px,88vw);height:100dvh;background:#fafafa;z-index:2001;transform:translateX(105%);opacity:0;transition:transform .3s ease,opacity .3s ease;display:flex;flex-direction:column;border:0;border-left:1px solid #d9d9d9;border-radius:22px 0 0 22px;box-shadow:-10px 0 30px rgba(0,0,0,.22);overflow:hidden}.pcart.open{transform:translateX(0);opacity:1}.pcart.closing{transform:translateX(105%);opacity:0}
 .pcart.open{transform:translateY(0);opacity:1}
 .pcart.closing{transform:translateY(105%);opacity:0}
 .pcart-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:#fff;border-bottom:1px solid #ddd;box-shadow:0 1px 4px rgba(0,0,0,.05)}
