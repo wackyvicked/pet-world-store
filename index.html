@@ -205,11 +205,22 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .pcart-empty{text-align:center;color:#777;padding:45px 15px;background:#fff;border:1px dashed #d5d5d5;border-radius:10px}
 .pcart-foot{padding:15px 16px;background:#fff;border-top:1px solid #d8d8d8;box-shadow:0 -2px 8px rgba(0,0,0,.05)}.pcart-total{display:flex;justify-content:space-between;font-weight:800;margin-bottom:12px}.pcart-checkout{width:100%;border:0;background:#f7c600;color:#111;padding:13px;border-radius:9px;font-weight:800;font-size:16px;cursor:pointer}
 .pcart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:none}
+</style><style id="universal-mobile-menu">
+@media(max-width:700px){
+  #menuBackdrop{display:block!important;position:fixed!important;inset:0!important;background:rgba(0,0,0,.42)!important;z-index:2100!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .28s ease,visibility 0s linear .28s!important}
+  #menuBackdrop.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:opacity .28s ease!important}
+  .nav#mainNav{display:flex!important;position:fixed!important;top:0!important;left:0!important;right:auto!important;width:min(340px,86vw)!important;height:100dvh!important;z-index:2101!important;flex-direction:column!important;background:#fff!important;color:#171717!important;padding:0 0 24px!important;margin:0!important;max-height:none!important;overflow-y:auto!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important;border-radius:0 24px 24px 0!important;transform:translateX(-105%)!important;visibility:hidden!important;pointer-events:none!important;transition:transform .28s ease,visibility 0s linear .28s!important}
+  .nav#mainNav.open{transform:translateX(0)!important;visibility:visible!important;pointer-events:auto!important;transition:transform .28s ease,visibility 0s linear 0s!important}
+  .nav#mainNav .menu-close{display:flex!important;align-items:center!important;justify-content:space-between!important;position:sticky!important;top:0!important;width:100%!important;box-sizing:border-box!important;padding:18px 20px!important;border:0!important;background:#fff!important;color:#171717!important;font:800 20px Arial,sans-serif!important;z-index:2!important}
+  .nav#mainNav .menu-close span{font-size:28px!important;line-height:1!important;font-weight:400!important}
+  .nav#mainNav a{display:block!important;color:#222!important;background:#fff!important;padding:15px 20px!important;border:0!important;border-bottom:1px solid #eee!important;text-decoration:none!important;font-weight:700!important;font-size:15px!important}
+  .nav#mainNav a:first-of-type{border-top:1px solid #eee!important}
+}
 </style></head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="event.preventDefault();var n=document.getElementById(\'mainNav\');if(n)n.classList.toggle(\'open\');" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
-<nav class="nav" id="mainNav"><a href="./track-order.html">TRACK ORDER</a><a href="./index.html#shop">BUNDLES</a><a href="./category.html?cat=Cats">CATS</a><a href="./category.html?cat=Dogs">DOGS</a><a href="./category.html?cat=Birds">BIRDS</a><a href="./category.html?cat=Fish">FISH</a><a href="./index.html#shop">PET FOOD</a><a href="./index.html#shop">GROOMING</a><a href="./index.html#shop">MEDICAL</a><a href="./index.html#shop">ACCESSORIES</a></nav></header>
+<div id="menuBackdrop" onclick="toggleMenu(event)"></div><nav class="nav" id="mainNav"><button type="button" class="menu-close" onclick="toggleMenu(event)">MENU <span>×</span></button><a href="./track-order.html">TRACK ORDER</a><a href="./index.html#shop">BUNDLES</a><a href="./category.html?cat=Cats">CATS</a><a href="./category.html?cat=Dogs">DOGS</a><a href="./category.html?cat=Birds">BIRDS</a><a href="./category.html?cat=Fish">FISH</a><a href="./index.html#shop">PET FOOD</a><a href="./index.html#shop">GROOMING</a><a href="./index.html#shop">MEDICAL</a><a href="./index.html#shop">ACCESSORIES</a></nav></header>
 <div id="homeBanners" style="display:block!important;width:100%!important;min-height:120px!important;margin:0!important;padding:0!important;visibility:visible!important;opacity:1!important;overflow:hidden!important;"><img src="https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/banner-1790022963853-tj13e1z10kn.jpg?v=20260923" alt="WOW Pets banner" style="display:block!important;width:100%!important;height:auto!important;min-height:120px!important;max-width:none!important;object-fit:cover!important;visibility:visible!important;opacity:1!important;"></div>
 <section class="section" id="categories">
 
@@ -525,7 +536,17 @@ function filterCategory(cat){
   const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
   window.location.hash="shop";
 }
-function toggleMenu(){let nav=document.getElementById("mainNav");if(!nav)return;nav.classList.toggle("open");let btn=document.querySelector(".menu-btn");if(btn){let open=nav.classList.contains("open");btn.classList.toggle("is-open",open);btn.setAttribute("aria-expanded",open?"true":"false");}}
+function toggleMenu(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  const nav=document.getElementById("mainNav"), btn=document.querySelector(".menu-btn"), backdrop=document.getElementById("menuBackdrop");
+  if(!nav)return false;
+  const open=!nav.classList.contains("open");
+  nav.classList.toggle("open",open);
+  if(backdrop)backdrop.classList.toggle("open",open);
+  if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
+  document.body.style.overflow=open?"hidden":"";
+  return false;
+}
 
 function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
 function goHome(){setBottomActive('Home');const e=document.querySelector('.hero')||document.body;e.scrollIntoView({behavior:'smooth',block:'start'});}
