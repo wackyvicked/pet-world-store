@@ -223,7 +223,16 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .pcart-empty{text-align:center;color:#777;padding:45px 15px;background:#fff;border:1px dashed #d5d5d5;border-radius:10px}
 .pcart-foot{padding:15px 16px;background:#fff;border-top:1px solid #d8d8d8;box-shadow:0 -2px 8px rgba(0,0,0,.05)}.pcart-total{display:flex;justify-content:space-between;font-weight:800;margin-bottom:12px}.pcart-checkout{width:100%;border:0;background:#f7c600;color:#111;padding:13px;border-radius:9px;font-weight:800;font-size:16px;cursor:pointer}
 .pcart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:none}
-</style><style>@media(max-width:700px){header{z-index:100!important}.mobile-menu-bar{position:relative!important;z-index:1001!important}.mobile-menu-bar .menu-btn{position:relative!important;z-index:1002!important;pointer-events:auto!important}.nav.open{display:flex!important;position:relative!important;z-index:1000!important;max-height:80vh!important;overflow-y:auto!important}}</style></head><body class="search-page">
+</style><style>@media(max-width:700px){header{z-index:100!important}.mobile-menu-bar{position:relative!important;z-index:1001!important}.mobile-menu-bar .menu-btn{position:relative!important;z-index:1002!important;pointer-events:auto!important}.nav.open{display:flex!important;position:relative!important;z-index:1000!important;max-height:80vh!important;overflow-y:auto!important}}</style><style id="menu-final-fix">
+@media(max-width:700px){
+  header{position:relative!important;z-index:1000!important}
+  .mobile-menu-bar{display:flex!important;position:relative!important;z-index:1100!important;flex:0 0 42px!important}
+  .mobile-menu-bar .menu-btn{display:flex!important;position:relative!important;z-index:1101!important;width:42px!important;height:42px!important;align-items:center!important;justify-content:center!important;padding:0!important;border:0!important;background:transparent!important;color:#171717!important;cursor:pointer!important;pointer-events:auto!important}
+  .nav#mainNav{display:none!important;position:absolute!important;left:0!important;right:0!important;top:100%!important;z-index:1099!important;flex-direction:column!important;background:#171717!important;padding:0!important;margin:0!important;max-height:80vh!important;overflow-y:auto!important}
+  .nav#mainNav.open{display:flex!important}
+  .nav#mainNav a{display:block!important;color:#fff!important;background:#171717!important;padding:14px 18px!important;border-bottom:1px solid #333!important;text-decoration:none!important}
+}
+</style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar" style="display:flex!important;flex:0 0 42px;align-items:center;justify-content:center;padding:0 10px;overflow:visible">
   <button type="button" class="menu-btn" onclick="toggleMenu(event)" aria-label="Menu" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
@@ -540,7 +549,15 @@ function filterCategory(cat){
   const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
   window.location.hash="shop";
 }
-function toggleMenu(e){if(e){e.preventDefault();e.stopPropagation();}const nav=document.getElementById("mainNav"),btn=document.querySelector(".menu-btn");if(!nav)return false;const open=!nav.classList.contains("open");nav.classList.toggle("open",open);nav.style.display=open?"flex":"none";if(btn)btn.setAttribute("aria-expanded",open?"true":"false");return false;}
+function toggleMenu(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  const nav=document.getElementById("mainNav");
+  const btn=document.querySelector(".menu-btn");
+  if(!nav)return false;
+  const open=nav.classList.toggle("open");
+  if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
+  return false;
+}
 function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
 function goHome(){setBottomActive('Home');window.location.href="./index.html";}
 function focusSearch(){setBottomActive('Search');const e=document.getElementById('search');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{e.focus();e.click()},350)}}
