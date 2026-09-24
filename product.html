@@ -44,7 +44,18 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .bottom-nav .bottom-item[aria-label="WhatsApp"] svg{width:22px!important;height:22px!important;display:block!important;stroke:currentColor!important;fill:none!important;stroke-width:2!important;}
 .bottom-nav .bottom-item[aria-label="WhatsApp"]{color:#111!important;text-decoration:none!important;opacity:1!important;}
 </style>
-</head><body><header><div class="head"><button class="menu-btn" type="button" onclick="event.preventDefault();var n=document.getElementById(\'mainNav\');if(n)n.classList.toggle(\'open\');" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button><a class="brand" href="./index.html" aria-label="WOW Pets Home"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" alt="WOW Pets"></a><button class="cart-btn" type="button" onclick="openProductCart();return false;" aria-label="Cart">🛒<span class="cart-badge">0</span></button><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div><nav class="nav" id="mainNav"><a href="./track-order.html">TRACK ORDER</a><a href="./index.html#shop">BUNDLES</a><a href="./category.html?cat=Cats">CATS</a><a href="./category.html?cat=Dogs">DOGS</a><a href="./category.html?cat=Birds">BIRDS</a><a href="./category.html?cat=Fish">FISH</a><a href="./index.html#shop">PET FOOD</a><a href="./index.html#shop">GROOMING</a><a href="./index.html#shop">MEDICAL</a><a href="./index.html#shop">ACCESSORIES</a></nav></header><main class="wrap"><div id="content" class="status">Loading product…</div></main>
+<style id="universal-mobile-menu">
+@media(max-width:700px){
+  #menuBackdrop{display:block!important;position:fixed!important;inset:0!important;background:rgba(0,0,0,.42)!important;z-index:2100!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .28s ease,visibility 0s linear .28s!important}
+  #menuBackdrop.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:opacity .28s ease!important}
+  .nav#mainNav{display:flex!important;position:fixed!important;top:0!important;left:0!important;right:auto!important;width:min(340px,86vw)!important;height:100dvh!important;z-index:2101!important;flex-direction:column!important;background:#fff!important;color:#171717!important;padding:0 0 24px!important;margin:0!important;max-height:none!important;overflow-y:auto!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important;border-radius:0 24px 24px 0!important;transform:translateX(-105%)!important;visibility:hidden!important;pointer-events:none!important;transition:transform .28s ease,visibility 0s linear .28s!important}
+  .nav#mainNav.open{transform:translateX(0)!important;visibility:visible!important;pointer-events:auto!important;transition:transform .28s ease,visibility 0s linear 0s!important}
+  .nav#mainNav .menu-close{display:flex!important;align-items:center!important;justify-content:space-between!important;position:sticky!important;top:0!important;width:100%!important;box-sizing:border-box!important;padding:18px 20px!important;border:0!important;background:#fff!important;color:#171717!important;font:800 20px Arial,sans-serif!important;z-index:2!important}
+  .nav#mainNav .menu-close span{font-size:28px!important;line-height:1!important;font-weight:400!important}
+  .nav#mainNav a{display:block!important;color:#222!important;background:#fff!important;padding:15px 20px!important;border:0!important;border-bottom:1px solid #eee!important;text-decoration:none!important;font-weight:700!important;font-size:15px!important}
+  .nav#mainNav a:first-of-type{border-top:1px solid #eee!important}
+}
+</style></head><body><header><div class="head"><button class="menu-btn" type="button" onclick="event.preventDefault();var n=document.getElementById(\'mainNav\');if(n)n.classList.toggle(\'open\');" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button><a class="brand" href="./index.html" aria-label="WOW Pets Home"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" alt="WOW Pets"></a><button class="cart-btn" type="button" onclick="openProductCart();return false;" aria-label="Cart">🛒<span class="cart-badge">0</span></button><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div><div id="menuBackdrop" onclick="toggleMenu(event)"></div><nav class="nav" id="mainNav"><button type="button" class="menu-close" onclick="toggleMenu(event)">MENU <span>×</span></button><a href="./track-order.html">TRACK ORDER</a><a href="./index.html#shop">BUNDLES</a><a href="./category.html?cat=Cats">CATS</a><a href="./category.html?cat=Dogs">DOGS</a><a href="./category.html?cat=Birds">BIRDS</a><a href="./category.html?cat=Fish">FISH</a><a href="./index.html#shop">PET FOOD</a><a href="./index.html#shop">GROOMING</a><a href="./index.html#shop">MEDICAL</a><a href="./index.html#shop">ACCESSORIES</a></nav></header><main class="wrap"><div id="content" class="status">Loading product…</div></main>
 <div id="productCartOverlay" class="pcart-overlay" onclick="closeProductCart()"></div>
 <aside id="productCart" class="pcart" aria-label="Shopping cart">
   <div class="pcart-head"><h2>Your Cart</h2><button type="button" onclick="closeProductCart()" aria-label="Close cart">×</button></div>
@@ -61,7 +72,17 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co",SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2ttcnhodHFyeWZmaXh6a29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MjM1NjQsImV4cCI6MjEwNTM5OTU2NH0.X9TRiy3fSt895Bkvkg1vKRhV_hfwbtNy2jN7g5yQjek";
 async function ensureSb(){if(window.supabase?.createClient)return window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);return await new Promise(resolve=>{const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>resolve(window.supabase?.createClient?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null);s.onerror=()=>resolve(null);document.head.appendChild(s)})}
 let sb=null;const id=new URLSearchParams(location.search).get("id");let product=null;
-function toggleMenu(){const n=document.getElementById("mainNav");if(!n)return;n.classList.toggle("open");document.body.style.overflow=n.classList.contains("open")?"hidden":""}
+function toggleMenu(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  const nav=document.getElementById("mainNav"), btn=document.querySelector(".menu-btn"), backdrop=document.getElementById("menuBackdrop");
+  if(!nav)return false;
+  const open=!nav.classList.contains("open");
+  nav.classList.toggle("open",open);
+  if(backdrop)backdrop.classList.toggle("open",open);
+  if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
+  document.body.style.overflow=open?"hidden":"";
+  return false;
+}
 function getStoredCart(){try{const a=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");return Array.isArray(a)?a.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0):[]}catch(e){return []}}
 function saveStoredCart(a){try{localStorage.setItem("wowPetsCart",JSON.stringify(a))}catch(e){}}
 function openProductCart(){const p=document.getElementById("productCart"),o=document.getElementById("productCartOverlay");if(!p)return;renderProductCart();p.classList.remove("closing");if(o)o.style.display="block";void p.offsetWidth;p.classList.add("open")}
