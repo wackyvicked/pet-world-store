@@ -49,8 +49,10 @@
     document.querySelectorAll(".cart-btn,.head-actions .cart-btn").forEach(b=>{b.onclick=function(e){e.preventDefault();open();return false}});
     document.querySelectorAll("[onclick*='openCart'],[onclick*='openProductCart']").forEach(b=>{b.onclick=function(e){e.preventDefault();open();return false}});
     document.querySelectorAll(".bottom-item").forEach(b=>{if(/cart/i.test(b.textContent||""))b.onclick=function(e){e.preventDefault();open();return false}});
-    /* Robust mobile menu binding: do not depend on inline onclick execution. */
+    /* Menu buttons with inline toggleMenu() are already handled by the page.
+       Do not add a second listener or the menu will toggle twice. */
     document.querySelectorAll(".menu-btn").forEach(b=>{
+      if(/toggleMenu/.test(b.getAttribute("onclick")||""))return;
       if(b.dataset.wowMenuBound==="1")return;
       b.dataset.wowMenuBound="1";
       b.addEventListener("click",function(e){
