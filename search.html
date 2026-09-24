@@ -83,7 +83,7 @@ body{margin:0;font-family:Arial;color:#171717}header{position:relative;backgroun
 /* Prevent persistent blue focus boxes on tap while keeping keyboard focus visible. */
 button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none!important;box-shadow:none!important;}
 
-/* Final product-card polish */
+/* Search page mobile menu visibility hardening */\n@media(max-width:700px){.mobile-menu-bar{display:flex!important;visibility:visible!important;opacity:1!important}.mobile-menu-bar .menu-btn{display:flex!important;visibility:visible!important;opacity:1!important}.menu-btn .hamburger-lines{display:flex!important;visibility:visible!important}.menu-btn .hamburger-lines i{display:block!important;visibility:visible!important;opacity:1!important}}\n\n/* Final product-card polish */
 .sale-badge{display:block!important;width:fit-content!important;margin:0 auto 7px!important;padding:4px 12px!important;border-radius:999px!important;font-size:11px!important;font-weight:800!important;line-height:1.15!important;letter-spacing:.35px!important;background:#fff1f1!important;color:#c62828!important;box-sizing:border-box!important;}
 .info .add-product{width:100%!important;height:42px!important;min-height:42px!important;margin:10px 0 0!important;padding:0 16px!important;border:0!important;border-radius:10px!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important;font-size:12px!important;font-weight:800!important;letter-spacing:.35px!important;line-height:1!important;white-space:nowrap!important;overflow:hidden!important;}
 .info .add-product:hover{transform:translateY(-1px)!important;}
@@ -538,7 +538,7 @@ const shopTitle=document.querySelector("#shop h2");
 if(shopTitle){shopTitle.textContent=currentSearch?"Search Results":"Featured Products";shopTitle.classList.toggle("search-results-title",!!currentSearch);}
 wireSearch();
 wireProductCardClicks();
-P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();update();
+P=[];window.P=P;update();applyProductFilters();
 if(currentSearch){const title=document.querySelector("#shop h2");if(title)title.textContent="Search Results";}
-ensureSb().then(()=>loadProducts().then(()=>{if(currentSearch){applyProductFilters()}else{applyProductFilters()}})).catch(()=>{});
-</script><script src="./shared-cart.js?v=20260924-2"></script></body></html>
+ensureSb().then(()=>loadProducts()).catch(e=>{console.error("Supabase startup error:",e);P=[];window.P=P;applyProductFilters();});
+</script><script src="./shared-cart.js?v=20260924-3"></script></body></html>
