@@ -225,7 +225,7 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .pcart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:none}
 </style><style>@media(max-width:700px){header{z-index:100!important}.mobile-menu-bar{position:relative!important;z-index:1001!important}.mobile-menu-bar .menu-btn{position:relative!important;z-index:1002!important;pointer-events:auto!important}.nav.open{display:flex!important;position:relative!important;z-index:1000!important;max-height:80vh!important;overflow-y:auto!important}}</style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar" style="display:flex!important;flex:0 0 42px;align-items:center;justify-content:center;padding:0 10px;overflow:visible">
-  <button type="button" class="menu-btn" aria-label="Menu" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
+  <button type="button" class="menu-btn" onclick="toggleMenu(event)" aria-label="Menu" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
 <nav class="nav" id="mainNav"><a href="./track-order.html">TRACK ORDER</a><a href="./index.html#shop">BUNDLES</a><a href="./category.html?cat=Cats">CATS</a><a href="./category.html?cat=Dogs">DOGS</a><a href="./category.html?cat=Birds">BIRDS</a><a href="./category.html?cat=Fish">FISH</a><a href="./index.html#shop">PET FOOD</a><a href="./index.html#shop">GROOMING</a><a href="./index.html#shop">MEDICAL</a><a href="./index.html#shop">ACCESSORIES</a></nav></header>
 <div id="homeBanners"></div>
@@ -378,7 +378,17 @@ async function place(){
     let orderPayload={order_number:no,customer_name:n,phone:ph,alternate_phone:altPhone||null,city:c,address:a,notes:(paymentNote+(notes?" | Notes: "+notes:"")),items,total:orderTotal,status:"New"};
     const {error}=await sb.from("orders").insert(orderPayload);
     if(error){throw new Error(error.message||"Database error");}
-    let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".\nName: "+n+"\nWhatsApp: "+ph+"\nCity: "+c+"\nAddress: "+a+"\nPayment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"\nProducts: PKR "+subtotal.toLocaleString()+"\nDiscount: PKR "+discount.toLocaleString()+"\nDelivery: "+deliveryMessage+"\nTotal: PKR "+orderTotal.toLocaleString()+"\nItems: "+list;
+    let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".
+Name: "+n+"
+WhatsApp: "+ph+"
+City: "+c+"
+Address: "+a+"
+Payment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"
+Products: PKR "+subtotal.toLocaleString()+"
+Discount: PKR "+discount.toLocaleString()+"
+Delivery: "+deliveryMessage+"
+Total: PKR "+orderTotal.toLocaleString()+"
+Items: "+list;
     ord.textContent=no;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);cart=[];update();
     /* WhatsApp is optional: customer chooses it manually. */
   }catch(e){
@@ -531,14 +541,14 @@ function filterCategory(cat){
   const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
   window.location.hash="shop";
 }
-function toggleMenu(){const nav=document.getElementById("mainNav"),btn=document.querySelector(".menu-btn");if(!nav)return;const open=!nav.classList.contains("open");nav.classList.toggle("open",open);nav.style.display=window.innerWidth<=700&&open?"flex":"none";if(btn){btn.classList.toggle("is-open",open);btn.setAttribute("aria-expanded",open?"true":"false");}}
+function toggleMenu(e){if(e){e.preventDefault();e.stopPropagation();}const nav=document.getElementById("mainNav"),btn=document.querySelector(".menu-btn");if(!nav)return false;const open=!nav.classList.contains("open");nav.classList.toggle("open",open);nav.style.display=open?"flex":"none";if(btn)btn.setAttribute("aria-expanded",open?"true":"false");return false;}
 function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
 function goHome(){setBottomActive('Home');window.location.href="./index.html";}
 function focusSearch(){setBottomActive('Search');const e=document.getElementById('search');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{e.focus();e.click()},350)}}
 function toggleCategories(){setBottomActive('Categories');window.location.href="./index.html#categories";}
 function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
-document.addEventListener("DOMContentLoaded",function(){const btn=document.querySelector(".menu-btn"),nav=document.getElementById("mainNav");if(!btn||!nav)return;btn.addEventListener("click",function(e){e.preventDefault();e.stopPropagation();toggleMenu();});});const searchParams=new URLSearchParams(window.location.search);
+const searchParams=new URLSearchParams(window.location.search);
 currentSearch=String(searchParams.get("q")||"").trim();
 // Search page is query-first: never show featured/static products when a query is present.
 if(currentSearch)document.body.classList.add("has-query");
