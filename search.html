@@ -281,20 +281,7 @@ async function ensureSb(){
 }
 const $=id=>document.getElementById(id);
 const products=$("products"),count=$("count"),items=$("items"),total=$("total"),overlay=$("overlay"),cartEl=$("cart"),ord=$("ord"),form=$("form"),success=$("success"),wa=$("wa");
-const BUILTIN_PRODUCTS=[
-{name:"Luxury Perfumed Cat Shampoo",price:700,sale_price:600,category:"Cats, Grooming",id:"a99224f6-f375-4886-9e6c-d60751a27f70",description:"Remu + Luxury Perfumed +320ml",sku:"PW-SHP-001-320",weight:320,weight_unit:"ml",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1790187910406-vlj1udpd318.jpg",active:true},
-{name:"Paw-comfort Glossy Furr",price:850,sale_price:null,category:"Cats, Grooming",id:"db834b06-b22c-4b9b-8eb0-3ceb120b1d30",description:"Paw-comfort Glossy Furr",sku:"PW-SHP-002-300",weight:300,weight_unit:"ml",image_url:"https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/product-1790187639963-i960kwdbwvp.jpg",active:true}
-];
-const FALLBACK_P=[
-["Premium Pet Food",2500,"🥫","Pet Food"],
-["Cat Litter",1800,"🐱","Cats"],
-["Pet Grooming Kit",2200,"🧴","Grooming"],
-["Dog Collar & Leash",1500,"🐕","Dogs"],
-["Bird Food",1200,"🦜","Birds"],
-["Pet Bowl",850,"🥣","Accessories"],
-["Pet Toy",700,"🧸","Toys"],
-["Pet Medical Supplies",2000,"🩺","Medical Supplies"]
-];
+const BUILTIN_PRODUCTS=[];
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 let P=[],cart=[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0).map(x=>({i:x.i,q:Number(x.q)}));}catch(e){}
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
@@ -305,14 +292,13 @@ async function loadProducts(){try{
   const {data,error}=await client.from("products").select("id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery").eq("active",true).order("created_at",{ascending:false});
   if(error)throw error;
   const apiProducts=Array.isArray(data)?data.map(productRow):[];
-  const base=BUILTIN_PRODUCTS.map(productRow);
   const byId=new Map();
-  [...base,...apiProducts].forEach(p=>{if(p&&p[4]!=null)byId.set(String(p[4]),p)});
+  apiProducts.forEach(p=>{if(p&&p[4]!=null)byId.set(String(p[4]),p)});
   P=[...byId.values()];
   window.P=P;applyProductFilters();update();loadBanners();loadDeliveryConfig();
 }catch(e){
   console.error("Product load error:",e);
-  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;cart=[];update();applyProductFilters();
+  P=[];window.P=P;cart=[];update();applyProductFilters();
   loadBanners();
 }}
 function render(a=P){const productsEl=document.getElementById("products");if(!productsEl)return;productsEl.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?'<span class="image-sale-badge">-'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':''}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?``:""}<b>${p[0]}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn yellow add-product" style="margin-left:5px" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
