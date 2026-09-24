@@ -217,8 +217,8 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
 .pcart-foot{padding:15px 16px;background:#fff;border-top:1px solid #d8d8d8;box-shadow:0 -2px 8px rgba(0,0,0,.05)}.pcart-total{display:flex;justify-content:space-between;font-weight:800;margin-bottom:12px}.pcart-checkout{width:100%;border:0;background:#f7c600;color:#111;padding:13px;border-radius:9px;font-weight:800;font-size:16px;cursor:pointer}
 .pcart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:1200;display:none}
 </style></head><body class="search-page">
-<header><div class="head"><div class="mobile-menu-bar">
-  <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
+<header><div class="head"><div class="mobile-menu-bar" style="display:flex!important;flex:0 0 42px;align-items:center;justify-content:center;padding:0 10px;overflow:visible">
+  <button type="button" class="menu-btn" onclick="toggleMenu()" aria-label="Menu" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
 <nav class="nav" id="mainNav"><a href="./track-order.html">TRACK ORDER</a><a href="./index.html#shop">BUNDLES</a><a href="./category.html?cat=Cats">CATS</a><a href="./category.html?cat=Dogs">DOGS</a><a href="./category.html?cat=Birds">BIRDS</a><a href="./category.html?cat=Fish">FISH</a><a href="./index.html#shop">PET FOOD</a><a href="./index.html#shop">GROOMING</a><a href="./index.html#shop">MEDICAL</a><a href="./index.html#shop">ACCESSORIES</a></nav></header>
 <div id="homeBanners"></div>
@@ -470,7 +470,7 @@ function applyProductFilters(){
         const visual=p[2]&&String(p[2]).startsWith("http")?'<img src="'+String(p[2]).replace(/"/g,"&quot;")+'" alt="'+String(p[0]).replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"🐾";
         return '<div class="card"><div class="pic product-photo" data-product-index="'+idx+'" role="link" tabindex="0" style="cursor:pointer">'+visual+(sale?'<span class="image-sale-badge">-'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':"")+'</div><div class="info"><b>'+String(p[0])+'</b><div class="price">'+(sale?'<span class="old-price">PKR '+Number(p[1]).toLocaleString()+'</span><span class="sale-price">PKR '+Number(p[9]).toLocaleString()+'</span>':"PKR "+Number(p[1]).toLocaleString())+'</div><button type="button" class="btn yellow add-product" data-product-index="'+idx+'">ADD TO CART</button></div></div>';
       }).join("") || '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#777">No products found.</div>';
-      document.querySelectorAll(".static-product-fallback").forEach(el=>el.style.display="none");
+      document.querySelectorAll(".static-product-fallback").forEach(el=>el.style.setProperty("display","none","important"));
     }else{
       render(result);
     }
@@ -551,5 +551,5 @@ if(shopTitle){shopTitle.textContent=currentSearch?"Search Results":"Featured Pro
 wireSearch();
 wireProductCardClicks();
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();update();
-ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
+ensureSb().then(()=>loadProducts().then(()=>{if(currentSearch){applyProductFilters()}else{applyProductFilters()}})).catch(()=>{});
 </script><script src="./shared-cart.js?v=20260924-2"></script></body></html>
