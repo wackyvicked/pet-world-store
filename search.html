@@ -378,17 +378,7 @@ async function place(){
     let orderPayload={order_number:no,customer_name:n,phone:ph,alternate_phone:altPhone||null,city:c,address:a,notes:(paymentNote+(notes?" | Notes: "+notes:"")),items,total:orderTotal,status:"New"};
     const {error}=await sb.from("orders").insert(orderPayload);
     if(error){throw new Error(error.message||"Database error");}
-    let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".
-Name: "+n+"
-WhatsApp: "+ph+"
-City: "+c+"
-Address: "+a+"
-Payment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"
-Products: PKR "+subtotal.toLocaleString()+"
-Discount: PKR "+discount.toLocaleString()+"
-Delivery: "+deliveryMessage+"
-Total: PKR "+orderTotal.toLocaleString()+"
-Items: "+list;
+    let list=items.map(x=>x.name+" x"+x.qty).join(", "),deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+delivery.zone+", "+delivery.kg.toFixed(2)+" kg)",msg="Hello WOW Pets! I placed order "+no+".\nName: "+n+"\nWhatsApp: "+ph+"\nCity: "+c+"\nAddress: "+a+"\nPayment: "+(paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery")+"\nProducts: PKR "+subtotal.toLocaleString()+"\nDiscount: PKR "+discount.toLocaleString()+"\nDelivery: "+deliveryMessage+"\nTotal: PKR "+orderTotal.toLocaleString()+"\nItems: "+list;
     ord.textContent=no;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);cart=[];update();
     /* WhatsApp is optional: customer chooses it manually. */
   }catch(e){
