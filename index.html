@@ -268,6 +268,21 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
   #homeBanners{margin-top:5px!important;}
 }
 </style>
+
+<style id="header-content-spacing-final">
+/* Final spacing + stacking: logo, search, banner and product cards form one clean vertical rhythm. */
+.head{padding-top:4px!important;padding-bottom:4px!important;row-gap:4px!important;}
+.search{position:relative!important;z-index:20!important;margin-top:1px!important;}
+.brand{position:relative!important;z-index:2!important;}
+#homeBanners{position:relative!important;z-index:1!important;margin-top:7px!important;margin-bottom:0!important;}
+.section{margin-top:24px!important;}
+@media(max-width:700px){
+  .head{padding:3px 8px 5px!important;row-gap:3px!important;}
+  .search{margin-top:2px!important;max-width:calc(100% - 20px)!important;}
+  #homeBanners{margin-top:6px!important;}
+  .section{margin-top:20px!important;}
+}
+</style>
 </head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
