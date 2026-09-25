@@ -25,7 +25,7 @@ function render(o){
  const names=["New","Confirmed","Paid","Shipped","Delivered"];
  const steps=names.map((n,i)=>'<div class="step '+(i<idx||status==="Delivered"&&i===idx?"done":i===idx?"current":"")+'"><div class="dot">'+(i<idx||status==="Delivered"&&i===idx?"✓":i+1)+'</div>'+n+'</div>').join("");
  const items=Array.isArray(o.items)?o.items.map(x=>'<div class="item"><span>'+esc(x.name||"Product")+' × '+esc(x.qty||1)+'</span><b>PKR '+Number((x.price||0)*(x.qty||1)).toLocaleString()+'</b></div>').join(""):"";
- $("result").innerHTML='<div class="orderhead"><div><b>Order '+esc(o.order_number)+'</b><div class="muted">'+esc(new Date(o.created_at).toLocaleString())+'</div></div><span class="pill">'+esc(status)+'</span></div><div class="steps">'+steps+'</div><div class="info"><div class="box"><b>Customer</b><br>'+esc(o.customer_name)+'</div><div class="box"><b>City</b><br>'+esc(o.city)+'</div><div class="box"><b>Address</b><br>'+esc(o.address)+'</div><div class="box"><b>Total</b><br>PKR '+Number(o.total||0).toLocaleString()+'</div><div class="box"><b>Phone</b><br>'+esc(o.phone)+'</div></div><div class="items">'+items+'</div>';
+ $("result").innerHTML='<div class="orderhead"><div><b>Order '+esc(o.order_number)+'</b><div class="muted">'+esc(new Date(o.created_at).toLocaleString())+'</div></div><span class="pill">'+esc(status)+'</span></div><div class="steps">'+steps+'</div><div class="info"><div class="box"><b>Total</b><br>PKR '+Number(o.total||0).toLocaleString()+'</div></div><div class="items">'+items+'</div>';
  $("result").style.display="block";
 }
 async function track(){
