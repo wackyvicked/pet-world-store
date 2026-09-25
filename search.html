@@ -467,6 +467,12 @@ button,a,[role="button"],summary,input[type="button"],input[type="submit"],input
 .product-photo:focus,
 .product-photo:active{outline:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent;}
 .product-photo:focus-visible{outline:none!important;}
+<style id="product-info-click-polish">
+/* Product name/price area opens the same product detail as the image. */
+.info[role="link"]{cursor:pointer!important;}
+.info[role="link"]:focus,.info[role="link"]:active{outline:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent;}
+.info[role="link"]:focus-visible{outline:none!important;}
+</style>
 </style>
 </head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
@@ -573,13 +579,15 @@ async function loadProducts(){
     }
   }
 }
-function render(a=P){const productsEl=document.getElementById("products");if(!productsEl)return;productsEl.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?'<span class="image-sale-badge">-'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':''}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?``:""}<b>${esc(p[0])}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn yellow add-product" style="margin-left:5px" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
+function render(a=P){const productsEl=document.getElementById("products");if(!productsEl)return;productsEl.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?'<span class="image-sale-badge">-'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':''}</div><div class="info" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?``:""}<b>${esc(p[0])}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn yellow add-product" style="margin-left:5px" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
 function wireProductCardClicks(){
   if(window.__wowPetsProductClicks)return;
   window.__wowPetsProductClicks=true;
   document.addEventListener("click",function(event){
     const photo=event.target.closest(".product-photo");
     if(photo){openProductPage(Number(photo.dataset.productIndex));return;}
+    const info=event.target.closest(".info");
+    if(info&&!event.target.closest(".add-product")){openProductPage(Number(info.dataset.productIndex));return;}
     const view=event.target.closest(".view-product");
     if(view){viewProduct(Number(view.dataset.productIndex));return;}
     const addBtn=event.target.closest(".add-product");
@@ -588,7 +596,9 @@ function wireProductCardClicks(){
   document.addEventListener("keydown",function(event){
     if(event.key!=="Enter"&&event.key!==" ")return;
     const photo=event.target.closest(".product-photo");
-    if(photo){event.preventDefault();openProductPage(Number(photo.dataset.productIndex));}
+    if(photo){event.preventDefault();openProductPage(Number(photo.dataset.productIndex));return;}
+    const info=event.target.closest(".info");
+    if(info&&event.target===info){event.preventDefault();openProductPage(Number(info.dataset.productIndex));}
   });
 }
 function openProductPage(i){const p=P[i];if(!p||p[4]==null)return;window.location.href="./product.html?id="+encodeURIComponent(p[4]);}
