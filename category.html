@@ -450,7 +450,12 @@ body>header .head{padding-top:4px!important;padding-bottom:4px!important;row-gap
   body.menu-open .bottom-nav{pointer-events:none!important;}
   body.menu-open .bottom-nav .bottom-item{pointer-events:none!important;}
 }
-</style></head><body class="search-page">
+</style>
+<style id="tap-highlight-polish">
+/* Remove browser tap highlight; keep keyboard focus visible via :focus-visible. */
+button,a,[role="button"],summary,input[type="button"],input[type="submit"],input[type="reset"]{-webkit-tap-highlight-color:transparent;}
+</style>
+</head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
