@@ -24,7 +24,6 @@
     document.getElementById("wowCartOverlay").onclick=close;
     document.getElementById("wowCartClose").onclick=close;
     document.getElementById("wowCartCheckout").onclick=checkout;
-    document.getElementById("wowCartWhatsApp").onclick=whatsapp;
   }
   function available(){const ps=products(),a=migrate(),valid=a.map(x=>{const i=resolve(ps,x);return i>=0?{...x,i}:null}).filter(Boolean);if(valid.length!==a.length)write(valid);return valid}
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
