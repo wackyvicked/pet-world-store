@@ -525,11 +525,11 @@ function viewProduct(i){
         ${images.length>1?`<div class="product-gallery"><div class="product-gallery-thumbs">${images.map((u,k)=>`<button type="button" onclick="selectProductImage(decodeURIComponent('${encodeURIComponent(u)}'))"><img loading="lazy" decoding="async" src="${esc(u)}" alt="Product image ${k+1}"></button>`).join("")}</div></div>`:""}
       </div>
       <div>
-        <span class="category">${p[3]}</span>
-        <h2>${p[0]}</h2>
+        <span class="category">${esc(p[3])}</span>
+        <h2>${esc(p[0])}</h2>
         <div class="detail-price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div>
-        <p>${p[5]||"Quality pet product from WOW Pets."}</p>${p[7]?`<p><b>Weight:</b> ${p[7]} ${p[8]||""}</p>`:""}
-        <p><b>Category:</b> ${p[3]}</p>
+        <p>${esc(p[5]||"Quality pet product from WOW Pets.")}</p>${p[7]?`<p><b>Weight:</b> ${esc(p[7])} ${esc(p[8]||"")}</p>`:""}
+        <p><b>Category:</b> ${esc(p[3])}</p>
         <div style="display:flex;align-items:center;gap:8px;margin:12px 0">
           <button class="btn" onclick="adjustProductQty(${i},-1)">−</button>
           <span id="qty-${i}" style="min-width:30px;text-align:center;font-weight:bold">1</span>
