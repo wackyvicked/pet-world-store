@@ -7,7 +7,22 @@
 body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width:1100px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}.card{background:#fff;border:1px solid #ddd;border-radius:12px;padding:18px;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}input,textarea,select{padding:11px;border:1px solid #ccc;border-radius:7px;font:inherit}.btn{border:0;border-radius:7px;padding:11px 16px;font-weight:bold;cursor:pointer;background:#ffd21c}.danger{background:#e74c3c;color:#fff}.muted{color:#666}.status{padding:10px;border-radius:8px;background:#fff5b8;margin:12px 0}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:10px;border-bottom:1px solid #eee;text-align:left}.actions{display:flex;gap:6px;flex-wrap:wrap}.preview{max-width:220px;max-height:180px;border-radius:10px;border:1px solid #ddd;display:none;object-fit:contain;background:#fafafa}.editor{display:none;margin-top:10px;padding:12px;border:1px solid #ddd;border-radius:10px}.editor canvas{max-width:100%;height:auto;border:1px solid #ddd;background:#eee;touch-action:none}.cropStage{position:relative;display:inline-block;max-width:100%;line-height:0}.cropStage canvas{display:block}.cropBox{position:absolute;display:none;border:2px solid #fff;box-shadow:0 0 0 9999px rgba(0,0,0,.45);pointer-events:none}.range{display:grid;grid-template-columns:110px 1fr 45px;gap:8px;align-items:center;margin-top:8px}.range input{padding:0}#adminLayout{display:grid;grid-template-columns:220px minmax(0,1fr);gap:20px;align-items:start}.sidebar{position:sticky;top:16px;background:#fff;border:1px solid #ddd;border-radius:12px;padding:12px}.sidebar h3{margin:8px 10px 12px}.navBtn{display:block;width:100%;text-align:left;border:0;background:transparent;padding:12px 10px;border-radius:8px;font:inherit;font-weight:bold;cursor:pointer}.navBtn:hover,.navBtn.active{background:#fff5b8}.mobileMenuBtn{display:none}.mainContent{min-width:0}@media(max-width:700px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.table{font-size:13px}.wrap{padding:14px}.table-wrap{overflow:auto}.range{grid-template-columns:90px 1fr 40px}#adminLayout{display:block}.sidebar{display:none;position:fixed;z-index:20;left:14px;right:14px;top:72px;box-shadow:0 10px 30px rgba(0,0,0,.18)}.sidebar.open{display:block}.mobileMenuBtn{display:inline-block}.mainContent{width:100%}}
 @media(max-width:700px){#categoryOptions{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
-</head>
+<style id="final-home-header-match">
+/* Shared approved homepage header styling */
+.brand-logo{display:block!important;width:200px!important;height:auto!important;max-width:200px!important;max-height:none!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important}
+.head{padding-top:16px!important;padding-bottom:16px!important;row-gap:14px!important}
+@media(max-width:700px){
+ .head{padding:10px 12px 12px!important;gap:10px!important;flex-wrap:wrap!important;align-items:center!important}
+ .mobile-menu-bar{display:flex!important;position:static!important;order:0!important;flex:0 0 42px!important;align-items:center!important;justify-content:center!important;padding:0!important;background:transparent!important;overflow:visible!important}
+ .brand{position:static!important;order:1!important;flex:1!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+ .brand-logo{width:210px!important;max-width:210px!important}
+ .head-actions{order:2!important;margin-left:0!important;flex:0 0 auto!important}
+ .head-actions .icon-btn{width:38px!important;height:42px!important;font-size:27px!important}
+ .search{order:3!important;margin-top:2px!important;width:100%!important;max-width:100%!important}
+ #menuBackdrop{z-index:2100!important}
+ .nav#mainNav{left:0!important;right:auto!important;width:min(340px,86vw)!important;border-radius:0 24px 24px 0!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important}
+}
+</style></head>
 <body>
 <div class="wrap">
 <div class="top" id="top"></div>
