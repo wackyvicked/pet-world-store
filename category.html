@@ -545,7 +545,7 @@ wireProductCardClicks();
 /* Render verified products immediately. Supabase refreshes in the background. */
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();
 ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
-</script><script src="./shared-cart.js?v=20260924-2"></script><script>
+</script><script src="./shared-cart.js?v=20260925-1"></script><script>
 function addCategoryStaticProduct(id){
   var ps=Array.isArray(window.P)?window.P:[];
   var i=ps.findIndex(function(p){return p&&String(p[4])===String(id);});
