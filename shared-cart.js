@@ -2,12 +2,12 @@
 (function(){
   "use strict";
   const KEY="wowPetsCart";
-  function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(a)?a.filter(x=>x&&Number(x.q)>0&&((x.id!=null&&String(x.id)!=="")||Number.isInteger(Number(x.i)))).map(x=>({id:x.id!=null?String(x.id):null,i:Number.isInteger(Number(x.i))?Number(x.i):null,q:Number(x.q)})):[]}catch(e){return[]}}
+  function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(a)?a.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)})):[]}catch(e){return[]}}
   function write(a){try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}
   function products(){return Array.isArray(window.P)?window.P:(Array.isArray(window.productList)?window.productList:[])}
   function productId(p){const n=norm(p);return n.id!=null?String(n.id):null}
-  function migrate(){const ps=products(),a=read();let changed=false;const out=a.map(x=>{if(x.id==null&&x.i!=null&&ps[x.i]){changed=true;const p=norm(ps[x.i]);return {id:productId(ps[x.i]),i:x.i,q:x.q,p:{name:p.name,price:p.price,sale:p.sale,image:p.image}}}if(x.id!=null&&x.i!=null&&ps[x.i]){const p=norm(ps[x.i]);if(!x.p||x.p.name!==p.name||x.p.price!==p.price||x.p.sale!==p.sale||x.p.image!==p.image){changed=true;return {...x,p:{name:p.name,price:p.price,sale:p.sale,image:p.image}}}}return x}).filter(x=>x.id!=null||x.i!=null);if(changed)write(out);return out}
-  function resolve(ps,x){if(x.id!=null){const j=ps.findIndex(p=>productId(p)===String(x.id));if(j>=0)return j}return x.i!=null&&ps[x.i]?x.i:-1}
+  function migrate(){const ps=products();let raw=[];try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.isArray(a))raw=a}catch(e){}let changed=false;const out=[];raw.forEach(x=>{if(!x||Number(x.q)<=0)return;if(x.id!=null&&String(x.id)!==""){const id=String(x.id);const found=out.find(v=>v.id===id);if(found)found.q+=Number(x.q);else out.push({id,q:Number(x.q)});if(x.i!=null||x.p)changed=true;return}if(Number.isInteger(Number(x.i))&&ps[Number(x.i)]){const id=productId(ps[Number(x.i)]);if(id){const found=out.find(v=>v.id===id);if(found)found.q+=Number(x.q);else out.push({id,q:Number(x.q)});changed=true}}});if(changed||out.length!==raw.length)write(out);return out}
+  function resolve(ps,x){return x&&x.id!=null?ps.findIndex(p=>productId(p)===String(x.id)):-1}
   function norm(p){
     if(Array.isArray(p)) return {id:p[4],name:p[0],price:Number(p[1])||0,sale:Number(p[9])||0,image:p[2]||"",weight:p[7],unit:p[8]};
     return {id:p?.id,name:p?.name||p?.product_name,price:Number(p?.price)||0,sale:Number(p?.sale_price)||0,image:p?.image_url||p?.image||"",weight:p?.weight,unit:p?.unit};
@@ -25,21 +25,15 @@
     document.getElementById("wowCartClose").onclick=close;
     document.getElementById("wowCartCheckout").onclick=checkout;
   }
-  function available(){const ps=products(),a=migrate();if(!ps.length)return a;const valid=a.map(x=>{const i=resolve(ps,x);return i>=0?{...x,i}:null}).filter(Boolean);if(valid.length!==a.length)write(valid);return valid}
+  function available(){const ps=products(),a=migrate();if(!ps.length)return a;const valid=a.filter(x=>resolve(ps,x)>=0);if(valid.length!==a.length)write(valid);return valid}
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-  function render(){
-    ensure();const ps=products(),a=available(),box=document.getElementById("wowCartItems"),total=document.getElementById("wowCartTotal");let sum=0;
-    if(!a.length){box.innerHTML='<div class="wow-cart-empty">Your cart is empty.</div>';total.textContent="PKR 0";badges();return}
-    box.innerHTML=a.map(x=>{const p=ps[x.i]?norm(ps[x.i]):norm(x.p||{}),pr=price(p);sum+=pr*x.q;return '<div class="wow-cart-row"><div class="wow-cart-img">'+(p.image?'<img src="'+esc(p.image)+'" alt="">':'🐾')+'</div><div class="wow-cart-info"><div class="wow-cart-name">'+esc(p.name||"Product")+'</div><div class="wow-cart-price">PKR '+pr.toLocaleString()+'</div></div><div class="wow-cart-qty"><button type="button" data-ci="'+x.i+'" data-d="-1">−</button><span>'+x.q+'</span><button type="button" data-ci="'+x.i+'" data-d="1">+</button></div></div>'}).join("");
-    box.querySelectorAll("[data-ci]").forEach(b=>b.onclick=()=>change(Number(b.dataset.ci),Number(b.dataset.d)));
-    total.textContent="PKR "+sum.toLocaleString();badges();
-  }
+  function render(){ensure();const ps=products(),a=available(),box=document.getElementById("wowCartItems"),total=document.getElementById("wowCartTotal");let sum=0;if(!a.length){box.innerHTML='<div class="wow-cart-empty">Your cart is empty.</div>';total.textContent="PKR 0";badges();return}box.innerHTML=a.map(x=>{const i=resolve(ps,x),p=i>=0?norm(ps[i]):null;if(!p)return "";const pr=price(p);sum+=pr*x.q;return '<div class="wow-cart-row"><div class="wow-cart-img">'+(p.image?'<img src="'+esc(p.image)+'" alt="">':'🐾')+'</div><div class="wow-cart-info"><div class="wow-cart-name">'+esc(p.name||"Product")+'</div><div class="wow-cart-price">PKR '+pr.toLocaleString()+'</div></div><div class="wow-cart-qty"><button type="button" data-ci="'+esc(x.id)+'" data-d="-1">−</button><span>'+x.q+'</span><button type="button" data-ci="'+esc(x.id)+'" data-d="1">+</button></div></div>'}).join("");box.querySelectorAll("[data-ci]").forEach(b=>b.onclick=()=>change(String(b.dataset.ci),Number(b.dataset.d)));total.textContent="PKR "+sum.toLocaleString();badges()}
   function badges(){const n=read().reduce((s,x)=>s+Number(x.q||0),0);document.querySelectorAll(".cart-badge,.cart-count,.cart-btn .badge,.icon-btn .badge,.bottom-item .badge").forEach(e=>e.textContent=n);const b=document.getElementById("productBottomCount");if(b)b.textContent=n}
   function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open")}
   function close(){const c=document.getElementById("wowSharedCart"),o=document.getElementById("wowCartOverlay");if(c)c.classList.remove("open");if(o)o.classList.remove("open")}
-  function change(i,d){const ps=products(),va=available(),shown=va.find(v=>v.i===i),a=read();if(!shown)return;const x=a.find(v=>shown.id!=null?v.id===shown.id:v.i===i);if(x){x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1)}write(a);render()}
-  function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){try{window.__sharedCheckoutItems=a;window.checkout()}finally{window.__sharedCheckoutItems=null}return}location.href="./index.html#cart"}
-  function add(i,q){const ps=products(),p=ps[Number(i)];if(!p)return;const n=norm(p),id=productId(p),a=migrate(),x=a.find(v=>v.id!=null&&v.id===id),snapshot={name:n.name,price:n.price,sale:n.sale,image:n.image};if(x){x.q+=Number(q)||1;x.i=Number(i);x.p=snapshot}else a.push({id:id,i:Number(i),q:Number(q)||1,p:snapshot});write(a);render();open()}
+  function change(id,d){const a=read(),x=a.find(v=>v.id===String(id));if(!x)return;x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1);write(a);render()}
+  function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){try{window.__sharedCheckoutItems=a.map(x=>({id:x.id,q:x.q}));window.checkout()}finally{window.__sharedCheckoutItems=null}return}location.href="./index.html#cart"}
+  function add(i,q){const ps=products(),p=ps[Number(i)];if(!p)return;const id=productId(p);if(!id)return;const a=migrate(),x=a.find(v=>v.id===id);if(x)x.q+=Number(q)||1;else a.push({id,q:Number(q)||1});write(a);render();open()}
   function bind(){
     migrate();
     ensure();
