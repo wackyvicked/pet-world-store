@@ -32,7 +32,7 @@
   function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open")}
   function close(){const c=document.getElementById("wowSharedCart"),o=document.getElementById("wowCartOverlay");if(c)c.classList.remove("open");if(o)o.classList.remove("open")}
   function change(id,d){const a=read(),x=a.find(v=>v.id===String(id));if(!x)return;x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1);write(a);render()}
-  function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){try{window.__sharedCheckoutItems=a.map(x=>({i:resolve(products(),x),q:x.q})).filter(x=>Number.isInteger(x.i)&&x.i>=0);window.checkout()}finally{window.__sharedCheckoutItems=null}return}location.href="./index.html#cart"}
+  function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}close();if(typeof window.checkout==="function"){try{window.__sharedCheckoutItems=a.filter(x=>resolve(products(),x)>=0).map(x=>({id:x.id,q:x.q}));window.checkout()}finally{window.__sharedCheckoutItems=null}return}location.href="./index.html#cart"}
   function add(i,q){const ps=products(),p=ps[Number(i)];if(!p)return;const id=productId(p);if(!id)return;const a=migrate(),x=a.find(v=>v.id===id);if(x)x.q+=Number(q)||1;else a.push({id,q:Number(q)||1});write(a);render();open()}
   function bind(){
     migrate();
@@ -67,7 +67,7 @@
     document.querySelectorAll(".pcart,.pcart-overlay").forEach(e=>{if(!e.closest("#wowSharedCart"))e.style.display="none"});
     badges();
   }
-  window.toggleMenu=function(){const nav=document.getElementById("mainNav")||document.querySelector(".nav");if(!nav)return;const isOpen=nav.classList.toggle("open");const b=document.querySelector(".menu-btn");if(b){b.setAttribute("aria-expanded",isOpen?"true":"false");b.classList.toggle("is-open",isOpen)}};
+  if(typeof window.toggleMenu!=="function"){window.toggleMenu=function(){const nav=document.getElementById("mainNav")||document.querySelector(".nav");if(!nav)return false;const isOpen=nav.classList.toggle("open");const b=document.querySelector(".menu-btn");if(b){b.setAttribute("aria-expanded",isOpen?"true":"false");b.classList.toggle("is-open",isOpen)}return false};}
   window.WOWSharedCart={open,close,add,render,read,available};
   window.openProductCart=open;
   window.openCart=open;
