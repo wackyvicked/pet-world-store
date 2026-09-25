@@ -245,6 +245,31 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
  #menuBackdrop{z-index:2100!important}
  .nav#mainNav{left:0!important;right:auto!important;width:min(340px,86vw)!important;border-radius:0 24px 24px 0!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important}
 }
+</style><style id="homepage-header-final">
+/* EXACT homepage header layout — keep all storefront pages identical */
+header{position:relative!important;background:#fff!important;border-bottom:1px solid #ddd!important;z-index:5!important}
+header .head{max-width:1100px!important;margin:0 auto!important;padding:16px 14px!important;display:flex!important;gap:14px!important;align-items:center!important;flex-wrap:wrap!important;box-sizing:border-box!important}
+header .mobile-menu-bar{display:none!important;max-width:1100px!important;margin:auto!important;padding:0 14px 10px!important;align-items:center!important;gap:12px!important}
+header .brand{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;position:static!important;transform:none!important;flex:1 1 auto!important;justify-content:flex-start!important}
+header .brand>a{display:flex!important;align-items:center!important;cursor:pointer!important}
+header .brand-logo{display:block!important;width:200px!important;height:auto!important;max-width:200px!important;max-height:none!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important}
+header .head-actions{display:flex!important;align-items:center!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important}
+header .head-actions .icon-btn{position:relative!important;width:42px!important;height:42px!important;border:0!important;background:transparent!important;font-size:30px!important;line-height:1!important;cursor:pointer!important;padding:0!important}
+header .icon-btn .badge{position:absolute!important;right:-1px!important;top:-4px!important;background:#f7b900!important;color:#111!important;border-radius:50%!important;min-width:20px!important;height:20px!important;font-size:12px!important;font-weight:900!important;display:grid!important;place-items:center!important}
+header .search{order:3!important;flex-basis:100%!important;width:100%!important;max-width:680px!important;height:44px!important;margin:4px auto 0!important;display:flex!important;border:1px solid #dcdcdc!important;border-radius:12px!important;overflow:hidden!important;background:#fff!important;box-shadow:0 2px 8px rgba(0,0,0,.06)!important}
+header .search input{flex:1!important;width:100%!important;height:44px!important;border:0!important;outline:0!important;background:transparent!important;padding:0 15px!important;font:500 14px "Inter","Segoe UI",Arial,sans-serif!important;box-sizing:border-box!important}
+@media(min-width:701px){header .mobile-menu-bar{display:none!important}}
+@media(max-width:700px){
+ header .head{padding:10px 12px 12px!important;gap:10px!important;flex-wrap:wrap!important;align-items:center!important}
+ header .mobile-menu-bar{display:flex!important;position:static!important;order:0!important;flex:0 0 42px!important;align-items:center!important;justify-content:center!important;padding:0!important;background:transparent!important;overflow:visible!important}
+ header .mobile-menu-bar .menu-btn{position:relative!important;width:42px!important;height:42px!important;flex:0 0 42px!important;border:0!important;background:transparent!important;color:#171717!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important}
+ header .brand{order:1!important;flex:1 1 auto!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+ header .brand-logo{width:210px!important;max-width:58vw!important}
+ header .head-actions{order:2!important;margin-left:0!important;flex:0 0 auto!important}
+ header .head-actions .icon-btn{width:38px!important;height:42px!important;font-size:27px!important}
+ header .search{order:3!important;flex-basis:100%!important;width:100%!important;max-width:calc(100% - 28px)!important;height:42px!important;margin:6px auto 0!important}
+ header .search input{height:42px!important;font-size:13px!important;padding:0 13px!important}
+}
 </style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
