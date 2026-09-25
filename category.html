@@ -444,6 +444,12 @@ body>header .head{padding-top:4px!important;padding-bottom:4px!important;row-gap
     z-index:2101!important;
   }
 }
+</style><style id="unified-menu-bottom-nav-lock">
+@media(max-width:700px){
+  header{z-index:2000!important;}
+  body.menu-open .bottom-nav{pointer-events:none!important;}
+  body.menu-open .bottom-nav .bottom-item{pointer-events:none!important;}
+}
 </style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
