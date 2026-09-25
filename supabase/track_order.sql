@@ -36,4 +36,4 @@ as $$
 $$;
 
 revoke execute on function public.track_order(text,text) from public;
-grant execute on function public.track_order(text,text) to anon, authenticated;
+grant execute on function public.track_order(text,text) to anon;
