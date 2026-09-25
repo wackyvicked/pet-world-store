@@ -34,7 +34,7 @@
     box.querySelectorAll("[data-ci]").forEach(b=>b.onclick=()=>change(Number(b.dataset.ci),Number(b.dataset.d)));
     total.textContent="PKR "+sum.toLocaleString();badges();
   }
-  function badges(){const n=read().reduce((s,x)=>s+Number(x.q||0),0);document.querySelectorAll(".cart-badge,.cart-count,.cart-btn .badge,.bottom-item .badge").forEach(e=>e.textContent=n);const b=document.getElementById("productBottomCount");if(b)b.textContent=n}
+  function badges(){const n=read().reduce((s,x)=>s+Number(x.q||0),0);document.querySelectorAll(".cart-badge,.cart-count,.cart-btn .badge,.icon-btn .badge,.bottom-item .badge").forEach(e=>e.textContent=n);const b=document.getElementById("productBottomCount");if(b)b.textContent=n}
   function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open")}
   function close(){const c=document.getElementById("wowSharedCart"),o=document.getElementById("wowCartOverlay");if(c)c.classList.remove("open");if(o)o.classList.remove("open")}
   function change(i,d){const ps=products(),va=available(),shown=va.find(v=>v.i===i),a=read();if(!shown)return;const x=a.find(v=>shown.id!=null?v.id===shown.id:v.i===i);if(x){x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1)}write(a);render()}
