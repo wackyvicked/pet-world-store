@@ -528,7 +528,7 @@ function applyProductFilters(){
       productsEl.innerHTML=result.map((p)=>{
         const idx=P.indexOf(p);
         const sale=Number(p[9])>0&&Number(p[9])<Number(p[1]);
-        const visual=p[2]&&String(p[2]).startsWith("http")?'<img loading="lazy" decoding="async" src="'+String(p[2]).replace(/"/g,"&quot;")+'" alt="'+String(p[0]).replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"🐾";
+        const visual=p[2]&&String(p[2]).startsWith("http")?'<img loading="lazy" decoding="async" src="'+esc(p[2])+'" alt="'+esc(p[0])+'" style="width:100%;height:100%;object-fit:contain;display:block">':"🐾";
         return '<div class="card"><div class="pic product-photo" data-product-index="'+idx+'" role="link" tabindex="0" style="cursor:pointer">'+visual+(sale?'<span class="image-sale-badge">-'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':"")+'</div><div class="info"><b>'+String(p[0])+'</b><div class="price">'+(sale?'<span class="old-price">PKR '+Number(p[1]).toLocaleString()+'</span><span class="sale-price">PKR '+Number(p[9]).toLocaleString()+'</span>':"PKR "+Number(p[1]).toLocaleString())+'</div><button type="button" class="btn yellow add-product" data-product-index="'+idx+'">ADD TO CART</button></div></div>';
       }).join("") || '<div style="grid-column:1/-1;text-align:center;padding:30px;color:#777">No products found.</div>';
       document.querySelectorAll(".static-product-fallback").forEach(el=>el.style.setProperty("display","none","important"));
