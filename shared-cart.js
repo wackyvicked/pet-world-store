@@ -25,7 +25,7 @@
     document.getElementById("wowCartClose").onclick=close;
     document.getElementById("wowCartCheckout").onclick=checkout;
   }
-  function available(){const ps=products(),a=migrate(),valid=a.map(x=>{const i=resolve(ps,x);return i>=0?{...x,i}:null}).filter(Boolean);if(valid.length!==a.length)write(valid);return valid}
+  function available(){const ps=products(),a=migrate();if(!ps.length)return a;const valid=a.map(x=>{const i=resolve(ps,x);return i>=0?{...x,i}:null}).filter(Boolean);if(valid.length!==a.length)write(valid);return valid}
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
   function render(){
     ensure();const ps=products(),a=available(),box=document.getElementById("wowCartItems"),total=document.getElementById("wowCartTotal");let sum=0;
