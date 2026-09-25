@@ -310,6 +310,11 @@ button,a,[role="button"],summary,input[type="button"],input[type="submit"],input
 .product-back:active{transform:translateY(0);box-shadow:0 2px 7px rgba(0,0,0,.06)}
 .product-back-icon{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#f5f5f5;color:#222;font-size:19px;line-height:1}
 @media(max-width:700px){.product-back-wrap{margin-bottom:13px}.product-back{height:40px;padding-right:13px;font-size:12px;gap:8px}.product-back-icon{width:27px;height:27px;font-size:18px}}
+</style><style id="product-back-spacing-polish">
+/* Keep contextual back control visually attached to the product gallery. */
+.product-back-wrap{margin:0 0 8px!important;}
+.product-back{height:40px!important;}
+@media(max-width:700px){.product-back-wrap{margin-bottom:6px!important}.product-back{height:38px!important}}
 </style></head><body><header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
