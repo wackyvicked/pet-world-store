@@ -294,6 +294,28 @@ header .search input{flex:1!important;width:100%!important;height:44px!important
  header .search{order:3!important;flex-basis:100%!important;width:100%!important;max-width:calc(100% - 28px)!important;height:42px!important;margin:6px auto 0!important}
  header .search input{height:42px!important;font-size:13px!important;padding:0 13px!important}
 }
+</style><style id="homepage-header-final-v2">
+/* Mirror the CURRENT homepage header's final computed styling exactly. */
+.brand-logo{display:block!important;width:260px!important;max-width:260px!important;height:auto!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important;}
+.head{padding-top:4px!important;padding-bottom:4px!important;row-gap:4px!important;}
+.search{position:relative!important;z-index:20!important;margin-top:1px!important;transform:translateY(-4px)!important;}
+.brand{position:relative!important;z-index:2!important;}
+@media(min-width:701px){
+  .head{padding-left:10px!important;padding-right:10px!important;}
+  .brand-logo{transform:scale(1.08);transform-origin:center center;}
+  .search{margin-top:1px!important;}
+}
+@media(max-width:700px){
+  .head{padding:3px 8px 5px!important;column-gap:6px!important;row-gap:3px!important;}
+  .mobile-menu-bar{display:flex!important;position:relative!important;z-index:auto!important;flex:0 0 42px!important;width:42px!important;padding:0 10px!important;justify-content:center!important;align-items:center!important;background:transparent!important;overflow:visible!important;}
+  .mobile-menu-bar .menu-btn{width:42px!important;height:42px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#171717!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;line-height:1!important;}
+  .brand{flex:1 1 auto!important;min-width:0!important;justify-content:center!important;overflow:visible!important;}
+  .brand-logo{width:220px!important;max-width:220px!important;height:auto!important;transform:scale(1.2273)!important;transform-origin:center center!important;}
+  .head-actions{order:2!important;flex:0 0 42px!important;width:42px!important;gap:0!important;margin-left:0!important;justify-content:center!important;}
+  .head-actions .icon-btn{width:42px!important;height:42px!important;font-size:27px!important;}
+  .search{margin-top:2px!important;max-width:calc(100% - 20px)!important;height:42px!important;transform:translateY(-4px)!important;}
+  .search input{height:42px!important;}
+}
 </style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
