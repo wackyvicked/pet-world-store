@@ -398,7 +398,7 @@ async function loadProducts(){const productsEl=document.getElementById("products
 function productVisual(p){
   const src=String(p[2]||"");
   if(src.startsWith("http")){
-    const alt=String(p[0]).replace(/"/g,"&quot;");
+    const alt=String(p[0]);
     return '<img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(alt)+'" style="width:100%;height:100%;object-fit:contain;display:block">';
   }
   return src;
