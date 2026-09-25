@@ -117,20 +117,26 @@ const PRODUCT_FALLBACKS=Array.isArray(window.WOWFallbackProducts)?window.WOWFall
 async function load(){
  const content=document.getElementById("content");
  if(!id){content.textContent="Product not found.";return}
- /* Always render the verified product first. Supabase is only a background refresh. */
+ /* Render a known fallback immediately, but allow every active Supabase product
+    to open directly from category/search/related-product links. */
  window.productList=PRODUCT_FALLBACKS;
  const fallback=PRODUCT_FALLBACKS.find(p=>String(p.id)===String(id));
- if(fallback){render(fallback);syncCartBadge()}else{content.textContent="Product not found.";return}
+ if(fallback){render(fallback);syncCartBadge()}
  try{
   sb=await ensureSb();
-  if(!sb)return;
+  if(!sb){if(!fallback)content.textContent="Product could not be loaded. Please try again.";return}
   const all=await sb.from("products").select("*").eq("active",true).order("created_at",{ascending:false});
-  if(!all.error&&Array.isArray(all.data)&&all.data.length){
+  if(!all.error&&Array.isArray(all.data)){
+    window.productList=all.data;
     const data=all.data.find(p=>String(p.id)===String(id));
-    if(data){window.productList=all.data;render(data);}
+    if(data){render(data)}
+    else if(!fallback){content.textContent="Product not found.";return}
     syncCartBadge();
-  }
- }catch(e){console.warn("Product API unavailable; keeping displayed product:",e)}
+  }else if(!fallback){content.textContent="Product could not be loaded. Please try again."}
+ }catch(e){
+  console.warn("Product API unavailable; keeping displayed product:",e);
+  if(!fallback)content.textContent="Product could not be loaded. Please try again.";
+ }
 }
 document.getElementById("search").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();handleSearch()}});
 document.getElementById("search").addEventListener("search",handleSearch);
