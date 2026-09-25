@@ -460,6 +460,14 @@ body>header .head{padding-top:4px!important;padding-bottom:4px!important;row-gap
 /* Remove browser tap highlight; keep keyboard focus visible via :focus-visible. */
 button,a,[role="button"],summary,input[type="button"],input[type="submit"],input[type="reset"]{-webkit-tap-highlight-color:transparent;}
 </style>
+
+<style id="product-photo-focus-polish">
+/* Product photos are interactive cards, not text links: keep tap/focus from painting a blue browser ring. */
+.product-photo,
+.product-photo:focus,
+.product-photo:active{outline:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent;}
+.product-photo:focus-visible{outline:none!important;}
+</style>
 </head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
