@@ -62,6 +62,11 @@
       a.addEventListener("click",function(){
         const nav=a.closest(".nav");
         if(nav)nav.classList.remove("open");
+        const backdrop=document.getElementById("menuBackdrop");
+        if(backdrop)backdrop.classList.remove("open");
+        const btn=document.querySelector(".menu-btn");
+        if(btn)btn.setAttribute("aria-expanded","false");
+        document.body.style.overflow="";
       });
     });
     document.querySelectorAll(".pcart,.pcart-overlay").forEach(e=>{if(!e.closest("#wowSharedCart"))e.style.display="none"});
