@@ -498,9 +498,12 @@ function adjustProductQty(i,n){
 }
 function addWithQty(i){
   let q=selectedQty[i]||1;
-  let x=cart.find(x=>x.i==i);
-  x?x.q+=q:cart.push({i:i,q:q});
-  update();
+  if(window.WOWSharedCart){window.WOWSharedCart.add(Number(i),Number(q)||1);}
+  else{
+    let x=cart.find(x=>x.id===String(P[Number(i)]?.[4]));
+    x?x.q+=q:cart.push({id:String(P[Number(i)]?.[4]),q:q});
+    update();
+  }
   let btn=document.querySelector("#productDetails .btn.yellow");
   if(btn){
     let old=btn.innerHTML;
