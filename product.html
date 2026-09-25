@@ -265,6 +265,11 @@ body>header .head{padding-top:4px!important;padding-bottom:4px!important;row-gap
   body>header .head{padding-top:3px!important;padding-bottom:5px!important;row-gap:3px!important;}
 }
 </style><style id="menu-overlay-lock-bottom-nav">
+/* The backdrop lives inside header; keep the header stacking context above bottom-nav so the open-menu overlay can cover it, matching Search. */
+@media(max-width:700px){
+  header{z-index:2000!important;}
+}
+
 @media(max-width:700px){
   body.menu-open .bottom-nav{
     pointer-events:none!important;
