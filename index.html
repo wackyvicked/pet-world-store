@@ -220,7 +220,16 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
   .nav#mainNav .menu-close{padding:14px 16px!important;}
   .nav#mainNav .menu-close span{width:38px!important;height:38px!important;min-width:38px!important;}
 }
-</style></head><body>
+</style>
+<style id="logo-size-polish">
+/* Slightly larger WOW Pets logo without overlapping or crowding the search bar. */
+.brand-logo{width:220px!important;max-width:220px!important;height:auto!important;}
+@media(max-width:700px){
+  .brand-logo{width:230px!important;max-width:230px!important;height:auto!important;}
+  .brand{min-height:46px!important;}
+}
+</style>
+</head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
