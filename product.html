@@ -84,64 +84,193 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
  #menuBackdrop{z-index:2100!important}
  .nav#mainNav{left:0!important;right:auto!important;width:min(340px,86vw)!important;border-radius:0 24px 24px 0!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important}
 }
-</style><style id="homepage-header-final">
-/* EXACT homepage header layout — keep all storefront pages identical */
-header{position:relative!important;background:#fff!important;border-bottom:1px solid #ddd!important;z-index:5!important}
-header .head{max-width:1100px!important;margin:0 auto!important;padding:16px 14px!important;display:flex!important;gap:14px!important;align-items:center!important;flex-wrap:wrap!important;box-sizing:border-box!important}
-header .mobile-menu-bar{display:none!important;max-width:1100px!important;margin:auto!important;padding:0 14px 10px!important;align-items:center!important;gap:12px!important}
-header .brand{display:flex!important;align-items:center!important;gap:8px!important;min-width:0!important;position:static!important;transform:none!important;flex:1 1 auto!important;justify-content:flex-start!important}
-header .brand>a{display:flex!important;align-items:center!important;cursor:pointer!important}
-header .brand-logo{display:block!important;width:200px!important;height:auto!important;max-width:200px!important;max-height:none!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important}
-header .head-actions{display:flex!important;align-items:center!important;gap:10px!important;margin-left:auto!important;flex:0 0 auto!important}
-header .head-actions .icon-btn{position:relative!important;width:42px!important;height:42px!important;border:0!important;background:transparent!important;font-size:30px!important;line-height:1!important;cursor:pointer!important;padding:0!important}
-header .icon-btn .badge{position:absolute!important;right:-1px!important;top:-4px!important;background:#f7b900!important;color:#111!important;border-radius:50%!important;min-width:20px!important;height:20px!important;font-size:12px!important;font-weight:900!important;display:grid!important;place-items:center!important}
-header .search{order:3!important;flex-basis:100%!important;width:100%!important;max-width:680px!important;height:44px!important;margin:4px auto 0!important;display:flex!important;border:1px solid #dcdcdc!important;border-radius:12px!important;overflow:hidden!important;background:#fff!important;box-shadow:0 2px 8px rgba(0,0,0,.06)!important}
-header .search input{flex:1!important;width:100%!important;height:44px!important;border:0!important;outline:0!important;background:transparent!important;padding:0 15px!important;font:500 14px "Inter","Segoe UI",Arial,sans-serif!important;box-sizing:border-box!important}
-@media(min-width:701px){header .mobile-menu-bar{display:none!important}}
-@media(max-width:700px){
- header .head{padding:10px 12px 12px!important;gap:10px!important;flex-wrap:wrap!important;align-items:center!important}
- header .mobile-menu-bar{display:flex!important;position:static!important;order:0!important;flex:0 0 42px!important;align-items:center!important;justify-content:center!important;padding:0!important;background:transparent!important;overflow:visible!important}
- header .mobile-menu-bar .menu-btn{position:relative!important;width:42px!important;height:42px!important;flex:0 0 42px!important;border:0!important;background:transparent!important;color:#171717!important;display:flex!important;align-items:center!important;justify-content:center!important;padding:0!important}
- header .brand{order:1!important;flex:1 1 auto!important;min-width:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
- header .brand-logo{width:210px!important;max-width:58vw!important}
- header .head-actions{order:2!important;margin-left:0!important;flex:0 0 auto!important}
- header .head-actions .icon-btn{width:38px!important;height:42px!important;font-size:27px!important}
- header .search{order:3!important;flex-basis:100%!important;width:100%!important;max-width:calc(100% - 28px)!important;height:42px!important;margin:6px auto 0!important}
- header .search input{height:42px!important;font-size:13px!important;padding:0 13px!important}
-}
-</style><style id="homepage-header-final-v2">
-/* Mirror the CURRENT homepage header's final computed styling exactly. */
-.brand-logo{display:block!important;width:260px!important;max-width:260px!important;height:auto!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important;}
-.head{padding-top:4px!important;padding-bottom:4px!important;row-gap:4px!important;}
-.search{position:relative!important;z-index:20!important;margin-top:1px!important;transform:translateY(-4px)!important;}
-.brand{position:relative!important;z-index:2!important;}
+</style><style id="homepage-header-exact-copy">
+/* SOURCE: exact header-related CSS copied from index.html. Do not alter independently. */
+header{position:relative;background:white;border-bottom:1px solid #ddd;z-index:5}
+.head{max-width:1100px;margin:auto;padding:14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.search{flex:1;display:flex;border:1px solid #ccc;border-radius:24px;overflow:hidden;min-width:200px}
+.search input{flex:1;border:0;padding:12px}
+.nav{max-width:1100px;margin:auto;padding:0 14px 12px;display:flex;gap:20px;overflow:auto;font-size:13px;font-weight:bold}
+.mobile-menu-bar{max-width:1100px;margin:auto;padding:0 14px 10px;display:flex;align-items:center;gap:12px}
+.menu-btn{border:0;background:#171717;color:#fff;border-radius:6px;padding:9px 13px;font-weight:bold;cursor:pointer}
+.menu-btn span{font-size:12px;margin-left:3px}
 @media(min-width:701px){
-  .head{padding-left:10px!important;padding-right:10px!important;}
-  .brand-logo{transform:scale(1.08);transform-origin:center center;}
-  .search{margin-top:1px!important;}
+.mobile-menu-bar{display:none}
+
 }
 @media(max-width:700px){
-  .head{padding:3px 8px 5px!important;column-gap:6px!important;row-gap:3px!important;}
-  .mobile-menu-bar{display:flex!important;position:relative!important;z-index:auto!important;flex:0 0 42px!important;width:42px!important;padding:0 10px!important;justify-content:center!important;align-items:center!important;background:transparent!important;overflow:visible!important;}
-  .mobile-menu-bar .menu-btn{width:42px!important;height:42px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#171717!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important;line-height:1!important;}
-  .brand{flex:1 1 auto!important;min-width:0!important;justify-content:center!important;overflow:visible!important;}
-  .brand-logo{width:220px!important;max-width:220px!important;height:auto!important;transform:scale(1.2273)!important;transform-origin:center center!important;}
-  .head-actions{order:2!important;flex:0 0 42px!important;width:42px!important;gap:0!important;margin-left:0!important;justify-content:center!important;}
-  .head-actions .icon-btn{width:42px!important;height:42px!important;font-size:27px!important;}
-  .search{margin-top:2px!important;max-width:calc(100% - 20px)!important;height:42px!important;transform:translateY(-4px)!important;}
-  .search input{height:42px!important;}
+.nav{display:none;flex-direction:column;gap:0;padding:0 14px 10px;overflow:visible}
+.nav.open{display:flex}
+.nav a{padding:11px 5px;border-bottom:1px solid #eee}
+.mobile-menu-bar{display:flex}
+
 }
-<style id="homepage-header-size-lock">
-/* Exact same final visual sizing as index.html, with the same compact mobile layout width. */
-header .brand-logo{width:260px!important;max-width:260px!important;height:auto!important;transform:scale(1.08)!important;transform-origin:center center!important;}
-header .search{width:100%!important;max-width:680px!important;height:44px!important;transform:translateY(-4px)!important;margin:1px auto 0!important;box-sizing:border-box!important;}
-header .search input{height:44px!important;box-sizing:border-box!important;}
 @media(max-width:700px){
-  header .brand-logo{width:220px!important;max-width:220px!important;height:auto!important;transform:scale(1.2273)!important;transform-origin:center center!important;}
-  header .search{width:calc(100% - 20px)!important;max-width:calc(100% - 20px)!important;height:42px!important;margin:2px auto 0!important;transform:translateY(-4px)!important;}
-  header .search input{height:42px!important;}
+header{position:relative}
+.head{padding:10px 12px 12px;gap:10px;flex-wrap:wrap;align-items:center}
+.mobile-menu-bar{display:flex;position:static;order:0;flex:0 0 42px;align-items:center;justify-content:center;padding:0;background:transparent;overflow:visible;z-index:6}
+.brand{position:static;order:1;flex:1;min-width:0;transform:none;z-index:auto;display:flex;align-items:center;justify-content:center}
+.head-actions{order:2;margin-left:0;flex:0 0 auto}
+.search{order:3;margin-top:2px}
+.mobile-menu-bar .menu-btn{background:transparent;color:#171717;border-radius:0;padding:0;font-size:0}
+
 }
-</style></style></head><body><header><div class="head"><div class="mobile-menu-bar">
+/* Mobile design matched to the approved Pet World reference */
+.brand{display:flex;align-items:center;gap:8px;min-width:0}
+.brand-title{font-weight:900;font-size:34px;line-height:1;letter-spacing:-1px;white-space:nowrap}
+.brand-title .pet{color:#20242b}
+.brand-title .world{color:#f7b900}
+.brand-logo{display:block!important;width:200px!important;height:auto!important;max-width:200px!important;max-height:none!important;object-fit:contain!important;object-position:center!important;flex:none!important;opacity:1!important;visibility:visible!important}
+.head-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.icon-btn{position:relative;width:42px;height:42px;border:0;background:transparent;font-size:30px;line-height:1;cursor:pointer}
+.icon-btn .badge{position:absolute;right:-1px;top:-4px;background:#f7b900;color:#111;border-radius:50%;min-width:20px;height:20px;font-size:12px;font-weight:900;display:grid;place-items:center}
+.menu-icon{font-size:32px}
+.search{order:3;flex-basis:100%;height:48px}
+.mobile-menu-bar{display:none}
+/* Header spacing polish */
+.head{padding-top:16px!important;padding-bottom:16px!important;row-gap:14px!important;}
+/* Search bar professional polish */
+.search{width:100%!important;max-width:560px!important;height:44px!important;margin-left:auto!important;margin-right:auto!important;background:#fff!important;border:1px solid #dcdcdc!important;border-radius:12px!important;box-shadow:0 2px 8px rgba(0,0,0,.06)!important;overflow:hidden!important;}
+.search input{height:44px!important;border:0!important;outline:0!important;background:transparent!important;padding:0 15px!important;font-size:14px!important;font-weight:500!important;color:#222!important;box-sizing:border-box!important;}
+.search input::placeholder{color:#888!important;font-weight:400!important;}
+.search input:focus{box-shadow:none!important;}
+@media(max-width:700px){
+.search{max-width:calc(100% - 28px)!important;height:42px!important;border-radius:11px!important}
+.search input{height:42px!important;font-size:13px!important;padding:0 13px!important}
+
+}
+.search{margin-top:4px!important;max-width:680px!important;margin-left:auto!important;margin-right:auto!important;}
+@media(max-width:700px){
+.head{padding:12px 12px 16px!important;row-gap:12px!important}
+.search{margin-top:6px!important;max-width:calc(100% - 28px)!important}
+
+}
+@media(max-width:700px){
+header{position:relative}
+.head{padding:10px 12px 12px;gap:10px;flex-wrap:wrap;align-items:center}
+.brand{flex:1;min-width:0}
+.brand-title{font-size:28px}
+.brand-logo{width:210px!important;height:auto!important;max-width:210px!important;max-height:none!important;object-fit:contain!important;object-position:center!important}
+.head-actions{gap:4px}
+.icon-btn{width:38px;height:42px;font-size:27px}
+.menu-icon{font-size:30px}
+.search{order:3;margin-top:2px;height:50px;border-radius:15px}
+.search input{font-size:16px;padding:12px 14px}
+.mobile-menu-bar{display:flex;background:#171717;color:#fff;padding:10px 12px;overflow-x:auto;gap:10px}
+.mobile-menu-bar .menu-btn{background:#ffd21c;color:#171717;border-radius:12px;padding:10px 14px;font-size:15px;white-space:nowrap}
+.nav{display:none!important;flex-direction:column!important;gap:0!important;padding:0!important;background:#171717;color:#fff;overflow:hidden!important;white-space:normal}
+.nav.open{display:flex!important}
+.nav a{display:block!important;padding:13px 18px;color:#fff;border:0;border-bottom:1px solid #333;text-decoration:none}
+.nav a:before{margin-right:4px}
+.nav a:nth-child(1):before{content:'🏠 ';}
+.nav a:nth-child(2):before{content:'🛍️ ';}
+.nav a:nth-child(3):before{content:'🐱 ';}
+.nav a:nth-child(4):before{content:'🐶 ';}
+.nav a:nth-child(5):before{content:'🦜 ';}
+.nav a:nth-child(6):before{content:'🐠 ';}
+.nav a:nth-child(7):before{content:'🍖 ';}
+.nav a:nth-child(8):before{content:'✂️ ';}
+.nav a:nth-child(9):before{content:'🩺 ';}
+.nav a:nth-child(10):before{content:'🏠 ';}
+
+}
+/* Menu button — match bottom navigation icon sizing and visual weight */
+.menu-btn{width:42px!important;height:42px!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;color:#171717!important;display:flex!important;align-items:center!important;justify-content:center!important;box-shadow:none!important;font-size:0!important;line-height:1!important;cursor:pointer!important;}
+.menu-btn .hamburger-lines{width:26px;height:24px;display:flex;flex-direction:column;justify-content:center;gap:5px;align-items:center;}
+.menu-btn .hamburger-lines i{display:block;width:25px;height:2.5px;background:currentColor;border-radius:2px;}
+@media(max-width:700px){
+.mobile-menu-bar{padding:0 10px!important;background:transparent!important;overflow:visible!important}
+.mobile-menu-bar .menu-btn{width:42px!important;height:42px!important;background:transparent!important;color:#171717!important;box-shadow:none!important}
+.menu-btn .hamburger-lines{width:26px;height:24px;gap:5px}
+.menu-btn .hamburger-lines i{width:25px;height:2.5px;}
+
+}
+.nav,.nav a,.mobile-menu-bar,.menu-btn,.menu-label,.bottom-nav,.bottom-item{font-family:Arial,sans-serif!important;}
+@media(max-width:700px){
+#menuBackdrop{display:block!important;position:fixed!important;inset:0!important;background:rgba(0,0,0,.42)!important;z-index:2100!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .3s ease,visibility 0s linear .3s!important}
+#menuBackdrop.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:opacity .3s ease!important}
+.mobile-menu-bar{position:relative!important;z-index:auto!important}
+.nav#mainNav{display:flex!important;position:fixed!important;top:0!important;bottom:auto!important;left:0!important;right:auto!important;width:min(340px,86vw)!important;height:auto!important;max-height:100dvh!important;
+    min-height:0!important;z-index:2101!important;flex-direction:column!important;background:#fff!important;color:#171717!important;padding:0!important;margin:0!important;max-height:100dvh!important;overflow-y:auto!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important;border-radius:0 24px 24px 0!important;transform:translateX(-100%)!important;visibility:hidden!important;pointer-events:none!important;transition:transform .3s ease,visibility 0s linear .3s!important}
+.nav#mainNav.open{transform:translateX(0)!important;visibility:visible!important;pointer-events:auto!important;transition:transform .3s ease!important}
+.nav#mainNav .menu-close{display:flex!important;align-items:center!important;justify-content:space-between!important;position:sticky!important;top:0!important;width:100%!important;box-sizing:border-box!important;padding:18px 20px!important;border:0!important;background:#fff!important;color:#171717!important;font:800 20px Arial,sans-serif!important;z-index:2!important}
+.nav#mainNav .menu-close span{font-size:28px!important;line-height:1!important;font-weight:400!important}
+.nav#mainNav a{display:block!important;color:#222!important;background:#fff!important;padding:15px 20px!important;border:0!important;border-bottom:1px solid #eee!important;text-decoration:none!important;font-weight:700!important;font-size:15px!important}
+.nav#mainNav a:first-of-type{border-top:1px solid #eee!important}
+
+}
+.nav#mainNav a .menu-icon{width:30px;min-width:30px;display:inline-flex;align-items:center;justify-content:center;margin-right:12px;font-size:21px;line-height:1;vertical-align:middle}
+.nav#mainNav a .menu-text{display:inline-flex;align-items:center;min-height:24px;line-height:1.2;vertical-align:middle}
+/* Final unified menu icon system: one real icon per item, no generated duplicates. */
+.nav#mainNav a::before{content:none!important;display:none!important;}
+.nav#mainNav a .menu-icon{display:inline-flex!important;width:30px!important;min-width:30px!important;height:24px!important;margin:0 12px 0 0!important;align-items:center!important;justify-content:center!important;font-size:21px!important;line-height:1!important;vertical-align:middle!important;}
+.nav#mainNav a .menu-text{display:inline-flex!important;align-items:center!important;min-height:24px!important;line-height:1.2!important;vertical-align:middle!important;}
+.nav#mainNav .menu-close{gap:12px!important;}
+.nav#mainNav .menu-close span{width:38px!important;height:38px!important;min-width:38px!important;border:1px solid #ddd!important;background:#f7f7f7!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:25px!important;line-height:1!important;font-weight:400!important;color:#222!important;box-sizing:border-box!important;box-shadow:0 1px 4px rgba(0,0,0,.06)!important;}
+@media(max-width:700px){
+.nav#mainNav a .menu-icon{width:30px!important;min-width:30px!important;margin-right:12px!important;font-size:21px!important;}
+.nav#mainNav .menu-close{padding:14px 16px!important;}
+.nav#mainNav .menu-close span{width:38px!important;height:38px!important;min-width:38px!important;}
+
+}
+/* Slightly larger WOW Pets logo without overlapping or crowding the search bar. */
+.brand-logo{width:220px!important;max-width:220px!important;height:auto!important;}
+@media(max-width:700px){
+.brand-logo{width:230px!important;max-width:230px!important;height:auto!important;}
+.brand{min-height:46px!important;}
+
+}
+/* Visual size test: make the main logo noticeably larger for review. */
+.brand-logo{width:260px!important;max-width:260px!important;height:auto!important;}
+@media(max-width:700px){
+.brand-logo{width:270px!important;max-width:270px!important;height:auto!important;}
+
+}
+/* Header spacing balance: keep the approved large logo while reducing empty space and keeping menu/cart visually even. */
+.head{padding-top:7px!important;padding-bottom:8px!important;row-gap:6px!important;}
+@media(min-width:701px){
+.head{padding-left:10px!important;padding-right:10px!important;}
+.brand-logo{transform:scale(1.08);transform-origin:center center;}
+.search{margin-top:0!important;}
+
+}
+@media(max-width:700px){
+.head{padding:5px 8px 8px!important;column-gap:6px!important;row-gap:4px!important;}
+.mobile-menu-bar{flex:0 0 42px!important;width:42px!important;padding:0!important;justify-content:center!important;}
+.brand{flex:1 1 auto!important;min-width:0!important;justify-content:center!important;overflow:visible!important;}
+/* Keep the approved 270px visual size, but use a compact layout width. */
+  .brand-logo{width:220px!important;max-width:220px!important;transform:scale(1.2273);transform-origin:center center;}
+.head-actions{flex:0 0 42px!important;width:42px!important;gap:0!important;margin-left:0!important;justify-content:center!important;}
+.icon-btn{width:42px!important;height:42px!important;}
+.search{margin-top:-3px!important;max-width:calc(100% - 20px)!important;height:42px!important;}
+.search input{height:42px!important;}
+
+}
+/* Final vertical rhythm: logo, search bar and banner use one compact balanced spacing system. */
+.head{padding-top:4px!important;padding-bottom:5px!important;row-gap:3px!important;}
+.search{margin-top:0!important;}
+@media(max-width:700px){
+.head{padding:3px 8px 5px!important;row-gap:2px!important;}
+.search{margin-top:-2px!important;}
+
+}
+/* Final spacing + stacking: logo, search, banner and product cards form one clean vertical rhythm. */
+.head{padding-top:4px!important;padding-bottom:4px!important;row-gap:4px!important;}
+.search{position:relative!important;z-index:20!important;margin-top:1px!important;}
+.brand{position:relative!important;z-index:2!important;}
+@media(max-width:700px){
+.head{padding:3px 8px 5px!important;row-gap:3px!important;}
+.search{margin-top:2px!important;max-width:calc(100% - 20px)!important;}
+
+}
+/* Fine tune the vertical rhythm: lift search, add breathing room before banner, tighten banner-to-products. */
+.search{transform:translateY(-4px)!important;}
+@media(max-width:700px){
+.search{transform:translateY(-4px)!important;}
+
+}
+
+</style></head><body><header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
 <div id="menuBackdrop" onclick="toggleMenu(event)"></div><nav class="nav" id="mainNav"><button type="button" class="menu-close" onclick="toggleMenu(event)">MENU <span>×</span></button><a href="./track-order.html"><span class="menu-icon" aria-hidden="true">📦</span><span class="menu-text">TRACK ORDER</span></a><a href="./index.html#shop"><span class="menu-icon" aria-hidden="true">🎁</span><span class="menu-text">BUNDLES</span></a><a href="./category.html?cat=Cats"><span class="menu-icon" aria-hidden="true">🐱</span><span class="menu-text">CATS</span></a><a href="./category.html?cat=Dogs"><span class="menu-icon" aria-hidden="true">🐶</span><span class="menu-text">DOGS</span></a><a href="./category.html?cat=Birds"><span class="menu-icon" aria-hidden="true">🦜</span><span class="menu-text">BIRDS</span></a><a href="./category.html?cat=Fish"><span class="menu-icon" aria-hidden="true">🐠</span><span class="menu-text">FISH</span></a><a href="./category.html?cat=Pet%20Food"><span class="menu-icon" aria-hidden="true">🍖</span><span class="menu-text">PET FOOD</span></a><a href="./category.html?cat=Grooming"><span class="menu-icon" aria-hidden="true">✂️</span><span class="menu-text">GROOMING</span></a><a href="./category.html?cat=Medical%20Supplies"><span class="menu-icon" aria-hidden="true">🩺</span><span class="menu-text">MEDICAL</span></a><a href="./category.html?cat=Accessories"><span class="menu-icon" aria-hidden="true">🏠</span><span class="menu-text">ACCESSORIES</span></a></nav></header><main class="wrap"><div id="content" class="status">Loading product…</div></main>
