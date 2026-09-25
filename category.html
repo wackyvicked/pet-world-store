@@ -425,6 +425,20 @@ body>header .head{padding-top:4px!important;padding-bottom:4px!important;row-gap
 @media(max-width:700px){
   body>header .head{padding-top:3px!important;padding-bottom:5px!important;row-gap:3px!important;}
 }
+</style><style id="menu-overlay-lock-bottom-nav">
+@media(max-width:700px){
+  body.menu-open .bottom-nav{
+    pointer-events:none!important;
+    z-index:999!important;
+  }
+  body.menu-open #menuBackdrop{
+    z-index:2100!important;
+    pointer-events:auto!important;
+  }
+  body.menu-open .nav#mainNav{
+    z-index:2101!important;
+  }
+}
 </style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
@@ -738,7 +752,7 @@ function toggleMenu(e){
   nav.classList.toggle("open",open);
   if(backdrop)backdrop.classList.toggle("open",open);
   if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
-  document.body.style.overflow=open?"hidden":"";
+  document.body.style.overflow=open?"hidden":"";document.body.classList.toggle("menu-open",open);
   return false;
 }
 
