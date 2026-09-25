@@ -229,6 +229,12 @@ input,textarea,select{font-family:"Inter","Segoe UI",Arial,sans-serif;}
   .brand{min-height:46px!important;}
 }
 </style>
+
+<style id="logo-visual-size-test">
+/* Visual size test: make the main logo noticeably larger for review. */
+.brand-logo{width:260px!important;max-width:260px!important;height:auto!important;}
+@media(max-width:700px){.brand-logo{width:270px!important;max-width:270px!important;height:auto!important;}}
+</style>
 </head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Menu"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
