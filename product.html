@@ -124,7 +124,7 @@ async function load(){
     const data=all.data.find(p=>String(p.id)===String(id));
     if(data){render(data)}
     else if(!fallback){content.textContent="Product not found.";return}
-    syncCartBadge();
+
   }else if(!fallback){content.textContent="Product could not be loaded. Please try again."}
  }catch(e){
   console.warn("Product API unavailable; keeping displayed product:",e);
@@ -133,5 +133,5 @@ async function load(){
 }
 document.getElementById("search").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();handleSearch()}});
 document.getElementById("search").addEventListener("search",handleSearch);
-syncCartBadge();load();
+load();
 </script><script src="./shared-cart.js?v=20260925-4"></script></body></html>
