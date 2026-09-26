@@ -541,8 +541,6 @@ function toggleSubmenu(id,btn,e){
   const open=!el.classList.contains("open");
   el.classList.toggle("open",open);
   btn.setAttribute("aria-expanded",open?"true":"false");
-  const arrow=btn.querySelector("span");
-  if(arrow) arrow.textContent=open?"⌄":"›";
   return false;
 }
 </script></body></html>
