@@ -424,18 +424,33 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 }
 .nav#mainNav .menu-icon-grooming,.nav#mainNav .menu-icon-accessories{font-size:17px!important;}
 </style><style id="submenu-chevron-final-fix">
-/* Fixed chevron: right when closed, down when open. No rotation. */
+/* FINAL: exactly one SVG arrow. Legacy span/glyph arrows are disabled. */
+.nav#mainNav .menu-sub-toggle{
+  font-size:0!important;line-height:0!important;color:#666!important;
+}
+.nav#mainNav .menu-sub-toggle span{
+  width:20px!important;height:20px!important;min-width:20px!important;
+  padding:0!important;margin:0!important;border:0!important;
+  background:none!important;box-shadow:none!important;
+  font-size:0!important;line-height:0!important;
+  transform:none!important;display:flex!important;
+}
+.nav#mainNav .menu-sub-toggle span::before,
+.nav#mainNav .menu-sub-toggle span::after{
+  content:none!important;display:none!important;
+  width:0!important;height:0!important;border:0!important;
+}
 .nav#mainNav .menu-sub-toggle svg{
   width:15px!important;height:15px!important;display:block!important;
+  margin:0!important;padding:0!important;
   overflow:visible!important;fill:none!important;
   stroke:#666!important;stroke-width:1.9!important;
   stroke-linecap:round!important;stroke-linejoin:round!important;
-  transform:none!important;transform-origin:center!important;
-  transition:none!important;
-}
-.nav#mainNav .menu-sub-toggle[aria-expanded="true"] svg{
   transform:none!important;
 }
+.nav#mainNav .menu-sub-toggle .chevron-down{display:none!important;}
+.nav#mainNav .menu-sub-toggle[aria-expanded="true"] .chevron-right{display:none!important;}
+.nav#mainNav .menu-sub-toggle[aria-expanded="true"] .chevron-down{display:block!important;}
 </style><style id="submenu-chevron-state-fix">
 .nav#mainNav .menu-sub-toggle .chevron-down{display:none!important;}
 .nav#mainNav .menu-sub-toggle[aria-expanded="true"] .chevron-right{display:none!important;}
