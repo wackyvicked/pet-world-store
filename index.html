@@ -349,7 +349,7 @@ button,a,[role="button"],summary,input[type="button"],input[type="submit"],input
     box-shadow:12px 0 30px rgba(0,0,0,.22)!important;
     transform:translate3d(-105%,0,0)!important;
     opacity:0!important;visibility:hidden!important;pointer-events:none!important;
-    transition:transform .3s ease,opacity .3s ease!important;
+    transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important;
     will-change:transform,opacity;
     backface-visibility:hidden!important;
     -webkit-backface-visibility:hidden!important;
@@ -357,7 +357,7 @@ button,a,[role="button"],summary,input[type="button"],input[type="submit"],input
   .nav#mainNav.open{
     transform:translate3d(0,0,0)!important;
     opacity:1!important;visibility:visible!important;pointer-events:auto!important;
-    transition:transform .3s ease,opacity .3s ease!important;
+    transition:transform .3s ease,opacity .3s ease,visibility 0s linear 0s!important;
   }
 }
 </style></head><body>
