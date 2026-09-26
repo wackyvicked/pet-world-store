@@ -827,7 +827,8 @@ function subcategoryMatches(p,parent,sub){
 function applyProductFilters(){
   const shopTitle=document.querySelector("#shop h2");
   const categoryTitles={All:"Products",Cats:"Cat Products",Dogs:"Dog Products",Birds:"Bird Products",Fish:"Fish Products","Pet Food":"Pet Food Products",Toys:"Toy Products",Grooming:"Grooming Products","Medical Supplies":"Medical Supplies Products",Accessories:"Accessory Products"};
-  if(shopTitle)shopTitle.textContent=categoryTitles[currentCategory]||currentCategory+" Products";
+  const subTitles={food:"Food",litter:"Litter",toys:"Toys",grooming:"Grooming",accessories:"Accessories",treats:"Treats"};
+  if(shopTitle)shopTitle.textContent=currentSubcategory?(currentCategory+" "+(subTitles[currentSubcategory]||"Products")):(categoryTitles[currentCategory]||currentCategory+" Products");
   const q=currentSearch.trim().toLowerCase();
   const result=q
     ? P.filter(p=>[p[0],p[3],p[5],p[6],p[7],p[8]].map(v=>String(v??"").toLowerCase().trim()).join(" ").includes(q))
