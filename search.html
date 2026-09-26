@@ -550,39 +550,28 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 }
 .nav#mainNav .menu-icon-grooming,.nav#mainNav .menu-icon-accessories{font-size:17px!important;}
 </style>
+
 <style id="submenu-chevron-clean">
-/* Final submenu arrow: one chevron, centered, 0deg closed / 90deg open. */
 .nav#mainNav .menu-sub-toggle{
   width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
-  margin:0 16px 0 8px!important;padding:0!important;
-  border:1px solid #d6d6d6!important;border-radius:50%!important;
-  background:#fff!important;color:#666!important;
-  display:inline-flex!important;align-items:center!important;justify-content:center!important;
-  box-sizing:border-box!important;box-shadow:none!important;
-  font-size:0!important;line-height:0!important;cursor:pointer!important;
+  margin:0 16px 0 8px!important;padding:0!important;border:1px solid #d6d6d6!important;
+  border-radius:50%!important;background:#fff!important;display:flex!important;
+  align-items:center!important;justify-content:center!important;box-sizing:border-box!important;
+  font-size:0!important;line-height:0!important;transform:none!important;
 }
 .nav#mainNav .menu-sub-toggle span{
-  width:20px!important;height:20px!important;min-width:20px!important;min-height:20px!important;
-  margin:0!important;padding:0!important;border:0!important;background:transparent!important;
+  width:18px!important;height:18px!important;margin:0!important;padding:0!important;
   display:flex!important;align-items:center!important;justify-content:center!important;
   font-size:0!important;line-height:0!important;transform:none!important;
 }
 .nav#mainNav .menu-sub-toggle span::before,
-.nav#mainNav .menu-sub-toggle span::after{
-  content:none!important;display:none!important;border:0!important;
-}
+.nav#mainNav .menu-sub-toggle span::after{content:none!important;display:none!important;}
 .nav#mainNav .menu-sub-toggle svg{
-  width:16px!important;height:16px!important;display:block!important;
-  margin:0!important;padding:0!important;overflow:visible!important;
+  display:block!important;width:16px!important;height:16px!important;margin:0!important;
   fill:none!important;stroke:#666!important;stroke-width:1.9!important;
   stroke-linecap:round!important;stroke-linejoin:round!important;
-  transform-origin:50% 50%!important;
-  transform:rotate(0deg)!important;
+  transform:rotate(0deg)!important;transform-origin:50% 50%!important;
   transition:transform .22s ease!important;
-}
-.nav#mainNav .menu-sub-toggle svg path{
-  fill:none!important;stroke:#666!important;stroke-width:1.9!important;
-  stroke-linecap:round!important;stroke-linejoin:round!important;
 }
 .nav#mainNav .menu-sub-toggle[aria-expanded="true"] svg{
   transform:rotate(90deg)!important;
@@ -977,6 +966,7 @@ function toggleSubmenu(id,btn,e){
   const el=document.getElementById(id); if(!el||!btn)return false;
   const open=!el.classList.contains("open");
   el.classList.toggle("open",open);
+  btn.classList.toggle("is-open",open);
   btn.setAttribute("aria-expanded",open?"true":"false");
   return false;
 }
