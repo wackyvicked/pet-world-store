@@ -807,6 +807,23 @@ function closeProduct(){document.getElementById("productModal").style.display="n
 
 let currentCategory="All";
 let currentSearch="";
+let currentSubcategory="";
+function subcategoryMatches(p,parent,sub){
+  if(!sub)return true;
+  const text=[p?.[0],p?.[3],p?.[5],p?.[6]].map(v=>String(v??"").toLowerCase()).join(" ");
+  const parentName=String(parent||"").toLowerCase();
+  const parentOk=parentName==="cats"?/\bcat(s)?\b/.test(text):parentName==="dogs"?/\bdog(s)?\b/.test(text):true;
+  if(!parentOk)return false;
+  const terms={
+    food:["food","kibble","diet","meal"],
+    litter:["litter","clumping","sand","toilet"],
+    toys:["toy","toys","ball","mouse"],
+    grooming:["grooming","shampoo","brush","comb","fur"],
+    accessories:["accessor","collar","leash","bowl","carrier","harness","bed"],
+    treats:["treat","snack","biscuit","chew"]
+  };
+  return (terms[sub]||[]).some(t=>text.includes(t));
+}
 function applyProductFilters(){
   const shopTitle=document.querySelector("#shop h2");
   const categoryTitles={All:"Products",Cats:"Cat Products",Dogs:"Dog Products",Birds:"Bird Products",Fish:"Fish Products","Pet Food":"Pet Food Products",Toys:"Toy Products",Grooming:"Grooming Products","Medical Supplies":"Medical Supplies Products",Accessories:"Accessory Products"};
@@ -814,7 +831,7 @@ function applyProductFilters(){
   const q=currentSearch.trim().toLowerCase();
   const result=q
     ? P.filter(p=>[p[0],p[3],p[5],p[6],p[7],p[8]].map(v=>String(v??"").toLowerCase().trim()).join(" ").includes(q))
-    : P.filter(p=>categoryMatches(p[3],currentCategory));
+    : P.filter(p=>categoryMatches(p[3],currentCategory) && subcategoryMatches(p,currentCategory,currentSubcategory));
   render(result);
   document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));
   const active=[...document.querySelectorAll(".filter-bar .btn")].find(b=>b.textContent.trim()===currentCategory);
@@ -855,6 +872,7 @@ function categoryMatches(productCategory, selectedCategory){
 }
 function filterCategory(cat){
   currentCategory=cat;
+  currentSubcategory="";
   applyProductFilters();
   const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
   window.location.hash="shop";
@@ -882,8 +900,12 @@ function closeAccount(){document.getElementById('accountPanel').style.display='n
 const categoryParams=new URLSearchParams(window.location.search);
 currentSearch="";
 currentCategory=String(categoryParams.get("cat")||"All").trim()||"All";
+currentSubcategory=String(categoryParams.get("sub")||"").trim().toLowerCase();
 const shopTitle=document.querySelector("#shop h2");
-if(shopTitle)shopTitle.textContent=currentCategory==="All"?"Products":currentCategory+" Products";
+if(shopTitle){
+  const subLabels={food:"Food",litter:"Litter",toys:"Toys",grooming:"Grooming",accessories:"Accessories",treats:"Treats"};
+  shopTitle.textContent=currentSubcategory?(currentCategory+" "+(subLabels[currentSubcategory]||"Products")):(currentCategory==="All"?"Products":currentCategory+" Products");
+}
 wireSearch();
 wireProductCardClicks();
 /* Render verified products immediately. Supabase refreshes in the background. */
