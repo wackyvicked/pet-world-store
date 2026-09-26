@@ -502,6 +502,44 @@ button,a,[role="button"],summary,input[type="button"],input[type="submit"],input
   #shop #searchResult{margin:0 0 10px!important;}
   #shop .filter-bar{margin-bottom:20px!important;}
 }
+</style><style id="menu-cart-architecture">
+/* Menu drawer architecture — synchronized with shared Cart drawer */
+@media(max-width:700px){
+  #menuBackdrop{
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+    transition:opacity .25s ease,visibility 0s linear .25s!important;
+    will-change:opacity;
+  }
+  #menuBackdrop.open{
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+    transition:opacity .25s ease!important;
+  }
+  .nav#mainNav{
+    display:flex!important;
+    position:fixed!important;
+    top:0!important;bottom:0!important;left:0!important;right:auto!important;
+    width:min(380px,88vw)!important;
+    height:100dvh!important;max-height:none!important;min-height:0!important;
+    margin:0!important;padding:0!important;
+    overflow-y:auto!important;overflow-x:hidden!important;
+    flex-direction:column!important;
+    z-index:2101!important;
+    background:#fff!important;color:#171717!important;
+    border-radius:0 22px 22px 0!important;
+    box-shadow:12px 0 30px rgba(0,0,0,.22)!important;
+    transform:translate3d(-105%,0,0)!important;
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+    transition:transform .3s ease,opacity .3s ease!important;
+    will-change:transform,opacity;
+    backface-visibility:hidden!important;
+    -webkit-backface-visibility:hidden!important;
+  }
+  .nav#mainNav.open{
+    transform:translate3d(0,0,0)!important;
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+    transition:transform .3s ease,opacity .3s ease!important;
+  }
+}
 </style></head><body class="search-page">
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
