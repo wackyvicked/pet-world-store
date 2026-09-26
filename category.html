@@ -453,11 +453,11 @@ body>header .head{padding-top:4px!important;padding-bottom:4px!important;row-gap
 </style>
 <style id="tap-highlight-polish">
 /* Remove browser tap highlight; keep keyboard focus visible via :focus-visible. */
-button,a,[role="button"],summary,input[type="button"],input[type="submit"],input[type="reset"]{-webkit-tap-highlight-color:transparent;}
+button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="submit"],input[type="reset"]{-webkit-tap-highlight-color:transparent;}
 </style>
 
 <style id="product-photo-focus-polish">
-/* Product photos are interactive cards, not text links: keep tap/focus from painting a blue browser ring. */
+.product-link-area:focus,.product-link-area:active,.info[role="link"]:focus,.info[role="link"]:active{outline:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent;}\n.product-link-area:focus-visible,.info[role="link"]:focus-visible{outline:none!important;}\n/* Product photos are interactive cards, not text links: keep tap/focus from painting a blue browser ring. */
 .product-photo,
 .product-photo:focus,
 .product-photo:active{outline:none!important;box-shadow:none!important;-webkit-tap-highlight-color:transparent;}
