@@ -26,7 +26,7 @@ body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width
 <body>
 <div class="wrap">
 <div class="top" id="top"></div>
-<div id="login" class="card"><h2>Admin Login</h2><p class="muted">Only the Pet World admin account can change products.</p><div class="grid"><label class="field">Email<input id="email" type="email" autocomplete="username" required></label><label class="field">Password<input id="password" type="password" autocomplete="current-password" required></label></div><button class="btn" style="margin-top:12px" onclick="login()">Sign In</button><button type="button" class="btn" style="margin-top:10px;background:#fff;border:1px solid #ccc" onclick="showForgotPassword()">Forgot Password?</button></div><div id="resetCard" class="card" style="display:none"><h2>Reset Admin Password</h2><p class="muted">Enter your admin email to receive a secure password reset link.</p><label class="field">Email<input id="resetEmail" type="email" autocomplete="email" required></label><button type="button" class="btn" style="margin-top:12px" onclick="sendPasswordReset()">Send Reset Email</button><button type="button" class="btn" style="margin-top:10px;background:#fff;border:1px solid #ccc" onclick="showLogin()">Back to Login</button></div><div id="changePasswordCard" class="card" style="display:none"><h2>Set New Admin Password</h2><p class="muted">Choose a new password for the Pet World admin account.</p><label class="field">New Password<input id="newPassword" type="password" autocomplete="new-password" minlength="8" required></label><label class="field" style="margin-top:10px">Confirm Password<input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label><button type="button" class="btn" style="margin-top:12px" onclick="updateAdminPassword()">Save New Password</button></div><div id="status" class="status">Please sign in.</div><div id="app" style="display:none">
+<div id="login" class="card"><h2>Admin Login</h2><p class="muted">Only the Pet World admin account can change products.</p><div class="grid"><label class="field">Email<input id="email" type="email" autocomplete="username" required></label><label class="field">Password<input id="password" type="password" autocomplete="current-password" required></label></div><button type="button" class="btn" style="margin-top:12px" onclick="login()">Sign In</button><button type="button" class="btn" style="margin-top:10px;background:#fff;border:1px solid #ccc" onclick="showForgotPassword()">Forgot Password?</button></div><div id="resetCard" class="card" style="display:none"><h2>Reset Admin Password</h2><p class="muted">Enter your admin email to receive a secure password reset link.</p><label class="field">Email<input id="resetEmail" type="email" autocomplete="email" required></label><button type="button" class="btn" style="margin-top:12px" onclick="sendPasswordReset()">Send Reset Email</button><button type="button" class="btn" style="margin-top:10px;background:#fff;border:1px solid #ccc" onclick="showLogin()">Back to Login</button></div><div id="changePasswordCard" class="card" style="display:none"><h2>Set New Admin Password</h2><p class="muted">Choose a new password for the Pet World admin account.</p><label class="field">New Password<input id="newPassword" type="password" autocomplete="new-password" minlength="8" required></label><label class="field" style="margin-top:10px">Confirm Password<input id="confirmPassword" type="password" autocomplete="new-password" minlength="8" required></label><button type="button" class="btn" style="margin-top:12px" onclick="updateAdminPassword()">Save New Password</button></div><div id="status" class="status">Please sign in.</div><div id="app" style="display:none">
 <div id="adminLayout">
 <nav class="sidebar" id="adminSidebar"><h3>ADMIN MENU</h3><button class="navBtn" type="button" onclick="adminNavTo('productForm')">➕ Add / Edit Product</button><button class="navBtn" type="button" onclick="adminNavTo('productsSection')">📦 Products & Stock</button><button class="navBtn" type="button" onclick="adminNavTo('ordersSection')">🛒 Orders</button><button class="navBtn" type="button" onclick="adminNavTo('bannersSection')">🖼️ Banners</button><button class="navBtn" type="button" onclick="adminNavTo('shippingSection')">🚚 Delivery Rates</button><button class="navBtn" type="button" onclick="adminNavTo('dashboard')">📊 Dashboard</button></nav>
 <main class="mainContent" id="adminMain">
@@ -115,16 +115,43 @@ body{margin:0;font-family:Arial;background:#f6f7f9;color:#171717}.wrap{max-width
 </main>
 </div>
 </div>
+<script>
+window.addEventListener("error",function(e){
+  const el=document.getElementById("status");
+  if(el&&e&&e.message){el.textContent="Admin page error: "+e.message;el.style.background="#ffe5e5";el.style.color="#b00020";}
+  console.error("Admin page error:",e&&e.error||e&&e.message||e);
+});
+window.addEventListener("unhandledrejection",function(e){
+  const el=document.getElementById("status");
+  const msg=e&&e.reason?(e.reason.message||String(e.reason)):"Unknown promise error";
+  if(el){el.textContent="Admin page error: "+msg;el.style.background="#ffe5e5";el.style.color="#b00020";}
+  console.error("Admin promise error:",e&&e.reason||e);
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
 const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZlc2ttcnhodHFyeWZmaXh6a29pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk4MjM1NjQsImV4cCI6MjEwNTM5OTU2NH0.X9TRiy3fSt895Bkvkg1vKRhV_hfwbtNy2jN7g5yQjek";
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"pet-world-admin-auth"}});
+let sb=null;
+try{
+  if(!window.supabase||typeof window.supabase.createClient!=="function") throw new Error("Supabase Auth library did not load.");
+  sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"pet-world-admin-auth"}});
+}catch(e){
+  console.error("Supabase initialization failed:",e);
+  setTimeout(()=>{const el=document.getElementById("status");if(el){el.textContent="Admin login could not start: "+(e.message||e);el.style.background="#ffe5e5";el.style.color="#b00020";}},0);
+}
 let products=[], photoBlob=null, originalImage=null, originalImageSource=null, rotation=0, cropStart=null, cropEnd=null, originalProductImageUrl=null, galleryUrls=[], galleryEditingIndex=-1, allOrders=[], orderFilter="All";
 const $=id=>document.getElementById(id);
 function setStatus(t,ok=false){$("status").textContent=t;$("status").style.background=ok?"#dff5e3":"#fff5b8"}
 function pick(p,...keys){for(const k of keys)if(p[k]!==undefined&&p[k]!==null)return p[k];return ""}
-async function login(){const email=$("email").value.trim();const password=$("password").value;if(!email||!password){setStatus("Enter your email and password.");return}setStatus("Signing in…");try{const {data,error}=await sb.auth.signInWithPassword({email,password});if(error){setStatus("Login failed: "+error.message);return}if(!data||!data.session){setStatus("Login did not create a session. Please try again.");return}await showApp()}catch(e){setStatus("Login failed: "+(e.message||e))}}
+async function login(){
+  const email=$("email").value.trim();
+  const password=$("password").value;
+  if(!email||!password){setStatus("Enter your email and password.");return}
+  if(!sb||!sb.auth){setStatus("Admin login is not initialized. Please reload the page.",false);return}
+  setStatus("Signing in…");
+  try{
+    const {data,error}=await sb.auth.signInWithPassword({email,password});if(error){setStatus("Login failed: "+error.message);return}if(!data||!data.session){setStatus("Login did not create a session. Please try again.");return}await showApp()}catch(e){setStatus("Login failed: "+(e.message||e))}}
 function showForgotPassword(){ $("login").style.display="none"; $("resetCard").style.display="block"; $("changePasswordCard").style.display="none"; $("resetEmail").value=$("email").value.trim(); setStatus("Enter your admin email to receive a reset link."); }
 function showLogin(){ $("resetCard").style.display="none"; $("changePasswordCard").style.display="none"; $("login").style.display="block"; setStatus("Please sign in."); }
 async function sendPasswordReset(){ const email=$("resetEmail").value.trim(); if(!email){setStatus("Enter your admin email.");return} setStatus("Sending reset email…"); try{ const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:"https://wackyvicked.github.io/pet-world-store/admin.html"}); if(error){setStatus("Reset email failed: "+error.message);return} setStatus("Reset email sent. Open the email and tap the reset link.",true); }catch(e){setStatus("Reset email failed: "+(e.message||e))} }
