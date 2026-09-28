@@ -985,7 +985,8 @@ wireSearch();
 wireProductCardClicks();
 /* Render verified products immediately. Supabase refreshes in the background. */
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();
-ensureSb().then(()=>loadProducts().then(()=>applyProductFilters())).catch(()=>{});
+/* Category product loading uses the REST API directly; do not block it on the Supabase JS client. */
+loadProducts().catch(e=>console.error("Category bootstrap error:",e));
 </script><script src="./shared-cart.js?v=20260927-1"></script><script>
 function addCategoryStaticProduct(id){
   var ps=Array.isArray(window.P)?window.P:[];
