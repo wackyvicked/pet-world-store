@@ -947,11 +947,14 @@ function categoryMatches(productCategory, selectedCategory){
   return cats.some(c=>allowed.includes(c));
 }
 function filterCategory(cat){
-  currentCategory=cat;
-  currentSubcategory="";
-  applyProductFilters();
-  const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
-  window.location.hash="shop";
+  const value=String(cat||"All").trim();
+  const nav=document.getElementById("mainNav");
+  if(nav)nav.classList.remove("open");
+  if(!value||value==="All"){
+    window.location.href="./category.html#shop";
+    return;
+  }
+  window.location.href="./category.html?cat="+encodeURIComponent(value)+"#shop";
 }
 document.addEventListener("keydown",function(event){if(event.key==="Escape"){const nav=document.getElementById("mainNav"),backdrop=document.getElementById("menuBackdrop"),btn=document.querySelector(".menu-btn");if(nav&&nav.classList.contains("open")){nav.classList.remove("open");if(backdrop)backdrop.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");document.body.style.overflow="";}}});
 
