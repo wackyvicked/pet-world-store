@@ -866,17 +866,12 @@ async function place(){
     const saved=Array.isArray(data)?data[0]:data;
     if(!saved||!saved.order_number)throw new Error("Order service returned an invalid response.");
     const no=String(saved.order_number),subtotal=Number(saved.subtotal)||0,discount=Number(saved.discount)||0,deliveryCharge=Number(saved.delivery_charge)||0,orderTotal=Number(saved.total)||0,weight=Number(saved.weight_kg)||0,zone=String(saved.zone||"other"),serverItems=Array.isArray(saved.items)?saved.items:[];
-    const list=serverItems.map(x=>String(x.name||"Product")+" x"+Number(x.qty||0)).join(", ");
     const deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+zone.replace(/^./,m=>m.toUpperCase())+", "+weight.toFixed(2)+" kg)";
-    const paymentLabel=paymentMethod==="easypaisa"?"Easypaisa (10% OFF regular-price items)":paymentMethod==="jazzcash"?"JazzCash (10% OFF regular-price items)":paymentMethod==="store"?"Pay at Store (10% OFF regular-price items)":"Cash on Delivery";
-    const msg="Hello WOW Pets! I placed order "+no+".\nName: "+n+"\nWhatsApp: "+ph+"\nCity: "+city+"\nAddress: "+address+"\nPayment: "+paymentLabel+"\nProducts: PKR "+subtotal.toLocaleString()+"\nDiscount: PKR "+discount.toLocaleString()+"\nDelivery: "+deliveryMessage+"\nTotal: PKR "+orderTotal.toLocaleString()+"\nItems: "+list;
-    const confirmationItems=serverItems.map((x,i)=>'<div class="confirmation-item"><span class="confirmation-index">'+(i+1)+'</span><div class="confirmation-product"><b>'+esc(x.name||"Product")+'</b><small>Qty: '+Number(x.qty||1)+'</small></div><strong>PKR '+Number(x.price||0).toLocaleString()+'</strong></div>').join("");
-    ord.textContent=no;
-    const sd=document.getElementById("successDetails");
-    if(sd)sd.innerHTML='<div class="confirmation-list"><div class="confirmation-head"><span>ORDER ITEMS</span><span>PRICE</span></div>'+confirmationItems+'</div>';
-    form.style.display="none";
-    success.style.display="block";
-    const wa=document.getElementById("wa"); if(wa)wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);
+    const paymentLabel=paymentMethod==="easypaisa"?"Easypaisa":paymentMethod==="jazzcash"?"JazzCash":paymentMethod==="store"?"Pay at Store":"Cash on Delivery";
+    const msg="Hello WOW Pets! I placed order "+no+".\\nName: "+n+"\\nWhatsApp: "+ph+"\\nCity: "+city+"\\nAddress: "+address+"\\nPayment: "+paymentLabel+"\\nProducts: PKR "+subtotal.toLocaleString()+"\\nDiscount: PKR "+discount.toLocaleString()+"\\nDelivery: "+deliveryMessage+"\\nTotal: PKR "+orderTotal.toLocaleString()+"\\nItems: "+serverItems.map(x=>String(x.name||"Product")+" x"+Number(x.qty||0)).join(", ");
+    const confirmationProducts=serverItems.map((x,i)=>'<div class="confirmation-row"><span class="confirmation-label">Product '+(i+1)+'</span><span class="confirmation-value">'+esc(x.name||"Product")+' × '+Number(x.qty||1)+' — PKR '+Number(x.price||0).toLocaleString()+'</span></div>').join("");
+    const confirmationSummary='<div class="confirmation-summary"><div class="confirmation-row"><span class="confirmation-label">Total</span><span class="confirmation-value">PKR '+orderTotal.toLocaleString()+'</span></div><div class="confirmation-row"><span class="confirmation-label">Discount</span><span class="confirmation-value">PKR '+discount.toLocaleString()+'</span></div><div class="confirmation-row"><span class="confirmation-label">Delivery</span><span class="confirmation-value">'+esc(deliveryMessage)+'</span></div><div class="confirmation-row"><span class="confirmation-label">Weight</span><span class="confirmation-value">'+weight.toFixed(2)+' kg</span></div><div class="confirmation-row"><span class="confirmation-label">Payment</span><span class="confirmation-value">'+esc(paymentLabel)+'</span></div>'+confirmationProducts+'<div class="confirmation-row confirmation-address"><span class="confirmation-label">Delivery Address</span><span class="confirmation-value">'+esc([n,city,address].filter(Boolean).join(", "))+'</span></div></div>';
+    ord.textContent=no;const sd=document.getElementById("successDetails");if(sd)sd.innerHTML=confirmationSummary;form.style.display="none";success.style.display="block";wa.href="https://wa.me/923465771099?text="+encodeURIComponent(msg);
     cart=[];try{localStorage.removeItem("wowPetsCart")}catch(_e){}update();
   }catch(e){
     alert("We couldn't save your order. Please try again. Error: "+e.message);
