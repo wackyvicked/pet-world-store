@@ -655,6 +655,11 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 </nav>
 <script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
+let __liveDebugStage="page script starting";
+function showLiveDebug(stage,error){try{__liveDebugStage=stage||__liveDebugStage;const box=document.getElementById("liveDebug"),textEl=document.getElementById("liveDebugText"),details=document.getElementById("liveDebugDetails");if(!box||!textEl||!details)return;const msg=error instanceof Error?(error.message||String(error)):String(error||"Unknown error");const stack=error&&error.stack?error.stack:"";const params=new URLSearchParams(location.search);textEl.innerHTML="<b>Stage:</b> "+String(__liveDebugStage).replace(/</g,"&lt;")+"<br><b>URL:</b> "+String(location.href).replace(/</g,"&lt;")+"<br><b>Category:</b> "+String(params.get("cat")||"All").replace(/</g,"&lt;")+"<br><b>Subcategory:</b> "+String(params.get("sub")||"").replace(/</g,"&lt;");details.textContent=msg+(stack?"\n\n"+stack:"");box.classList.add("show")}catch(_e){}}
+window.addEventListener("error",function(e){showLiveDebug("JavaScript runtime error",e.error||e.message)});
+window.addEventListener("unhandledrejection",function(e){showLiveDebug("Unhandled promise rejection",e.reason)});
+function copyLiveDebug(){const text="WOW Pets LIVE ERROR\n"+(document.getElementById("liveDebugText")?.innerText||"")+"\n"+(document.getElementById("liveDebugDetails")?.innerText||"");if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>alert("Error copied. Ab mujhe paste kar dein.")).catch(()=>prompt("Copy this error:",text));else prompt("Copy this error:",text)}
 const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
 let sb=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 async function ensureSb(){
@@ -676,14 +681,17 @@ const BUILTIN_PRODUCTS=Array.isArray(window.WOWFallbackProducts)?window.WOWFallb
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";const category=Array.isArray(r.category)?r.category.join(", "):(r.category??r.category_name??"Accessories");return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,category,r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.subcategory??""];}
 async function loadBanners(){try{const {data,error}=await sb.from("site_banners").select("*").eq("active",true).neq("type","shipping_config").neq("type","banner_config").order("sort_order",{ascending:true});const el=document.getElementById("homeBanners");if(!el)return;if(error){console.error("Banner load error:",error);return}let height="auto";try{const cfg=await sb.from("site_banners").select("banner_text").eq("type","banner_config").eq("active",true).limit(1).maybeSingle();if(!cfg.error&&cfg.data&&cfg.data.banner_text){const v=JSON.parse(cfg.data.banner_text).height;if(["180","260","360","480"].includes(String(v)))height=String(v)+"px"}}catch(e){}if(!Array.isArray(data)||!data.length){el.innerHTML="";return}el.innerHTML=data.map(b=>{const title=String(b.title||"").replace(/</g,"&lt;");const text=String(b.banner_text||"").replace(/</g,"&lt;");const button=b.button_text?'<a class="btn" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'">'+String(b.button_text).replace(/</g,"&lt;")+"</a>":"";const image=b.image_url?'<img loading="lazy" decoding="async" src="'+String(b.image_url).replace(/"/g,"&quot;")+'" alt="'+title.replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"";if(image){const imageButton=b.button_text?'<a class="btn banner-image-button" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'"'+(String(b.button_link||"")==="#sale"?' onclick="showSale();return false;"':'')+'>'+String(b.button_text).replace(/</g,"&lt;")+'</a>':"";const h=height==="auto"?"":" style=\"height:"+height+";\"";return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"'+h+'><div class="banner-media">'+image+imageButton+'</div></section>';}return b.type==="sale"?'<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>':'<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>'}).join("")}catch(e){console.error("Banner load error:",e)}}
 async function loadProducts(){
+  __liveDebugStage="loadProducts started";
   const productsEl=document.getElementById("products");
   if(productsEl)productsEl.innerHTML='<div class="catalog-loading" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#777">Loading products…</div>';
   const select="id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery";
   try{
     let data=null;
     try{
+      __liveDebugStage="connecting to Supabase";
       const client=await ensureSb();
       if(client){
+        __liveDebugStage="reading products from Supabase";
         const result=await client.from("products").select(select).eq("active",true).order("created_at",{ascending:false});
         if(!result.error && Array.isArray(result.data)) data=result.data;
         else if(result.error) console.warn("Category Supabase client read failed:",result.error);
@@ -692,12 +700,14 @@ async function loadProducts(){
       console.warn("Category Supabase client unavailable:",clientError);
     }
     if(!Array.isArray(data)){
+      __liveDebugStage="Supabase JS unavailable; using REST API fallback";
       const url=SUPABASE_URL+"/rest/v1/products?select="+encodeURIComponent(select)+"&active=eq.true&order=created_at.desc";
       const res=await fetch(url,{method:"GET",cache:"no-store",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json","Cache-Control":"no-cache"}});
       if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
       data=await res.json();
     }
     if(!Array.isArray(data))throw new Error("Products API returned invalid data");
+    __liveDebugStage="received "+data.length+" live products; rendering category";
     P=data.map(productRow).filter(p=>p&&p[4]!=null);
     window.P=P;
     applyProductFilters();
@@ -705,6 +715,7 @@ async function loadProducts(){
     if(location.hash==="#cart")setTimeout(openCart,50);
   }catch(e){
     console.error("Category product load failed:",e);
+    showLiveDebug(__liveDebugStage,e);
     P=[];
     window.P=P;
     applyProductFilters();
