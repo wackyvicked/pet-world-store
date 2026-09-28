@@ -679,8 +679,8 @@ async function loadProducts(){
   const productsEl=document.getElementById("products");
   if(productsEl)productsEl.innerHTML='<div class="catalog-loading" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#777">Loading products…</div>';
   try{
-    const url=SUPABASE_URL+"/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery,subcategory&active=eq.true&order=created_at.desc";
-    const res=await fetch(url,{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"}});
+    const url=SUPABASE_URL+"/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery,subcategory&active=eq.true&order=created_at.desc&_cb="+Date.now();
+    const res=await fetch(url,{method:"GET",cache:"no-store",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json","Cache-Control":"no-cache"}});
     if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
     const data=await res.json();
     if(!Array.isArray(data))throw new Error("Products API returned invalid data");
