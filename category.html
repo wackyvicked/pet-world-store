@@ -946,10 +946,10 @@ function filterCategory(cat){
   const nav=document.getElementById("mainNav");
   if(nav)nav.classList.remove("open");
   if(!value||value==="All"){
-    window.location.href="./category.html#shop";
+    window.location.href="./category.html?v=20260928#shop";
     return false;
   }
-  window.location.href="./category.html?cat="+encodeURIComponent(value)+"#shop";
+  window.location.href="./category.html?v=20260928&cat="+encodeURIComponent(value)+"#shop";
   return false;
 }
 document.addEventListener("keydown",function(event){if(event.key==="Escape"){const nav=document.getElementById("mainNav"),backdrop=document.getElementById("menuBackdrop"),btn=document.querySelector(".menu-btn");if(nav&&nav.classList.contains("open")){nav.classList.remove("open");if(backdrop)backdrop.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");document.body.style.overflow="";}}});
