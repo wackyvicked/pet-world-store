@@ -605,7 +605,7 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
   transform:rotate(90deg)!important;
 }
 </style>
-</head><body class="search-page">
+</head><body class="search-page"><style id="live-debug-style">#liveDebug{display:none;position:fixed;left:10px;right:10px;top:10px;z-index:99999;background:#fff;border:2px solid #d71920;border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.25);padding:12px;font:13px/1.4 Arial;color:#222;max-height:70vh;overflow:auto}#liveDebug.show{display:block}#liveDebug b{color:#d71920}#liveDebug pre{white-space:pre-wrap;word-break:break-word;background:#f6f6f6;padding:8px;border-radius:8px;margin:8px 0}#liveDebug button{border:0;border-radius:8px;padding:8px 12px;margin-right:6px;font-weight:700;cursor:pointer}</style><div id="liveDebug" role="alert"><b>WOW Pets LIVE ERROR</b><div id="liveDebugText"></div><pre id="liveDebugDetails"></pre><button type="button" onclick="copyLiveDebug()">COPY ERROR</button><button type="button" onclick="document.getElementById('liveDebug').classList.remove('show')">CLOSE</button></div>
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
@@ -656,6 +656,7 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 <script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
 let __liveDebugStage="page script starting";
+window.__categoryDebug={stage:function(){return __liveDebugStage},show:function(s,e){showLiveDebug(s,e)}};
 function showLiveDebug(stage,error){try{__liveDebugStage=stage||__liveDebugStage;const box=document.getElementById("liveDebug"),textEl=document.getElementById("liveDebugText"),details=document.getElementById("liveDebugDetails");if(!box||!textEl||!details)return;const msg=error instanceof Error?(error.message||String(error)):String(error||"Unknown error");const stack=error&&error.stack?error.stack:"";const params=new URLSearchParams(location.search);textEl.innerHTML="<b>Stage:</b> "+String(__liveDebugStage).replace(/</g,"&lt;")+"<br><b>URL:</b> "+String(location.href).replace(/</g,"&lt;")+"<br><b>Category:</b> "+String(params.get("cat")||"All").replace(/</g,"&lt;")+"<br><b>Subcategory:</b> "+String(params.get("sub")||"").replace(/</g,"&lt;");details.textContent=msg+(stack?"\n\n"+stack:"");box.classList.add("show")}catch(_e){}}
 window.addEventListener("error",function(e){showLiveDebug("JavaScript runtime error",e.error||e.message)});
 window.addEventListener("unhandledrejection",function(e){showLiveDebug("Unhandled promise rejection",e.reason)});
