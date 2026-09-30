@@ -800,6 +800,38 @@ function checkout(){if(window.__sharedCheckoutItems){cart=window.__sharedCheckou
 function toggleConfirmationSummary(button){const panel=button?.nextElementSibling;if(!panel)return;const open=panel.classList.toggle("open");button.setAttribute("aria-expanded",open?"true":"false")}
 async function saveOrderConfirmation(){const target=document.getElementById("successCapture"),button=document.querySelector(".save-order");if(!target||typeof html2canvas==="undefined"){alert("Order save is temporarily unavailable. Please try again.");return}if(button){button.disabled=true;const s=button.querySelector("span");if(s)s.textContent="SAVING…"}try{const canvas=await html2canvas(target,{backgroundColor:"#ffffff",scale:Math.min(window.devicePixelRatio||1,2),useCORS:true,logging:false});const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));if(!blob)throw new Error("Could not create image");const no=(document.getElementById("ord")?.textContent||"order").trim();const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="WOW-Pets-"+no+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}catch(e){alert("We could not save the order confirmation. Please try again.")}finally{if(button){button.disabled=false;const s=button.querySelector("span");if(s)s.textContent="SAVE ORDER"}}}
 function buildWhatsAppUrl(message){const clean=String(message??"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\\r\\n").join("\n").split("\\n").join("\n").split("\\r").join("\n");return "https://wa.me/923465771099?text="+encodeURIComponent(clean)}
+async function place(){
+  const btn=document.querySelector('#form .btn.green');
+  if(!sb){alert("Order service is temporarily unavailable. Please try again.");return}
+  if(btn&&btn.disabled)return;
+  const n=document.getElementById("name").value.trim(),ph=document.getElementById("phone").value.trim(),city=document.getElementById("city").value.trim(),address=document.getElementById("address").value.trim();
+  if(!n||!ph||!city||!address)return alert("Please complete all required fields.");
+  if(!cart.length)return alert("Your cart is empty.");
+  if(btn){btn.disabled=true;btn.textContent="SUBMITTING ORDER…";}
+  try{
+    const paymentMethod=getPaymentMethod(),deliveryMethod=getDeliveryMethod(),altPhone=document.getElementById("alt").value.trim(),notes=document.getElementById("notes").value.trim();
+    const requestedItems=cart.map(x=>({product_id:getCartProduct(x)?.[4]||null,qty:Number(x.q)||1}));
+    if(requestedItems.some(x=>!x.product_id))throw new Error("One or more cart items are unavailable. Please refresh and try again.");
+    const {data,error}=await sb.rpc("create_order",{
+      p_customer_name:n,p_phone:ph,p_alternate_phone:altPhone||null,p_city:city,p_address:address,
+      p_notes:notes||null,p_items:requestedItems,p_payment_method:paymentMethod,p_delivery_method:deliveryMethod
+    });
+    if(error)throw new Error(error.message||"Order service error");
+    const saved=Array.isArray(data)?data[0]:data;
+    if(!saved||!saved.order_number)throw new Error("Order service returned an invalid response.");
+    const no=String(saved.order_number),subtotal=Number(saved.subtotal)||0,discount=Number(saved.discount)||0,deliveryCharge=Number(saved.delivery_charge)||0,orderTotal=Number(saved.total)||0,weight=Number(saved.weight_kg)||0,zone=String(saved.zone||"other"),serverItems=Array.isArray(saved.items)?saved.items:[];
+    const deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+zone.replace(/^./,m=>m.toUpperCase())+", "+weight.toFixed(2)+" kg)";
+    const paymentLabel=paymentMethod==="easypaisa"?"Easypaisa":paymentMethod==="jazzcash"?"JazzCash":paymentMethod==="store"?"Pay at Store":"Cash on Delivery";
+    const msg=["Hello WOW Pets! I placed order "+no+".","Name: "+n,"WhatsApp: "+ph,"City: "+city,"Address: "+address,"Payment: "+paymentLabel,"Products: PKR "+subtotal.toLocaleString(),"Discount: PKR "+discount.toLocaleString(),"Delivery: "+deliveryMessage,"Total: PKR "+orderTotal.toLocaleString(),"Items: "+serverItems.map(x=>String(x.name||"Product")+" x"+Number(x.qty||0)).join(", ")].join(String.fromCharCode(10));
+    const confirmationItems=serverItems.map((x,i)=>'<div class="confirmation-item"><span class="confirmation-index">'+(i+1)+'</span><div class="confirmation-product"><b>'+esc(x.name||"Product")+'</b><small>Quantity: '+Number(x.qty||1)+'</small></div><strong>PKR '+Number(x.price||0).toLocaleString()+'</strong></div>').join("");
+    const confirmationSummary='<div class="confirmation-list"><button type="button" class="confirmation-head" aria-expanded="false" onclick="toggleConfirmationSummary(this)"><span>ORDER SUMMARY</span><span class="confirmation-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 7.5 L10 12.5 L15 7.5"></path></svg></span></button><div class="confirmation-panel"><div class="confirmation-row"><span class="confirmation-label">Customer Name</span><span class="confirmation-value">'+esc(n)+'</span></div><div class="confirmation-row"><span class="confirmation-label">Mobile Number</span><span class="confirmation-value">'+esc(ph)+'</span></div><div class="confirmation-row confirmation-address"><span class="confirmation-label">Delivery Address</span><span class="confirmation-value">'+esc([city,address].filter(Boolean).join(", ")) +'</span></div>'+confirmationItems+'</div></div>';
+    ord.textContent=no;const sd=document.getElementById("successDetails");if(sd)sd.innerHTML=confirmationSummary;form.style.display="none";success.style.display="block";wa.href=buildWhatsAppUrl(msg);
+    cart=[];try{localStorage.removeItem("wowPetsCart")}catch(_e){}update();
+  }catch(e){
+    alert("We couldn't save your order. Please try again. Error: "+e.message);
+    if(btn){btn.disabled=false;btn.textContent="SUBMIT ORDER";}
+  }
+}
 let selectedQty={};
 function adjustProductQty(i,n){
   selectedQty[i]=(selectedQty[i]||1)+n;
