@@ -640,8 +640,8 @@ function clearCheckoutErrors(){document.querySelectorAll('#form .field.has-error
 function showCheckoutError(fieldId,errorId,message){const field=document.getElementById(fieldId),error=document.getElementById(errorId);if(field)field.classList.add('has-error');if(error)error.textContent=message;const input=field?field.querySelector('input,textarea,select'):null;if(input){input.setAttribute('aria-invalid','true');input.focus({preventScroll:true});input.scrollIntoView({behavior:'smooth',block:'center'})}}
 function clearCheckoutFieldError(input){const field=input.closest('.field');if(field){field.classList.remove('has-error');const error=field.querySelector('.field-error');if(error)error.textContent=''}input.removeAttribute('aria-invalid')}
 document.addEventListener('input',function(event){const input=event.target.closest('#form .field input,#form .field textarea');if(input)clearCheckoutFieldError(input)});
-async function buildWhatsAppUrl(message){const clean=String(message??"").replace(/\\r\\n/g,"\n").replace(/\\n/g,"\n").replace(/\\r/g,"\n");return "https://wa.me/923465771099?text="+encodeURIComponent(clean)}
-function place(){
+function buildWhatsAppUrl(message){const clean=String(message??"").replace(/\\r\\n/g,"\n").replace(/\\n/g,"\n").replace(/\\r/g,"\n");return "https://wa.me/923465771099?text="+encodeURIComponent(clean)}
+async function place(){
   const btn=document.querySelector('#form .btn.green');
   if(!sb) await ensureSb();
   if(!sb){alert("Order service is temporarily unavailable. Please try again.");return}
