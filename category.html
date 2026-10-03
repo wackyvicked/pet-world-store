@@ -1102,7 +1102,7 @@ function handleSearch(){
   const nav=document.getElementById("mainNav");
   if(nav)nav.classList.remove("open");
   if(q){window.location.href="./search.html?q="+encodeURIComponent(q);return;}
-  currentSearch="";currentCategory="All";applyProductFilters();
+  currentSearch="";currentCategory="All";currentSubcategory="";applyProductFilters();
 }
 function wireSearch(){
   if(window.__wowPetsSearchWired)return;
@@ -1139,7 +1139,7 @@ function categoryMatches(productCategory, selectedCategory){
   return cats.some(c=>(aliases[selected]||[]).includes(c));
 }
 function filterCategory(cat){
-  currentCategory=cat;
+  currentCategory=cat;currentSubcategory="";
   applyProductFilters();
   const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
   window.location.hash="shop";
