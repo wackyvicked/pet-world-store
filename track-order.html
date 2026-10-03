@@ -29,7 +29,7 @@ input:focus{border-color:#999;box-shadow:0 0 0 3px #ffd21c44}.btn{width:100%;bor
 <main class="wrap">
 <section class="hero"><h1>Track Your Order</h1><p>Check your latest order status using the order number and mobile number you used at checkout.</p></section>
 <div class="card">
-<div class="grid"><div class="fields"><label>Order Number<input id="order" placeholder="e.g. WOW-12345678" autocomplete="off" required></label><label>Mobile Number<input id="phone" placeholder="03XXXXXXXXX" autocomplete="tel" required></label></div>
+<div class="grid"><div class="fields"><label>Order Number<input id="order" placeholder="e.g. WOW-12345678" autocomplete="off" required></label><label>Mobile Number<input id="phone" type="tel" inputmode="numeric" pattern="[0-9]*" autocomplete="tel-national" enterkeyhint="done" placeholder="03XXXXXXXXX" required></label></div>
 <button class="btn" onclick="track()">TRACK ORDER</button></div>
 <div id="status" class="status">Enter your order number and mobile number to check your order.</div>
 <div id="result" class="result"></div>
