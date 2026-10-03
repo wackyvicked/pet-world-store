@@ -800,7 +800,7 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 let P=[],cart=[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)}))}catch(e){}
 function getCartProduct(x){return P.find(p=>p&&p[4]!=null&&String(p[4])===String(x.id))||null}
 function getCartSubtotal(){return cart.reduce((a,x)=>{const p=getCartProduct(x);if(!p)return a;const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));return a+price*x.q},0)}
-function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
+function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";const categories=[r.category,r.subcategory].flatMap(v=>String(v??"").split(",")).map(v=>v.trim()).filter(Boolean);const categoryText=[...new Set(categories)].join(", ")||"Accessories";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,categoryText,r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.brand??""];}
 async function loadBanners(){try{const {data,error}=await sb.from("site_banners").select("*").eq("active",true).neq("type","shipping_config").neq("type","banner_config").order("sort_order",{ascending:true});const el=document.getElementById("homeBanners");if(!el)return;if(error){console.error("Banner load error:",error);return}let height="auto";try{const cfg=await sb.from("site_banners").select("banner_text").eq("type","banner_config").eq("active",true).limit(1).maybeSingle();if(!cfg.error&&cfg.data&&cfg.data.banner_text){const v=JSON.parse(cfg.data.banner_text).height;if(["180","260","360","480"].includes(String(v)))height=String(v)+"px"}}catch(e){}if(!Array.isArray(data)||!data.length){el.innerHTML="";return}el.innerHTML=data.map(b=>{const title=String(b.title||"").replace(/</g,"&lt;");const text=String(b.banner_text||"").replace(/</g,"&lt;");const button=b.button_text?'<a class="btn" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'">'+String(b.button_text).replace(/</g,"&lt;")+"</a>":"";const image=b.image_url?'<img loading="lazy" decoding="async" src="'+String(b.image_url).replace(/"/g,"&quot;")+'" alt="'+title.replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"";if(image){const imageButton=b.button_text?'<a class="btn banner-image-button" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'"'+(String(b.button_link||"")==="#sale"?' onclick="showSale();return false;"':'')+'>'+String(b.button_text).replace(/</g,"&lt;")+'</a>':"";const h=height==="auto"?"":" style=\"height:"+height+";\"";return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"'+h+'><div class="banner-media">'+image+imageButton+'</div></section>';}return b.type==="sale"?'<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>':'<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>'}).join("")}catch(e){console.error("Banner load error:",e)}}
 async function loadProducts(){
   const resultBox=document.getElementById("searchResult");
@@ -1056,16 +1056,20 @@ function closeProduct(){document.getElementById("productModal").style.display="n
 
 let currentCategory="All";
 let currentSearch="";
+let currentBrand="";
 function applyProductFilters(){
   const q=String(currentSearch||"").trim().toLowerCase();
-  const result=q
-    ? P.filter(p=>{
-        const haystack=[p[0],p[3],p[5],p[6],p[7],p[8]]
-          .map(v=>String(v??"").trim().toLowerCase())
-          .join(" ");
-        return haystack.includes(q);
-      })
-    : P.filter(p=>categoryMatches(p[3],currentCategory));
+  const brand=String(currentBrand||"").trim().toLowerCase();
+  const result=brand
+    ? P.filter(p=>String(p[11]||"").trim().toLowerCase()===brand)
+    : q
+      ? P.filter(p=>{
+          const haystack=[p[0],p[3],p[5],p[6],p[7],p[8],p[11]]
+            .map(v=>String(v??"").trim().toLowerCase())
+            .join(" ");
+          return haystack.includes(q);
+        })
+      : P.filter(p=>categoryMatches(p[3],currentCategory));
   const productsEl=document.getElementById("products");
   if(productsEl){
     if(q){
@@ -1159,17 +1163,18 @@ function accountBottom(){setBottomActive('Account');const p=document.getElementB
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 const searchParams=new URLSearchParams(window.location.search);
 currentSearch=String(searchParams.get("q")||"").trim();
+currentBrand=String(searchParams.get("brand")||"").trim();
+currentCategory=String(searchParams.get("category")||"").trim()||"All";
 // Search page is query-first: never show featured/static products when a query is present.
-if(currentSearch)document.body.classList.add("has-query");
-currentCategory="All";
+if(currentSearch||currentBrand||currentCategory!=="All")document.body.classList.add("has-query");
 const searchInput=document.getElementById("search");
 if(searchInput){searchInput.value=currentSearch;searchInput.setAttribute("value",currentSearch);}
 const shopTitle=document.querySelector("#shop h2");
-if(shopTitle){shopTitle.textContent=currentSearch?"Search Results":"Featured Products";shopTitle.classList.toggle("search-results-title",!!currentSearch);}
+if(shopTitle){shopTitle.textContent=currentBrand?("Brand: "+currentBrand):(currentCategory!=="All"?currentCategory:(currentSearch?"Search Results":"Featured Products"));shopTitle.classList.toggle("search-results-title",!!(currentSearch||currentBrand||currentCategory!=="All"));}
 wireSearch();
 wireProductCardClicks();
 P=[];window.P=P;applyProductFilters();
-if(currentSearch){const title=document.querySelector("#shop h2");if(title)title.textContent="Search Results";}
+if(currentBrand||currentCategory!=="All"){const title=document.querySelector("#shop h2");if(title)title.textContent=currentBrand?("Brand: "+currentBrand):currentCategory;}else if(currentSearch){const title=document.querySelector("#shop h2");if(title)title.textContent="Search Results";}
 ensureSb().then(()=>loadProducts()).catch(e=>{console.error("Supabase startup error:",e);P=[];window.P=P;applyProductFilters();});
 </script><script src="./shared-cart.js?v=20261003-1"></script><script>
 function toggleSubmenu(id,btn,e){
