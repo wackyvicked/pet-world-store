@@ -1184,7 +1184,7 @@ function closeAccount(){document.getElementById('accountPanel').style.display='n
 wireProductCardClicks();
 wireSearch();
 /* Render the verified catalog immediately; Supabase refreshes it in the background. */
-P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
+P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();update();
 loadBanners();
 loadProducts();
 ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
