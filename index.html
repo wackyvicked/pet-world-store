@@ -930,6 +930,15 @@ loadBanners();
 loadProducts();
 ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
 </script><script src="./shared-cart.js?v=20261003-1"></script><script>
+(function(){
+  const q=new URLSearchParams(location.search);
+  if(q.get("openCheckout")==="1"){
+    const open=()=>{if(typeof window.checkout==="function"){try{window.checkout()}catch(e){console.error("Checkout auto-open error:",e)}}};
+    if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(open,350),{once:true});
+    else setTimeout(open,350);
+  }
+})();
+</script><script>
 function toggleSubmenu(id,btn,e){
   if(e){e.preventDefault();e.stopPropagation();}
   const el=document.getElementById(id); if(!el||!btn)return false;
