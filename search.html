@@ -859,7 +859,7 @@ function wireProductCardClicks(){
     if(info&&event.target===info){event.preventDefault();openProductPage(Number(info.dataset.productIndex));}
   });
 }
-function openProductPage(i){const p=P[i];if(!p||p[4]==null)return;window.location.href="./product.html?id="+encodeURIComponent(p[4]);}
+function openProductPage(i){const p=P[i];if(!p||p[4]==null)return;const dbg=new URLSearchParams(location.search).has("debug")?"&debug=1":"";window.location.href="./product.html?id="+encodeURIComponent(p[4])+dbg;}
 function add(i){if(window.WOWSharedCart){window.WOWSharedCart.add(Number(i),1);return}let x=cart.find(x=>x.i==i);x?x.q++:cart.push({i,q:1});update();openCart()}
 function update(){if(window.WOWSharedCart){window.WOWSharedCart.render();return}cart=cart.filter(x=>x&&Number.isInteger(x.i)&&x.i>=0&&x.i<P.length&&Number(x.q)>0);try{localStorage.setItem("wowPetsCart",JSON.stringify(cart))}catch(e){}const cartCount=cart.reduce((a,x)=>a+x.q,0);if(count)count.textContent=cartCount;const bottomCountEl=document.getElementById("bottomCount");if(bottomCountEl)bottomCountEl.textContent=cartCount;items.innerHTML=cart.map(x=>{const p=P[x.i];const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));const img=p[2]||"";return `<div class="pcart-item">${img?'<img loading="lazy" decoding="async" src="'+esc(img)+'" alt="">':""}<div class="pcart-item-info"><div class="pcart-item-name">${esc(p[0])}</div><div class="pcart-item-price">PKR ${price.toLocaleString()}</div></div><div class="pcart-qty"><button onclick="chg(${x.i},-1)">−</button><span>${x.q}</span><button onclick="chg(${x.i},1)">+</button></div></div>`}).join("")||'<div class="pcart-empty">Your cart is empty.</div>';total.textContent=cart.reduce((a,x)=>{const p=P[x.i];const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));return a+price*x.q},0).toLocaleString()}
 function chg(i,n){let x=cart.find(x=>x.i==i);x.q+=n;if(x.q<1)cart=cart.filter(y=>y.i!=i);update()}
@@ -1186,4 +1186,4 @@ function toggleSubmenu(id,btn,e){
   btn.setAttribute("aria-expanded",open?"true":"false");
   return false;
 }
-</script></body></html>
+</script><script>(function(){if(!new URLSearchParams(location.search).has("debug"))return;document.querySelectorAll('a[href*="product.html"]').forEach(a=>{const u=new URL(a.href,location.href);u.searchParams.set("debug","1");a.href=u.href})})();</script></body></html>
