@@ -1128,7 +1128,15 @@ function categoryMatches(productCategory, selectedCategory){
   if(selectedCategory==="All")return true;
   const cats=String(productCategory||"").split(",").map(v=>v.trim().toLowerCase()).filter(Boolean);
   const selected=String(selectedCategory||"").trim().toLowerCase();
-  if(cats.includes(selected))return true;
+  const normalizeSpecies=v=>{
+    const x=String(v||"").trim().toLowerCase();
+    if(["dog","dogs","canine"].includes(x))return "dogs";
+    if(["cat","cats","feline"].includes(x))return "cats";
+    return x;
+  };
+  const normalizedCats=cats.map(normalizeSpecies);
+  const normalizedSelected=normalizeSpecies(selected);
+  if(normalizedCats.includes(normalizedSelected))return true;
   const aliases={
     "grooming":["shampoo","grooming supplies","grooming"],
     "medical supplies":["medical","medical supplies","medicines","medicine"],
