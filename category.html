@@ -1136,6 +1136,13 @@ function categoryMatches(productCategory, selectedCategory){
   };
   const normalizedCats=cats.map(normalizeSpecies);
   const normalizedSelected=normalizeSpecies(selected);
+  const speciesOnly=normalizedCats.filter(x=>x==="cats"||x==="dogs");
+  if(normalizedSelected==="cats"||normalizedSelected==="dogs"){
+    /* Products tagged for both species need one primary species for exact menu filtering.
+       The first species tag is treated as the primary assignment until the admin data model
+       is given a dedicated primary_species field. */
+    if(speciesOnly.length)return speciesOnly[0]===normalizedSelected;
+  }
   if(normalizedCats.includes(normalizedSelected))return true;
   const aliases={
     "grooming":["shampoo","grooming supplies","grooming"],
