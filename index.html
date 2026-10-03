@@ -491,6 +491,8 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 <section class="checkout-section"><div class="section-title"><span class="step">2</span><div><h3>Delivery address</h3><p>Tell us where to deliver your order.</p></div></div>
 <div class="formgrid checkout-fields">
 <label class="field" id="cityField">City *<select id="city" autocomplete="address-level2" aria-describedby="cityError"><option value="">Select your city</option><option value="Abbottabad">Abbottabad</option><option value="Ahmadpur East">Ahmadpur East</option><option value="Ali Pur">Ali Pur</option><option value="Attock">Attock</option><option value="Bahawalnagar">Bahawalnagar</option><option value="Bahawalpur">Bahawalpur</option><option value="Bannu">Bannu</option><option value="Bhakkar">Bhakkar</option><option value="Bhalwal">Bhalwal</option><option value="Burewala">Burewala</option><option value="Chakwal">Chakwal</option><option value="Charsadda">Charsadda</option><option value="Chiniot">Chiniot</option><option value="Chishtian">Chishtian</option><option value="Chitral">Chitral</option><option value="Choa Saidan Shah">Choa Saidan Shah</option><option value="Chunian">Chunian</option><option value="Daska">Daska</option><option value="Dera Allah Yar">Dera Allah Yar</option><option value="Dera Ghazi Khan">Dera Ghazi Khan</option><option value="Dera Ismail Khan">Dera Ismail Khan</option><option value="Faisalabad">Faisalabad</option><option value="Fateh Jang">Fateh Jang</option><option value="Ghotki">Ghotki</option><option value="Gujar Khan">Gujar Khan</option><option value="Gujranwala">Gujranwala</option><option value="Gujrat">Gujrat</option><option value="Gwadar">Gwadar</option><option value="Hafizabad">Hafizabad</option><option value="Haripur">Haripur</option><option value="Hasilpur">Hasilpur</option><option value="Hassan Abdal">Hassan Abdal</option><option value="Hyderabad">Hyderabad</option><option value="Islamabad">Islamabad</option><option value="Jacobabad">Jacobabad</option><option value="Jaranwala">Jaranwala</option><option value="Jhang">Jhang</option><option value="Jhelum">Jhelum</option><option value="Kabirwala">Kabirwala</option><option value="Kahuta">Kahuta</option><option value="Kallar Kahar">Kallar Kahar</option><option value="Kamoke">Kamoke</option><option value="Karachi">Karachi</option><option value="Kasur">Kasur</option><option value="Khanewal">Khanewal</option><option value="Kharian">Kharian</option><option value="Khushab">Khushab</option><option value="Khuzdar">Khuzdar</option><option value="Kohat">Kohat</option><option value="Kot Addu">Kot Addu</option><option value="Lahore">Lahore</option><option value="Larkana">Larkana</option><option value="Layyah">Layyah</option><option value="Lodhran">Lodhran</option><option value="Mandi Bahauddin">Mandi Bahauddin</option><option value="Mansehra">Mansehra</option><option value="Mardan">Mardan</option><option value="Mianwali">Mianwali</option><option value="Mirpur AJK">Mirpur AJK</option><option value="Mirpur Khas">Mirpur Khas</option><option value="Multan">Multan</option><option value="Muridke">Muridke</option><option value="Murree">Murree</option><option value="Muzaffarabad">Muzaffarabad</option><option value="Nankana Sahib">Nankana Sahib</option><option value="Narowal">Narowal</option><option value="Nawabshah">Nawabshah</option><option value="Nowshera">Nowshera</option><option value="Okara">Okara</option><option value="Pakpattan">Pakpattan</option><option value="Peshawar">Peshawar</option><option value="Pindi Gheb">Pindi Gheb</option><option value="Rahim Yar Khan">Rahim Yar Khan</option><option value="Rawalpindi">Rawalpindi</option><option value="Sahiwal">Sahiwal</option><option value="Samundri">Samundri</option><option value="Sargodha">Sargodha</option><option value="Sheikhupura">Sheikhupura</option><option value="Shikarpur">Shikarpur</option><option value="Sialkot">Sialkot</option><option value="Sibi">Sibi</option><option value="Skardu">Skardu</option><option value="Sukkur">Sukkur</option><option value="Swabi">Swabi</option><option value="Talagang">Talagang</option><option value="Taxila">Taxila</option><option value="Toba Tek Singh">Toba Tek Singh</option><option value="Turbat">Turbat</option><option value="Vehari">Vehari</option><option value="Wah Cantt">Wah Cantt</option><option value="Wazirabad">Wazirabad</option><option value="Zhob">Zhob</option></select><small class="field-error" id="cityError"></small></label>
+<label class="field" id="areaField">Area / Locality <span class="optional">Optional</span><select id="area" autocomplete="address-level3" disabled><option value="">Select city first</option></select><small class="field-error" id="areaError"></small><small class="field-help" id="areaHelp">Select your area when available.</small></label>
+
 <label class="field full" id="addressField">House / Street Address *<textarea id="address" rows="3" autocomplete="street-address" placeholder="House no., street, block, sector, etc."></textarea><small class="field-error" id="addressError"></small></label>
 <label class="field full">Landmark <span class="optional">Optional</span><input id="landmark" placeholder="Nearby landmark"></label>
 <label class="field full">Order Notes <span class="optional">Optional</span><textarea id="notes" rows="2" placeholder="Any special delivery instructions?"></textarea></label>
@@ -624,6 +626,34 @@ let DELIVERY_RATES=[
 ];
 let EXTRA_KG_RATES={...DEFAULT_EXTRA_KG_RATES};
 let deliveryConfigLoaded=false;
+async function loadCheckoutAreas(cityValue){
+  const areaEl=document.getElementById("area");
+  if(!areaEl)return;
+  areaEl.innerHTML='<option value="">Loading areas…</option>'; areaEl.disabled=true;
+  if(!cityValue){areaEl.innerHTML='<option value="">Select city first</option>';return;}
+  try{
+    const client=await ensureSb();
+    if(!client)throw new Error("Supabase unavailable");
+    const {data,error}=await client.rpc("get_checkout_areas",{p_city:cityValue});
+    if(error)throw error;
+    const rows=Array.isArray(data)?data:[];
+    areaEl.innerHTML='<option value="">Select your area (optional)</option>'+rows.map(r=>'<option value="'+esc(r.area)+'">'+esc(r.area)+'</option>').join("");
+    areaEl.disabled=false;
+  }catch(e){
+    console.warn("Area load error:",e);
+    areaEl.innerHTML='<option value="">Area unavailable — enter in address</option>'; areaEl.disabled=true;
+  }
+}
+async function loadCheckoutCities(){
+  const cityEl=document.getElementById("city");
+  if(!cityEl)return;
+  try{
+    const client=await ensureSb(); if(!client)return;
+    const {data,error}=await client.rpc("get_checkout_cities");
+    if(error||!Array.isArray(data)||!data.length)return;
+    cityEl.innerHTML='<option value="">Select your city</option>'+data.map(r=>'<option value="'+esc(r.city)+'">'+esc(r.city)+'</option>').join("");
+  }catch(e){console.warn("City load error:",e)}
+}
 async function loadDeliveryConfig(){try{const {data,error}=await sb.from("site_banners").select("id,banner_text").eq("type","shipping_config").eq("active",true).limit(1).maybeSingle();if(!error&&data&&data.banner_text){const cfg=JSON.parse(data.banner_text);if(Array.isArray(cfg.rates)&&cfg.rates.length)DELIVERY_RATES=cfg.rates;if(cfg.extra&&typeof cfg.extra==="object")EXTRA_KG_RATES={...DEFAULT_EXTRA_KG_RATES,...cfg.extra}}}catch(e){console.warn("Delivery config fallback:",e)}deliveryConfigLoaded=true;if(typeof updateCheckoutTotal==="function")updateCheckoutTotal()}
 
 const CITY_ZONES={
@@ -679,6 +709,7 @@ function validateCheckoutFields(){
   const rawPhone=document.getElementById("phone")?.value||"";
   const phone=normalizePakMobile(rawPhone);
   const city=document.getElementById("city")?.value.trim()||"";
+  const area=document.getElementById("area")?.value.trim()||"";
   const address=document.getElementById("address")?.value.trim()||"";
   let ok=true;
   const nameOk=n.length>=2&&n.length<=120;
@@ -687,21 +718,24 @@ function validateCheckoutFields(){
   setCheckoutFieldState("phone","Enter a valid Pakistani mobile number (03XX-XXXXXXX).",phoneOk); ok=ok&&phoneOk;
   const cityOk=!!city;
   setCheckoutFieldState("city","Please select your city from the list.",cityOk); ok=ok&&cityOk;
+  if(area) setCheckoutFieldState("area","",true);
   const addressOk=validateBasicAddress(address);
   setCheckoutFieldState("address","Please enter a sensible house/street address.",addressOk); ok=ok&&addressOk;
-  return {ok,phone,city,address};
+  return {ok,phone,city,area,address};
 }
 function wireCheckoutValidation(){
   const phone=document.getElementById("phone");
   const city=document.getElementById("city");
   const address=document.getElementById("address");
+  const area=document.getElementById("area");
   
   if(phone&&!phone.dataset.validationWired){
     phone.dataset.validationWired="1";
     phone.addEventListener("input",()=>{phone.value=phone.value.replace(/[^0-9+\s()-]/g,"");const v=normalizePakMobile(phone.value);if(/^03\d{9}$/.test(v)){phone.value=v;setCheckoutFieldState("phone","",true)}else if(phone.value)setCheckoutFieldState("phone","Enter a valid Pakistani mobile number (03XX-XXXXXXX).",false)});
     phone.addEventListener("blur",()=>{if(phone.value)validateCheckoutFields()});
   }
-  if(city&&!city.dataset.validationWired){city.dataset.validationWired="1";city.addEventListener("change",()=>updateCheckoutTotal());}
+  if(city&&!city.dataset.validationWired){city.dataset.validationWired="1";city.addEventListener("change",()=>{loadCheckoutAreas(city.value);updateCheckoutTotal();})}
+  if(area&&!area.dataset.validationWired){area.dataset.validationWired="1";area.addEventListener("change",()=>updateCheckoutTotal());}
   if(address&&!address.dataset.validationWired){address.dataset.validationWired="1";address.addEventListener("input",()=>{if(address.value.length>=8)setCheckoutFieldState("address","Please enter a sensible house/street address.",validateBasicAddress(address.value))})}
 }
 
@@ -713,7 +747,7 @@ async function place(){
   if(btn&&btn.disabled)return;
   const validated=validateCheckoutFields();
   if(!validated.ok)return alert("Please correct the highlighted checkout fields.");
-  const n=document.getElementById("name").value.trim(),ph=validated.phone,city=validated.city,address=validated.address,landmark=document.getElementById("landmark")?.value.trim()||"",email=document.getElementById("email")?.value.trim()||"";
+  const n=document.getElementById("name").value.trim(),ph=validated.phone,city=validated.city,area=validated.area,address=validated.address,landmark=document.getElementById("landmark")?.value.trim()||"",email=document.getElementById("email")?.value.trim()||"";
   if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showCheckoutError("emailField","emailError","Please enter a valid email address, or leave it blank.");return}
   const fullAddress=[address,landmark].filter(Boolean).join(", ");
   if(!cart.length)return alert("Your cart is empty.");
@@ -723,7 +757,7 @@ async function place(){
     const requestedItems=cart.map(x=>({product_id:x.id||null,qty:Number(x.q)||1}));
     if(requestedItems.some(x=>!x.product_id))throw new Error("One or more cart items are unavailable. Please refresh and try again.");
     const {data,error}=await sb.rpc("create_order",{
-      p_customer_name:n,p_phone:ph,p_alternate_phone:altPhone||null,p_city:city,p_address:fullAddress,
+      p_customer_name:n,p_phone:ph,p_alternate_phone:altPhone||null,p_city:city,p_address:fullAddress,p_area:area||null,
       p_notes:notes||null,p_items:requestedItems,p_payment_method:paymentMethod,p_delivery_method:deliveryMethod
     });
     if(error)throw new Error(error.message||"Order service error");
@@ -732,7 +766,7 @@ async function place(){
     const no=String(saved.order_number),subtotal=Number(saved.subtotal)||0,discount=Number(saved.discount)||0,deliveryCharge=Number(saved.delivery_charge)||0,orderTotal=Number(saved.total)||0,weight=Number(saved.weight_kg)||0,zone=String(saved.zone||"other"),serverItems=Array.isArray(saved.items)?saved.items:[];
     const deliveryMessage=deliveryMethod==="pickup"?"Store Pickup (FREE)":"PKR "+deliveryCharge.toLocaleString()+" ("+zone.replace(/^./,m=>m.toUpperCase())+", "+weight.toFixed(2)+" kg)";
     const paymentLabel=paymentMethod==="easypaisa"?"Easypaisa":paymentMethod==="jazzcash"?"JazzCash":paymentMethod==="store"?"Pay at Store":"Cash on Delivery";
-    const msg=["Hello WOW Pets! I placed order "+no+".","Name: "+n,"WhatsApp: "+ph,"City: "+city,"Address: "+address,"Payment: "+paymentLabel,"Products: PKR "+subtotal.toLocaleString(),"Discount: PKR "+discount.toLocaleString(),"Delivery: "+deliveryMessage,"Total: PKR "+orderTotal.toLocaleString(),"Items: "+serverItems.map(x=>String(x.name||"Product")+" x"+Number(x.qty||0)).join(", ")].join(String.fromCharCode(10));
+    const msg=["Hello WOW Pets! I placed order "+no+".","Name: "+n,"WhatsApp: "+ph,"City: "+city,"Area: "+(area||"Not specified"),"Address: "+address,"Payment: "+paymentLabel,"Products: PKR "+subtotal.toLocaleString(),"Discount: PKR "+discount.toLocaleString(),"Delivery: "+deliveryMessage,"Total: PKR "+orderTotal.toLocaleString(),"Items: "+serverItems.map(x=>String(x.name||"Product")+" x"+Number(x.qty||0)).join(", ")].join(String.fromCharCode(10));
     const confirmationItems=serverItems.map((x,i)=>'<div class="confirmation-item"><span class="confirmation-index">'+(i+1)+'</span><div class="confirmation-product"><b>'+esc(x.name||"Product")+'</b><small>Quantity: '+Number(x.qty||1)+'</small></div><strong>PKR '+Number(x.price||0).toLocaleString()+'</strong></div>').join("");
     const confirmationSummary='<div class="confirmation-list"><button type="button" class="confirmation-head" aria-expanded="false" onclick="toggleConfirmationSummary(this)"><span>ORDER SUMMARY</span><span class="confirmation-chevron" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 7.5 L10 12.5 L15 7.5"></path></svg></span></button><div class="confirmation-panel"><div class="confirmation-row"><span class="confirmation-label">Customer Name</span><span class="confirmation-value">'+esc(n)+'</span></div><div class="confirmation-row"><span class="confirmation-label">Mobile Number</span><span class="confirmation-value">'+esc(ph)+'</span></div><div class="confirmation-row confirmation-address"><span class="confirmation-label">Delivery Address</span><span class="confirmation-value">'+esc([city,address].filter(Boolean).join(", ")) +'</span></div>'+confirmationItems+'</div></div>';
     ord.textContent=no;const sd=document.getElementById("successDetails");if(sd)sd.innerHTML=confirmationSummary;form.style.display="none";success.style.display="block";wa.href=buildWhatsAppUrl(msg);
@@ -888,6 +922,8 @@ function accountBottom(){setBottomActive('Account');const p=document.getElementB
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
 wireProductCardClicks();
 wireSearch();
+wireCheckoutValidation();
+loadCheckoutCities();
 /* Render the verified catalog immediately; Supabase refreshes it in the background. */
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
 loadBanners();
