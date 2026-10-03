@@ -838,7 +838,7 @@ async function loadProducts(){const productsEl=document.getElementById("products
     data=await res.json();
   }
   P=(Array.isArray(data)&&data.length?data:BUILTIN_PRODUCTS).map(productRow);
-  window.P=P;render();update();
+  window.P=P;applyProductFilters();update();
   if(location.hash==="#cart")setTimeout(openCart,50);
 }catch(e){
   console.error("Product load error:",e);
