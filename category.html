@@ -110,6 +110,96 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none!import
 .nav#mainNav .menu-submenu a{transition:background-color .16s ease,padding-left .16s ease!important;}
 .nav#mainNav .menu-submenu a:hover{background:#f4f4f4!important;}
 .nav#mainNav .menu-icon-grooming,.nav#mainNav .menu-icon-accessories{font-size:17px!important;font-weight:500!important;}
+
+/* Canonical checkout UI — kept identical to home checkout */
+.field{display:flex;flex-direction:column;gap:5px}
+.field.full{grid-column:1/-1}
+.field input,.field textarea{padding:11px;border:1px solid #ccc;border-radius:6px}
+.checkout{display:none;position:fixed;inset:0;background:#0008;z-index:1000;overflow:auto}
+.field.full{grid-column:auto}
+.cart-checkout-bar{position:sticky;bottom:-22px;background:#fff;padding:12px 0 2px;margin-top:10px;border-top:1px solid #eee;z-index:2}
+@media(max-width:700px){.cart-checkout-bar{position:fixed;left:0;right:0;bottom:72px;background:#fff;padding:10px 14px;border-top:1px solid #ddd;box-shadow:0 -4px 14px rgba(0,0,0,.12);z-index:25}
+/* Product Summary — polished collapsed-by-default checkout section */
+.checkout{z-index:2050!important;}
+.checkout-summary-card summary{position:relative;padding:14px 16px;min-height:54px;box-sizing:border-box}
+.checkout-summary-card summary>.checkout-summary-label{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.checkout-summary-card summary strong{flex:none;margin-right:46px;font-size:14px;font-weight:800;color:#222;white-space:nowrap}
+.checkout-summary-card summary>.checkout-summary-chevron{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:34px;height:34px;margin:0;padding:0;display:flex;align-items:center;justify-content:center;box-sizing:border-box;border:1px solid #d6d6d6;border-radius:50%;background:#fff;flex:none;transition:background .22s ease,border-color .22s ease}
+.checkout-summary-card summary>.checkout-summary-chevron svg{display:block;width:16px;height:16px;margin:0;fill:none;stroke:#666;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;transform:rotate(90deg);transition:transform .22s ease}
+.checkout-summary-card[open] summary>.checkout-summary-chevron{background:#f7f7f7;border-color:#cfcfcf}
+.checkout-summary-card[open] summary>.checkout-summary-chevron svg{transform:rotate(270deg)}
+.checkout-summary-card summary b{font-size:15px;font-weight:800;letter-spacing:-.1px}
+.checkout-summary-card summary small{font-size:11px;color:#777}
+.checkout-summary-card[open] summary{border-bottom:1px solid #eee}
+.checkout-summary-card:not([open]) #checkoutItems{display:none}
+.checkout-summary-card #checkoutItems{animation:checkoutSummaryIn .18s ease}
+@media(max-width:700px){.checkout{z-index:2050!important}
+.checkout-summary-card{margin:9px 16px 2px;border-radius:14px}
+.checkout-summary-card summary{padding:13px 14px;min-height:52px}
+.checkout-summary-card summary strong{margin-right:40px;font-size:13px}
+.checkout-summary-card summary>.checkout-summary-chevron{right:11px;width:32px;height:32px}
+.checkout-summary-card summary>.checkout-summary-chevron svg{width:15px;height:15px}
+.checkout-summary-card summary b{font-size:14px}
+/* Checkout validation + confirmation polish */
+.checkout-fields .field.has-error input,.checkout-fields .field.has-error textarea{border-color:#d71920!important;background:#fff6f6!important;box-shadow:0 0 0 3px rgba(215,25,32,.10)!important}
+.checkout-fields .field .field-error{display:none;color:#c62828;font-size:12px;font-weight:700;line-height:1.35;margin-top:1px}
+.checkout-fields .field.has-error .field-error{display:block}
+/* ===== WOW PETS CHECKOUT POLISH ===== */
+.checkout{background:rgba(15,15,15,.62)!important;backdrop-filter:blur(3px);padding:18px!important;box-sizing:border-box}
+.checkout-modal{width:min(760px,100%);max-width:760px!important;margin:0 auto!important;padding:0!important;border-radius:22px!important;overflow:hidden!important;background:#f8f9fb!important;box-shadow:0 24px 70px rgba(0,0,0,.25)!important}
+.checkout-brand{height:66px;padding:0 20px;background:#fff;border-bottom:1px solid #e7e8eb;display:flex;align-items:center;gap:10px}
+.checkout-brand img{width:142px;height:42px;object-fit:contain}
+.checkout-brand span{font-size:12px;color:#73777f;border-left:1px solid #e2e3e6;padding-left:10px}
+.checkout-brand button{margin-left:auto;width:36px;height:36px;border:1px solid #e1e2e5;border-radius:50%;background:#fff;color:#333;font-size:20px;cursor:pointer}
+.checkout-heading{padding:22px 22px 8px}
+.checkout-heading h2{margin:0;font-size:27px;line-height:1.15;color:#171717}
+.checkout-heading p{margin:7px 0 0;color:#6f747c;font-size:13px;line-height:1.45}
+.checkout-summary-card{margin:10px 22px 2px;background:#fff;border:1px solid #e4e5e8;border-radius:15px;overflow:hidden}
+.checkout-summary-card summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;align-items:center;gap:12px}
+.checkout-summary-card summary::-webkit-details-marker{display:none}
+.checkout-summary-card summary>span{display:flex;flex-direction:column;gap:3px;flex:1}
+.checkout-summary-card summary b{font-size:15px}
+.checkout-summary-card summary small{font-size:11px;color:#777}
+.checkout-summary-card summary strong{font-size:15px}
+.checkout-summary-card[open] summary{border-bottom:1px solid #eee}
+.checkout-item{display:flex;align-items:center;gap:11px;padding:9px 2px}
+.checkout-item+.checkout-item{border-top:1px solid #f0f0f2}
+.checkout-item-image{width:54px;height:54px;border-radius:10px;background:#f4f4f5;border:1px solid #eee;object-fit:contain;flex:none}
+.checkout-item-info{min-width:0;flex:1}
+.checkout-item-info b{display:block;font-size:13px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.checkout-item-info small{color:#777;font-size:11px}
+.checkout-item-price{font-size:13px;font-weight:800;white-space:nowrap}
+.checkout-section{margin:12px 22px 0;background:#fff;border:1px solid #e4e5e8;border-radius:15px;padding:17px}
+.checkout-fields{gap:12px}
+.checkout-fields .field{font-size:12px;font-weight:700;color:#30343a}
+.checkout-fields input,.checkout-fields textarea{width:100%;box-sizing:border-box;margin-top:2px;border:1px solid #d9dce1;border-radius:10px;background:#fff;padding:11px 12px;font:500 13px Arial;color:#20242a;outline:none;transition:border-color .15s,box-shadow .15s}
+.checkout-fields textarea{resize:vertical;min-height:72px}
+.checkout-fields input:focus,.checkout-fields textarea:focus{border-color:#aeb3bb;box-shadow:0 0 0 3px rgba(0,0,0,.045)}
+.checkout-info{margin-top:9px;padding:11px 12px;border-radius:10px;background:#f5f6f7;color:#5e636b;font-size:11px;line-height:1.45}
+.checkout-total-card{margin:12px 22px 0;background:#fff;border:1px solid #e4e5e8;border-radius:15px;padding:16px 17px}
+.checkout-trust{margin:12px 22px 0;padding:11px 13px;display:flex;gap:9px;align-items:flex-start;color:#5e636b}
+.checkout-trust>span{font-size:16px}
+.checkout-trust b{display:block;font-size:11px;color:#3d4248}
+.checkout-trust small{display:block;font-size:10px;line-height:1.4;margin-top:2px}
+.checkout-submit{margin:10px 22px 22px!important;width:calc(100% - 44px)!important;border-radius:12px!important;padding:13px 16px!important;font-size:15px!important;min-height:54px}
+.checkout-submit span{display:block;font-weight:900}
+.checkout-submit small{display:block;font-size:10px;font-weight:500;margin-top:2px;opacity:.9}
+@media(max-width:700px){.checkout{padding:8px!important}
+.checkout-modal{border-radius:17px!important}
+.checkout-brand{height:58px;padding:0 14px}
+.checkout-brand img{width:125px;height:38px}
+.checkout-heading{padding:18px 14px 7px}
+.checkout-heading h2{font-size:23px}
+.checkout-summary-card,.checkout-section,.checkout-total-card{margin-left:12px;margin-right:12px}
+.checkout-section{padding:14px}
+.checkout-submit{margin-left:12px!important;margin-right:12px!important;width:calc(100% - 24px)!important}
+.checkout-trust{margin-left:12px;margin-right:12px}
+.field.full{grid-column:auto}
+/* Checkout validation: Pakistan mobile, controlled city, basic address */
+.checkout-fields select{width:100%;box-sizing:border-box;padding:11px 42px 11px 12px;border:1px solid #d9dce1;border-radius:10px;background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2718%27 height=%2718%27 viewBox=%270 0 18 18%27 fill=%27none%27%3E%3Cpath d=%27M5 7l4 4 4-4%27 stroke=%27%23555b63%27 stroke-width=%271.8%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:18px 18px;color:#20242a;font:500 13px Arial;min-height:44px;appearance:none;-webkit-appearance:none;cursor:pointer;}
+.checkout-fields select:focus{outline:none;border-color:#aeb3bb;box-shadow:0 0 0 2px rgba(174,179,187,.16);}
+.checkout-fields select:disabled{opacity:.7;cursor:not-allowed;}
+.cart-checkout-bar{display:none!important}
 </style><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./fallback-products.js?v=20260925-1"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
@@ -664,7 +754,7 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 <details class="checkout-summary-card"><summary><span class="checkout-summary-label"><b>Product Summary</b><small id="checkoutItemCount">Review your items</small></span><strong id="checkoutSummaryTotal">PKR 0</strong><span class="checkout-summary-chevron" aria-hidden="true"><svg viewBox="0 0 20 20" focusable="false"><path d="M7 5 L12 10 L7 15"></path></svg></span></summary><div id="checkoutItems"></div></details>
 <section class="checkout-section"><div class="section-title"><span class="step">1</span><div><h3>Contact details</h3><p>How can we reach you?</p></div></div>
 <div class="formgrid checkout-fields">
-<label class="field">Full Name *<input id="name" autocomplete="name" placeholder="Your full name"><small class="field-error" id="nameError"></small></label>
+<label class="field" id="nameField">Full Name *<input id="name" autocomplete="name" placeholder="Your full name"><small class="field-error" id="nameError"></small></label>
 <label class="field" id="phoneField">WhatsApp Number *<input id="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="03XX-XXXXXXX"><small class="field-error" id="phoneError"></small></label>
 <label class="field">Alternate Phone <span class="optional">Optional</span><input id="alt" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="Optional"></label>
 <label class="field" id="emailField">Email <span class="optional">Optional</span><input id="email" type="email" autocomplete="email" placeholder="you@example.com"><small class="field-error" id="emailError"></small></label>
@@ -697,7 +787,6 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 </div>
 <div class="success" id="success"><div id="successCapture" class="success-capture"><div class="success-icon">✓</div><h2>Thank you for your order!</h2><p class="success-sub">Your order has been received successfully.</p><p style="margin:0 0 6px;color:#666;font-size:13px">Order number</p><div class="order" id="ord"></div><div id="successDetails" class="success-details"></div><p class="success-note">We'll contact you on WhatsApp shortly to confirm your order and delivery details.</p></div><div class="success-actions"><button type="button" class="save-order" onclick="saveOrderConfirmation()" aria-label="Save order confirmation"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg><span>SAVE ORDER</span></button><a class="btn green success-wa" id="wa" target="_blank" rel="noopener">CONTACT WOW PETS ON WHATSAPP</a></div></div></div></div>
 
-
 <div class="checkout" id="accountPanel" style="display:none;z-index:40"><div class="modal" style="max-width:430px;text-align:center"><button onclick="closeAccount()" style="float:right;border:0;background:none;font-size:24px">✕</button><div style="font-size:48px;margin-top:10px">👤</div><h2>WOW Pets Account</h2><p>You can shop and place orders as a guest — no account is required.</p><div class="notice" style="text-align:left"><b>Already placed an order?</b><br>WOW Pets will contact you on WhatsApp with your order confirmation and tracking details.</div><a class="btn green" style="display:block;text-decoration:none;margin-top:12px" href="https://api.whatsapp.com/send?phone=923465771099" target="_blank" rel="noopener">CONTACT WOW PETS ON WHATSAPP</a><button class="btn" style="width:100%;margin-top:10px" onclick="closeAccount()">CONTINUE SHOPPING</button></div></div>
 
 <nav class="bottom-nav" aria-label="Mobile navigation">
@@ -709,13 +798,6 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 </nav>
 <script>
 const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
-let __liveDebugStage="page script starting";
-window.__categoryDebug={stage:function(){return __liveDebugStage},show:function(s,e){showLiveDebug(s,e)}};
-function showLiveDebug(stage,error){try{__liveDebugStage=stage||__liveDebugStage;const box=document.getElementById("liveDebug"),textEl=document.getElementById("liveDebugText"),details=document.getElementById("liveDebugDetails");if(!box||!textEl||!details)return;const msg=error instanceof Error?(error.message||String(error)):String(error||"Unknown error");const stack=error&&error.stack?error.stack:"";const params=new URLSearchParams(location.search);textEl.innerHTML="<b>Stage:</b> "+String(__liveDebugStage).replace(/</g,"&lt;")+"<br><b>URL:</b> "+String(location.href).replace(/</g,"&lt;")+"<br><b>Category:</b> "+String(params.get("cat")||"All").replace(/</g,"&lt;")+"<br><b>Subcategory:</b> "+String(params.get("sub")||"").replace(/</g,"&lt;");details.textContent=msg+(stack?"\n\n"+stack:"");box.classList.add("show")}catch(_e){}}
-window.addEventListener("error",function(e){showLiveDebug("JavaScript runtime error",e.error||e.message)});
-window.addEventListener("unhandledrejection",function(e){showLiveDebug("Unhandled promise rejection",e.reason)});
-setTimeout(function(){if(!Array.isArray(window.P)||!window.P.length||__liveDebugStage!=="received "+window.P.length+" live products; rendering category"){showLiveDebug("Category loader watchdog",new Error("Category live product loader did not complete successfully. Current stage: "+__liveDebugStage))}},12000);
-function copyLiveDebug(){const text="WOW Pets LIVE ERROR\n"+(document.getElementById("liveDebugText")?.innerText||"")+"\n"+(document.getElementById("liveDebugDetails")?.innerText||"");if(navigator.clipboard?.writeText)navigator.clipboard.writeText(text).then(()=>alert("Error copied. Ab mujhe paste kar dein.")).catch(()=>prompt("Copy this error:",text));else prompt("Copy this error:",text)}
 const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
 let sb=window.supabase?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 async function ensureSb(){
@@ -733,53 +815,37 @@ const $=id=>document.getElementById(id);
 const products=$("products"),count=$("count"),items=$("items"),total=$("total"),overlay=$("overlay"),cartEl=$("cart"),ord=$("ord"),form=$("form"),success=$("success"),wa=$("wa");
 function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
 let P=[],cart=[];
-const BUILTIN_PRODUCTS=Array.isArray(window.WOWFallbackProducts)?window.WOWFallbackProducts:[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&Number.isInteger(x.i)&&Number(x.q)>0).map(x=>({i:x.i,q:Number(x.q)}));}catch(e){}
-function getCartProduct(x){return P.find(p=>p&&p[4]!=null&&String(p[4])===String(x.id))||null}
-function getCartSubtotal(){return cart.reduce((a,x)=>{const p=getCartProduct(x);if(!p)return a;const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));return a+price*x.q},0)}
-function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";const category=Array.isArray(r.category)?r.category.join(", "):(r.category??r.category_name??"Accessories");return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,category,r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.subcategory??""];}
-async function loadBanners(){try{const {data,error}=await sb.from("site_banners").select("*").eq("active",true).neq("type","shipping_config").neq("type","banner_config").order("sort_order",{ascending:true});const el=document.getElementById("homeBanners");if(!el)return;if(error){console.error("Banner load error:",error);return}let height="auto";try{const cfg=await sb.from("site_banners").select("banner_text").eq("type","banner_config").eq("active",true).limit(1).maybeSingle();if(!cfg.error&&cfg.data&&cfg.data.banner_text){const v=JSON.parse(cfg.data.banner_text).height;if(["180","260","360","480"].includes(String(v)))height=String(v)+"px"}}catch(e){}if(!Array.isArray(data)||!data.length){el.innerHTML="";return}el.innerHTML=data.map(b=>{const title=String(b.title||"").replace(/</g,"&lt;");const text=String(b.banner_text||"").replace(/</g,"&lt;");const button=b.button_text?'<a class="btn" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'">'+String(b.button_text).replace(/</g,"&lt;")+"</a>":"";const image=b.image_url?'<img loading="lazy" decoding="async" src="'+String(b.image_url).replace(/"/g,"&quot;")+'" alt="'+title.replace(/"/g,"&quot;")+'" style="width:100%;height:100%;object-fit:contain;display:block">':"";if(image){const imageButton=b.button_text?'<a class="btn banner-image-button" href="'+String(b.button_link||"#shop").replace(/"/g,"&quot;")+'"'+(String(b.button_link||"")==="#sale"?' onclick="showSale();return false;"':'')+'>'+String(b.button_text).replace(/</g,"&lt;")+'</a>':"";const h=height==="auto"?"":" style=\"height:"+height+";\"";return '<section class="'+(b.type==="sale"?"sale-banner":"hero")+'"'+h+'><div class="banner-media">'+image+imageButton+'</div></section>';}return b.type==="sale"?'<section class="sale-banner"><div><div><h2>'+title+'</h2><p>'+text+'</p></div>'+button+'</div></section>':'<section class="hero"><div><h1>'+title+'</h1><p>'+text+'</p>'+button+'</div></section>'}).join("")}catch(e){console.error("Banner load error:",e)}}
-async function loadProducts(){
-  __liveDebugStage="loadProducts started";
-  const productsEl=document.getElementById("products");
-  if(productsEl)productsEl.innerHTML='<div class="catalog-loading" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#777">Loading products…</div>';
-  const select="id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery";
-  try{
-    let data=null;
-    try{
-      __liveDebugStage="connecting to Supabase";
-      const client=await ensureSb();
-      if(client){
-        __liveDebugStage="reading products from Supabase";
-        const result=await client.from("products").select(select).eq("active",true).order("created_at",{ascending:false});
-        if(!result.error && Array.isArray(result.data)) data=result.data;
-        else if(result.error) console.warn("Category Supabase client read failed:",result.error);
-      }
-    }catch(clientError){
-      console.warn("Category Supabase client unavailable:",clientError);
-    }
-    if(!Array.isArray(data)){
-      __liveDebugStage="Supabase JS unavailable; using REST API fallback";
-      const url=SUPABASE_URL+"/rest/v1/products?select="+encodeURIComponent(select)+"&active=eq.true&order=created_at.desc";
-      const res=await fetch(url,{method:"GET",cache:"no-store",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json","Cache-Control":"no-cache"}});
-      if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
-      data=await res.json();
-    }
-    if(!Array.isArray(data))throw new Error("Products API returned invalid data");
-    __liveDebugStage="received "+data.length+" live products; rendering category";
-    P=data.map(productRow).filter(p=>p&&p[4]!=null);
-    window.P=P;
-    applyProductFilters();
-    update();
-    if(location.hash==="#cart")setTimeout(openCart,50);
-  }catch(e){
-    console.error("Category product load failed:",e);
-    showLiveDebug(__liveDebugStage,e);
-    P=[];
-    window.P=P;
-    applyProductFilters();
-    update();
-  }
+const BUILTIN_PRODUCTS=Array.isArray(window.WOWFallbackProducts)?window.WOWFallbackProducts:[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)}));}catch(e){}
+function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,r.category??r.category_name??"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery];}
+async function loadBanners(){
+  const el=document.getElementById("homeBanners");
+  if(!el)return;
+  el.innerHTML='<section class="hero" style="padding:0!important;overflow:hidden;background:transparent"><img src="https://veskmrxhtqryffixzkoi.supabase.co/storage/v1/object/public/product-images/banner-1790022963853-tj13e1z10kn.jpg?v=20260923" alt="WOW Pets banner" loading="eager" decoding="async" style="display:block;width:100%;height:auto;max-width:100%;object-fit:contain"></section>';
 }
+async function loadProducts(){const productsEl=document.getElementById("products");if(productsEl)productsEl.innerHTML='<div class="catalog-loading" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#777">Loading products…</div>';try{
+  const query=()=>fetch(SUPABASE_URL+"/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery&active=eq.true&order=created_at.desc",{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"}});
+  let data=null;
+  try{
+    const client=await ensureSb();
+    if(client){
+      const result=await client.from("products").select("id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery").eq("active",true).order("created_at",{ascending:false});
+      if(!result.error)data=result.data;
+    }
+  }catch(_e){}
+  if(!Array.isArray(data)){
+    const res=await query();
+    if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
+    data=await res.json();
+  }
+  P=(Array.isArray(data)&&data.length?data:BUILTIN_PRODUCTS).map(productRow);
+  window.P=P;render();update();
+  if(location.hash==="#cart")setTimeout(openCart,50);
+}catch(e){
+  console.error("Product load error:",e);
+  /* Never blank the storefront because the API is temporarily unavailable. */
+  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
+  if(location.hash==="#cart")setTimeout(openCart,50);
+}}
 function productVisual(p){
   const src=String(p[2]||"");
   if(src.startsWith("http")){
@@ -789,31 +855,36 @@ function productVisual(p){
   return src;
 }
 
-function render(a=P){const productsEl=document.getElementById("products");if(!productsEl)return;if(!Array.isArray(a)||!a.length){productsEl.innerHTML='<div class="catalog-empty" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#666;background:#fff;border:1px dashed #d5d5d5;border-radius:12px"><b>No products available right now.</b><br><span style="font-size:13px">Please try again in a moment.</span></div>';return;}productsEl.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?'<span class="image-sale-badge">'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':''}</div><div class="info">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?``:""}<b>${esc(p[0])}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn yellow add-product" style="margin-left:5px" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
+function render(a=P){const productsEl=document.getElementById("products");if(!productsEl)return;if(!Array.isArray(a)||!a.length){productsEl.innerHTML='<div class="catalog-empty" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#666;background:#fff;border:1px dashed #d5d5d5;border-radius:12px"><b>No products available right now.</b><br><span style="font-size:13px">Please try again in a moment.</span></div>';return;}productsEl.innerHTML=a.map((p,i)=>`<div class="card"><div class="pic product-photo" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${productVisual(p)}${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?'<span class="image-sale-badge">'+Math.round((1-(Number(p[9])/Number(p[1])))*100)+'% OFF</span>':''}</div><div class="info" data-product-index="${P.indexOf(p)}" role="link" tabindex="0" style="cursor:pointer">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?``:""}<b>${esc(p[0])}</b><div class="price">${p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?`<span class="old-price">PKR ${p[1].toLocaleString()}</span><span class="sale-price">PKR ${Number(p[9]).toLocaleString()}</span>`:`PKR ${p[1].toLocaleString()}`}</div><button type="button" class="btn yellow add-product" style="margin:8px 0 0!important;width:100%!important;height:42px!important;min-height:42px!important;display:flex!important;align-items:center!important;justify-content:center!important;background:#ffd21c!important;color:#171717!important;border:0!important;border-radius:10px!important;padding:0 16px!important;font-weight:800!important;font-size:12px!important;line-height:1!important;cursor:pointer!important;position:relative!important;z-index:5!important;visibility:visible!important;opacity:1!important" data-product-index="${P.indexOf(p)}">ADD TO CART</button></div></div>`).join("")}
 function wireProductCardClicks(){
   if(window.__wowPetsProductClicks)return;
   window.__wowPetsProductClicks=true;
   document.addEventListener("click",function(event){
     const photo=event.target.closest(".product-photo");
     if(photo){openProductPage(Number(photo.dataset.productIndex));return;}
+    const info=event.target.closest(".info");
+    if(info&&!event.target.closest(".add-product")){openProductPage(Number(info.dataset.productIndex));return;}
     const view=event.target.closest(".view-product");
     if(view){viewProduct(Number(view.dataset.productIndex));return;}
     const addBtn=event.target.closest(".add-product");
-    if(addBtn){add(Number(addBtn.dataset.productIndex));return;}
+    if(addBtn){event.preventDefault();event.stopPropagation();add(Number(addBtn.dataset.productIndex));return;}
   });
   document.addEventListener("keydown",function(event){
     if(event.key!=="Enter"&&event.key!==" ")return;
     const photo=event.target.closest(".product-photo");
-    if(photo){event.preventDefault();openProductPage(Number(photo.dataset.productIndex));}
+    if(photo){event.preventDefault();openProductPage(Number(photo.dataset.productIndex));return;}
+    const info=event.target.closest(".info");
+    if(info&&event.target===info){event.preventDefault();openProductPage(Number(info.dataset.productIndex));}
   });
 }
 function openProductPage(i){const p=P[i];if(!p||p[4]==null)return;window.location.href="./product.html?id="+encodeURIComponent(p[4]);}
-function add(i){if(window.WOWSharedCart){window.WOWSharedCart.add(Number(i),1);return}let x=cart.find(x=>x.i==i);x?x.q++:cart.push({i,q:1});update();openCart()}
-function update(){if(window.WOWSharedCart){window.WOWSharedCart.render();return}cart=cart.filter(x=>x&&Number.isInteger(x.i)&&x.i>=0&&x.i<P.length&&Number(x.q)>0);try{localStorage.setItem("wowPetsCart",JSON.stringify(cart))}catch(e){}const cartCount=cart.reduce((a,x)=>a+x.q,0);if(count)count.textContent=cartCount;const bottomCountEl=document.getElementById("bottomCount");if(bottomCountEl)bottomCountEl.textContent=cartCount;items.innerHTML=cart.map(x=>{const p=P[x.i];const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));const img=p[2]||"";return `<div class="pcart-item">${img?'<img loading="lazy" decoding="async" src="'+esc(img)+'" alt="">':""}<div class="pcart-item-info"><div class="pcart-item-name">${esc(p[0])}</div><div class="pcart-item-price">PKR ${price.toLocaleString()}</div></div><div class="pcart-qty"><button onclick="chg(${x.i},-1)">−</button><span>${x.q}</span><button onclick="chg(${x.i},1)">+</button></div></div>`}).join("")||'<div class="pcart-empty">Your cart is empty.</div>';total.textContent=cart.reduce((a,x)=>{const p=P[x.i];const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));return a+price*x.q},0).toLocaleString()}
-function chg(i,n){let x=cart.find(x=>x.i==i);x.q+=n;if(x.q<1)cart=cart.filter(y=>y.i!=i);update()}
+function add(i){const n=Number(i),p=P[n],id=p?.[4];if(!p||id==null)return;const sid=String(id);try{const raw=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");const a=Array.isArray(raw)?raw.filter(x=>x&&x.id!=null&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)})):[];const x=a.find(v=>v.id===sid);if(x)x.q+=1;else a.push({id:sid,q:1});localStorage.setItem("wowPetsCart",JSON.stringify(a));cart=a;}catch(e){let x=cart.find(x=>String(x.id)===sid);x?x.q++:cart.push({id:sid,q:1})}if(window.WOWSharedCart){window.WOWSharedCart.render();window.WOWSharedCart.open()}else{update();openCart()}}
+function update(){if(window.WOWSharedCart){window.WOWSharedCart.render();return}cart=cart.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0);try{localStorage.setItem("wowPetsCart",JSON.stringify(cart))}catch(e){}const cartCount=cart.reduce((a,x)=>a+Number(x.q||0),0);if(count)count.textContent=cartCount;const bottomCountEl=document.getElementById("bottomCount");if(bottomCountEl)bottomCountEl.textContent=cartCount;items.innerHTML=cart.map(x=>{const p=getCartProduct(x);if(!p)return "";const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));const img=p[2]||"";return `<div class="pcart-item">${img?'<img loading="lazy" decoding="async" src="'+esc(img)+'" alt="">':""}<div class="pcart-item-info"><div class="pcart-item-name">${esc(p[0])}</div><div class="pcart-item-price">PKR ${price.toLocaleString()}</div></div><div class="pcart-qty"><button onclick="chg('${esc(x.id)}',-1)">−</button><span>${x.q}</span><button onclick="chg('${esc(x.id)}',1)">+</button></div></div>`}).join("")||'<div class="pcart-empty">Your cart is empty.</div>';total.textContent=cart.reduce((a,x)=>{const p=getCartProduct(x);if(!p)return a;const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));return a+price*x.q},0).toLocaleString()}
+function chg(id,n){let x=cart.find(x=>String(x.id)===String(id));if(!x)return;x.q+=n;if(x.q<1)cart=cart.filter(y=>String(y.id)!==String(id));update()}
 function openCart(){setBottomActive("Cart");if(!cartEl)return;update();cartEl.classList.remove("closing");if(overlay)overlay.style.display="block";void cartEl.offsetWidth;cartEl.classList.add("open")}function closeCart(){if(!cartEl||(!cartEl.classList.contains("open")&&!cartEl.classList.contains("closing")))return;cartEl.classList.remove("open");cartEl.classList.add("closing");let done=false;const finish=()=>{if(done)return;done=true;cartEl.classList.remove("closing");if(overlay)overlay.style.display="none"};cartEl.addEventListener("transitionend",finish,{once:true});setTimeout(finish,360)}
 function getPaymentMethod(){const r=document.querySelector('input[name="paymentMethod"]:checked');return r?r.value:"cod"}function getDeliveryMethod(){const r=document.querySelector('input[name="deliveryMethod"]:checked');return r?r.value:"home"}function syncPaymentOptions(){const pickup=getDeliveryMethod()==="pickup";document.querySelectorAll('input[name="paymentMethod"]').forEach(r=>{const show=pickup?r.value==="store":r.value!=="store";const label=r.closest("label");if(label)label.style.display=show?"block":"none";r.disabled=!show});const target=document.querySelector('input[name="paymentMethod"][value="'+(pickup?"store":"cod")+'"]');if(target)target.checked=true;const info=document.getElementById("paymentInfo");if(info)info.style.display=pickup?"none":"block";updateCheckoutTotal()}
-function getCartSubtotal(){return cart.reduce((a,x)=>{const p=getCartProduct(x);if(!p)return a;const regular=Number(p[1])||0,sale=Number(p[9])||0;const price=sale>0&&sale<regular?sale:regular;return a+price*Number(x.q||0)},0)}
+function getCartProduct(x){return P.find(p=>p&&p[4]!=null&&String(p[4])===String(x.id))||null}
+function getCartSubtotal(){return cart.reduce((a,x)=>{const p=getCartProduct(x);if(!p)return a;const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));return a+price*x.q},0)}
 const DEFAULT_EXTRA_KG_RATES={nearby:150,major:170,other:200,remote:250};
 let DELIVERY_RATES=[
  {max:0.5,nearby:150,major:200,other:250,remote:300},
@@ -837,14 +908,18 @@ function weightToKg(value,unit){const n=Number(value);if(!Number.isFinite(n)||n<
 const DEFAULT_WEIGHT_BY_CATEGORY={"Pet Food":1,"Grooming":0.5,"Shampoo":0.5,"Medical":0.25,"Medical Supplies":0.25,"Accessories":0.5,"Toys":0.5,"Cats":0.5,"Dogs":1,"Birds":0.5,"Fish":0.5};
 const DEFAULT_PRODUCT_WEIGHT_KG=0.5;
 function getProductWeightKg(p){const actual=weightToKg(p&&p[7],p&&p[8]);if(actual>0)return actual;const cat=String(p&&p[3]||"").trim();return DEFAULT_WEIGHT_BY_CATEGORY[cat]||DEFAULT_PRODUCT_WEIGHT_KG}
-function getCartWeightKg(){return cart.reduce((sum,x)=>{const p=getCartProduct(x);return sum+(p?getProductWeightKg(p)*Number(x.q||0):0)},0)}
+function getCartWeightKg(){return cart.reduce((sum,x)=>{const p=getCartProduct(x);return sum+(p?getProductWeightKg(p)*x.q:0)},0)}
 function getMissingWeightItems(){return []}
 function getDeliveryInfo(city){const kg=getCartWeightKg(),zone=getCityZone(city);if(!kg)return {kg:0,zone,charge:0,ready:false};let row=DELIVERY_RATES.find(r=>kg<=r.max),charge;if(row)charge=row[zone];else charge=DELIVERY_RATES[DELIVERY_RATES.length-1][zone]+Math.ceil(kg-5)*EXTRA_KG_RATES[zone];return {kg,zone,charge,ready:true}}
-function renderCheckoutItems(){const box=document.getElementById("checkoutItems"),countEl=document.getElementById("checkoutItemCount");if(!box)return;let qty=0;box.innerHTML=cart.map(x=>{const p=getCartProduct(x);if(!p)return "";qty+=Number(x.q)||0;const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));const image=String(p[2]||"");return '<div class="checkout-item">'+(image.startsWith("http")?'<img class="checkout-item-image" src="'+esc(image)+'" alt="">':'<div class="checkout-item-image"></div>')+'<div class="checkout-item-info"><b>'+esc(p[0])+'</b><small>Qty '+Number(x.q||0)+'</small></div><div class="checkout-item-price">PKR '+(price*Number(x.q||0)).toLocaleString()+'</div></div>'}).join("");if(countEl)countEl.textContent=qty+" item"+(qty===1?"":"s");const totalEl=document.getElementById("checkoutSummaryTotal");if(totalEl)totalEl.textContent="PKR "+getCartSubtotal().toLocaleString()}function updateCheckoutTotal(){const el=document.getElementById("checkoutSummary");if(!el)return;renderCheckoutItems();const method=getDeliveryMethod(),pickup=method==="pickup",payment=getPaymentMethod(),subtotal=getCartSubtotal(),discountBase=cart.reduce((sum,x)=>{const p=getCartProduct(x);if(!p)return sum;const regular=Number(p[1])||0,sale=Number(p[9])||0;const onSale=sale>0&&sale<regular;return sum+(onSale?0:(sale>0?sale:regular))*x.q},0),discount=(payment==="easypaisa"||payment==="jazzcash"||payment==="store")?Math.round(discountBase*0.10):0,afterDiscount=subtotal-discount,info=getDeliveryInfo(document.getElementById("city")?.value||"");const missing=getMissingWeightItems();const pi=document.getElementById("pickupInfo");if(pi)pi.style.display=pickup?"block":"none";let deliveryLine=pickup?"<div>Store Pickup: <b>FREE</b></div>":missing.length?"<div style='color:#b00020;margin-top:8px'><b>Delivery charge pending:</b> weight missing for "+missing.join(", ")+"</div>":info.ready?"<div>Delivery ("+info.zone.replace(/^./,m=>m.toUpperCase())+", "+info.kg.toFixed(2)+" kg): <b>PKR "+info.charge.toLocaleString()+"</b></div>":"<div style='color:#666;margin-top:6px'>Enter your city to calculate delivery.</div>";const deliveryCharge=pickup?0:info.charge,ready=pickup||(info.ready&&!missing.length);el.innerHTML="<div>Products: <b>PKR "+subtotal.toLocaleString()+"</b></div>"+(discount?"<div style='color:#159447'>10% discount on regular-price items: <b>−PKR "+discount.toLocaleString()+"</b></div>":"")+deliveryLine+"<div style='margin-top:6px;font-size:20px'><b>TOTAL: PKR "+(ready?(afterDiscount+deliveryCharge).toLocaleString():"—")+"</b></div>"+(pickup?"<div style='font-size:12px;color:#666;margin-top:4px'>No delivery charge — collect your order from the WOW Pets store.</div>":"<div style='font-size:12px;color:#666;margin-top:4px'>Delivery is calculated automatically from city and total shipment weight.</div>")}
-function checkout(){if(window.__sharedCheckoutItems){cart=window.__sharedCheckoutItems.map(x=>({id:String(x.id),q:Number(x.q)||1}));try{localStorage.setItem("wowPetsCart",JSON.stringify(cart))}catch(e){}}else{try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)}))}catch(e){}}if(!cart.length)return alert("Your cart is empty.");const missing=getMissingWeightItems();closeCart();document.getElementById("checkout").style.display="block";const cod=document.querySelector('input[name="paymentMethod"][value="cod"]');if(cod)cod.checked=true;const home=document.querySelector('input[name="deliveryMethod"][value="home"]');if(home)home.checked=true;const city=document.getElementById("city");if(city){city.oninput=updateCheckoutTotal;wireCheckoutValidation()}updateCheckoutTotal()}function closeCheckout(){document.getElementById("checkout").style.display="none"}
-
+function renderCheckoutItems(){const box=document.getElementById("checkoutItems"),countEl=document.getElementById("checkoutItemCount");if(!box)return;let qty=0;box.innerHTML=cart.map(x=>{const p=getCartProduct(x);if(!p)return "";qty+=Number(x.q)||0;const price=(p[9]&&Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1]));const image=String(p[2]||"");return '<div class="checkout-item">'+(image.startsWith("http")?'<img class="checkout-item-image" src="'+esc(image)+'" alt="">':'<div class="checkout-item-image"></div>')+'<div class="checkout-item-info"><b>'+esc(p[0])+'</b><small>Qty '+Number(x.q||0)+'</small></div><div class="checkout-item-price">PKR '+(price*Number(x.q||0)).toLocaleString()+'</div></div>'}).join("");if(countEl)countEl.textContent=qty+" item"+(qty===1?"":"s");const totalEl=document.getElementById("checkoutSummaryTotal");if(totalEl)totalEl.textContent="PKR "+getCartSubtotal().toLocaleString()}
+function updateCheckoutTotal(){const el=document.getElementById("checkoutSummary");if(!el)return;renderCheckoutItems();const method=getDeliveryMethod(),pickup=method==="pickup",payment=getPaymentMethod(),subtotal=getCartSubtotal(),discountBase=cart.reduce((sum,x)=>{const p=getCartProduct(x);if(!p)return sum;const regular=Number(p[1])||0,sale=Number(p[9])||0;const onSale=sale>0&&sale<regular;return sum+(onSale?0:(sale>0?sale:regular))*x.q},0),discount=(payment==="easypaisa"||payment==="jazzcash"||payment==="store")?Math.round(discountBase*0.10):0,afterDiscount=subtotal-discount,info=getDeliveryInfo(document.getElementById("city")?.value||"");const missing=getMissingWeightItems();const pi=document.getElementById("pickupInfo");if(pi)pi.style.display=pickup?"block":"none";const payInfo=document.getElementById("paymentInfo");if(payInfo)payInfo.innerHTML=pickup?"":"<b>"+(payment==="easypaisa"?"Easypaisa":"JazzCash")+"</b> — Send payment to <b>03465771099</b>, then keep your transaction reference for confirmation.";let deliveryLine=pickup?"<div><span>Store Pickup</span><b>FREE</b></div>":missing.length?"<div><span>Delivery charge pending</span><b>Please check</b></div>":info.ready?"<div><span>Delivery ("+info.zone.replace(/^./,m=>m.toUpperCase())+", "+info.kg.toFixed(2)+" kg)</span><b>PKR "+info.charge.toLocaleString()+"</b></div>":"<div><span>Delivery</span><b>Enter city</b></div>";const deliveryCharge=pickup?0:info.charge,ready=pickup||(info.ready&&!missing.length);el.innerHTML="<div><span>Subtotal</span><b>PKR "+subtotal.toLocaleString()+"</b></div>"+(discount?"<div><span>Online payment discount</span><b style='color:#159447'>−PKR "+discount.toLocaleString()+"</b></div>":"")+deliveryLine+"<div><span>Total</span><b>"+(ready?"PKR "+(afterDiscount+deliveryCharge).toLocaleString():"—")+"</b></div>";}
 function toggleConfirmationSummary(button){const panel=button?.nextElementSibling;if(!panel)return;const open=panel.classList.toggle("open");button.setAttribute("aria-expanded",open?"true":"false")}
-async function saveOrderConfirmation(){const target=document.getElementById("successCapture"),button=document.querySelector(".save-order");if(!target||typeof html2canvas==="undefined"){alert("Order save is temporarily unavailable. Please try again.");return}if(button){button.disabled=true;const s=button.querySelector("span");if(s)s.textContent="SAVING…"}try{const canvas=await html2canvas(target,{backgroundColor:"#ffffff",scale:Math.min(window.devicePixelRatio||1,2),useCORS:true,logging:false});const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));if(!blob)throw new Error("Could not create image");const no=(document.getElementById("ord")?.textContent||"order").trim();const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="WOW-Pets-"+no+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}catch(e){alert("We could not save the order confirmation. Please try again.")}finally{if(button){button.disabled=false;const s=button.querySelector("span");if(s)s.textContent="SAVE ORDER"}}}
+async function saveOrderConfirmation(){const target=document.getElementById("successCapture"),button=document.querySelector(".save-order");if(!target||typeof html2canvas==="undefined"){alert("Order save is temporarily unavailable. Please try again.");return}if(button){button.disabled=true;button.querySelector("span").textContent="SAVING…"}try{const canvas=await html2canvas(target,{backgroundColor:"#ffffff",scale:Math.min(window.devicePixelRatio||1,2),useCORS:true,logging:false});const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/png"));if(!blob)throw new Error("Could not create image");const no=(document.getElementById("ord")?.textContent||"order").trim();const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="WOW-Pets-"+no+".png";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500)}catch(e){alert("We could not save the order confirmation. Please try again.")}finally{if(button){button.disabled=false;button.querySelector("span").textContent="SAVE ORDER"}}}
+function checkout(){if(window.__sharedCheckoutItems){cart=window.__sharedCheckoutItems.map(x=>({id:String(x.id),q:Number(x.q)||1}));try{localStorage.setItem("wowPetsCart",JSON.stringify(cart))}catch(e){}}else{try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)}))}catch(e){}}if(!cart.length)return alert("Your cart is empty.");const missing=getMissingWeightItems();closeCart();document.getElementById("checkout").style.display="block";const cod=document.querySelector('input[name="paymentMethod"][value="cod"]');if(cod)cod.checked=true;const home=document.querySelector('input[name="deliveryMethod"][value="home"]');if(home)home.checked=true;const city=document.getElementById("city");if(city){city.onchange=()=>updateCheckoutTotal();wireCheckoutValidation();}updateCheckoutTotal()}function closeCheckout(){document.getElementById("checkout").style.display="none"}
+function clearCheckoutErrors(){document.querySelectorAll('#form .field.has-error').forEach(el=>el.classList.remove('has-error'));document.querySelectorAll('#form .field-error').forEach(el=>el.textContent='');}
+function showCheckoutError(fieldId,errorId,message){const field=document.getElementById(fieldId),error=document.getElementById(errorId);if(field)field.classList.add('has-error');if(error)error.textContent=message;const input=field?field.querySelector('input,textarea,select'):null;if(input){input.setAttribute('aria-invalid','true');input.focus({preventScroll:true});input.scrollIntoView({behavior:'smooth',block:'center'})}}
+function clearCheckoutFieldError(input){const field=input.closest('.field');if(field){field.classList.remove('has-error');const error=field.querySelector('.field-error');if(error)error.textContent=''}input.removeAttribute('aria-invalid')}
+document.addEventListener('input',function(event){const input=event.target.closest('#form .field input,#form .field textarea');if(input)clearCheckoutFieldError(input)});
 function normalizePakMobile(value){
   let v=String(value??"").trim().replace(/[\s()-]/g,"");
   if(/^\+92\d{10}$/.test(v))v="0"+v.slice(3);
@@ -891,31 +966,35 @@ function wireCheckoutValidation(){
   const phone=document.getElementById("phone");
   const city=document.getElementById("city");
   const address=document.getElementById("address");
+  
   if(phone&&!phone.dataset.validationWired){
     phone.dataset.validationWired="1";
     phone.addEventListener("input",()=>{phone.value=phone.value.replace(/[^0-9+\s()-]/g,"");const v=normalizePakMobile(phone.value);if(/^03\d{9}$/.test(v)){phone.value=v;setCheckoutFieldState("phone","",true)}else if(phone.value)setCheckoutFieldState("phone","Enter a valid Pakistani mobile number (03XX-XXXXXXX).",false)});
     phone.addEventListener("blur",()=>{if(phone.value)validateCheckoutFields()});
   }
-  if(city&&!city.dataset.validationWired){city.dataset.validationWired="1";city.addEventListener("change",()=>{setCheckoutFieldState("city","Please select your city from the list.",!!city.value.trim());updateCheckoutTotal();});}
+  if(city&&!city.dataset.validationWired){city.dataset.validationWired="1";city.addEventListener("change",()=>updateCheckoutTotal());}
   if(address&&!address.dataset.validationWired){address.dataset.validationWired="1";address.addEventListener("input",()=>{if(address.value.length>=8)setCheckoutFieldState("address","Please enter a sensible house/street address.",validateBasicAddress(address.value))})}
 }
 
 function buildWhatsAppUrl(message){const clean=String(message??"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\\r\\n").join("\n").split("\\n").join("\n").split("\\r").join("\n");return "https://wa.me/923465771099?text="+encodeURIComponent(clean)}
 async function place(){
   const btn=document.querySelector('#form .btn.green');
+  if(!sb) await ensureSb();
   if(!sb){alert("Order service is temporarily unavailable. Please try again.");return}
   if(btn&&btn.disabled)return;
   const validated=validateCheckoutFields();
   if(!validated.ok)return alert("Please correct the highlighted checkout fields.");
-  const n=document.getElementById("name").value.trim(),ph=validated.phone,city=validated.city,address=[validated.address,document.getElementById("landmark")?.value.trim()].filter(Boolean).join(", ");
+  const n=document.getElementById("name").value.trim(),ph=validated.phone,city=validated.city,address=validated.address,landmark=document.getElementById("landmark")?.value.trim()||"",email=document.getElementById("email")?.value.trim()||"";
+  if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showCheckoutError("emailField","emailError","Please enter a valid email address, or leave it blank.");return}
+  const fullAddress=[address,landmark].filter(Boolean).join(", ");
   if(!cart.length)return alert("Your cart is empty.");
   if(btn){btn.disabled=true;btn.textContent="SUBMITTING ORDER…";}
   try{
     const paymentMethod=getPaymentMethod(),deliveryMethod=getDeliveryMethod(),altPhone=document.getElementById("alt").value.trim(),notes=document.getElementById("notes").value.trim();
-    const requestedItems=cart.map(x=>({product_id:getCartProduct(x)?.[4]||null,qty:Number(x.q)||1}));
+    const requestedItems=cart.map(x=>({product_id:x.id||null,qty:Number(x.q)||1}));
     if(requestedItems.some(x=>!x.product_id))throw new Error("One or more cart items are unavailable. Please refresh and try again.");
     const {data,error}=await sb.rpc("create_order",{
-      p_customer_name:n,p_phone:ph,p_alternate_phone:altPhone||null,p_city:city,p_address:address,
+      p_customer_name:n,p_phone:ph,p_alternate_phone:altPhone||null,p_city:city,p_address:fullAddress,
       p_notes:notes||null,p_items:requestedItems,p_payment_method:paymentMethod,p_delivery_method:deliveryMethod
     });
     if(error)throw new Error(error.message||"Order service error");
@@ -944,8 +1023,8 @@ function addWithQty(i){
   let q=selectedQty[i]||1;
   if(window.WOWSharedCart){window.WOWSharedCart.add(Number(i),Number(q)||1);}
   else{
-    let x=cart.find(x=>x.i==i);
-    x?x.q+=q:cart.push({i:i,q:q});
+    let x=cart.find(x=>x.id===String(P[Number(i)]?.[4]));
+    x?x.q+=q:cart.push({id:String(P[Number(i)]?.[4]),q:q});
     update();
   }
   let btn=document.querySelector("#productDetails .btn.yellow");
@@ -1005,37 +1084,11 @@ function closeProduct(){document.getElementById("productModal").style.display="n
 
 let currentCategory="All";
 let currentSearch="";
-let currentSubcategory="";
-function subcategoryMatches(p,parent,sub){
-  if(!sub)return true;
-  const stored=String(p?.[11]??"").toLowerCase();
-  if(stored){
-    const wanted=String(sub).toLowerCase();
-    return stored.split(",").map(v=>v.trim()).includes(wanted);
-  }
-  const text=[p?.[0],p?.[3],p?.[5],p?.[6],p?.[11]].map(v=>String(v??"").toLowerCase()).join(" ");
-  const parentName=String(parent||"").toLowerCase();
-  const parentOk=parentName==="cats"?/\bcat(s)?\b/.test(text):parentName==="dogs"?/\bdog(s)?\b/.test(text):true;
-  if(!parentOk)return false;
-  const terms={
-    food:["food","kibble","diet","meal"],
-    litter:["litter","clumping","sand","toilet"],
-    toys:["toy","toys","ball","mouse"],
-    grooming:["grooming","shampoo","brush","comb","fur"],
-    accessories:["accessor","collar","leash","bowl","carrier","harness","bed"],
-    treats:["treat","snack","biscuit","chew"]
-  };
-  return (terms[sub]||[]).some(t=>text.includes(t));
-}
 function applyProductFilters(){
-  const shopTitle=document.querySelector("#shop h2");
-  const categoryTitles={All:"Products",Cats:"Cat Products",Dogs:"Dog Products",Birds:"Bird Products",Fish:"Fish Products","Pet Food":"Pet Food Products",Toys:"Toy Products",Grooming:"Grooming Products","Medical Supplies":"Medical Supplies Products",Accessories:"Accessory Products"};
-  const subTitles={food:"Food",litter:"Litter",toys:"Toys",grooming:"Grooming",accessories:"Accessories",treats:"Treats"};
-  if(shopTitle)shopTitle.textContent=currentSubcategory?(currentCategory+" "+(subTitles[currentSubcategory]||"Products")):(categoryTitles[currentCategory]||currentCategory+" Products");
   const q=currentSearch.trim().toLowerCase();
   const result=q
-    ? P.filter(p=>[p[0],p[3],p[5],p[6],p[7],p[8]].map(v=>String(v??"").toLowerCase().trim()).join(" ").includes(q))
-    : P.filter(p=>categoryMatches(p[3],currentCategory) && subcategoryMatches(p,currentCategory,currentSubcategory));
+    ? P.filter(p=>p.some(v=>String(v??"").toLowerCase().includes(q)))
+    : P.filter(p=>categoryMatches(p[3],currentCategory));
   render(result);
   document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));
   const active=[...document.querySelectorAll(".filter-bar .btn")].find(b=>b.textContent.trim()===currentCategory);
@@ -1064,44 +1117,25 @@ function wireSearch(){
 }
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function showSale(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
-function normalizeCategoryValue(v){return String(v??"").trim().toLowerCase().replace(/[_-]+/g," ").replace(/\s+/g," ")}
-function getCategoryTokens(value){
-  if(Array.isArray(value))return value.flatMap(getCategoryTokens);
-  const raw=String(value??"").trim();
-  if(!raw)return [];
-  if((raw.startsWith("[")&&raw.endsWith("]"))||(raw.startsWith("{")&&raw.endsWith("}"))){
-    try{return getCategoryTokens(JSON.parse(raw))}catch(e){}
-  }
-  return raw.split(/[,|;/]+/).map(normalizeCategoryValue).filter(Boolean);
-}
 function categoryMatches(productCategory, selectedCategory){
-  const selected=normalizeCategoryValue(selectedCategory);
-  if(!selected||selected==="all")return true;
-  const cats=getCategoryTokens(productCategory);
+  if(selectedCategory==="All")return true;
+  const cats=String(productCategory||"").split(",").map(v=>v.trim().toLowerCase()).filter(Boolean);
+  const selected=String(selectedCategory||"").trim().toLowerCase();
+  if(cats.includes(selected))return true;
   const aliases={
-    cat:["cat","cats"],cats:["cat","cats"],
-    dog:["dog","dogs"],dogs:["dog","dogs"],
-    bird:["bird","birds"],birds:["bird","birds"],
-    fish:["fish","fishes"],fishes:["fish","fishes"],
-    grooming:["grooming","shampoo","grooming supplies"],
+    "grooming":["shampoo","grooming supplies","grooming"],
     "medical supplies":["medical","medical supplies","medicines","medicine"],
     "pet food":["food","pet food","petfood"],
-    toys:["toy","toys","pet toys"],
-    accessories:["accessory","accessories"]
+    "toys":["toy","toys","pet toys"],
+    "accessories":["accessory","accessories"]
   };
-  const allowed=aliases[selected]||[selected];
-  return cats.some(c=>allowed.includes(c));
+  return cats.some(c=>(aliases[selected]||[]).includes(c));
 }
 function filterCategory(cat){
-  const value=String(cat||"All").trim();
-  const nav=document.getElementById("mainNav");
-  if(nav)nav.classList.remove("open");
-  if(!value||value==="All"){
-    window.location.href="./category.html?v=20260928-2#shop";
-    return false;
-  }
-  window.location.href="./category.html?v=20260928-2&cat="+encodeURIComponent(value)+"#shop";
-  return false;
+  currentCategory=cat;
+  applyProductFilters();
+  const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
+  window.location.hash="shop";
 }
 document.addEventListener("keydown",function(event){if(event.key==="Escape"){const nav=document.getElementById("mainNav"),backdrop=document.getElementById("menuBackdrop"),btn=document.querySelector(".menu-btn");if(nav&&nav.classList.contains("open")){nav.classList.remove("open");if(backdrop)backdrop.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");document.body.style.overflow="";}}});
 
@@ -1118,34 +1152,19 @@ function toggleMenu(e){
 }
 
 function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
-function goHome(){setBottomActive('Home');window.location.href="./index.html";}
+function goHome(){setBottomActive('Home');const e=document.querySelector('.hero')||document.body;e.scrollIntoView({behavior:'smooth',block:'start'});}
 function focusSearch(){setBottomActive('Search');const e=document.getElementById('search');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{e.focus();e.click()},350)}}
-function toggleCategories(){setBottomActive('Categories');window.location.href="./index.html#categories";}
+function toggleCategories(){setBottomActive('Categories');const e=document.getElementById('categories');if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
 function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
-const categoryParams=new URLSearchParams(window.location.search);
-currentSearch="";
-currentCategory=String(categoryParams.get("cat")||"All").trim()||"All";
-currentSubcategory=String(categoryParams.get("sub")||"").trim().toLowerCase();
-const shopTitle=document.querySelector("#shop h2");
-if(shopTitle){
-  const subLabels={food:"Food",litter:"Litter",toys:"Toys",grooming:"Grooming",accessories:"Accessories",treats:"Treats"};
-  shopTitle.textContent=currentSubcategory?(currentCategory+" "+(subLabels[currentSubcategory]||"Products")):(currentCategory==="All"?"Products":currentCategory+" Products");
-}
-wireSearch();
 wireProductCardClicks();
-/* Render verified products immediately. Supabase refreshes in the background. */
-P=BUILTIN_PRODUCTS.map(productRow);window.P=P;applyProductFilters();
-/* Category product loading uses the REST API directly; do not block it on the Supabase JS client. */
-loadProducts().catch(e=>console.error("Category bootstrap error:",e));
+wireSearch();
+/* Render the verified catalog immediately; Supabase refreshes it in the background. */
+P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
+loadBanners();
+loadProducts();
+ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
 </script><script src="./shared-cart.js?v=20261003-1"></script><script>
-function addCategoryStaticProduct(id){
-  var ps=Array.isArray(window.P)?window.P:[];
-  var i=ps.findIndex(function(p){return p&&String(p[4])===String(id);});
-  if(i>=0&&window.WOWSharedCart){window.WOWSharedCart.add(i,1);return false;}
-  return false;
-}
-</script><script>
 function toggleSubmenu(id,btn,e){
   if(e){e.preventDefault();e.stopPropagation();}
   const el=document.getElementById(id); if(!el||!btn)return false;
@@ -1155,4 +1174,4 @@ function toggleSubmenu(id,btn,e){
   btn.setAttribute("aria-expanded",open?"true":"false");
   return false;
 }
-</script><script>if(new URLSearchParams(location.search).get("openCheckout")==="1"){setTimeout(()=>{if(typeof checkout==="function")checkout()},0)}</script></body></html>
+</script></body></html>
