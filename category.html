@@ -1084,16 +1084,17 @@ function closeProduct(){document.getElementById("productModal").style.display="n
 
 let currentCategory="All";
 let currentSearch="";
+let currentSubcategory="";
 function applyProductFilters(){
   const q=currentSearch.trim().toLowerCase();
   const result=q
     ? P.filter(p=>p.some(v=>String(v??"").toLowerCase().includes(q)))
-    : P.filter(p=>categoryMatches(p[3],currentCategory));
+    : P.filter(p=>currentSubcategory?categoryMatches(p[3],currentSubcategory):categoryMatches(p[3],currentCategory));
   render(result);
   document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));
   const active=[...document.querySelectorAll(".filter-bar .btn")].find(b=>b.textContent.trim()===currentCategory);
   if(active&&!q)active.classList.add("filter-active");
-  document.getElementById("searchResult").textContent=(currentCategory!=="All"||q)?(result.length+" product"+(result.length===1?"":"s")+" found"+(q?" for “"+q+"”":"")):"";
+  document.getElementById("searchResult").textContent=(currentCategory!=="All"||currentSubcategory||q)?(result.length+" product"+(result.length===1?"":"s")+" found"+(currentSubcategory?" in "+currentSubcategory:(q?" for “"+q+"”":""))):"";
 }
 function handleSearch(){
   const input=document.getElementById("search");
@@ -1115,6 +1116,12 @@ function wireSearch(){
     if(input&&event.key==="Enter"){event.preventDefault();handleSearch();}
   });
 }
+const categoryParams=new URLSearchParams(window.location.search);
+const categoryParam=String(categoryParams.get("cat")||"").trim();
+const subParam=String(categoryParams.get("sub")||"").trim();
+const subMap={Cats:{food:"Cat Food",litter:"Cat Litter",toys:"Cat Toys",grooming:"Cat Grooming",accessories:"Cat Accessories"},Dogs:{food:"Dog Food",treats:"Dog Treats",toys:"Dog Toys",grooming:"Dog Grooming",accessories:"Dog Accessories"}};
+if(categoryParam)currentCategory=categoryParam;
+if(subParam)currentSubcategory=(subMap[categoryParam]&&subMap[categoryParam][subParam])||subParam;
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function showSale(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function categoryMatches(productCategory, selectedCategory){
