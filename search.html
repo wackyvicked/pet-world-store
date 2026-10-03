@@ -653,18 +653,6 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 <section class="checkout-section"><div class="section-title"><span class="step">2</span><div><h3>Delivery address</h3><p>Tell us where to deliver your order.</p></div></div>
 <div class="formgrid checkout-fields">
 <label class="field" id="cityField">City *<select id="city" autocomplete="address-level2" aria-describedby="cityError"><option value="">Select your city</option><option value="Abbottabad">Abbottabad</option><option value="Ahmadpur East">Ahmadpur East</option><option value="Ali Pur">Ali Pur</option><option value="Attock">Attock</option><option value="Bahawalnagar">Bahawalnagar</option><option value="Bahawalpur">Bahawalpur</option><option value="Bannu">Bannu</option><option value="Bhakkar">Bhakkar</option><option value="Bhalwal">Bhalwal</option><option value="Burewala">Burewala</option><option value="Chakwal">Chakwal</option><option value="Charsadda">Charsadda</option><option value="Chiniot">Chiniot</option><option value="Chishtian">Chishtian</option><option value="Chitral">Chitral</option><option value="Choa Saidan Shah">Choa Saidan Shah</option><option value="Chunian">Chunian</option><option value="Daska">Daska</option><option value="Dera Allah Yar">Dera Allah Yar</option><option value="Dera Ghazi Khan">Dera Ghazi Khan</option><option value="Dera Ismail Khan">Dera Ismail Khan</option><option value="Faisalabad">Faisalabad</option><option value="Fateh Jang">Fateh Jang</option><option value="Ghotki">Ghotki</option><option value="Gujar Khan">Gujar Khan</option><option value="Gujranwala">Gujranwala</option><option value="Gujrat">Gujrat</option><option value="Gwadar">Gwadar</option><option value="Hafizabad">Hafizabad</option><option value="Haripur">Haripur</option><option value="Hasilpur">Hasilpur</option><option value="Hassan Abdal">Hassan Abdal</option><option value="Hyderabad">Hyderabad</option><option value="Islamabad">Islamabad</option><option value="Jacobabad">Jacobabad</option><option value="Jaranwala">Jaranwala</option><option value="Jhang">Jhang</option><option value="Jhelum">Jhelum</option><option value="Kabirwala">Kabirwala</option><option value="Kahuta">Kahuta</option><option value="Kallar Kahar">Kallar Kahar</option><option value="Kamoke">Kamoke</option><option value="Karachi">Karachi</option><option value="Kasur">Kasur</option><option value="Khanewal">Khanewal</option><option value="Kharian">Kharian</option><option value="Khushab">Khushab</option><option value="Khuzdar">Khuzdar</option><option value="Kohat">Kohat</option><option value="Kot Addu">Kot Addu</option><option value="Lahore">Lahore</option><option value="Larkana">Larkana</option><option value="Layyah">Layyah</option><option value="Lodhran">Lodhran</option><option value="Mandi Bahauddin">Mandi Bahauddin</option><option value="Mansehra">Mansehra</option><option value="Mardan">Mardan</option><option value="Mianwali">Mianwali</option><option value="Mirpur AJK">Mirpur AJK</option><option value="Mirpur Khas">Mirpur Khas</option><option value="Multan">Multan</option><option value="Muridke">Muridke</option><option value="Murree">Murree</option><option value="Muzaffarabad">Muzaffarabad</option><option value="Nankana Sahib">Nankana Sahib</option><option value="Narowal">Narowal</option><option value="Nawabshah">Nawabshah</option><option value="Nowshera">Nowshera</option><option value="Okara">Okara</option><option value="Pakpattan">Pakpattan</option><option value="Peshawar">Peshawar</option><option value="Pindi Gheb">Pindi Gheb</option><option value="Rahim Yar Khan">Rahim Yar Khan</option><option value="Rawalpindi">Rawalpindi</option><option value="Sahiwal">Sahiwal</option><option value="Samundri">Samundri</option><option value="Sargodha">Sargodha</option><option value="Sheikhupura">Sheikhupura</option><option value="Shikarpur">Shikarpur</option><option value="Sialkot">Sialkot</option><option value="Sibi">Sibi</option><option value="Skardu">Skardu</option><option value="Sukkur">Sukkur</option><option value="Swabi">Swabi</option><option value="Talagang">Talagang</option><option value="Taxila">Taxila</option><option value="Toba Tek Singh">Toba Tek Singh</option><option value="Turbat">Turbat</option><option value="Vehari">Vehari</option><option value="Wah Cantt">Wah Cantt</option><option value="Wazirabad">Wazirabad</option><option value="Zhob">Zhob</option></select><small class="field-error" id="cityError"></small></label>
-<label class="field" id="areaField">Area / Locality <span class="optional">Recommended</span>
-<select id="area" autocomplete="address-level3" aria-describedby="areaError" disabled>
-<option value="">Select area / locality</option>
-<option value="__manual__">My area isn't listed</option>
-</select>
-<small class="field-help" id="areaLoading" aria-live="polite"></small>
-<small class="field-error" id="areaError"></small>
-<div id="manualAreaWrap" class="manual-area-wrap" hidden>
-<input id="manualArea" autocomplete="address-level3" placeholder="Type your area / locality">
-<small class="field-help">Enter your area if it is not in the list.</small>
-</div>
-</label>
 <label class="field full" id="addressField">House / Street Address *<textarea id="address" rows="3" autocomplete="street-address" placeholder="House no., street, block, sector, etc."></textarea><small class="field-error" id="addressError"></small></label>
 <label class="field full">Landmark <span class="optional">Optional</span><input id="landmark" placeholder="Nearby landmark"></label>
 <label class="field full">Order Notes <span class="optional">Optional</span><textarea id="notes" rows="2" placeholder="Any special delivery instructions?"></textarea></label>
@@ -850,7 +838,6 @@ function validateCheckoutFields(){
   const phone=normalizePakMobile(rawPhone);
   const city=document.getElementById("city")?.value.trim()||"";
   const address=document.getElementById("address")?.value.trim()||"";
-  const areaOk=validateManualArea();
   let ok=true;
   const nameOk=n.length>=2&&n.length<=120;
   setCheckoutFieldState("name","Please enter your name.",nameOk); ok=ok&&nameOk;
@@ -860,99 +847,18 @@ function validateCheckoutFields(){
   setCheckoutFieldState("city","Please select your city from the list.",cityOk); ok=ok&&cityOk;
   const addressOk=validateBasicAddress(address);
   setCheckoutFieldState("address","Please enter a sensible house/street address.",addressOk); ok=ok&&addressOk;
-  ok=ok&&areaOk;
   return {ok,phone,city,address};
-}
-const localityCache=Object.create(null);
-let localityRequestId=0;
-function getCheckoutArea(){
-  const area=document.getElementById("area");
-  const manual=document.getElementById("manualArea");
-  if(area&&area.value==="__manual__")return String(manual?.value||"").trim();
-  return String(area?.value||"").trim();
-}
-function setAreaError(message){
-  const field=document.getElementById("areaField"),error=document.getElementById("areaError");
-  if(field)field.classList.toggle("invalid",!!message);
-  if(error)error.textContent=message||"";
-}
-function setAreaOptions(city,rows){
-  const area=document.getElementById("area"),loading=document.getElementById("areaLoading");
-  if(!area)return;
-  area.innerHTML='<option value="">Select area / locality</option>';
-  for(const row of rows||[]){
-    const name=String(row.area||"").trim();
-    if(!name)continue;
-    const option=document.createElement("option");
-    option.value=name; option.textContent=name;
-    area.appendChild(option);
-  }
-  const manual=document.createElement("option");
-  manual.value="__manual__"; manual.textContent="My area isn't listed";
-  area.appendChild(manual);
-  area.disabled=false;
-  if(loading)loading.textContent=(rows?.length||0)+" areas available for "+city+".";
-}
-async function loadCheckoutLocalities(city){
-  const area=document.getElementById("area"),loading=document.getElementById("areaLoading"),manualWrap=document.getElementById("manualAreaWrap"),manual=document.getElementById("manualArea");
-  if(!area)return;
-  const requestId=++localityRequestId;
-  area.disabled=true;
-  area.innerHTML='<option value="">Loading areas…</option>';
-  if(manualWrap)manualWrap.hidden=true;
-  if(manual)manual.value="";
-  setAreaError("");
-  if(!city){area.innerHTML='<option value="">Select city first</option>';if(loading)loading.textContent="";return;}
-  if(localityCache[city]){setAreaOptions(city,localityCache[city]);return;}
-  if(!sb){area.innerHTML='<option value="">Areas unavailable — enter manually</option>';area.disabled=false;if(manualWrap)manualWrap.hidden=false;return;}
-  if(loading)loading.textContent="Loading areas…";
-  const {data,error}=await sb.from("checkout_localities").select("area").eq("city",city).eq("active",true).order("sort_order",{ascending:true}).order("area",{ascending:true});
-  if(requestId!==localityRequestId||document.getElementById("city")?.value!==city)return;
-  if(error){console.error("Locality lookup failed:",error);area.innerHTML="<option value=\"\">Areas unavailable</option><option value=\"__manual__\">My area isn't listed</option>";area.disabled=false;if(loading)loading.textContent="You can enter your area manually.";return;}
-  const rows=Array.isArray(data)?data:[];
-  localityCache[city]=rows;
-  setAreaOptions(city,rows);
-  if(loading)loading.textContent=rows.length?"":"No saved areas yet — enter manually.";
-}
-function handleCheckoutCityChange(){
-  const city=document.getElementById("city")?.value.trim()||"";
-  setCheckoutFieldState("city","Please select your city from the list.",!!city);
-  loadCheckoutLocalities(city);
-  updateCheckoutTotal();
-}
-function handleCheckoutAreaChange(){
-  const area=document.getElementById("area"),manualWrap=document.getElementById("manualAreaWrap"),manual=document.getElementById("manualArea");
-  const manualMode=area?.value==="__manual__";
-  if(manualWrap)manualWrap.hidden=!manualMode;
-  if(manualMode)manual?.focus();
-  if(!manualMode&&manual)manual.value="";
-  setAreaError("");
-}
-function wireCheckoutLocality(){
-  const city=document.getElementById("city"),area=document.getElementById("area"),manual=document.getElementById("manualArea");
-  if(city&&!city.dataset.localityWired){city.dataset.localityWired="1";city.addEventListener("change",handleCheckoutCityChange);}
-  if(area&&!area.dataset.localityWired){area.dataset.localityWired="1";area.addEventListener("change",handleCheckoutAreaChange);}
-  if(manual&&!manual.dataset.localityWired){manual.dataset.localityWired="1";manual.addEventListener("input",()=>setAreaError(""));manual.addEventListener("blur",()=>{if(area?.value==="__manual__"&&manual.value.trim()&&!validateBasicAddress(manual.value)){setAreaError("Please enter a valid area / locality name.");}});}
-}
-function validateManualArea(){
-  const area=document.getElementById("area"),manual=document.getElementById("manualArea");
-  if(area?.value!=="__manual__")return true;
-  const value=String(manual?.value||"").trim();
-  const ok=value.length>=2&&value.length<=120&&/[A-Za-z]{2,}/.test(value)&&!/[<>]/.test(value);
-  setAreaError(ok?"":"Please enter a valid area / locality name.");
-  return ok;
 }
 function wireCheckoutValidation(){
   const phone=document.getElementById("phone");
   const city=document.getElementById("city");
   const address=document.getElementById("address");
-  wireCheckoutLocality();
   if(phone&&!phone.dataset.validationWired){
     phone.dataset.validationWired="1";
     phone.addEventListener("input",()=>{phone.value=phone.value.replace(/[^0-9+\s()-]/g,"");const v=normalizePakMobile(phone.value);if(/^03\d{9}$/.test(v)){phone.value=v;setCheckoutFieldState("phone","",true)}else if(phone.value)setCheckoutFieldState("phone","Enter a valid Pakistani mobile number (03XX-XXXXXXX).",false)});
     phone.addEventListener("blur",()=>{if(phone.value)validateCheckoutFields()});
   }
-  if(city&&!city.dataset.validationWired){city.dataset.validationWired="1";city.addEventListener("change",handleCheckoutCityChange);}
+  if(city&&!city.dataset.validationWired){city.dataset.validationWired="1";city.addEventListener("change",()=>{setCheckoutFieldState("city","Please select your city from the list.",!!city.value.trim());updateCheckoutTotal();});}
   if(address&&!address.dataset.validationWired){address.dataset.validationWired="1";address.addEventListener("input",()=>{if(address.value.length>=8)setCheckoutFieldState("address","Please enter a sensible house/street address.",validateBasicAddress(address.value))})}
 }
 function buildWhatsAppUrl(message){const clean=String(message??"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").split("\\r\\n").join("\n").split("\\n").join("\n").split("\\r").join("\n");return "https://wa.me/923465771099?text="+encodeURIComponent(clean)}
@@ -962,7 +868,7 @@ async function place(){
   if(btn&&btn.disabled)return;
   const validated=validateCheckoutFields();
   if(!validated.ok)return alert("Please correct the highlighted checkout fields.");
-  const n=document.getElementById("name").value.trim(),ph=validated.phone,city=validated.city,selectedArea=getCheckoutArea(),address=[validated.address,selectedArea,document.getElementById("landmark")?.value.trim()].filter(Boolean).join(", ");
+  const n=document.getElementById("name").value.trim(),ph=validated.phone,city=validated.city,address=[validated.address,document.getElementById("landmark")?.value.trim()].filter(Boolean).join(", ");
   if(!cart.length)return alert("Your cart is empty.");
   if(btn){btn.disabled=true;btn.textContent="SUBMITTING ORDER…";}
   try{
