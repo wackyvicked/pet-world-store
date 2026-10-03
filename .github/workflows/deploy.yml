@@ -1,5 +1,5 @@
 name: Deploy Pet World to GitHub Pages
-# Deployment trigger refresh
+# Deployment is blocked when the site integrity/syntax checks fail.
 
 on:
   push:
@@ -17,7 +17,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  validate:
+    name: Pre-deployment error check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+      - name: Run WOW site checker
+        run: node scripts/wow-site-check.mjs
+
   deploy:
+    needs: validate
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
