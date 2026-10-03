@@ -141,7 +141,7 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none!import
 .checkout-summary-card summary>.checkout-summary-chevron svg{width:15px;height:15px}
 .checkout-summary-card summary b{font-size:14px}
 /* Checkout validation + confirmation polish */
-.checkout-fields .field.has-error input,.checkout-fields .field.has-error textarea{border-color:#d71920!important;background:#fff6f6!important;box-shadow:0 0 0 3px rgba(215,25,32,.10)!important}
+.checkout-fields .field.has-error input,.checkout-fields .field.has-error textarea,.checkout-fields .field.has-error select{border-color:#d71920!important;background:#fff6f6!important;box-shadow:0 0 0 3px rgba(215,25,32,.10)!important}
 .checkout-fields .field .field-error{display:none;color:#c62828;font-size:12px;font-weight:700;line-height:1.35;margin-top:1px}
 .checkout-fields .field.has-error .field-error{display:block}
 /* ===== WOW PETS CHECKOUT POLISH ===== */
@@ -951,16 +951,16 @@ function validateCheckoutFields(){
   const phone=normalizePakMobile(rawPhone);
   const city=document.getElementById("city")?.value.trim()||"";
   const address=document.getElementById("address")?.value.trim()||"";
-  let ok=true;
+  let ok=true;let firstInvalid=null;
   const nameOk=n.length>=2&&n.length<=120;
-  setCheckoutFieldState("name","Please enter your name.",nameOk); ok=ok&&nameOk;
+  setCheckoutFieldState("name","Please enter your name.",nameOk); if(!nameOk&&!firstInvalid)firstInvalid=document.getElementById("name"); ok=ok&&nameOk;
   const phoneOk=validatePakMobile(rawPhone);
-  setCheckoutFieldState("phone","Enter a valid Pakistani mobile number (03XX-XXXXXXX).",phoneOk); ok=ok&&phoneOk;
+  setCheckoutFieldState("phone","Enter a valid Pakistani mobile number (03XX-XXXXXXX).",phoneOk); if(!phoneOk&&!firstInvalid)firstInvalid=document.getElementById("phone"); ok=ok&&phoneOk;
   const cityOk=!!city;
-  setCheckoutFieldState("city","Please select your city from the list.",cityOk); ok=ok&&cityOk;
+  setCheckoutFieldState("city","Please select your city from the list.",cityOk); if(!cityOk&&!firstInvalid)firstInvalid=document.getElementById("city"); ok=ok&&cityOk;
   const addressOk=validateBasicAddress(address);
-  setCheckoutFieldState("address","Please enter a sensible house/street address.",addressOk); ok=ok&&addressOk;
-  return {ok,phone,city,address};
+  setCheckoutFieldState("address","Please enter a sensible house/street address.",addressOk); if(!addressOk&&!firstInvalid)firstInvalid=document.getElementById("address"); ok=ok&&addressOk;
+  if(!ok&&firstInvalid){requestAnimationFrame(()=>{firstInvalid.scrollIntoView({behavior:"smooth",block:"center"});setTimeout(()=>{try{firstInvalid.focus({preventScroll:true})}catch(_e){firstInvalid.focus()}},180)})}return {ok,phone,city,address};
 }
 function wireCheckoutValidation(){
   const phone=document.getElementById("phone");
