@@ -1175,7 +1175,7 @@ wireProductCardClicks();
 P=[];window.P=P;applyProductFilters();
 if(currentBrand||currentCategory!=="All"){const title=document.querySelector("#shop h2");if(title)title.textContent=currentBrand?("Brand: "+currentBrand):currentCategory;}else if(currentSearch){const title=document.querySelector("#shop h2");if(title)title.textContent="Search Results";}
 ensureSb().then(()=>loadProducts()).catch(e=>{console.error("Supabase startup error:",e);P=[];window.P=P;applyProductFilters();});
-</script><script src="./shared-cart.js?v=20261004-2"></script><script>
+</script><script src="./shared-cart.js?v=20261004-3"></script><script>
 function toggleSubmenu(id,btn,e){
   if(e){e.preventDefault();e.stopPropagation();}
   const el=document.getElementById(id); if(!el||!btn)return false;
