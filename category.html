@@ -1086,13 +1086,14 @@ let currentCategory="All";
 let currentSearch="";
 let currentSubcategory="";
 function showLiveCategoryError(message){const b=document.getElementById("wowLiveRuntime"),t=document.getElementById("wowLiveRuntimeText"),d=document.getElementById("wowLiveRuntimeDetails");if(!b||!t||!d)return;t.textContent="Category filter error";d.textContent=message;b.classList.add("show")}
+let liveCatalogReady=false;
 function applyProductFilters(){
   const q=currentSearch.trim().toLowerCase();
   const result=q
     ? P.filter(p=>p.some(v=>String(v??"").toLowerCase().includes(q)))
     : P.filter(p=>currentSubcategory?categoryMatches(p[3],currentSubcategory):categoryMatches(p[3],currentCategory));
   render(result);
-  if(!q && currentCategory!=="All" && !result.length && P.length){showLiveCategoryError("Category: "+currentCategory+"\nLoaded products: "+P.length+"\nNo products matched the selected category. This indicates a category-data/filter mismatch.");}
+  if(liveCatalogReady && !q && currentCategory!=="All" && !result.length && P.length){showLiveCategoryError("Category: "+currentCategory+"\nLoaded products: "+P.length+"\nNo products matched the selected category. This indicates a category-data/filter mismatch.");}else{const b=document.getElementById("wowLiveRuntime");if(b)b.classList.remove("show");}
   document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));
   const active=[...document.querySelectorAll(".filter-bar .btn")].find(b=>b.textContent.trim()===currentCategory);
   if(active&&!q)active.classList.add("filter-active");
