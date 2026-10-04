@@ -1129,28 +1129,46 @@ function showBundles(){currentCategory="All";currentSearch="";document.getElemen
 function showSale(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>Number(p[9])>0&&Number(p[9])<Number(p[1]));render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" sale product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
 function categoryMatches(productCategory, selectedCategory){
   if(String(selectedCategory||"").trim()==="All")return true;
-  const cats=String(productCategory||"")
+  const raw=String(productCategory||"")
     .split(",")
     .map(v=>v.trim().toLowerCase())
     .filter(Boolean);
-  const selected=String(selectedCategory||"").trim().toLowerCase();
   const normalize=v=>{
-    const x=String(v||"").trim().toLowerCase();
+    const x=String(v||"").trim().toLowerCase().replace(/\\s+/g," ");
     if(["dog","dogs","canine"].includes(x))return "dogs";
     if(["cat","cats","feline"].includes(x))return "cats";
+    if(["bird","birds","avian"].includes(x))return "birds";
+    if(["fish","fishes"].includes(x))return "fish";
     return x;
   };
-  const normalizedCats=cats.map(normalize);
-  const normalizedSelected=normalize(selected);
+  const cats=raw.map(normalize);
+  const selected=normalize(selectedCategory);
 
-  /* Category assignment is additive: a product tagged for Cats and Dogs
-     belongs to both species. Do not force a multi-species product into one
-     artificial "primary" species. */
-  if(normalizedSelected==="cats")return normalizedCats.includes("cats");
-  if(normalizedSelected==="dogs")return normalizedCats.includes("dogs");
+  /* Parent species categories are additive: a product tagged for Cats and
+     Dogs belongs to both species. */
+  if(selected==="cats")return cats.includes("cats");
+  if(selected==="dogs")return cats.includes("dogs");
 
-  if(normalizedCats.includes(normalizedSelected))return true;
+  /* Subcategories are stored separately in Supabase, then combined into the
+     product category text by productRow(). Match the canonical clickable
+     subcategory names explicitly so every future admin assignment works. */
+  const subcategoryAliases={
+    "cat food":["cat food","cats food"],
+    "cat litter":["cat litter","cats litter"],
+    "cat toys":["cat toys","cats toys"],
+    "cat grooming":["cat grooming","cats grooming"],
+    "cat accessories":["cat accessories","cats accessories"],
+    "dog food":["dog food","dogs food"],
+    "dog treats":["dog treats","dogs treats"],
+    "dog toys":["dog toys","dogs toys"],
+    "dog grooming":["dog grooming","dogs grooming"],
+    "dog accessories":["dog accessories","dogs accessories"]
+  };
+  const selectedAliases=subcategoryAliases[selected]||[selected];
+  if(raw.some(v=>selectedAliases.includes(v)))return true;
 
+  /* Generic top-level category aliases. */
+  if(cats.includes(selected))return true;
   const aliases={
     "grooming":["shampoo","grooming supplies","grooming"],
     "medical supplies":["medical","medical supplies","medicines","medicine"],
@@ -1158,7 +1176,7 @@ function categoryMatches(productCategory, selectedCategory){
     "toys":["toy","toys","pet toys"],
     "accessories":["accessory","accessories"]
   };
-  return cats.some(c=>(aliases[normalizedSelected]||[]).includes(c));
+  return raw.some(v=>(aliases[selected]||[]).includes(v));
 }
 function filterCategory(cat){
   currentCategory=cat;currentSubcategory="";
