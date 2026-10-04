@@ -459,7 +459,72 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
   transform:rotate(90deg)!important;
 }
 </style>
-<style id="wowLiveRuntimeStyle">#wowLiveRuntime{display:none;position:fixed;top:8px;left:8px;right:8px;z-index:999999;background:#fff;border:2px solid #d71920;border-radius:10px;padding:10px;box-shadow:0 8px 28px rgba(0,0,0,.28);font:12px/1.4 Arial;color:#222;max-height:45vh;overflow:auto}#wowLiveRuntime.show{display:block}#wowLiveRuntime b{color:#d71920}#wowLiveRuntime pre{white-space:pre-wrap;word-break:break-word;margin:6px 0;padding:6px;background:#f5f5f5;border-radius:6px}#wowLiveRuntime button{border:0;border-radius:6px;padding:6px 9px;font-weight:700;margin-right:5px}</style><div id="wowLiveRuntime" role="alert"><b>WOW Pets LIVE ERROR</b><div id="wowLiveRuntimeText"></div><pre id="wowLiveRuntimeDetails"></pre><button type="button" onclick="navigator.clipboard?.writeText((document.getElementById('wowLiveRuntimeText')?.innerText||'')+'\n'+(document.getElementById('wowLiveRuntimeDetails')?.innerText||''))">COPY</button><button type="button" onclick="this.parentElement.classList.remove('show')">CLOSE</button></div><script>(function(){function show(stage,error){try{var b=document.getElementById("wowLiveRuntime"),t=document.getElementById("wowLiveRuntimeText"),d=document.getElementById("wowLiveRuntimeDetails");if(!b||!t||!d)return;var msg=error&&error.message?error.message:String(error||"Unknown error");t.textContent="Stage: "+stage+" | URL: "+location.href;d.textContent=msg+(error&&error.stack?"\n\n"+error.stack:"");b.classList.add("show")}catch(_e){}}window.addEventListener("error",function(e){show("JavaScript runtime error",e.error||e.message)});window.addEventListener("unhandledrejection",function(e){show("Unhandled promise rejection",e.reason)});window.__wowLiveRuntimeDebug={show:show}})();</script></head><body>
+<style id="wowLiveRuntimeStyle">#wowLiveRuntime{display:none;position:fixed;top:8px;left:8px;right:8px;z-index:999999;background:#fff;border:2px solid #d71920;border-radius:10px;padding:10px;box-shadow:0 8px 28px rgba(0,0,0,.28);font:12px/1.4 Arial;color:#222;max-height:45vh;overflow:auto}#wowLiveRuntime.show{display:block}#wowLiveRuntime b{color:#d71920}#wowLiveRuntime pre{white-space:pre-wrap;word-break:break-word;margin:6px 0;padding:6px;background:#f5f5f5;border-radius:6px}#wowLiveRuntime button{border:0;border-radius:6px;padding:6px 9px;font-weight:700;margin-right:5px}</style><div id="wowLiveRuntime" role="alert"><b>WOW Pets LIVE ERROR</b><div id="wowLiveRuntimeText"></div><pre id="wowLiveRuntimeDetails"></pre><button type="button" onclick="navigator.clipboard?.writeText((document.getElementById('wowLiveRuntimeText')?.innerText||'')+'\n'+(document.getElementById('wowLiveRuntimeDetails')?.innerText||''))">COPY</button><button type="button" onclick="this.parentElement.classList.remove('show')">CLOSE</button></div><script>(function(){function show(stage,error){try{var b=document.getElementById("wowLiveRuntime"),t=document.getElementById("wowLiveRuntimeText"),d=document.getElementById("wowLiveRuntimeDetails");if(!b||!t||!d)return;var msg=error&&error.message?error.message:String(error||"Unknown error");t.textContent="Stage: "+stage+" | URL: "+location.href;d.textContent=msg+(error&&error.stack?"\n\n"+error.stack:"");b.classList.add("show")}catch(_e){}}window.addEventListener("error",function(e){show("JavaScript runtime error",e.error||e.message)});window.addEventListener("unhandledrejection",function(e){show("Unhandled promise rejection",e.reason)});window.__wowLiveRuntimeDebug={show:show}})();</script><style id="wow-desktop-home-polish">
+@media(min-width:701px){
+  header{position:relative!important;z-index:2000!important;}
+  .head{display:grid!important;grid-template-columns:180px minmax(280px,1fr) 180px!important;grid-template-rows:auto auto!important;max-width:none!important;width:100%!important;padding:14px 28px 12px!important;box-sizing:border-box!important;gap:10px!important;align-items:center!important;}
+  .mobile-menu-bar{display:flex!important;grid-column:1;grid-row:1;align-items:center!important;justify-content:flex-start!important;padding:0!important;max-width:none!important;}
+  .mobile-menu-bar .menu-btn{width:auto!important;height:44px!important;padding:0 14px!important;display:inline-flex!important;gap:10px!important;background:#171717!important;color:#fff!important;border-radius:10px!important;font-size:14px!important;font-weight:800!important;letter-spacing:.2px!important;}
+  .mobile-menu-bar .menu-btn::after{content:"MENU";font-size:13px;font-weight:800;}
+  .mobile-menu-bar .hamburger-lines{width:22px!important;height:20px!important;gap:4px!important;}
+  .mobile-menu-bar .hamburger-lines i{width:22px!important;height:2px!important;background:currentColor!important;}
+  .brand{grid-column:2;grid-row:1;justify-content:center!important;min-width:0!important;}
+  .brand-logo{width:205px!important;max-width:205px!important;}
+  .head-actions{grid-column:3;grid-row:1;justify-content:flex-end!important;margin:0!important;}
+  .icon-btn{width:48px!important;height:44px!important;font-size:27px!important;}
+  .search{grid-column:1 / -1;grid-row:2;max-width:860px!important;width:100%!important;height:52px!important;border-radius:14px!important;margin:2px auto 0!important;box-shadow:0 4px 14px rgba(0,0,0,.08)!important;}
+  .search input{height:52px!important;font-size:16px!important;padding:0 18px!important;}
+  #mainNav{position:fixed!important;left:14px!important;top:108px!important;width:224px!important;max-height:calc(100vh - 126px)!important;overflow:auto!important;background:#fff!important;border:1px solid #e3e3e3!important;border-radius:16px!important;box-shadow:0 14px 36px rgba(0,0,0,.12)!important;display:block!important;padding:10px 0!important;z-index:1900!important;}
+  #mainNav .menu-close{display:none!important;}
+  #mainNav>a,#mainNav .menu-parent>a{display:flex!important;align-items:center!important;gap:10px!important;padding:12px 14px!important;color:#222!important;text-decoration:none!important;font-size:13px!important;font-weight:750!important;border-bottom:1px solid #f0f0f0!important;}
+  #mainNav>a:hover,#mainNav .menu-parent>a:hover{background:#fff9d9!important;}
+  #mainNav .menu-parent{display:flex!important;align-items:center!important;justify-content:space-between!important;}
+  #mainNav .menu-parent>a{flex:1!important;border-bottom:0!important;}
+  #mainNav .menu-sub-toggle{width:34px!important;height:34px!important;min-width:34px!important;margin:0 10px 0 4px!important;}
+  #mainNav .menu-submenu{max-height:none!important;opacity:1!important;transform:none!important;display:block!important;background:#fafafa!important;border-bottom:1px solid #eee!important;}
+  #mainNav .menu-submenu a{padding:9px 12px 9px 48px!important;font-size:12px!important;}
+  #mainNav .menu-icon{width:20px!important;min-width:20px!important;text-align:center!important;}
+  body{padding-left:252px!important;}
+  .wow-home-stage,.section,footer{max-width:none!important;margin-left:0!important;margin-right:22px!important;}
+  .wow-home-stage{padding-left:0!important;padding-right:0!important;}
+  .wow-promo{margin-top:16px!important;}
+  .wow-promo-track{min-height:270px!important;}
+  .wow-promo-slide{min-height:270px!important;}
+  .wow-animal-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:18px!important;}
+  .wow-animal-card,.wow-animal-card img{height:225px!important;min-height:225px!important;}
+}
+.wow-promo-track{position:relative;min-height:270px;overflow:hidden;border-radius:20px;background:#f4f4f4;box-shadow:0 10px 28px rgba(0,0,0,.10);}
+.wow-promo-slide{position:absolute;inset:0;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;padding:26px 54px;opacity:0;visibility:hidden;transform:translateX(18px);transition:opacity .4s ease,transform .4s ease;background:linear-gradient(110deg,#fff8dc,#fff 58%,#f4f6f8);}
+.wow-promo-slide:nth-child(2){background:linear-gradient(110deg,#eef7ff,#fff 58%,#f5f8fb);}
+.wow-promo-slide:nth-child(3){background:linear-gradient(110deg,#eefaf1,#fff 58%,#f5f7f6);}
+.wow-promo-slide:nth-child(4){background:linear-gradient(110deg,#f7efff,#fff 58%,#f6f5f8);}
+.wow-promo-slide.is-active{opacity:1;visibility:visible;transform:translateX(0);}
+.wow-promo-copy{max-width:620px;position:relative;z-index:2;}
+.wow-promo-tag{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,210,28,.24);font-size:11px;font-weight:850;letter-spacing:.5px;color:#6d5500;}
+.wow-promo-copy h2{margin:11px 0 7px;font-size:clamp(28px,3vw,42px);line-height:1.04;letter-spacing:-1px;}
+.wow-promo-copy p{margin:0 0 17px;color:#5d6167;font-size:14px;line-height:1.5;max-width:520px;}
+.wow-promo-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:10px;background:#171717;color:#fff;text-decoration:none;font-size:12px;font-weight:800;}
+.wow-promo-media{height:220px;display:flex;align-items:center;justify-content:center;}
+.wow-promo-media img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(0,0,0,.12));}
+.wow-promo-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid #ddd;border-radius:50%;background:rgba(255,255,255,.92);font-size:22px;display:grid;place-items:center;z-index:5;cursor:pointer;}
+.wow-promo-arrow.prev{left:14px}.wow-promo-arrow.next{right:14px}
+.wow-promo-dots{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.84);z-index:6;}
+.wow-promo-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#aaa;cursor:pointer}.wow-promo-dot.is-active{width:21px;border-radius:99px;background:#222}
+.wow-category-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;}
+.wow-category-cards-3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:760px}.wow-category-cards-4{grid-template-columns:repeat(4,minmax(0,1fr));}
+.wow-category-cards a{position:relative;min-height:145px;border-radius:15px;overflow:hidden;background:#f5f5f5;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.07);border:1px solid #e8e8e8;}
+.wow-category-cards img{display:block;width:100%;height:145px;object-fit:cover;background:#fff;}
+.wow-category-cards a:after{content:"";position:absolute;inset:42% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.64));}
+.wow-category-cards span{position:absolute;left:13px;bottom:11px;z-index:2;color:#fff;font-size:13px;font-weight:850;text-shadow:0 2px 8px rgba(0,0,0,.35);}
+.wow-live-row{display:flex;gap:12px;overflow-x:auto;padding:14px 2px 4px;scroll-snap-type:x proximity;}
+.wow-live-row .card{min-width:210px;max-width:210px;scroll-snap-align:start;}
+.wow-live-row .pic{height:170px!important;min-height:170px!important;}
+.wow-live-row .info>b{font-size:13px!important;min-height:35px!important;max-height:35px!important;}
+.wow-department-section{margin-bottom:34px;}
+@media(max-width:700px){
+ .wow-promo-track{min-height:320px;border-radius:16px}.wow-promo-slide{grid-template-columns:1fr;padding:20px 22px 44px}.wow-promo-media{position:absolute;right:4px;bottom:22px;width:43%;height:155px}.wow-promo-copy{max-width:68%}.wow-promo-copy h2{font-size:27px}.wow-promo-copy p{font-size:12px}.wow-promo-arrow{width:32px;height:32px;font-size:18px}.wow-category-cards,.wow-category-cards-4,.wow-category-cards-3{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none}.wow-category-cards a{min-height:125px}.wow-category-cards img{height:125px}.wow-live-row .card{min-width:175px;max-width:175px}.wow-live-row .pic{height:145px!important;min-height:145px!important;}
+}
+</style></head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
@@ -469,17 +534,54 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
   <section class="wow-animal-section" aria-labelledby="shop-by-animal-title">
     <div class="wow-section-heading"><h2 id="shop-by-animal-title">Shop by Animal</h2><p>Choose your pet and start shopping.</p></div>
     <div class="wow-animal-grid">
-      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Cats"><img src="./wow-cat.webp" alt="Cats" loading="eager"><span>Cats</span></a>
-      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Cats&sub=kitten"><img src="./wow-kitten.webp" alt="Kittens" loading="lazy"><span>Kittens</span></a>
-      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Dogs&sub=puppy"><img src="./wow-puppy.webp" alt="Puppies" loading="lazy"><span>Puppies</span></a>
-      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Dogs"><img src="./wow-dog.webp" alt="Dogs" loading="lazy"><span>Dogs</span></a>
-      <a class="wow-animal-card wow-other-card" href="./category.html?v=20260928-2&cat=Other%20Animals"><span class="wow-other-icon">🐾</span><strong>Other Animals</strong><small>Birds • Fish • Horses</small></a>
+      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Cats"><img src="https://images.unsplash.com/photo-1747319822345-cdf9c325995c?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1200" alt="Cats" loading="eager"><span>Cats</span></a>
+      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Cats&sub=kitten"><img src="https://kellyandcompanion.jp/cdn/shop/articles/green-eyed-kitten.jpg?v=1750899608" alt="Kittens" loading="lazy"><span>Kittens</span></a>
+      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Dogs&sub=puppy"><img src="https://images.unsplash.com/photo-1746282153111-06ce735f5239?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1200" alt="Puppies" loading="lazy"><span>Puppies</span></a>
+      <a class="wow-animal-card" href="./category.html?v=20260928-2&cat=Dogs"><img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=82&w=1200" alt="Dogs" loading="lazy"><span>Dogs</span></a>
+      <a class="wow-animal-card wow-other-card" href="./category.html?v=20260928-2&cat=Other%20Animals"><img src="https://paradepets.com/.image/c_fill%2Cw_1280%2Ch_853%2Cg_faces%3Acenter/NTowMDAwMDAwMDAwMjQxMDAx/getty-images-carol-yepes-1.jpg" alt="Other Animals"><span>Other Animals</span></a>
     </div>
   </section>
-  <section class="wow-category-section"><div class="wow-section-heading compact"><h2>Shop by Cat</h2></div><div class="wow-link-grid"><a href="./category.html?v=20260928-2&cat=Cats&sub=food">Cat Food</a><a href="./category.html?v=20260928-2&cat=Cats&sub=litter">Cat Litter</a><a href="./category.html?v=20260928-2&cat=Cats&sub=toys">Cat Toys</a><a href="./category.html?v=20260928-2&cat=Cats&sub=grooming">Cat Grooming</a><a href="./category.html?v=20260928-2&cat=Cats&sub=accessories">Cat Accessories</a></div></section>
-  <section class="wow-category-section"><div class="wow-section-heading compact"><h2>Shop by Dog</h2></div><div class="wow-link-grid"><a href="./category.html?v=20260928-2&cat=Dogs&sub=food">Dog Food</a><a href="./category.html?v=20260928-2&cat=Dogs&sub=treats">Dog Treats</a><a href="./category.html?v=20260928-2&cat=Dogs&sub=toys">Dog Toys</a><a href="./category.html?v=20260928-2&cat=Dogs&sub=grooming">Dog Grooming</a><a href="./category.html?v=20260928-2&cat=Dogs&sub=accessories">Dog Accessories</a></div></section>
-  <section class="wow-category-section"><div class="wow-section-heading compact"><h2>Shop by Other Animals</h2></div><div class="wow-link-grid"><a href="./category.html?v=20260928-2&cat=Birds">Birds</a><a href="./category.html?v=20260928-2&cat=Fish">Fish</a><a href="./category.html?v=20260928-2&cat=Horses">Horses</a></div></section>
-  <section class="wow-category-section"><div class="wow-section-heading compact"><h2>Pet Health & Pharmacy</h2></div><div class="wow-link-grid"><a href="./category.html?v=20260928-2&cat=Medical%20Supplies">Medicines</a><a href="./category.html?v=20260928-2&cat=Medical%20Supplies&sub=deworming">Deworming</a><a href="./category.html?v=20260928-2&cat=Medical%20Supplies&sub=flea">Flea & Tick Care</a><a href="./category.html?v=20260928-2&cat=Medical%20Supplies&sub=care">Pet Health</a></div></section>
+  <section class="wow-category-section wow-department-section">
+    <div class="wow-section-heading"><div><h2>Shop by Cat</h2><p>Choose a category, then browse live products.</p></div></div>
+    <div class="wow-category-cards">
+      <a href="./category.html?v=20260928-2&cat=Cats&sub=food"><img src="https://birdagents.pk/cdn/shop/files/Pawfect-Cat-Food-1.2-Kg-Reem-Pet-Store-e1662990396210_1_1946x.png?v=1776545070" alt="Cat Food"><span>Cat Food</span></a>
+      <a href="./category.html?v=20260928-2&cat=Cats&sub=litter"><img src="https://www.worldsbestcatlitter.com/WBCL/international/assets/WBC_pnt_brand-guidelines_2018_final.pdf" alt="Cat Litter"><span>Cat Litter</span></a>
+      <a href="./category.html?v=20260928-2&cat=Cats&sub=toys"><img src="https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg" alt="Cat Toys"><span>Cat Toys</span></a>
+      <a href="./category.html?v=20260928-2&cat=Cats&sub=grooming"><img src="https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg" alt="Cat Grooming"><span>Cat Grooming</span></a>
+      <a href="./category.html?v=20260928-2&cat=Cats&sub=accessories"><img src="https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg" alt="Cat Accessories"><span>Cat Accessories</span></a>
+    </div>
+    <div class="wow-live-row" data-live-group="cats"></div>
+  </section>
+  <section class="wow-category-section wow-department-section">
+    <div class="wow-section-heading"><div><h2>Shop by Dog</h2><p>Real category imagery now; products will stay live from Supabase.</p></div></div>
+    <div class="wow-category-cards">
+      <a href="./category.html?v=20260928-2&cat=Dogs&sub=food"><img src="https://i5.walmartimages.com/asr/5f47b20c-f09e-4ca5-817a-f02ba9565ed0.dee87e74b8777df53ea321745abd521b.jpeg" alt="Dog Food"><span>Dog Food</span></a>
+      <a href="./category.html?v=20260928-2&cat=Dogs&sub=treats"><img src="https://i5.walmartimages.com/asr/5f47b20c-f09e-4ca5-817a-f02ba9565ed0.dee87e74b8777df53ea321745abd521b.jpeg" alt="Dog Treats"><span>Dog Treats</span></a>
+      <a href="./category.html?v=20260928-2&cat=Dogs&sub=toys"><img src="https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg" alt="Dog Toys"><span>Dog Toys</span></a>
+      <a href="./category.html?v=20260928-2&cat=Dogs&sub=grooming"><img src="https://static.athome.com/images/w_1600%2Ch_1600%2Cc_pad%2Cf_auto%2Cfl_lossy%2Cq_auto/v1768449806/p/125032449_E1/lavender-shampoo-16.3oz.jpg" alt="Dog Grooming"><span>Dog Grooming</span></a>
+      <a href="./category.html?v=20260928-2&cat=Dogs&sub=accessories"><img src="https://static.athome.com/images/w_1600%2Ch_1600%2Cc_pad%2Cf_auto%2Cfl_lossy%2Cq_auto/v1768449806/p/125032449_E1/lavender-shampoo-16.3oz.jpg" alt="Dog Accessories"><span>Dog Accessories</span></a>
+    </div>
+    <div class="wow-live-row" data-live-group="dogs"></div>
+  </section>
+  <section class="wow-category-section wow-department-section">
+    <div class="wow-section-heading"><div><h2>Shop by Other Animals</h2><p>Birds, fish and other pets.</p></div></div>
+    <div class="wow-category-cards wow-category-cards-3">
+      <a href="./category.html?v=20260928-2&cat=Birds"><img src="https://paradepets.com/.image/c_fill%2Cw_1280%2Ch_853%2Cg_faces%3Acenter/NTowMDAwMDAwMDAwMjQxMDAx/getty-images-carol-yepes-1.jpg" alt="Birds"><span>Birds</span></a>
+      <a href="./category.html?v=20260928-2&cat=Fish"><img src="https://paradepets.com/.image/c_fill%2Cw_1280%2Ch_853%2Cg_faces%3Acenter/NTowMDAwMDAwMDAwMjQxMDAx/getty-images-carol-yepes-1.jpg" alt="Fish"><span>Fish</span></a>
+      <a href="./category.html?v=20260928-2&cat=Horses"><img src="https://paradepets.com/.image/c_fill%2Cw_1280%2Ch_853%2Cg_faces%3Acenter/NTowMDAwMDAwMDAwMjQxMDAx/getty-images-carol-yepes-1.jpg" alt="Horses"><span>Horses</span></a>
+    </div>
+    <div class="wow-live-row" data-live-group="other"></div>
+  </section>
+  <section class="wow-category-section wow-department-section">
+    <div class="wow-section-heading"><div><h2>Pet Health & Pharmacy</h2><p>Health, prevention and everyday care.</p></div></div>
+    <div class="wow-category-cards wow-category-cards-4">
+      <a href="./category.html?v=20260928-2&cat=Medical%20Supplies"><img src="https://simv-production.s3.fr-par.scw.cloud/products/65158675cd281-DOLTHENE-S-65158675cd2f4.png" alt="Medicines"><span>Medicines</span></a>
+      <a href="./category.html?v=20260928-2&cat=Medical%20Supplies&sub=deworming"><img src="https://simv-production.s3.fr-par.scw.cloud/products/65158675cd281-DOLTHENE-S-65158675cd2f4.png" alt="Deworming"><span>Deworming</span></a>
+      <a href="./category.html?v=20260928-2&cat=Medical%20Supplies&sub=flea"><img src="https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg" alt="Flea and Tick Care"><span>Flea &amp; Tick Care</span></a>
+      <a href="./category.html?v=20260928-2&cat=Medical%20Supplies&sub=care"><img src="https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg" alt="Pet Health"><span>Pet Health</span></a>
+    </div>
+    <div class="wow-live-row" data-live-group="health"></div>
+  </section>
 </section>
 <section class="section" id="shop"><h2>Featured Products</h2><div id="searchResult" style="margin:-8px 0 15px;color:#666;font-size:14px"></div><div class="filter-bar" style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">
 <button class="btn yellow filter-active" onclick="filterCategory('All')">All</button>
@@ -568,16 +670,27 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 let P=[],cart=[];
 const BUILTIN_PRODUCTS=Array.isArray(window.WOWFallbackProducts)?window.WOWFallbackProducts:[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)}));}catch(e){}
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";const categories=[r.category,r.subcategory].flatMap(v=>String(v??"").split(",")).map(v=>v.trim()).filter(Boolean);const categoryText=[...new Set(categories)].join(", ")||"Accessories";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,categoryText,r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.brand??""];}
-async function loadBanners(){
-  const el=document.getElementById("homeBanners");if(!el)return;
-  const source=Array.isArray(P)&&P.length?P:BUILTIN_PRODUCTS.map(productRow);if(!source.length){el.innerHTML="";return}
-  const used=new Set(),slides=[];const add=(label,icon,matcher)=>{const p=source.find(x=>!used.has(String(x[4]))&&matcher(x));if(p){used.add(String(p[4]));slides.push({label,icon,p})}};
-  add("NEW ARRIVAL","✨",()=>true);add("CAT ESSENTIAL","🐱",x=>/cat|kitten/i.test(String(x[0]+" "+x[3]))&&/food|feed|kitten/i.test(String(x[0]+" "+x[3])));add("DOG ESSENTIAL","🐶",x=>/dog|puppy/i.test(String(x[0]+" "+x[3]))&&/food|feed|puppy/i.test(String(x[0]+" "+x[3])));add("CARE & HEALTH","🩺",x=>/medical|deworm|worm|flea|tick|health|frontliner|medicine/i.test(String(x[0]+" "+x[3])));
-  source.forEach(x=>{if(slides.length<4&&!used.has(String(x[4]))){used.add(String(x[4]));slides.push({label:"WOW PETS PICK",icon:"🐾",p:x})}});if(!slides.length){el.innerHTML="";return}
-  el.innerHTML='<div class="wow-showcase-track" tabindex="0">'+slides.map((s,i)=>{const p=s.p,price=Number(p[1])||0,sale=Number(p[9])>0&&Number(p[9])<price?Number(p[9]):0;return '<article class="wow-showcase-slide'+(i===0?" is-active":"")+'" data-index="'+i+'"><div class="wow-showcase-copy"><span class="wow-showcase-kicker">'+s.icon+' '+esc(s.label)+'</span><h2>Made for happy pets.</h2><p class="wow-showcase-product">'+esc(String(p[0]))+'</p><div class="wow-showcase-price">'+(sale?'<span class="wow-old">PKR '+price.toLocaleString()+'</span><span class="wow-sale">PKR '+sale.toLocaleString()+'</span>':'PKR '+price.toLocaleString())+'</div><a class="wow-showcase-cta" href="./product.html?id='+encodeURIComponent(p[4])+'">View Product <span aria-hidden="true">→</span></a></div><div class="wow-showcase-media"><img src="'+esc(String(p[2]||""))+'" alt="'+esc(String(p[0]))+'" loading="'+(i===0?"eager":"lazy")+'" decoding="async"></div></article>'}).join("")+'<button type="button" class="wow-showcase-arrow prev" aria-label="Previous featured product">‹</button><button type="button" class="wow-showcase-arrow next" aria-label="Next featured product">›</button><div class="wow-showcase-dots" role="tablist" aria-label="Featured product slides">'+slides.map((_,i)=>'<button type="button" class="wow-showcase-dot'+(i===0?" is-active":"")+'" data-slide="'+i+'" aria-label="Show slide '+(i+1)+'" aria-selected="'+(i===0?"true":"false")+'"></button>').join("")+'</div></div>';
-  const track=el.querySelector(".wow-showcase-track"),slideEls=[...el.querySelectorAll(".wow-showcase-slide")],dots=[...el.querySelectorAll(".wow-showcase-dot")];let active=0,timer=null,touchX=0;
-  const stop=()=>{if(timer){clearInterval(timer);timer=null}};const restart=()=>{stop();if(slideEls.length>1&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)timer=setInterval(()=>show(active+1,false),5600)};const show=(n,auto=true)=>{active=(n+slideEls.length)%slideEls.length;slideEls.forEach((s,i)=>s.classList.toggle("is-active",i===active));dots.forEach((d,i)=>{d.classList.toggle("is-active",i===active);d.setAttribute("aria-selected",i===active?"true":"false")});if(auto)restart()};
-  el.querySelector(".prev").addEventListener("click",()=>show(active-1));el.querySelector(".next").addEventListener("click",()=>show(active+1));dots.forEach(d=>d.addEventListener("click",()=>show(Number(d.dataset.slide))));track.addEventListener("mouseenter",stop);track.addEventListener("mouseleave",restart);track.addEventListener("focusin",stop);track.addEventListener("focusout",restart);track.addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX;stop()},{passive:true});track.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)show(active+(dx<0?1:-1));restart()},{passive:true});track.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")show(active-1);if(e.key==="ArrowRight")show(active+1)});restart();
+function loadBanners(){
+  const el=document.getElementById("homeBanners"); if(!el)return;
+  const slides=[
+    {tag:"CAT FAVOURITES",title:"Better food for happy cats.",text:"Shop popular cat food and everyday nutrition.",image:"https://birdagents.pk/cdn/shop/files/Pawfect-Cat-Food-1.2-Kg-Reem-Pet-Store-e1662990396210_1_1946x.png?v=1776545070",href:"./category.html?v=20260928-2&cat=Cats&sub=food"},
+    {tag:"DOG FAVOURITES",title:"Good food. Happy dogs.",text:"Explore dog food, treats and daily essentials.",image:"https://i5.walmartimages.com/asr/5f47b20c-f09e-4ca5-817a-f02ba9565ed0.dee87e74b8777df53ea321745abd521b.jpeg",href:"./category.html?v=20260928-2&cat=Dogs&sub=food"},
+    {tag:"PET HEALTH",title:"Everyday health & care.",text:"Find deworming, flea & tick and health essentials.",image:"https://simv-production.s3.fr-par.scw.cloud/products/65158675cd281-DOLTHENE-S-65158675cd2f4.png",href:"./category.html?v=20260928-2&cat=Medical%20Supplies"},
+    {tag:"GROOMING",title:"Fresh coats. Happy pets.",text:"Shop grooming and coat-care essentials.",image:"https://cdn.prod.website-files.com/679504b1db6e0feab4380814/67fceb7a3f899ec8a7468893_1R5A3515_1_02_9999.jpg",href:"./category.html?v=20260928-2&cat=Grooming"}
+  ];
+  el.innerHTML='<div class="wow-promo-track" tabindex="0">'+slides.map((s,i)=>'<article class="wow-promo-slide '+(i===0?"is-active":"")+'" data-index="'+i+'"><div class="wow-promo-copy"><span class="wow-promo-tag">'+esc(s.tag)+'</span><h2>'+esc(s.title)+'</h2><p>'+esc(s.text)+'</p><a class="wow-promo-cta" href="'+esc(s.href)+'">Shop Now <span aria-hidden="true">→</span></a></div><div class="wow-promo-media"><img src="'+esc(s.image)+'" alt="'+esc(s.tag)+'" loading="'+(i===0?"eager":"lazy")+'" decoding="async"></div></article>').join("")+'<button type="button" class="wow-promo-arrow prev" aria-label="Previous promotion">‹</button><button type="button" class="wow-promo-arrow next" aria-label="Next promotion">›</button><div class="wow-promo-dots" role="tablist" aria-label="Promotions">'+slides.map((_,i)=>'<button type="button" class="wow-promo-dot '+(i===0?"is-active":"")+'" data-slide="'+i+'" aria-label="Show promotion '+(i+1)+'" aria-selected="'+(i===0?"true":"false")+'"></button>').join("")+'</div></div>';
+  const track=el.querySelector(".wow-promo-track"), slidesEl=[...el.querySelectorAll(".wow-promo-slide")], dots=[...el.querySelectorAll(".wow-promo-dot")];
+  let active=0,timer=null,touchX=0;
+  const stop=()=>{if(timer){clearInterval(timer);timer=null}};
+  const restart=()=>{stop();if(slidesEl.length>1&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)timer=setInterval(()=>show(active+1,false),5200)};
+  const show=n=>{active=(n+slidesEl.length)%slidesEl.length;slidesEl.forEach((s,i)=>s.classList.toggle("is-active",i===active));dots.forEach((d,i)=>{d.classList.toggle("is-active",i===active);d.setAttribute("aria-selected",i===active?"true":"false")});restart()};
+  el.querySelector(".prev").addEventListener("click",()=>show(active-1)); el.querySelector(".next").addEventListener("click",()=>show(active+1));
+  dots.forEach(d=>d.addEventListener("click",()=>show(Number(d.dataset.slide))));
+  track.addEventListener("mouseenter",stop); track.addEventListener("mouseleave",restart); track.addEventListener("focusin",stop); track.addEventListener("focusout",restart);
+  track.addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX;stop()},{passive:true});
+  track.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)show(active+(dx<0?1:-1));else restart()},{passive:true});
+  track.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")show(active-1);if(e.key==="ArrowRight")show(active+1)});
+  restart();
 }
 async function loadProducts(){const productsEl=document.getElementById("products");if(productsEl)productsEl.innerHTML='<div class="catalog-loading" role="status" style="grid-column:1/-1;text-align:center;padding:38px 18px;color:#777">Loading products…</div>';try{
   const query=()=>fetch(SUPABASE_URL+"/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery&active=eq.true&order=created_at.desc",{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"}});
@@ -600,7 +713,7 @@ async function loadProducts(){const productsEl=document.getElementById("products
 }catch(e){
   console.error("Product load error:",e);
   /* Never blank the storefront because the API is temporarily unavailable. */
-  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
+  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();if(window.renderDepartmentRows)window.renderDepartmentRows();
   if(location.hash==="#cart")setTimeout(openCart,50);
 }}
 function productVisual(p){
@@ -923,54 +1036,3 @@ function categoryMatches(productCategory, selectedCategory){
 function filterCategory(cat){
   currentCategory=cat;
   applyProductFilters();
-  const nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");
-  window.location.hash="shop";
-}
-document.addEventListener("keydown",function(event){if(event.key==="Escape"){const nav=document.getElementById("mainNav"),backdrop=document.getElementById("menuBackdrop"),btn=document.querySelector(".menu-btn");if(nav&&nav.classList.contains("open")){nav.classList.remove("open");if(backdrop)backdrop.classList.remove("open");if(btn)btn.setAttribute("aria-expanded","false");document.body.style.overflow="";}}});
-
-function toggleMenu(e){
-  if(e){e.preventDefault();e.stopPropagation();}
-  const nav=document.getElementById("mainNav"), btn=document.querySelector(".menu-btn"), backdrop=document.getElementById("menuBackdrop");
-  if(!nav)return false;
-  const open=!nav.classList.contains("open");
-  nav.classList.toggle("open",open);
-  if(backdrop)backdrop.classList.toggle("open",open);
-  if(btn)btn.setAttribute("aria-expanded",open?"true":"false");
-  document.body.style.overflow=open?"hidden":"";document.body.classList.toggle("menu-open",open);
-  return false;
-}
-
-function setBottomActive(label){document.querySelectorAll('.bottom-item').forEach(b=>b.classList.remove('active'));let b=[...document.querySelectorAll('.bottom-item')].find(x=>x.textContent.trim().startsWith(label));if(b)b.classList.add('active')}
-function goHome(){setBottomActive('Home');const e=document.querySelector('.hero')||document.body;e.scrollIntoView({behavior:'smooth',block:'start'});}
-function focusSearch(){setBottomActive('Search');const e=document.getElementById('search');if(e){e.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>{e.focus();e.click()},350)}}
-function toggleCategories(){setBottomActive('Categories');const e=document.getElementById('categories');if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
-function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
-function closeAccount(){document.getElementById('accountPanel').style.display='none'}
-wireProductCardClicks();
-wireSearch();
-wireCheckoutValidation();
-loadCheckoutCities();
-/* Render the verified catalog immediately; Supabase refreshes it in the background. */
-P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
-loadProducts().then(()=>loadBanners());
-ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
-</script><script src="./shared-cart.js?v=20261004-3"></script><script>
-(function(){
-  const q=new URLSearchParams(location.search);
-  if(q.get("openCheckout")==="1"){
-    const open=()=>{if(typeof window.checkout==="function"){try{window.checkout()}catch(e){console.error("Checkout auto-open error:",e)}}};
-    if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(open,350),{once:true});
-    else setTimeout(open,350);
-  }
-})();
-</script><script>
-function toggleSubmenu(id,btn,e){
-  if(e){e.preventDefault();e.stopPropagation();}
-  const el=document.getElementById(id); if(!el||!btn)return false;
-  const open=!el.classList.contains("open");
-  el.classList.toggle("open",open);
-  btn.classList.toggle("is-open",open);
-  btn.setAttribute("aria-expanded",open?"true":"false");
-  return false;
-}
-</script><script>(function(){if(!new URLSearchParams(location.search).has("debug"))return;document.querySelectorAll('a[href*="product.html"]').forEach(a=>{const u=new URL(a.href,location.href);u.searchParams.set("debug","1");a.href=u.href})})();</script></body></html>
