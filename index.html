@@ -461,69 +461,8 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
 </style>
 <style id="wowLiveRuntimeStyle">#wowLiveRuntime{display:none;position:fixed;top:8px;left:8px;right:8px;z-index:999999;background:#fff;border:2px solid #d71920;border-radius:10px;padding:10px;box-shadow:0 8px 28px rgba(0,0,0,.28);font:12px/1.4 Arial;color:#222;max-height:45vh;overflow:auto}#wowLiveRuntime.show{display:block}#wowLiveRuntime b{color:#d71920}#wowLiveRuntime pre{white-space:pre-wrap;word-break:break-word;margin:6px 0;padding:6px;background:#f5f5f5;border-radius:6px}#wowLiveRuntime button{border:0;border-radius:6px;padding:6px 9px;font-weight:700;margin-right:5px}</style><div id="wowLiveRuntime" role="alert"><b>WOW Pets LIVE ERROR</b><div id="wowLiveRuntimeText"></div><pre id="wowLiveRuntimeDetails"></pre><button type="button" onclick="navigator.clipboard?.writeText((document.getElementById('wowLiveRuntimeText')?.innerText||'')+'\n'+(document.getElementById('wowLiveRuntimeDetails')?.innerText||''))">COPY</button><button type="button" onclick="this.parentElement.classList.remove('show')">CLOSE</button></div><script>(function(){function show(stage,error){try{var b=document.getElementById("wowLiveRuntime"),t=document.getElementById("wowLiveRuntimeText"),d=document.getElementById("wowLiveRuntimeDetails");if(!b||!t||!d)return;var msg=error&&error.message?error.message:String(error||"Unknown error");t.textContent="Stage: "+stage+" | URL: "+location.href;d.textContent=msg+(error&&error.stack?"\n\n"+error.stack:"");b.classList.add("show")}catch(_e){}}window.addEventListener("error",function(e){show("JavaScript runtime error",e.error||e.message)});window.addEventListener("unhandledrejection",function(e){show("Unhandled promise rejection",e.reason)});window.__wowLiveRuntimeDebug={show:show}})();</script><style id="wow-desktop-home-polish">
 @media(min-width:701px){
-  header{position:relative!important;z-index:2000!important;}
-  .head{display:grid!important;grid-template-columns:180px minmax(280px,1fr) 180px!important;grid-template-rows:auto auto!important;max-width:none!important;width:100%!important;padding:14px 28px 12px!important;box-sizing:border-box!important;gap:10px!important;align-items:center!important;}
-  .mobile-menu-bar{display:flex!important;grid-column:1;grid-row:1;align-items:center!important;justify-content:flex-start!important;padding:0!important;max-width:none!important;}
-  .mobile-menu-bar .menu-btn{width:auto!important;height:44px!important;padding:0 14px!important;display:inline-flex!important;gap:10px!important;background:#171717!important;color:#fff!important;border-radius:10px!important;font-size:14px!important;font-weight:800!important;letter-spacing:.2px!important;}
-  .mobile-menu-bar .menu-btn::after{content:"MENU";font-size:13px;font-weight:800;}
-  .mobile-menu-bar .hamburger-lines{width:22px!important;height:20px!important;gap:4px!important;}
-  .mobile-menu-bar .hamburger-lines i{width:22px!important;height:2px!important;background:currentColor!important;}
-  .brand{grid-column:2;grid-row:1;justify-content:center!important;min-width:0!important;}
-  .brand-logo{width:205px!important;max-width:205px!important;}
-  .head-actions{grid-column:3;grid-row:1;justify-content:flex-end!important;margin:0!important;}
-  .icon-btn{width:48px!important;height:44px!important;font-size:27px!important;}
-  .search{grid-column:1 / -1;grid-row:2;max-width:860px!important;width:100%!important;height:52px!important;border-radius:14px!important;margin:2px auto 0!important;box-shadow:0 4px 14px rgba(0,0,0,.08)!important;}
-  .search input{height:52px!important;font-size:16px!important;padding:0 18px!important;}
-  #mainNav{position:fixed!important;left:14px!important;top:108px!important;width:224px!important;max-height:calc(100vh - 126px)!important;overflow:auto!important;background:#fff!important;border:1px solid #e3e3e3!important;border-radius:16px!important;box-shadow:0 14px 36px rgba(0,0,0,.12)!important;display:block!important;padding:10px 0!important;z-index:1900!important;}
-  #mainNav .menu-close{display:none!important;}
-  #mainNav>a,#mainNav .menu-parent>a{display:flex!important;align-items:center!important;gap:10px!important;padding:12px 14px!important;color:#222!important;text-decoration:none!important;font-size:13px!important;font-weight:750!important;border-bottom:1px solid #f0f0f0!important;}
-  #mainNav>a:hover,#mainNav .menu-parent>a:hover{background:#fff9d9!important;}
-  #mainNav .menu-parent{display:flex!important;align-items:center!important;justify-content:space-between!important;}
-  #mainNav .menu-parent>a{flex:1!important;border-bottom:0!important;}
-  #mainNav .menu-sub-toggle{width:34px!important;height:34px!important;min-width:34px!important;margin:0 10px 0 4px!important;}
-  #mainNav .menu-submenu{max-height:none!important;opacity:1!important;transform:none!important;display:block!important;background:#fafafa!important;border-bottom:1px solid #eee!important;}
-  #mainNav .menu-submenu a{padding:9px 12px 9px 48px!important;font-size:12px!important;}
-  #mainNav .menu-icon{width:20px!important;min-width:20px!important;text-align:center!important;}
-  body{padding-left:252px!important;}
-  .wow-home-stage,.section,footer{max-width:none!important;margin-left:0!important;margin-right:22px!important;}
-  .wow-home-stage{padding-left:0!important;padding-right:0!important;}
-  .wow-promo{margin-top:16px!important;}
-  .wow-promo-track{min-height:270px!important;}
-  .wow-promo-slide{min-height:270px!important;}
-  .wow-animal-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:18px!important;}
-  .wow-animal-card,.wow-animal-card img{height:225px!important;min-height:225px!important;}
-}
-.wow-promo-track{position:relative;min-height:270px;overflow:hidden;border-radius:20px;background:#f4f4f4;box-shadow:0 10px 28px rgba(0,0,0,.10);}
-.wow-promo-slide{position:absolute;inset:0;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;padding:26px 54px;opacity:0;visibility:hidden;transform:translateX(18px);transition:opacity .4s ease,transform .4s ease;background:linear-gradient(110deg,#fff8dc,#fff 58%,#f4f6f8);}
-.wow-promo-slide:nth-child(2){background:linear-gradient(110deg,#eef7ff,#fff 58%,#f5f8fb);}
-.wow-promo-slide:nth-child(3){background:linear-gradient(110deg,#eefaf1,#fff 58%,#f5f7f6);}
-.wow-promo-slide:nth-child(4){background:linear-gradient(110deg,#f7efff,#fff 58%,#f6f5f8);}
-.wow-promo-slide.is-active{opacity:1;visibility:visible;transform:translateX(0);}
-.wow-promo-copy{max-width:620px;position:relative;z-index:2;}
-.wow-promo-tag{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,210,28,.24);font-size:11px;font-weight:850;letter-spacing:.5px;color:#6d5500;}
-.wow-promo-copy h2{margin:11px 0 7px;font-size:clamp(28px,3vw,42px);line-height:1.04;letter-spacing:-1px;}
-.wow-promo-copy p{margin:0 0 17px;color:#5d6167;font-size:14px;line-height:1.5;max-width:520px;}
-.wow-promo-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:10px;background:#171717;color:#fff;text-decoration:none;font-size:12px;font-weight:800;}
-.wow-promo-media{height:220px;display:flex;align-items:center;justify-content:center;}
-.wow-promo-media img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(0,0,0,.12));}
-.wow-promo-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid #ddd;border-radius:50%;background:rgba(255,255,255,.92);font-size:22px;display:grid;place-items:center;z-index:5;cursor:pointer;}
-.wow-promo-arrow.prev{left:14px}.wow-promo-arrow.next{right:14px}
-.wow-promo-dots{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.84);z-index:6;}
-.wow-promo-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#aaa;cursor:pointer}.wow-promo-dot.is-active{width:21px;border-radius:99px;background:#222}
-.wow-category-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;}
-.wow-category-cards-3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:760px}.wow-category-cards-4{grid-template-columns:repeat(4,minmax(0,1fr));}
-.wow-category-cards a{position:relative;min-height:145px;border-radius:15px;overflow:hidden;background:#f5f5f5;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.07);border:1px solid #e8e8e8;}
-.wow-category-cards img{display:block;width:100%;height:145px;object-fit:cover;background:#fff;}
-.wow-category-cards a:after{content:"";position:absolute;inset:42% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.64));}
-.wow-category-cards span{position:absolute;left:13px;bottom:11px;z-index:2;color:#fff;font-size:13px;font-weight:850;text-shadow:0 2px 8px rgba(0,0,0,.35);}
-.wow-live-row{display:flex;gap:12px;overflow-x:auto;padding:14px 2px 4px;scroll-snap-type:x proximity;}
-.wow-live-row .card{min-width:210px;max-width:210px;scroll-snap-align:start;}
-.wow-live-row .pic{height:170px!important;min-height:170px!important;}
-.wow-live-row .info>b{font-size:13px!important;min-height:35px!important;max-height:35px!important;}
-.wow-department-section{margin-bottom:34px;}
-@media(max-width:700px){
- .wow-promo-track{min-height:320px;border-radius:16px}.wow-promo-slide{grid-template-columns:1fr;padding:20px 22px 44px}.wow-promo-media{position:absolute;right:4px;bottom:22px;width:43%;height:155px}.wow-promo-copy{max-width:68%}.wow-promo-copy h2{font-size:27px}.wow-promo-copy p{font-size:12px}.wow-promo-arrow{width:32px;height:32px;font-size:18px}.wow-category-cards,.wow-category-cards-4,.wow-category-cards-3{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none}.wow-category-cards a{min-height:125px}.wow-category-cards img{height:125px}.wow-live-row .card{min-width:175px;max-width:175px}.wow-live-row .pic{height:145px!important;min-height:145px!important;}
-}
+header{position:relative!important;z-index:2000!important}.head{display:grid!important;grid-template-columns:180px minmax(280px,1fr) 180px!important;grid-template-rows:auto auto!important;max-width:none!important;width:100%!important;padding:14px 28px 12px!important;box-sizing:border-box!important;gap:10px!important;align-items:center!important}.mobile-menu-bar{display:flex!important;grid-column:1;grid-row:1;align-items:center!important;justify-content:flex-start!important;padding:0!important;max-width:none!important}.mobile-menu-bar .menu-btn{width:auto!important;height:44px!important;padding:0 14px!important;display:inline-flex!important;gap:10px!important;background:#171717!important;color:#fff!important;border-radius:10px!important;font-size:14px!important;font-weight:800!important;letter-spacing:.2px!important}.mobile-menu-bar .menu-btn::after{content:"MENU";font-size:13px;font-weight:800}.mobile-menu-bar .hamburger-lines{width:22px!important;height:20px!important;gap:4px!important}.mobile-menu-bar .hamburger-lines i{width:22px!important;height:2px!important;background:currentColor!important}.brand{grid-column:2;grid-row:1;justify-content:center!important;min-width:0!important}.brand-logo{width:205px!important;max-width:205px!important}.head-actions{grid-column:3;grid-row:1;justify-content:flex-end!important;margin:0!important}.icon-btn{width:48px!important;height:44px!important;font-size:27px!important}.search{grid-column:1 / -1;grid-row:2;max-width:860px!important;width:100%!important;height:52px!important;border-radius:14px!important;margin:2px auto 0!important;box-shadow:0 4px 14px rgba(0,0,0,.08)!important}.search input{height:52px!important;font-size:16px!important;padding:0 18px!important}#mainNav{position:fixed!important;left:14px!important;top:108px!important;width:224px!important;max-height:calc(100vh - 126px)!important;overflow:auto!important;background:#fff!important;border:1px solid #e3e3e3!important;border-radius:16px!important;box-shadow:0 14px 36px rgba(0,0,0,.12)!important;display:block!important;padding:10px 0!important;z-index:1900!important}#mainNav .menu-close{display:none!important}#mainNav>a,#mainNav .menu-parent>a{display:flex!important;align-items:center!important;gap:10px!important;padding:12px 14px!important;color:#222!important;text-decoration:none!important;font-size:13px!important;font-weight:750!important;border-bottom:1px solid #f0f0f0!important}#mainNav>a:hover,#mainNav .menu-parent>a:hover{background:#fff9d9!important}#mainNav .menu-parent{display:flex!important;align-items:center!important;justify-content:space-between!important}#mainNav .menu-parent>a{flex:1!important;border-bottom:0!important}#mainNav .menu-sub-toggle{width:34px!important;height:34px!important;min-width:34px!important;margin:0 10px 0 4px!important}#mainNav .menu-submenu{max-height:none!important;opacity:1!important;transform:none!important;display:block!important;background:#fafafa!important;border-bottom:1px solid #eee!important}#mainNav .menu-submenu a{padding:9px 12px 9px 48px!important;font-size:12px!important}#mainNav .menu-icon{width:20px!important;min-width:20px!important;text-align:center!important}body{padding-left:252px!important}.wow-home-stage,.section,footer{max-width:none!important;margin-left:0!important;margin-right:22px!important}.wow-home-stage{padding-left:0!important;padding-right:0!important}.wow-promo{margin-top:16px!important}.wow-promo-track{min-height:270px!important}.wow-promo-slide{min-height:270px!important}.wow-animal-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:18px!important}.wow-animal-card,.wow-animal-card img{height:225px!important;min-height:225px!important}}
+.wow-promo-track{position:relative;min-height:270px;overflow:hidden;border-radius:20px;background:#f4f4f4;box-shadow:0 10px 28px rgba(0,0,0,.10)}.wow-promo-slide{position:absolute;inset:0;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;padding:26px 54px;opacity:0;visibility:hidden;transform:translateX(18px);transition:opacity .4s ease,transform .4s ease;background:linear-gradient(110deg,#fff8dc,#fff 58%,#f4f6f8)}.wow-promo-slide:nth-child(2){background:linear-gradient(110deg,#eef7ff,#fff 58%,#f5f8fb)}.wow-promo-slide:nth-child(3){background:linear-gradient(110deg,#eefaf1,#fff 58%,#f5f7f6)}.wow-promo-slide:nth-child(4){background:linear-gradient(110deg,#f7efff,#fff 58%,#f6f5f8)}.wow-promo-slide.is-active{opacity:1;visibility:visible;transform:translateX(0)}.wow-promo-copy{max-width:620px;position:relative;z-index:2}.wow-promo-tag{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(255,210,28,.24);font-size:11px;font-weight:850;letter-spacing:.5px;color:#6d5500}.wow-promo-copy h2{margin:11px 0 7px;font-size:clamp(28px,3vw,42px);line-height:1.04;letter-spacing:-1px}.wow-promo-copy p{margin:0 0 17px;color:#5d6167;font-size:14px;line-height:1.5;max-width:520px}.wow-promo-cta{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:10px;background:#171717;color:#fff;text-decoration:none;font-size:12px;font-weight:800}.wow-promo-media{height:220px;display:flex;align-items:center;justify-content:center}.wow-promo-media img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 12px 16px rgba(0,0,0,.12))}.wow-promo-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid #ddd;border-radius:50%;background:rgba(255,255,255,.92);font-size:22px;display:grid;place-items:center;z-index:5;cursor:pointer}.wow-promo-arrow.prev{left:14px}.wow-promo-arrow.next{right:14px}.wow-promo-dots{position:absolute;bottom:11px;left:50%;transform:translateX(-50%);display:flex;gap:6px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.84);z-index:6}.wow-promo-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;background:#aaa;cursor:pointer}.wow-promo-dot.is-active{width:21px;border-radius:99px;background:#222}.wow-category-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.wow-category-cards-3{grid-template-columns:repeat(3,minmax(0,1fr));max-width:760px}.wow-category-cards-4{grid-template-columns:repeat(4,minmax(0,1fr))}.wow-category-cards a{position:relative;min-height:145px;border-radius:15px;overflow:hidden;background:#f5f5f5;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.07);border:1px solid #e8e8e8}.wow-category-cards img{display:block;width:100%;height:145px;object-fit:cover;background:#fff}.wow-category-cards a:after{content:"";position:absolute;inset:42% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.64))}.wow-category-cards span{position:absolute;left:13px;bottom:11px;z-index:2;color:#fff;font-size:13px;font-weight:850;text-shadow:0 2px 8px rgba(0,0,0,.35)}.wow-live-row{display:flex;gap:12px;overflow-x:auto;padding:14px 2px 4px;scroll-snap-type:x proximity}.wow-live-row .card{min-width:210px;max-width:210px;scroll-snap-align:start}.wow-live-row .pic{height:170px!important;min-height:170px!important}.wow-live-row .info>b{font-size:13px!important;min-height:35px!important;max-height:35px!important}.wow-department-section{margin-bottom:34px}@media(max-width:700px){.wow-promo-track{min-height:320px;border-radius:16px}.wow-promo-slide{grid-template-columns:1fr;padding:20px 22px 44px}.wow-promo-media{position:absolute;right:4px;bottom:22px;width:43%;height:155px}.wow-promo-copy{max-width:68%}.wow-promo-copy h2{font-size:27px}.wow-promo-copy p{font-size:12px}.wow-promo-arrow{width:32px;height:32px;font-size:18px}.wow-category-cards,.wow-category-cards-4,.wow-category-cards-3{grid-template-columns:repeat(2,minmax(0,1fr));max-width:none}.wow-category-cards a{min-height:125px}.wow-category-cards img{height:125px}.wow-live-row .card{min-width:175px;max-width:175px}.wow-live-row .pic{height:145px!important;min-height:145px!important;}}
 </style></head><body>
 <header><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
@@ -713,7 +652,7 @@ async function loadProducts(){const productsEl=document.getElementById("products
 }catch(e){
   console.error("Product load error:",e);
   /* Never blank the storefront because the API is temporarily unavailable. */
-  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();renderDepartmentRows();
+  P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
   if(location.hash==="#cart")setTimeout(openCart,50);
 }}
 function productVisual(p){
@@ -1059,32 +998,13 @@ function focusSearch(){setBottomActive('Search');const e=document.getElementById
 function toggleCategories(){setBottomActive('Categories');const e=document.getElementById('categories');if(e)e.scrollIntoView({behavior:'smooth',block:'start'});}
 function accountBottom(){setBottomActive('Account');const p=document.getElementById('accountPanel');if(p)p.style.display='block';}
 function closeAccount(){document.getElementById('accountPanel').style.display='none'}
-<script id="wow-live-department-render">
-function renderDepartmentRows(){
-  if(!Array.isArray(window.P)||!window.P.length)return;
-  const groups=[
-    {key:"cats",match:p=>/cat|kitten|feline/i.test(String(p[0]+" "+p[3]))},
-    {key:"dogs",match:p=>/dog|puppy|canine/i.test(String(p[0]+" "+p[3]))},
-    {key:"other",match:p=>/bird|fish|horse|other/i.test(String(p[0]+" "+p[3]))},
-    {key:"health",match:p=>/medical|medicine|deworm|flea|tick|health|frontliner/i.test(String(p[0]+" "+p[3]))}
-  ];
-  groups.forEach(g=>{
-    const el=document.querySelector('.wow-live-row[data-live-group="'+g.key+'"]'); if(!el)return;
-    const list=window.P.filter(g.match).slice(0,8);
-    if(!list.length){el.innerHTML='<div class="wow-live-empty">Live products will appear here as you add inventory.</div>';return;}
-    el.innerHTML=list.map(p=>{
-      const i=window.P.indexOf(p);
-      return '<div class="card"><div class="pic product-photo" data-product-index="'+i+'" role="link" tabindex="0" style="cursor:pointer">'+productVisual(p)+'</div><div class="info" data-product-index="'+i+'" role="link" tabindex="0" style="cursor:pointer"><b>'+esc(p[0])+'</b><div class="price">PKR '+(Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1])).toLocaleString()+'</div><button type="button" class="btn yellow add-product" data-product-index="'+i+'">ADD TO CART</button></div></div>';
-    }).join("");
-  });
-}
-</script><script>wireProductCardClicks();
+wireProductCardClicks();
 wireSearch();
 wireCheckoutValidation();
 loadCheckoutCities();
 /* Render the verified catalog immediately; Supabase refreshes it in the background. */
 P=BUILTIN_PRODUCTS.map(productRow);window.P=P;render();update();
-loadProducts().then(()=>{loadBanners();renderDepartmentRows();});
+loadProducts().then(()=>{loadBanners();if(window.renderDepartmentRows)window.renderDepartmentRows();});
 ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
 </script><script src="./shared-cart.js?v=20261004-3"></script><script>
 (function(){
@@ -1105,4 +1025,21 @@ function toggleSubmenu(id,btn,e){
   btn.setAttribute("aria-expanded",open?"true":"false");
   return false;
 }
-</script><script>(function(){if(!new URLSearchParams(location.search).has("debug"))return;document.querySelectorAll('a[href*="product.html"]').forEach(a=>{const u=new URL(a.href,location.href);u.searchParams.set("debug","1");a.href=u.href})})();</script></body></html>
+</script><script>(function(){if(!new URLSearchParams(location.search).has("debug"))return;document.querySelectorAll('a[href*="product.html"]').forEach(a=>{const u=new URL(a.href,location.href);u.searchParams.set("debug","1");a.href=u.href})})();</script><script id="wow-live-department-render">
+function renderDepartmentRows(){
+  if(!Array.isArray(window.P)||!window.P.length)return;
+  const groups=[
+    {key:"cats",match:p=>/cat|kitten|feline/i.test(String(p[0]+" "+p[3]))},
+    {key:"dogs",match:p=>/dog|puppy|canine/i.test(String(p[0]+" "+p[3]))},
+    {key:"other",match:p=>/bird|fish|horse|other/i.test(String(p[0]+" "+p[3]))},
+    {key:"health",match:p=>/medical|medicine|deworm|flea|tick|health|frontliner/i.test(String(p[0]+" "+p[3]))}
+  ];
+  groups.forEach(g=>{
+    const el=document.querySelector('.wow-live-row[data-live-group="'+g.key+'"]'); if(!el)return;
+    const list=window.P.filter(g.match).slice(0,8);
+    if(!list.length){el.innerHTML='<div class="wow-live-empty">Live products will appear here as you add inventory.</div>';return;}
+    el.innerHTML=list.map(p=>{const i=window.P.indexOf(p);return '<div class="card"><div class="pic product-photo" data-product-index="'+i+'" role="link" tabindex="0" style="cursor:pointer">'+productVisual(p)+'</div><div class="info" data-product-index="'+i+'" role="link" tabindex="0" style="cursor:pointer"><b>'+esc(p[0])+'</b><div class="price">PKR '+(Number(p[9])>0&&Number(p[9])<Number(p[1])?Number(p[9]):Number(p[1])).toLocaleString()+'</div><button type="button" class="btn yellow add-product" data-product-index="'+i+'">ADD TO CART</button></div></div>'}).join("");
+  });
+}
+if(window.P&&window.P.length)renderDepartmentRows();
+</script></body></html>
