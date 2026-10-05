@@ -787,9 +787,9 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
       <span><span class="mobile-category-icon">🦜</span>Birds</span><span class="mobile-category-arrow">›</span>
     </button>
     <div class="mobile-category-sub" id="mobileBirdsSub">
-      <a href="./category.html?cat=Birds">🍖 Bird Food</a>
-      <a href="./category.html?cat=Birds">🏠 Bird Cages</a>
-      <a href="./category.html?cat=Birds">🧸 Bird Toys</a>
+      <a href="./category.html?cat=Birds&sub=bird-food">🍖 Bird Food</a>
+      <a href="./category.html?cat=Birds&sub=bird-cages">🏠 Bird Cages</a>
+      <a href="./category.html?cat=Birds&sub=bird-toys">🧸 Bird Toys</a>
     </div>
   </div>
 
@@ -798,9 +798,9 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
       <span><span class="mobile-category-icon">🐠</span>Fish & Aquatics</span><span class="mobile-category-arrow">›</span>
     </button>
     <div class="mobile-category-sub" id="mobileFishSub">
-      <a href="./category.html?cat=Fish">🍖 Fish Food</a>
-      <a href="./category.html?cat=Fish">🫧 Aquariums</a>
-      <a href="./category.html?cat=Fish">⚙️ Filters</a>
+      <a href="./category.html?cat=Fish&sub=fish-food">🍖 Fish Food</a>
+      <a href="./category.html?cat=Fish&sub=aquariums">🫧 Aquariums</a>
+      <a href="./category.html?cat=Fish&sub=fish-filters">⚙️ Filters</a>
     </div>
   </div>
 
@@ -809,9 +809,9 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
       <span><span class="mobile-category-icon">✂️</span>Grooming & Equipment</span><span class="mobile-category-arrow">›</span>
     </button>
     <div class="mobile-category-sub" id="mobileGroomSub">
-      <a href="./category.html?cat=Grooming">🧴 Shampoos</a>
-      <a href="./category.html?cat=Grooming">🪮 Brushes & Combs</a>
-      <a href="./category.html?cat=Grooming">✂️ Nail Care</a>
+      <a href="./category.html?cat=Grooming&sub=shampoos">🧴 Shampoos</a>
+      <a href="./category.html?cat=Grooming&sub=brushes-combs">🪮 Brushes & Combs</a>
+      <a href="./category.html?cat=Grooming&sub=nail-care">✂️ Nail Care</a>
     </div>
   </div>
 
@@ -820,9 +820,9 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
       <span><span class="mobile-category-icon">🩺</span>Health & Care</span><span class="mobile-category-arrow">›</span>
     </button>
     <div class="mobile-category-sub" id="mobileHealthSub">
-      <a href="./category.html?cat=Medical%20Supplies">🦟 Flea & Tick</a>
-      <a href="./category.html?cat=Medical%20Supplies">🩹 First Aid</a>
-      <a href="./category.html?cat=Medical%20Supplies">💊 Supplements</a>
+      <a href="./category.html?cat=Medical%20Supplies&sub=flea-tick">🦟 Flea & Tick</a>
+      <a href="./category.html?cat=Medical%20Supplies&sub=first-aid">🩹 First Aid</a>
+      <a href="./category.html?cat=Medical%20Supplies&sub=supplements">💊 Supplements</a>
     </div>
   </div>
 
@@ -831,9 +831,9 @@ button,a,[role="button"],[role="link"],summary,input[type="button"],input[type="
       <span><span class="mobile-category-icon">🏠</span>Accessories & Living</span><span class="mobile-category-arrow">›</span>
     </button>
     <div class="mobile-category-sub" id="mobileAccessSub">
-      <a href="./category.html?cat=Accessories">🦮 Collars & Leashes</a>
-      <a href="./category.html?cat=Accessories">🥣 Bowls & Feeders</a>
-      <a href="./category.html?cat=Accessories">🛏️ Beds & Carriers</a>
+      <a href="./category.html?cat=Accessories&sub=collars-leashes">🦮 Collars & Leashes</a>
+      <a href="./category.html?cat=Accessories&sub=bowls-feeders">🥣 Bowls & Feeders</a>
+      <a href="./category.html?cat=Accessories&sub=beds-carriers">🛏️ Beds & Carriers</a>
     </div>
   </div>
 
@@ -1230,7 +1230,7 @@ function wireSearch(){
 const categoryParams=new URLSearchParams(window.location.search);
 const categoryParam=String(categoryParams.get("cat")||"").trim();
 const subParam=String(categoryParams.get("sub")||"").trim();
-const subMap={Cats:{food:"Cat Food",litter:"Cat Litter",toys:"Cat Toys",grooming:"Cat Grooming",accessories:"Cat Accessories"},Dogs:{food:"Dog Food",treats:"Dog Treats",toys:"Dog Toys",grooming:"Dog Grooming",accessories:"Dog Accessories"}};
+const subMap={Cats:{food:"Cat Food",litter:"Cat Litter",toys:"Cat Toys",grooming:"Cat Grooming",accessories:"Cat Accessories"},Dogs:{food:"Dog Food",treats:"Dog Treats",toys:"Dog Toys",grooming:"Dog Grooming",accessories:"Dog Accessories"},Birds:{"bird-food":"Bird Food","bird-cages":"Bird Cages","bird-toys":"Bird Toys"},Fish:{"fish-food":"Fish Food",aquariums:"Aquariums","fish-filters":"Filters"},Grooming:{shampoos:"Shampoos","brushes-combs":"Brushes & Combs","nail-care":"Nail Care"},"Medical Supplies":{"flea-tick":"Flea & Tick","first-aid":"First Aid",supplements:"Supplements"},Accessories:{"collars-leashes":"Collars & Leashes","bowls-feeders":"Bowls & Feeders","beds-carriers":"Beds & Carriers"}};
 if(categoryParam)currentCategory=categoryParam;
 if(subParam)currentSubcategory=(subMap[categoryParam]&&subMap[categoryParam][subParam])||subParam;
 function showBundles(){currentCategory="All";currentSearch="";document.getElementById("search").value="";let result=P.filter(p=>{let n=String(p[0]).toLowerCase();return n.includes("bundle")||n.includes("combo")||n.includes("pack");});render(result);document.querySelectorAll(".filter-bar .btn").forEach(b=>b.classList.remove("filter-active"));document.getElementById("searchResult").textContent=result.length+" bundle product"+(result.length===1?"":"s")+" found";let nav=document.getElementById("mainNav");if(nav)nav.classList.remove("open");window.location.hash="shop"}
@@ -1261,16 +1261,13 @@ function categoryMatches(productCategory, selectedCategory){
      product category text by productRow(). Match the canonical clickable
      subcategory names explicitly so every future admin assignment works. */
   const subcategoryAliases={
-    "cat food":["cat food","cats food"],
-    "cat litter":["cat litter","cats litter"],
-    "cat toys":["cat toys","cats toys"],
-    "cat grooming":["cat grooming","cats grooming"],
-    "cat accessories":["cat accessories","cats accessories"],
-    "dog food":["dog food","dogs food"],
-    "dog treats":["dog treats","dogs treats"],
-    "dog toys":["dog toys","dogs toys"],
-    "dog grooming":["dog grooming","dogs grooming"],
-    "dog accessories":["dog accessories","dogs accessories"]
+    "cat food":["cat food","cats food"],"cat litter":["cat litter","cats litter"],"cat toys":["cat toys","cats toys"],"cat grooming":["cat grooming","cats grooming"],"cat accessories":["cat accessories","cats accessories"],
+    "dog food":["dog food","dogs food"],"dog treats":["dog treats","dogs treats"],"dog toys":["dog toys","dogs toys"],"dog grooming":["dog grooming","dogs grooming"],"dog accessories":["dog accessories","dogs accessories"],
+    "bird food":["bird food"],"bird cages":["bird cages"],"bird toys":["bird toys"],
+    "fish food":["fish food"],"aquariums":["aquariums"],"filters":["filters","fish filters"],
+    "shampoos":["shampoos","shampoo"],"brushes & combs":["brushes & combs","brushes and combs"],"nail care":["nail care"],
+    "flea & tick":["flea & tick","flea and tick"],"first aid":["first aid"],"supplements":["supplements"],
+    "collars & leashes":["collars & leashes","collars and leashes"],"bowls & feeders":["bowls & feeders","bowls and feeders"],"beds & carriers":["beds & carriers","beds and carriers"]
   };
   const selectedAliases=subcategoryAliases[selected]||[selected];
   if(raw.some(v=>selectedAliases.includes(v)))return true;
