@@ -1636,3 +1636,40 @@ if(window.P&&window.P.length)renderDepartmentRows();
 }
 </style>
 
+
+<style id="wow-final-image-frame-v10">
+/* V10: reduce the white label band and give the artwork more vertical room on mobile. */
+@media(max-width:700px){
+  .wow-category-cards a{
+    min-height:0!important;
+  }
+  .wow-category-cards a img,
+  .wow-mobile-home-sections .wow-category-cards a img{
+    height:135px!important;
+    min-height:135px!important;
+    flex:0 0 135px!important;
+  }
+  .wow-category-cards a span{
+    min-height:34px!important;
+    height:34px!important;
+    padding:4px 5px!important;
+    line-height:1.05!important;
+    box-sizing:border-box!important;
+  }
+  .wow-animal-grid-primary .wow-animal-card{
+    min-height:0!important;
+  }
+  .wow-animal-grid-primary .wow-animal-card img{
+    height:174px!important;
+    min-height:174px!important;
+    flex-basis:174px!important;
+  }
+  .wow-animal-grid-primary .wow-animal-card>span:not(.wow-other-icon){
+    min-height:34px!important;
+    height:34px!important;
+    padding:4px 5px!important;
+    line-height:1.05!important;
+    box-sizing:border-box!important;
+  }
+}
+</style>
