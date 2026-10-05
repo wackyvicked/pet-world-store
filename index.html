@@ -1147,11 +1147,27 @@ ensureSb().then(()=>loadDeliveryConfig()).catch(()=>{});
 </script><script src="./shared-cart.js?v=20261004-3"></script><script>
 (function(){
   const q=new URLSearchParams(location.search);
-  if(q.get("openCheckout")==="1"){
-    const open=()=>{if(typeof window.checkout==="function"){try{window.checkout()}catch(e){console.error("Checkout auto-open error:",e)}}};
-    if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(open,350),{once:true});
-    else setTimeout(open,350);
-  }
+  if(q.get("openCheckout")!=="1")return;
+  let attempts=0;
+  const openWhenReady=()=>{
+    attempts++;
+    if(typeof window.checkout!=="function"){
+      if(attempts<34)setTimeout(openWhenReady,150);
+      else console.error("Checkout auto-open failed: checkout handler unavailable.");
+      return;
+    }
+    let saved=[];
+    try{const raw=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");saved=Array.isArray(raw)?raw.filter(x=>x&&x.id!=null&&Number(x.q)>0):[]}catch(_e){}
+    const catalogReady=Array.isArray(window.P)&&window.P.length>0;
+    const cartResolvable=!saved.length||!catalogReady||saved.every(x=>window.P.some(p=>p&&p[4]!=null&&String(p[4])===String(x.id)));
+    if(cartResolvable||attempts>=34){
+      try{window.checkout()}catch(e){console.error("Checkout auto-open error:",e)}
+      return;
+    }
+    setTimeout(openWhenReady,150);
+  };
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(openWhenReady,150),{once:true});
+  else setTimeout(openWhenReady,150);
 })();
 </script><script>
 function toggleSubmenu(id,btn,e){
