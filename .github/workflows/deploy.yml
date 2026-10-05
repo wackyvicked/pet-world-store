@@ -14,12 +14,15 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  # Do not cancel an active deployment validation when another push arrives.
+  # The latest commit can still deploy after the active validation completes.
+  cancel-in-progress: false
 
 jobs:
   validate:
     name: Pre-deployment error check
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v6
