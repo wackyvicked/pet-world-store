@@ -161,7 +161,7 @@ button:focus:not(:focus-visible),a:focus:not(:focus-visible){outline:none!import
 .manual-area-wrap[hidden]{display:none!important;}
 .manual-area-wrap input{width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid #d9dce1;border-radius:10px;background:#fff;min-height:44px;}
 
-</style><style>
+<style id="responsive-home-banner">.wow-promo-slide.banner-desktop-off{display:none!important}.wow-promo-slide.banner-mobile-off{display:none!important}.wow-promo-copy-mobile{display:none}.wow-promo-media picture,.wow-promo-media picture img{display:block;width:100%;height:100%}@media(max-width:700px){.wow-promo-slide.banner-desktop-off{display:none!important}.wow-promo-slide.banner-mobile-off{display:none!important}.wow-promo-copy-desktop{display:none!important}.wow-promo-copy-mobile{display:block!important}.wow-promo-media picture{width:100%;height:100%}.wow-promo-media picture img{width:100%;height:100%;object-fit:contain}}</style></style><style>
 html.checkout-route body > *:not(#checkout){visibility:hidden!important}
 html.checkout-route #checkout{display:block!important;visibility:visible!important}
 </style><script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./fallback-products.js?v=20260925-1"></script>
@@ -794,25 +794,40 @@ function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&l
 let P=[],cart=[];
 const BUILTIN_PRODUCTS=Array.isArray(window.WOWFallbackProducts)?window.WOWFallbackProducts:[];try{const saved=JSON.parse(localStorage.getItem("wowPetsCart")||"[]");if(Array.isArray(saved))cart=saved.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)}));}catch(e){}
 function productRow(r){const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"🐾";const categories=[r.category,r.subcategory].flatMap(v=>String(v??"").split(",")).map(v=>v.trim()).filter(Boolean);const categoryText=[...new Set(categories)].join(", ")||"Accessories";return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,categoryText,r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.brand??""];}
-function loadBanners(){
+async function loadBanners(){
   const el=document.getElementById("homeBanners"); if(!el)return;
-  const slides=[
+  const fallback=[
     {tag:"CAT FAVOURITES",title:"Better food for happy cats.",text:"Shop popular cat food and everyday nutrition.",image:"https://animalxop.com/cdn/shop/collections/27c7aa7c-dbd6-4498-a26a-761bc53b3305_3c243838-24d9-4882-a505-255c1161c800.png?v=1774683490",href:"./category.html?v=20260928-2&cat=Cats&sub=food"},
     {tag:"DOG FAVOURITES",title:"Good food. Happy dogs.",text:"Explore dog food, treats and daily essentials.",image:"https://images.pexels.com/photos/6568944/pexels-photo-6568944.jpeg?auto=compress&cs=tinysrgb&w=1200",href:"./category.html?v=20260928-2&cat=Dogs&sub=food"},
     {tag:"PET HEALTH",title:"Everyday health & care.",text:"Find deworming, flea & tick and health essentials.",image:"https://medlem.tine.no/fag-og-forskning/soker-midler-i-melkeproduksjonen/_/image/a13ca79c-956c-42cc-bcce-6c179e32122e%3Ade1bc2e8b436b05e9f9e2608174d26bd26e238e9/block-1200-630/ku-og-geit-pa-beite.jpg?quality=85",href:"./category.html?v=20260928-2&cat=Medical%20Supplies"},
     {tag:"GROOMING",title:"Fresh coats. Happy pets.",text:"Shop grooming and coat-care essentials.",image:"https://cdn1.productnation.co/stg/sites/5/60221111544e0.jpeg",href:"./category.html?v=20260928-2&cat=Grooming"}
   ];
-  el.innerHTML='<div class="wow-promo-track" tabindex="0">'+slides.map((s,i)=>'<article class="wow-promo-slide '+(i===0?"is-active":"")+'" data-index="'+i+'"><div class="wow-promo-copy"><span class="wow-promo-tag">'+esc(s.tag)+'</span><h2>'+esc(s.title)+'</h2><p>'+esc(s.text)+'</p><a class="wow-promo-cta" href="'+esc(s.href)+'">Shop Now <span aria-hidden="true">→</span></a></div><div class="wow-promo-media"><img src="'+esc(s.image)+'" alt="'+esc(s.tag)+'" loading="'+(i===0?"eager":"lazy")+'" decoding="async"></div></article>').join("")+'<button type="button" class="wow-promo-arrow prev" aria-label="Previous promotion">‹</button><button type="button" class="wow-promo-arrow next" aria-label="Next promotion">›</button><div class="wow-promo-dots" role="tablist" aria-label="Promotions">'+slides.map((_,i)=>'<button type="button" class="wow-promo-dot '+(i===0?"is-active":"")+'" data-slide="'+i+'" aria-label="Show promotion '+(i+1)+'" aria-selected="'+(i===0?"true":"false")+'"></button>').join("")+'</div></div>';
-  const track=el.querySelector(".wow-promo-track"), slidesEl=[...el.querySelectorAll(".wow-promo-slide")], dots=[...el.querySelectorAll(".wow-promo-dot")];
+  let dbRows=[];
+  try{
+    const client=await ensureSb();
+    if(client){
+      const {data,error}=await client.from("site_banners").select("id,type,title,banner_text,button_text,button_link,active,sort_order,image_url,desktop_image_url,mobile_image_url,desktop_title,desktop_text,desktop_button_text,desktop_button_link,mobile_title,mobile_text,mobile_button_text,mobile_button_link,desktop_active,mobile_active").neq("type","shipping_config").neq("type","banner_config").eq("active",true).order("sort_order",{ascending:true});
+      if(!error&&Array.isArray(data))dbRows=data.filter(b=>b.desktop_active!==false||b.mobile_active!==false);
+    }
+  }catch(e){console.warn("Banner database load failed; using fallback banners.",e)}
+  const slides=dbRows.length?dbRows.map((b,i)=>{
+    const d={tag:b.type==="sale"?"SPECIAL OFFER":"WOW PETS",title:b.desktop_title||b.title||"WOW Pets",text:b.desktop_text||b.banner_text||"",image:b.desktop_image_url||b.image_url||"",href:b.desktop_button_link||b.button_link||"#shop",button:b.desktop_button_text||b.button_text||"SHOP NOW",mobileTitle:b.mobile_title||b.desktop_title||b.title||"WOW Pets",mobileText:b.mobile_text||b.desktop_text||b.banner_text||"",mobileImage:b.mobile_image_url||b.desktop_image_url||b.image_url||"",mobileHref:b.mobile_button_link||b.desktop_button_link||b.button_link||"#shop",mobileButton:b.mobile_button_text||b.desktop_button_text||b.button_text||"SHOP NOW",desktopOn:b.desktop_active!==false,mobileOn:b.mobile_active!==false};
+    return d;
+  }):fallback.map(x=>({...x,button:"Shop Now",mobileTitle:x.title,mobileText:x.text,mobileImage:x.image,mobileHref:x.href,mobileButton:"Shop Now",desktopOn:true,mobileOn:true}));
+  if(!slides.length){el.innerHTML="";return}
+  el.innerHTML='<div class="wow-promo-track" tabindex="0">'+slides.map((b,i)=>{
+    const dOff=b.desktopOn?"":" banner-desktop-off",mOff=b.mobileOn?"":" banner-mobile-off";
+    const mobileSource=b.mobileImage&&b.mobileImage!==b.image?'<source media="(max-width:700px)" srcset="'+esc(b.mobileImage)+'">':(b.mobileImage?'<source media="(max-width:700px)" srcset="'+esc(b.mobileImage)+'">':"");
+    return '<article class="wow-promo-slide '+(i===0?"is-active":"")+dOff+mOff+'" data-index="'+i+'"><div class="wow-promo-copy wow-promo-copy-desktop"><span class="wow-promo-tag">'+esc(b.tag)+'</span><h2>'+esc(b.title)+'</h2><p>'+esc(b.text)+'</p><a class="wow-promo-cta" href="'+esc(b.href)+'">'+esc(b.button||"SHOP NOW")+' <span aria-hidden="true">→</span></a></div><div class="wow-promo-copy wow-promo-copy-mobile"><span class="wow-promo-tag">'+esc(b.tag)+'</span><h2>'+esc(b.mobileTitle)+'</h2><p>'+esc(b.mobileText)+'</p><a class="wow-promo-cta" href="'+esc(b.mobileHref)+'">'+esc(b.mobileButton||"SHOP NOW")+' <span aria-hidden="true">→</span></a></div><div class="wow-promo-media"><picture>'+mobileSource+'<img src="'+esc(b.image||b.mobileImage)+'" alt="'+esc(b.title||b.tag)+'" loading="'+(i===0?"eager":"lazy")+'" decoding="async" fetchpriority="'+(i===0?"high":"auto")+'"></picture></div></article>';
+  }).join("")+'<button type="button" class="wow-promo-arrow prev" aria-label="Previous promotion">‹</button><button type="button" class="wow-promo-arrow next" aria-label="Next promotion">›</button><div class="wow-promo-dots" role="tablist" aria-label="Promotions">'+slides.map((_,i)=>'<button type="button" class="wow-promo-dot '+(i===0?"is-active":"")+'" data-slide="'+i+'" aria-label="Show promotion '+(i+1)+'" aria-selected="'+(i===0?"true":"false")+'"></button>').join("")+'</div></div>';
+  const track=el.querySelector(".wow-promo-track"),slidesEl=[...el.querySelectorAll(".wow-promo-slide")],dots=[...el.querySelectorAll(".wow-promo-dot")];
   let active=0,timer=null,touchX=0;
   const stop=()=>{if(timer){clearInterval(timer);timer=null}};
   const restart=()=>{stop();if(slidesEl.length>1&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)timer=setInterval(()=>show(active+1),5200)};
-  const show=n=>{active=(n+slidesEl.length)%slidesEl.length;slidesEl.forEach((s,i)=>s.classList.toggle("is-active",i===active));dots.forEach((d,i)=>{d.classList.toggle("is-active",i===active);d.setAttribute("aria-selected",i===active?"true":"false")});restart()};
-  el.querySelector(".prev").addEventListener("click",()=>show(active-1)); el.querySelector(".next").addEventListener("click",()=>show(active+1));
-  dots.forEach(d=>d.addEventListener("click",()=>show(Number(d.dataset.slide))));
-  track.addEventListener("mouseenter",stop); track.addEventListener("mouseleave",restart); track.addEventListener("focusin",stop); track.addEventListener("focusout",restart);
-  track.addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX;stop()},{passive:true});
-  track.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)show(active+(dx<0?1:-1));else restart()},{passive:true});
+  const show=n=>{active=(n+slidesEl.length)%slidesEl.length;slidesEl.forEach((x,i)=>x.classList.toggle("is-active",i===active));dots.forEach((d,i)=>{d.classList.toggle("is-active",i===active);d.setAttribute("aria-selected",i===active?"true":"false")});restart()};
+  el.querySelector(".prev").addEventListener("click",()=>show(active-1));el.querySelector(".next").addEventListener("click",()=>show(active+1));dots.forEach(d=>d.addEventListener("click",()=>show(Number(d.dataset.slide))));
+  track.addEventListener("mouseenter",stop);track.addEventListener("mouseleave",restart);track.addEventListener("focusin",stop);track.addEventListener("focusout",restart);
+  track.addEventListener("touchstart",e=>{touchX=e.changedTouches[0].clientX;stop()},{passive:true});track.addEventListener("touchend",e=>{const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>45)show(active+(dx<0?1:-1));else restart()},{passive:true});
   track.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")show(active-1);if(e.key==="ArrowRight")show(active+1)});
   restart();
 }
