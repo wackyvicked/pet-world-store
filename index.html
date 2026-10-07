@@ -647,7 +647,14 @@ header{position:relative!important;z-index:2000!important}.head{display:grid!imp
 .wow-category-cards a:hover img{filter:brightness(1.12) saturate(1.20) contrast(1.04)!important;transform:scale(1.045)}
 .wow-animal-card>span:not(.wow-other-icon){font-family:"Trebuchet MS",ui-rounded,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif!important;font-size:20px!important;font-weight:700!important}
 @media(max-width:700px){.wow-category-cards a span{font-size:15px!important;bottom:10px!important}.wow-animal-card>span:not(.wow-other-icon){font-size:17px!important}}
-</style><style id="wow-mobile-remove-category-helper-v30">\n/* V30: remove the redundant "Four simple categories." helper text from the Cat/Dog department headings on mobile only. Desktop untouched. */\n@media(max-width:700px){\n  #shopCats .wow-section-heading p,\n  #shopDogs .wow-section-heading p{display:none!important;}\n}\n</style>\n</head><body>
+</style><style id="wow-mobile-remove-category-helper-v31">
+/* V31: remove the redundant Cat/Dog helper text on mobile only. Desktop untouched. */
+@media(max-width:700px){
+  #shopCats .wow-section-heading p,
+  #shopDogs .wow-section-heading p{display:none!important;}
+}
+</style>
+</head><body>
 <header><div class="wow-offer-ticker" role="status" aria-label="WOW Pets offers"><div class="wow-offer-track"><span>✨ WOW Pets Launch Offers</span><span>•</span><span>💳 Cash on Delivery</span><span>•</span><span>💬 WhatsApp Order Support</span><span>•</span><span>🏪 Store Pickup — Rawalpindi</span><span>•</span><span>🐾 Food • Grooming • Medicines • Accessories</span><span aria-hidden="true">✨ WOW Pets Launch Offers</span><span aria-hidden="true">•</span><span aria-hidden="true">💳 Cash on Delivery</span><span aria-hidden="true">•</span><span aria-hidden="true">💬 WhatsApp Order Support</span><span aria-hidden="true">•</span><span aria-hidden="true">🏪 Store Pickup — Rawalpindi</span><span aria-hidden="true">•</span><span aria-hidden="true">🐾 Food • Grooming • Medicines • Accessories</span></div></div><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
@@ -1222,15 +1229,17 @@ if(window.P&&window.P.length)renderDepartmentRows();
   }
 }
 </style>
-<style id="wow-mobile-category-images-edge-v29">
-/* V29: make Cat/Dog department cards uniform and edge-to-edge on mobile. Desktop untouched. */
+<style id="wow-mobile-category-images-edge-v31">
+/* V31: Cat/Dog category windows are uniform and filled edge-to-edge on mobile. Desktop untouched. */
 @media(max-width:700px){
-  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4{
+  #shopCats .wow-category-cards.wow-category-cards-4,
+  #shopDogs .wow-category-cards.wow-category-cards-4{
     grid-template-columns:repeat(2,minmax(0,1fr))!important;
     gap:9px!important;
     width:100%!important;
   }
-  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4 a{
+  #shopCats .wow-category-cards.wow-category-cards-4 a,
+  #shopDogs .wow-category-cards.wow-category-cards-4 a{
     width:100%!important;
     height:158px!important;
     min-height:158px!important;
@@ -1239,33 +1248,40 @@ if(window.P&&window.P.length)renderDepartmentRows();
     overflow:hidden!important;
     border-radius:14px!important;
     display:grid!important;
-    grid-template-rows:minmax(0,1fr) 40px!important;
+    grid-template-rows:118px 40px!important;
     box-sizing:border-box!important;
   }
-  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4 a img{
+  #shopCats .wow-category-cards.wow-category-cards-4 a img,
+  #shopDogs .wow-category-cards.wow-category-cards-4 a img{
     display:block!important;
     width:100%!important;
-    height:100%!important;
+    height:118px!important;
     min-width:100%!important;
-    min-height:0!important;
+    min-height:118px!important;
     max-width:none!important;
     max-height:none!important;
-    padding:0!important;
     margin:0!important;
+    padding:0!important;
+    border:0!important;
     object-fit:cover!important;
     object-position:center!important;
     box-sizing:border-box!important;
   }
-  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4 a span{
+  #shopCats .wow-category-cards.wow-category-cards-4 a span,
+  #shopDogs .wow-category-cards.wow-category-cards-4 a span{
     width:100%!important;
     height:40px!important;
     min-height:40px!important;
     margin:0!important;
     padding:5px!important;
     box-sizing:border-box!important;
+    display:flex!important;
+    align-items:center!important;
+    justify-content:center!important;
   }
 }
 </style>
+
 </body></html>
 <style id="wow-category-polish-v4">
 @media(min-width:701px){
