@@ -1222,6 +1222,50 @@ if(window.P&&window.P.length)renderDepartmentRows();
   }
 }
 </style>
+<style id="wow-mobile-category-images-edge-v29">
+/* V29: make Cat/Dog department cards uniform and edge-to-edge on mobile. Desktop untouched. */
+@media(max-width:700px){
+  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:9px!important;
+    width:100%!important;
+  }
+  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4 a{
+    width:100%!important;
+    height:158px!important;
+    min-height:158px!important;
+    max-height:158px!important;
+    padding:0!important;
+    overflow:hidden!important;
+    border-radius:14px!important;
+    display:grid!important;
+    grid-template-rows:minmax(0,1fr) 40px!important;
+    box-sizing:border-box!important;
+  }
+  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4 a img{
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    min-width:100%!important;
+    min-height:0!important;
+    max-width:none!important;
+    max-height:none!important;
+    padding:0!important;
+    margin:0!important;
+    object-fit:cover!important;
+    object-position:center!important;
+    box-sizing:border-box!important;
+  }
+  .wow-mobile-home-sections .wow-category-cards.wow-category-cards-4 a span{
+    width:100%!important;
+    height:40px!important;
+    min-height:40px!important;
+    margin:0!important;
+    padding:5px!important;
+    box-sizing:border-box!important;
+  }
+}
+</style>
 </body></html>
 <style id="wow-category-polish-v4">
 @media(min-width:701px){
