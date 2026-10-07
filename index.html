@@ -1210,7 +1210,19 @@ function renderDepartmentRows(){
   });
 }
 if(window.P&&window.P.length)renderDepartmentRows();
-</script></body></html>
+</script><style id="wow-mobile-section-heading-cleanup-v28">
+/* V28: remove explanatory/repetitive helper text from mobile homepage sections only. Desktop untouched. */
+@media(max-width:700px){
+  #categories .wow-section-heading p,
+  .wow-mobile-home-sections .wow-section-heading p,
+  #shop .wow-section-heading p,
+  .wow-reviews-section .wow-section-heading p,
+  .wow-review-empty p{
+    display:none!important;
+  }
+}
+</style>
+</body></html>
 <style id="wow-category-polish-v4">
 @media(min-width:701px){
   .wow-category-section{margin-bottom:42px!important}
