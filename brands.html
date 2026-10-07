@@ -20,4 +20,18 @@ const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&
   .head{padding-bottom:10px!important;}
   .wow-offer-ticker + .head{border-top:0!important;}
 }
+</style><style id="wow-mobile-logo-padding-layer-v27">
+/* V27: match homepage logo clipping/layering on every customer page. Mobile only. Desktop untouched. */
+@media(max-width:700px){
+  .wow-offer-ticker{position:relative!important;z-index:30!important;}
+  .head{position:relative!important;z-index:20!important;overflow:visible!important;}
+  .brand{position:relative!important;z-index:1!important;height:65px!important;min-height:65px!important;overflow:hidden!important;isolation:isolate!important;}
+  .brand-logo{
+    position:relative!important;z-index:0!important;height:65px!important;max-height:65px!important;
+    width:auto!important;max-width:none!important;object-fit:contain!important;object-position:center!important;
+    transform:scale(1.55)!important;transform-origin:center center!important;
+    background:transparent!important;mix-blend-mode:normal!important;
+  }
+  .search{position:relative!important;z-index:40!important;}
+}
 </style></body></html>
