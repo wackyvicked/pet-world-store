@@ -1727,34 +1727,64 @@ if(window.P&&window.P.length)renderDepartmentRows();
   .search{margin-top:-6px!important;transform:translateY(-2px)!important;}
 }
 </style>
-<style id="wow-mobile-header-hero-final-v16">
-/* V16: mobile-only vertical spacing balance. Desktop intentionally untouched. */
+<style id="wow-mobile-header-hero-final-v17">
+/* V17: mobile-only final spacing/alignment pass. Desktop untouched. */
 @media(max-width:700px){
-  /* 8px above the menu/logo/cart row; 10px between that row and search. */
-  .head{padding-top:8px!important;padding-bottom:0!important;row-gap:10px!important;gap:5px!important;}
-
-  /* Keep the requested larger logo; constrain its rendered box without changing the asset. */
-  .brand-logo{
-    width:225px!important;
-    max-width:225px!important;
-    height:auto!important;
-    max-height:52px!important;
-    transform:none!important;
-    transform-origin:center!important;
+  header{overflow:visible!important;}
+  .head{
+    padding:8px 16px 0!important;
+    row-gap:10px!important;
+    column-gap:5px!important;
   }
-
-  /* Preserve comfortable touch targets at 44x44px. */
-  .mobile-menu-bar,.brand,.head-actions{transform:none!important;}
-  .mobile-menu-bar{flex-basis:44px!important;}
-  .head-actions{gap:10px!important;}
-  .icon-btn{width:44px!important;height:44px!important;}
+  .brand-logo{
+    width:195px!important;
+    max-width:195px!important;
+    height:auto!important;
+    max-height:48px!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    background:transparent!important;
+    margin:0!important;
+  }
+  .mobile-menu-bar{
+    flex-basis:44px!important;
+    width:44px!important;
+    min-width:44px!important;
+    margin:0!important;
+    padding:0!important;
+  }
+  .head-actions{
+    gap:10px!important;
+    margin-left:auto!important;
+  }
+  .icon-btn{
+    width:44px!important;
+    min-width:44px!important;
+    height:44px!important;
+    min-height:44px!important;
+  }
   .menu-icon{font-size:32px!important;}
-
-  /* Search stays the same design/size; only its vertical position is balanced. */
-  .search{margin-top:0!important;transform:none!important;height:48px!important;max-width:none!important;}
-  .search input{height:auto!important;padding-left:13px!important;padding-right:13px!important;}
-
-  /* Give the banner a clean 15px separation from the search/header. */
-  #homeBanners{margin-top:15px!important;}
+  .search{
+    margin:0!important;
+    height:48px!important;
+    max-width:none!important;
+    width:100%!important;
+    padding-bottom:11px!important;
+    box-sizing:content-box!important;
+    border-bottom:0!important;
+  }
+  .search input{
+    height:auto!important;
+    padding-left:13px!important;
+    padding-right:13px!important;
+  }
+  #homeBanners{
+    margin:15px 0 8px!important;
+    padding:0!important;
+  }
+  #homeBanners .wow-static-hero{
+    margin-left:0!important;
+    margin-right:0!important;
+  }
 }
 </style>
