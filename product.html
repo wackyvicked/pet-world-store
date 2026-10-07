@@ -555,7 +555,8 @@ function toggleSubmenu(id,btn,e){
   return false;
 }
 </script><script>(function(){if(!new URLSearchParams(location.search).has("debug"))return;document.querySelectorAll('a[href*="product.html"]').forEach(a=>{const u=new URL(a.href,location.href);u.searchParams.set("debug","1");a.href=u.href})})();</script><style id="wow-mobile-global-header-polish-v26">
-/* V26: mobile-only global header consistency. Announcement on customer pages; remove hard grey divider and use clean spacing. Desktop untouched. */
+/* V26: mobile-only global header consistency. Desktop remains unchanged. */
+.wow-offer-ticker{display:none;}
 @media(max-width:700px){
   header{border-bottom:0!important;box-shadow:none!important;}
   .wow-offer-ticker{height:31px!important;min-height:31px!important;display:flex!important;align-items:center!important;overflow:hidden!important;background:#171717!important;color:#fff!important;font-size:10px!important;font-weight:700!important;white-space:nowrap!important;}
