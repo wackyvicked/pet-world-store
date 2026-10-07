@@ -1830,3 +1830,28 @@ if(window.P&&window.P.length)renderDepartmentRows();
   header{border-bottom:0!important;box-shadow:none!important;}
 }
 </style>
+
+<style id="wow-mobile-search-consistency-v25">
+/* V25: unify mobile search bar with the compact product/category/search-page treatment. Desktop untouched. */
+@media(max-width:700px){
+  .search{
+    width:100%!important;
+    max-width:calc(100% - 28px)!important;
+    height:42px!important;
+    min-height:42px!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    padding:0!important;
+    box-sizing:border-box!important;
+    border-radius:11px!important;
+  }
+  .search input{
+    width:100%!important;
+    height:42px!important;
+    min-height:42px!important;
+    padding:0 13px!important;
+    box-sizing:border-box!important;
+    line-height:42px!important;
+  }
+}
+</style>
