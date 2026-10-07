@@ -11,7 +11,8 @@ const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY),box=document.ge
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 (async()=>{const {data,error}=await sb.from("products").select("brand").eq("active",true).not("brand","is",null).order("brand");if(error){box.innerHTML='<div class="muted">Could not load brands. Please try again.</div>';return}const brands=[...new Set((data||[]).map(x=>String(x.brand||"").trim()).filter(Boolean).sort((a,b)=>a.localeCompare(b)))];box.innerHTML=brands.length?brands.map(b=>'<a class="brand-card" href="./search.html?brand='+encodeURIComponent(b)+'">'+esc(b)+'</a>').join(""):'<div class="muted">No brands have been added yet. Add a brand to a product in Admin and it will appear here.</div>'})()
 </script><style id="wow-mobile-global-header-polish-v26">
-/* V26: mobile-only global header consistency. Announcement on customer pages; remove hard grey divider and use clean spacing. Desktop untouched. */
+/* V26: mobile-only global header consistency. Desktop remains unchanged. */
+.wow-offer-ticker{display:none;}
 @media(max-width:700px){
   header{border-bottom:0!important;box-shadow:none!important;}
   .wow-offer-ticker{height:31px!important;min-height:31px!important;display:flex!important;align-items:center!important;overflow:hidden!important;background:#171717!important;color:#fff!important;font-size:10px!important;font-weight:700!important;white-space:nowrap!important;}
