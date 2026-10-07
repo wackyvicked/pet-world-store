@@ -1768,8 +1768,8 @@ if(window.P&&window.P.length)renderDepartmentRows();
   }
 }
 </style>
-<style id="wow-mobile-logo-visual-v22">
-/* V22: mobile-only fix — the offer strip and search/header controls are always painted above the enlarged logo. */
+<style id="wow-mobile-logo-visual-v23">
+/* V23: mobile-only. Clip the enlarged logo to its own header row so its image padding can never enter the announcement/search areas. Move the complete search box upward without changing its height. */
 @media(max-width:700px){
   .top{
     position:relative!important;
@@ -1778,30 +1778,48 @@ if(window.P&&window.P.length)renderDepartmentRows();
   .head{
     position:relative!important;
     z-index:20!important;
+    row-gap:2px!important;
   }
   .mobile-menu-bar,
   .head-actions{
     position:relative!important;
     z-index:25!important;
   }
-  .search{
-    position:relative!important;
-    z-index:40!important;
-  }
   .brand{
     position:relative!important;
     z-index:1!important;
+    height:65px!important;
+    min-height:65px!important;
+    overflow:hidden!important;
+    isolation:isolate!important;
   }
   .brand-logo{
     position:relative!important;
-    z-index:-1!important;
+    z-index:0!important;
     height:65px!important;
     max-height:65px!important;
     width:auto!important;
     max-width:none!important;
     transform:scale(1.55)!important;
     transform-origin:center center!important;
-    mix-blend-mode:multiply!important;
+    background:transparent!important;
+    mix-blend-mode:normal!important;
+  }
+  .search{
+    position:relative!important;
+    z-index:40!important;
+    transform:translateY(-6px)!important;
+    height:50px!important;
+    min-height:50px!important;
+    padding:0!important;
+    box-sizing:border-box!important;
+  }
+  .search input{
+    height:50px!important;
+    min-height:50px!important;
+    padding:0 13px!important;
+    box-sizing:border-box!important;
+    line-height:50px!important;
   }
 }
 </style>
