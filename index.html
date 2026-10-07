@@ -1727,17 +1727,34 @@ if(window.P&&window.P.length)renderDepartmentRows();
   .search{margin-top:-6px!important;transform:translateY(-2px)!important;}
 }
 </style>
-<style id="wow-mobile-header-hero-final-v15">
-/* V15: mobile-only polished header spacing. Logo enlarged; no visual spill into offer strip. Desktop untouched. */
+<style id="wow-mobile-header-hero-final-v16">
+/* V16: mobile-only vertical spacing balance. Desktop intentionally untouched. */
 @media(max-width:700px){
-  .head{padding-top:2px!important;padding-bottom:3px!important;row-gap:0!important;gap:5px!important;}
-  .brand-logo{width:225px!important;max-width:225px!important;height:auto!important;transform:none!important;transform-origin:center!important;}
+  /* 8px above the menu/logo/cart row; 10px between that row and search. */
+  .head{padding-top:8px!important;padding-bottom:0!important;row-gap:10px!important;gap:5px!important;}
+
+  /* Keep the requested larger logo; constrain its rendered box without changing the asset. */
+  .brand-logo{
+    width:225px!important;
+    max-width:225px!important;
+    height:auto!important;
+    max-height:52px!important;
+    transform:none!important;
+    transform-origin:center!important;
+  }
+
+  /* Preserve comfortable touch targets at 44x44px. */
   .mobile-menu-bar,.brand,.head-actions{transform:none!important;}
-  .mobile-menu-bar{flex-basis:42px!important;}
+  .mobile-menu-bar{flex-basis:44px!important;}
   .head-actions{gap:10px!important;}
-  .icon-btn{width:42px!important;height:42px!important;}
+  .icon-btn{width:44px!important;height:44px!important;}
   .menu-icon{font-size:32px!important;}
-  .search{margin-top:-2px!important;transform:none!important;height:48px!important;max-width:none!important;}
+
+  /* Search stays the same design/size; only its vertical position is balanced. */
+  .search{margin-top:0!important;transform:none!important;height:48px!important;max-width:none!important;}
   .search input{height:auto!important;padding-left:13px!important;padding-right:13px!important;}
+
+  /* Give the banner a clean 15px separation from the search/header. */
+  #homeBanners{margin-top:15px!important;}
 }
 </style>
