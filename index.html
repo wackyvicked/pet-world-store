@@ -1704,3 +1704,18 @@ if(window.P&&window.P.length)renderDepartmentRows();
   #homeBanners .wow-static-hero img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center!important;transform:none!important;margin:0!important;padding:0!important;}
 }
 </style>
+<style id="wow-mobile-header-hero-final-v13">
+/* V13: tighten mobile-only header/search vertical spacing. Desktop untouched. */
+@media(max-width:700px){
+  /* Reduce the gap between the offer strip and the menu/logo/cart row. */
+  .head{padding-top:4px!important;padding-bottom:5px!important;row-gap:5px!important;gap:6px!important;}
+  /* Keep menu, logo and cart visually closer as one compact row. */
+  .mobile-menu-bar{flex-basis:38px!important;}
+  .head-actions{gap:5px!important;}
+  .icon-btn{width:38px!important;height:38px!important;}
+  .menu-icon{font-size:29px!important;}
+  /* Bring the search bar closer to the row above and make it slightly shorter. */
+  .search{margin-top:0!important;max-width:calc(100% - 18px)!important;height:40px!important;}
+  .search input{height:40px!important;padding-left:13px!important;padding-right:13px!important;}
+}
+</style>
