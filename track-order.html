@@ -25,7 +25,7 @@ input:focus{border-color:#999;box-shadow:0 0 0 3px #ffd21c44}.btn{width:100%;bor
 @media(max-width:560px){.header{padding-top:16px}.brand{font-size:18px}.brand-mark{width:34px;height:34px}.store-link{padding:8px 11px;font-size:12px}.hero{padding:15px 4px 18px}h1{font-size:28px}.card{padding:16px;border-radius:18px}.fields{grid-template-columns:1fr}.steps{grid-template-columns:1fr;gap:8px;padding:14px}.step{text-align:left;display:flex;align-items:center;gap:9px}.dot{margin:0;flex:0 0 28px}.info{grid-template-columns:1fr;padding:13px}.detail-grid{grid-template-columns:1fr}.details-panel{padding:0 13px 13px}.items{margin:0 13px 13px}.orderhead{align-items:flex-start}.pill{font-size:11px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style id="wowLiveRuntimeStyle">#wowLiveRuntime{display:none;position:fixed;top:8px;left:8px;right:8px;z-index:999999;background:#fff;border:2px solid #d71920;border-radius:10px;padding:10px;box-shadow:0 8px 28px rgba(0,0,0,.28);font:12px/1.4 Arial;color:#222;max-height:45vh;overflow:auto}#wowLiveRuntime.show{display:block}#wowLiveRuntime b{color:#d71920}#wowLiveRuntime pre{white-space:pre-wrap;word-break:break-word;margin:6px 0;padding:6px;background:#f5f5f5;border-radius:6px}#wowLiveRuntime button{border:0;border-radius:6px;padding:6px 9px;font-weight:700;margin-right:5px}</style><div id="wowLiveRuntime" role="alert"><b>WOW Pets LIVE ERROR</b><div id="wowLiveRuntimeText"></div><pre id="wowLiveRuntimeDetails"></pre><button type="button" onclick="navigator.clipboard?.writeText((document.getElementById('wowLiveRuntimeText')?.innerText||'')+'\n'+(document.getElementById('wowLiveRuntimeDetails')?.innerText||''))">COPY</button><button type="button" onclick="this.parentElement.classList.remove('show')">CLOSE</button></div><script>(function(){function show(stage,error){try{var b=document.getElementById("wowLiveRuntime"),t=document.getElementById("wowLiveRuntimeText"),d=document.getElementById("wowLiveRuntimeDetails");if(!b||!t||!d)return;var msg=error&&error.message?error.message:String(error||"Unknown error");t.textContent="Stage: "+stage+" | URL: "+location.href;d.textContent=msg+(error&&error.stack?"\n\n"+error.stack:"");b.classList.add("show")}catch(_e){}}window.addEventListener("error",function(e){show("JavaScript runtime error",e.error||e.message)});window.addEventListener("unhandledrejection",function(e){show("Unhandled promise rejection",e.reason)});window.__wowLiveRuntimeDebug={show:show}})();</script></head>
 <body>
-<header class="header"><div class="brand"><a href="./index.html" aria-label="WOW Pets Home"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><a class="store-link" href="./index.html">Back to Store</a></header>
+<header class="header"><div class="wow-offer-ticker" role="status" aria-label="WOW Pets offers"><div class="wow-offer-track"><span>✨ WOW Pets Launch Offers</span><span>•</span><span>💳 Cash on Delivery</span><span>•</span><span>💬 WhatsApp Order Support</span><span>•</span><span>🏪 Store Pickup — Rawalpindi</span><span>•</span><span>🐾 Food • Grooming • Medicines • Accessories</span></div></div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><a class="store-link" href="./index.html">Back to Store</a></header>
 <main class="wrap">
 <section class="hero"><h1>Track Your Order</h1><p>Check your latest order status using the order number and mobile number you used at checkout.</p></section>
 <div class="card">
@@ -72,4 +72,13 @@ async function track(){
  $("status").textContent=data.length===1?"Order found.":data.length+" orders found.";
  render(data[0]);
 }
-</script></body></html>
+</script><style id="wow-mobile-global-header-polish-v26">
+/* V26: mobile-only global header consistency. Announcement on customer pages; remove hard grey divider and use clean spacing. Desktop untouched. */
+@media(max-width:700px){
+  header{border-bottom:0!important;box-shadow:none!important;}
+  .wow-offer-ticker{height:31px!important;min-height:31px!important;display:flex!important;align-items:center!important;overflow:hidden!important;background:#171717!important;color:#fff!important;font-size:10px!important;font-weight:700!important;white-space:nowrap!important;}
+  .wow-offer-track{display:flex!important;align-items:center!important;gap:9px!important;white-space:nowrap!important;animation:none!important;}
+  .head{padding-bottom:10px!important;}
+  .wow-offer-ticker + .head{border-top:0!important;}
+}
+</style></body></html>
