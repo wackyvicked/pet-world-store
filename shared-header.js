@@ -37,6 +37,19 @@
     var nav=document.getElementById("mainNav");
     if(nav&&nav.classList.contains("open")&&event.target.closest("#mainNav a"))setMenu(false);
   });
+  var brandRoot=document.getElementById("brandSubmenu");
+  if(brandRoot){
+    var api="https://veskmrxhtqryffixzkoi.supabase.co/rest/v1/products?select=brand&active=eq.true&brand=not.is.null&order=brand.asc";
+    var key="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+    var escapeHtml=function(value){return String(value??"").replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];});};
+    fetch(api,{headers:{apikey:key,Authorization:"Bearer "+key,Accept:"application/json"},cache:"no-store"})
+      .then(function(response){if(!response.ok)throw new Error("Brand menu HTTP "+response.status);return response.json();})
+      .then(function(rows){
+        var brands=[...new Set((Array.isArray(rows)?rows:[]).map(function(row){return String(row.brand||"").trim();}).filter(Boolean))].sort(function(a,b){return a.localeCompare(b);});
+        brandRoot.innerHTML='<a href="./brands.html"><span class="menu-sub-text">View All Brands</span></a>'+(brands.length?brands.map(function(name){return '<a href="./brands.html?brand='+encodeURIComponent(name)+'"><span class="menu-sub-text">'+escapeHtml(name)+'</span></a>';}).join(""):'<div class="brand-menu-empty">No active brands yet</div>');
+      })
+      .catch(function(error){console.error("WOW Pets brand menu load failed:",error);brandRoot.innerHTML='<a href="./brands.html"><span class="menu-sub-text">View All Brands</span></a><div class="brand-menu-empty">Brands are temporarily unavailable</div>';});
+  }
   var search=document.getElementById("search");
   if(search){
     search.addEventListener("keydown",function(event){
