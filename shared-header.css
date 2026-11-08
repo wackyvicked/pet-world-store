@@ -151,7 +151,7 @@ body>header .head>.search input{
   body>header .head>.search{
     order:3!important;flex:0 0 calc(100% - 28px)!important;width:calc(100% - 28px)!important;
     max-width:calc(100% - 28px)!important;height:42px!important;min-height:42px!important;
-    margin:0 auto!important;padding:0!important;border-radius:11px!important;transform:translateY(-6px)!important;
+    margin:2px auto 0!important;padding:0!important;border:1px solid #cfcfcf!important;border-top:1px solid #cfcfcf!important;border-radius:11px!important;transform:none!important;
     box-shadow:0 2px 8px rgba(0,0,0,.06)!important;
   }
   body>header .head>.search input{height:42px!important;min-height:42px!important;padding:0 13px!important;font-size:13px!important;line-height:42px!important}
