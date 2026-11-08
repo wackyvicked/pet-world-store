@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Discover curated starter packs and value bundles for cats, dogs and pet food at WOW Pets.">
+<meta name="robots" content="index,follow">
+<title>Pet Bundles & Starter Packs — WOW Pets</title>
+<link rel="stylesheet" href="./shared-header.css?v=20261108-3">
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:#171717;background:#f8f8f8;padding-bottom:0}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 16px 54px}
+.bundle-hero{position:relative;overflow:hidden;background:linear-gradient(120deg,#171717 0%,#303030 58%,#4b421f 100%);color:#fff;border-radius:18px;padding:34px 32px;margin-bottom:26px}
+.bundle-hero:after{content:"🐾";position:absolute;right:34px;top:50%;transform:translateY(-50%);font-size:94px;opacity:.16}
+.eyebrow{font-size:11px;letter-spacing:1.7px;font-weight:800;color:#ffd21c;text-transform:uppercase}
+.bundle-hero h1{font-size:32px;line-height:1.15;margin:9px 0 10px;font-weight:900;max-width:620px}
+.bundle-hero p{font-size:14px;line-height:1.65;color:#e8e8e8;margin:0;max-width:620px}
+.section-intro{margin:0 0 16px}
+.section-intro h2{font-size:21px;margin:0 0 5px}
+.section-intro p{margin:0;color:#666;font-size:13px;line-height:1.55}
+.bundle-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.bundle-card{background:#fff;border:1px solid #e8e8e8;border-radius:16px;overflow:hidden;display:flex;flex-direction:column;min-width:0;box-shadow:0 3px 14px rgba(0,0,0,.035)}
+.bundle-card img{display:block;width:100%;height:205px;object-fit:cover;background:#eee}
+.bundle-card-body{padding:17px;display:flex;flex-direction:column;flex:1}
+.bundle-type{font-size:10px;font-weight:900;letter-spacing:1px;color:#967400;text-transform:uppercase;margin-bottom:7px}
+.bundle-card h3{font-size:19px;margin:0 0 7px}
+.bundle-card p{font-size:13px;color:#666;line-height:1.55;margin:0 0 15px;min-height:40px}
+.bundle-card .card-actions{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.coming-soon{font-size:10px;font-weight:800;color:#777;background:#f2f2f2;border-radius:20px;padding:7px 10px;white-space:nowrap}
+.browse-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;background:#ffd21c;color:#171717;border-radius:9px;padding:10px 13px;font-size:12px;font-weight:900}
+.bundle-note{margin-top:22px;padding:15px 17px;background:#fff;border:1px solid #e8e8e8;border-radius:12px;color:#666;font-size:12px;line-height:1.6}
+@media(min-width:701px){.wrap{padding-top:30px}}
+@media(max-width:700px){
+ body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+ .wrap{padding:16px 12px 30px}
+ .bundle-hero{padding:24px 19px;border-radius:15px;margin-bottom:22px}
+ .bundle-hero:after{right:12px;font-size:65px;opacity:.12}
+ .bundle-hero h1{font-size:26px;max-width:75%}
+ .bundle-hero p{font-size:13px;max-width:90%}
+ .section-intro h2{font-size:19px}
+ .bundle-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .bundle-card{border-radius:12px}
+ .bundle-card img{height:140px}
+ .bundle-card-body{padding:11px}
+ .bundle-card h3{font-size:15px;line-height:1.25}
+ .bundle-card p{font-size:11px;min-height:58px;margin-bottom:10px}
+ .bundle-card .card-actions{align-items:flex-start;flex-direction:column;gap:8px}
+ .browse-link{width:100%;font-size:11px;padding:10px 7px}
+ .coming-soon{font-size:9px}
+ .bundle-note{font-size:11px;margin-top:15px}
+}
+@media(max-width:380px){.bundle-grid{grid-template-columns:1fr}.bundle-card img{height:175px}.bundle-card .card-actions{flex-direction:row;align-items:center}.browse-link{width:auto}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header><div class="wow-offer-ticker" role="status" aria-label="WOW Pets offers"><div class="wow-offer-track"><span>✨ WOW Pets Launch Offers</span><span>•</span><span>💳 Cash on Delivery</span><span>•</span><span>💬 WhatsApp Order Support</span><span>•</span><span>🏪 Store Pickup — Rawalpindi</span><span>•</span><span>🐾 Food • Grooming • Medicines • Accessories</span><span aria-hidden="true">✨ WOW Pets Launch Offers</span><span aria-hidden="true">•</span><span aria-hidden="true">💳 Cash on Delivery</span><span aria-hidden="true">•</span><span aria-hidden="true">💬 WhatsApp Order Support</span><span aria-hidden="true">•</span><span aria-hidden="true">🏪 Store Pickup — Rawalpindi</span><span aria-hidden="true">•</span><span aria-hidden="true">🐾 Food • Grooming • Medicines • Accessories</span></div></div><div class="head"><div class="mobile-menu-bar">
+  <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
+</div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
+<div id="menuBackdrop" onclick="toggleMenu(event)"></div><nav class="nav" id="mainNav"><button type="button" class="menu-close" onclick="toggleMenu(event)">MENU <span>×</span></button><a href="./track-order.html"><span class="menu-icon" aria-hidden="true">📦</span><span class="menu-text">TRACK ORDER</span></a><a href="./bundles.html"><span class="menu-icon" aria-hidden="true">🎁</span><span class="menu-text">BUNDLES</span></a><div class="menu-group"><div class="menu-parent"><a href="./brands.html"><span class="menu-icon" aria-hidden="true">🏷️</span><span class="menu-text">SHOP BY BRAND</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="brandSubmenu" onclick="toggleSubmenu('brandSubmenu',this,event)" aria-label="Expand brands"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="brandSubmenu"><a href="./brands.html"><span class="menu-sub-text">View All Brands</span></a><div class="brand-menu-loading" aria-live="polite">Loading brands…</div></div></div><div class="menu-group"><div class="menu-parent"><a href="./category.html?v=20260928-2&cat=Cats"><span class="menu-icon" aria-hidden="true">🐱</span><span class="menu-text">CATS</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="catSubmenu" onclick="toggleSubmenu('catSubmenu',this,event)" aria-label="Expand Cat categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="catSubmenu"><a href="./category.html?v=20260928-2&cat=Cats&sub=food"><span class="menu-sub-icon" aria-hidden="true">🍖</span><span class="menu-sub-text">Cat Food</span></a><a href="./category.html?v=20260928-2&cat=Cats&sub=litter"><span class="menu-sub-icon" aria-hidden="true">🪣</span><span class="menu-sub-text">Cat Litter</span></a><a href="./category.html?v=20260928-2&cat=Cats&sub=toys-accessories"><span class="menu-sub-icon" aria-hidden="true">🧶</span><span class="menu-sub-text">Cat Toys &amp; Accessories</span></a><a href="./category.html?v=20260928-2&cat=Cats&sub=grooming"><span class="menu-sub-icon menu-icon-grooming" aria-hidden="true">🧴</span><span class="menu-sub-text">Cat Grooming</span></a></div></div><div class="menu-group"><div class="menu-parent"><a href="./category.html?v=20260928-2&cat=Dogs"><span class="menu-icon" aria-hidden="true">🐶</span><span class="menu-text">DOGS</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="dogSubmenu" onclick="toggleSubmenu('dogSubmenu',this,event)" aria-label="Expand Dog categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="dogSubmenu"><a href="./category.html?v=20260928-2&cat=Dogs&sub=food"><span class="menu-sub-icon" aria-hidden="true">🍖</span><span class="menu-sub-text">Dog Food</span></a><a href="./category.html?v=20260928-2&cat=Dogs&sub=treats"><span class="menu-sub-icon" aria-hidden="true">🦴</span><span class="menu-sub-text">Dog Treats</span></a><a href="./category.html?v=20260928-2&cat=Dogs&sub=toys-accessories"><span class="menu-sub-icon" aria-hidden="true">🧸</span><span class="menu-sub-text">Dog Toys &amp; Accessories</span></a><a href="./category.html?v=20260928-2&cat=Dogs&sub=grooming"><span class="menu-sub-icon menu-icon-grooming" aria-hidden="true">🧴</span><span class="menu-sub-text">Dog Grooming</span></a></div></div><a href="./category.html?v=20260928-2&cat=Birds"><span class="menu-icon" aria-hidden="true">🦜</span><span class="menu-text">BIRDS</span></a><a href="./category.html?v=20260928-2&cat=Fish"><span class="menu-icon" aria-hidden="true">🐠</span><span class="menu-text">FISH</span></a><div class="menu-group"><div class="menu-parent"><a href="./category.html?v=20260928-2&cat=Pet%20Food"><span class="menu-icon" aria-hidden="true">🍖</span><span class="menu-text">PET FOOD</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="petFoodSubmenu" onclick="toggleSubmenu('petFoodSubmenu',this,event)" aria-label="Expand Pet Food categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="petFoodSubmenu"><a href="./category.html?v=20260928-2&cat=Pet%20Food&amp;sub=wet-food"><span class="menu-sub-icon" aria-hidden="true">🥫</span><span class="menu-sub-text">Wet Food</span></a><a href="./category.html?v=20260928-2&cat=Pet%20Food&amp;sub=dry-food"><span class="menu-sub-icon" aria-hidden="true">🥣</span><span class="menu-sub-text">Dry Food</span></a><a href="./category.html?v=20260928-2&cat=Pet%20Food&amp;sub=fish-feed"><span class="menu-sub-icon" aria-hidden="true">🐠</span><span class="menu-sub-text">Fish Feed</span></a><a href="./category.html?v=20260928-2&cat=Pet%20Food&amp;sub=bird-feed"><span class="menu-sub-icon" aria-hidden="true">🦜</span><span class="menu-sub-text">Bird Feed</span></a></div></div><a href="./category.html?v=20260928-2&cat=Medical%20Supplies"><span class="menu-icon" aria-hidden="true">🩺</span><span class="menu-text">MEDICAL SUPPLIES</span></a><a href="./medical-services.html"><span class="menu-icon" aria-hidden="true">👨‍⚕️</span><span class="menu-text">CONSULTANT DOCTOR</span></a></nav></header>
+<main class="wrap">
+<section class="bundle-hero">
+ <div class="eyebrow">WOW Pets • Curated value packs</div>
+ <h1>Pet Bundles & Starter Packs</h1>
+ <p>Thoughtfully grouped essentials for your pets. Explore our planned collections and find the right everyday supplies in one place.</p>
+</section>
+<section aria-labelledby="bundleCollectionsTitle">
+ <div class="section-intro"><h2 id="bundleCollectionsTitle">Explore Bundle Collections</h2><p>We are preparing our first ready-made bundle offers. These collections will be updated as soon as the bundles are configured.</p></div>
+ <div class="bundle-grid">
+  <article class="bundle-card">
+   <img src="./assets/category-images/kitten.jpg" alt="Kitten essentials for a cat starter pack" loading="lazy">
+   <div class="bundle-card-body"><div class="bundle-type">For cats & kittens</div><h3>Cat Starter Pack</h3><p>Starter essentials for new cat parents, with everyday care and comfort items.</p><div class="card-actions"><span class="coming-soon">Bundle offers coming soon</span><a class="browse-link" href="./category.html?v=20260928-2&amp;cat=Cats">Browse Cat Essentials</a></div></div>
+  </article>
+  <article class="bundle-card">
+   <img src="./assets/category-images/puppy-new.jpg" alt="Puppy essentials for a dog starter pack" loading="lazy">
+   <div class="bundle-card-body"><div class="bundle-type">For dogs & puppies</div><h3>Dog Starter Pack</h3><p>A practical starter collection for feeding, play and daily puppy care.</p><div class="card-actions"><span class="coming-soon">Bundle offers coming soon</span><a class="browse-link" href="./category.html?v=20260928-2&amp;cat=Dogs">Browse Dog Essentials</a></div></div>
+  </article>
+  <article class="bundle-card">
+   <img src="./assets/category-images/cat-food.jpg" alt="Pet food value bundle collection" loading="lazy">
+   <div class="bundle-card-body"><div class="bundle-type">Everyday value</div><h3>Food Value Bundles</h3><p>Value packs for regular food purchases, with options across pet food types.</p><div class="card-actions"><span class="coming-soon">Bundle offers coming soon</span><a class="browse-link" href="./category.html?v=20260928-2&amp;cat=Pet%20Food">Browse Pet Food</a></div></div>
+  </article>
+ </div>
+</section>
+<div class="bundle-note">Bundle prices, included products and availability will be shown here once the bundle builder is enabled in Admin. No bundle is being advertised for sale until its products and price are configured.</div>
+</main>
+<nav class="bottom-nav" aria-label="Mobile navigation">
+ <button type="button" class="bottom-item" onclick="location.href='./index.html';return false;"><svg viewBox="0 0 48 48"><path d="m6 23 18-15 18 15v19H29V30H19v12H6z"></path></svg><span>Home</span></button>
+ <button type="button" class="bottom-item" onclick="location.href='./search.html';return false;"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="13"></circle><path d="m31 31 10 10"></path></svg><span>Search</span></button>
+ <button type="button" class="bottom-item" onclick="location.href='./index.html#categories';return false;"><svg viewBox="0 0 48 48"><rect x="6" y="6" width="13" height="13" rx="2"></rect><rect x="29" y="6" width="13" height="13" rx="2"></rect><rect x="6" y="29" width="13" height="13" rx="2"></rect><rect x="29" y="29" width="13" height="13" rx="2"></rect></svg><span>Categories</span></button>
+ <button type="button" class="bottom-item" onclick="openCart();return false;" style="position:relative"><span class="badge" id="bottomCount">0</span><svg viewBox="0 0 48 48"><path d="M6 8h6l4 24h23l4-17H14"></path><circle cx="20" cy="40" r="2.5"></circle><circle cx="36" cy="40" r="2.5"></circle></svg><span>Cart</span></button>
+ <a class="bottom-item" href="https://api.whatsapp.com/send?phone=923465771099" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 48 48"><path d="M24 6c-10 0-18 7.8-18 17.5 0 3.2.9 6.2 2.6 8.8L6 42l10.2-2.5c2.3 1.2 4.9 1.8 7.8 1.8 10 0 18-7.8 18-17.5S34 6 24 6Z"></path><path d="M18 16c.5-1 1-1.1 1.7-1.1h1.2c.4 0 .8.2 1 .7l1.6 3.7c.2.5.1.9-.2 1.2l-1.2 1.4c1 1.8 2.5 3.3 4.3 4.3l1.4-1.2c.3-.3.8-.4 1.2-.2l3.7 1.6c.5.2.7.6.7 1v1.2c0 .7-.1 1.2-1.1 1.7-1.1.5-2.4.7-3.6.3-2.8-.9-5.5-2.5-7.6-4.6s-3.7-4.8-4.6-7.6c-.4-1.2-.2-2.5.3-3.6Z"></path></svg><span>WhatsApp</span></a>
+</nav>
+<script>
+"use strict";
+const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
+const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+window.P=[];
+const $=id=>document.getElementById(id);
+async function loadCartProducts(){
+ try{
+  const fields="id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery";
+  const url=SUPABASE_URL+"/rest/v1/products?select="+encodeURIComponent(fields)+"&active=eq.true&order=created_at.desc";
+  const response=await fetch(url,{headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json"},cache:"no-store"});
+  if(!response.ok)throw new Error("Products API HTTP "+response.status);
+  const rows=await response.json();
+  window.P=Array.isArray(rows)?rows.map(r=>[r.name??r.product_name??r.title??"Product",Number(r.price??0),r.image_url||r.image||"",r.category??"Accessories",r.id,r.description??"",r.sku,r.weight,r.weight_unit,r.sale_price,Array.isArray(r.image_gallery)?r.image_gallery:[],r.brand??""]).filter(p=>p[4]!=null):[];
+  if(window.WOWSharedCart)window.WOWSharedCart.render();
+ }catch(error){console.error("WOW Pets bundle page cart catalogue failed:",error);}
+}
+loadCartProducts();
+</script>
+<script src="./shared-cart.js?v=20261004-3"></script>
+</body>
+</html>
