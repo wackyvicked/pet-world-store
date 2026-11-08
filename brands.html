@@ -90,7 +90,300 @@ header{position:relative;background:#fff;border-bottom:1px solid #e5e5e5;z-index
  .bottom-item .badge{position:absolute;transform:translate(11px,-8px);width:18px;height:18px;border-radius:50%;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px}
 }
 </style>
-<style id="wow-brand-menu-style">#brandSubmenu.open{max-height:1200px!important}#brandSubmenu .brand-menu-loading{padding:10px 20px 10px 62px;color:#777;font-size:12px}#brandSubmenu .brand-menu-empty{padding:10px 20px 10px 62px;color:#777;font-size:12px}</style></head>
+<style id="wow-brand-menu-style">#brandSubmenu.open{max-height:1200px!important}#brandSubmenu .brand-menu-loading{padding:10px 20px 10px 62px;color:#777;font-size:12px}#brandSubmenu .brand-menu-empty{padding:10px 20px 10px 62px;color:#777;font-size:12px}</style><style id="universal-mobile-menu">
+/* Synced from index.html shared header/menu styling. */
+
+@media(max-width:700px){
+  #menuBackdrop{display:block!important;position:fixed!important;inset:0!important;background:rgba(0,0,0,.42)!important;z-index:2100!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,visibility 0s linear .25s!important;will-change:opacity}
+  #menuBackdrop.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:opacity .25s ease!important;will-change:opacity}
+  .mobile-menu-bar{position:relative!important;z-index:auto!important}.nav#mainNav{display:flex!important;position:fixed!important;top:0!important;bottom:auto!important;left:0!important;right:auto!important;width:min(340px,86vw)!important;height:auto!important;max-height:100dvh!important;
+    min-height:0!important;z-index:2101!important;flex-direction:column!important;background:#fff!important;color:#171717!important;padding:0!important;margin:0!important;max-height:100dvh!important;overflow-y:auto!important;box-shadow:12px 0 35px rgba(0,0,0,.22)!important;border-radius:0 24px 24px 0!important;transform:translate3d(-100%,0,0)!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important;will-change:transform,opacity;backface-visibility:hidden!important}
+  .nav#mainNav.open{transform:translate3d(0,0,0)!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:transform .3s ease,opacity .3s ease!important;will-change:transform,opacity}
+  .nav#mainNav .menu-close{display:flex!important;align-items:center!important;justify-content:space-between!important;position:sticky!important;top:0!important;width:100%!important;box-sizing:border-box!important;padding:18px 20px!important;border:0!important;background:#fff!important;color:#171717!important;font:800 20px Arial,sans-serif!important;z-index:2!important}
+  .nav#mainNav .menu-close span{font-size:28px!important;line-height:1!important;font-weight:400!important}
+  .nav#mainNav a{display:block!important;color:#222!important;background:#fff!important;padding:15px 20px!important;border:0!important;border-bottom:1px solid #eee!important;text-decoration:none!important;font-weight:700!important;font-size:15px!important}
+  .nav#mainNav a:first-of-type{border-top:1px solid #eee!important}
+}
+.nav#mainNav a .menu-icon{width:30px;min-width:30px;display:inline-flex;align-items:center;justify-content:center;margin-right:12px;font-size:21px;line-height:1;vertical-align:middle}.nav#mainNav a .menu-text{display:inline-flex;align-items:center;min-height:24px;line-height:1.2;vertical-align:middle}
+</style>
+<style id="menu-icons-final">
+/* Synced from index.html shared header/menu styling. */
+
+/* Final unified menu icon system: one real icon per item, no generated duplicates. */
+.nav#mainNav a::before{content:none!important;display:none!important;}
+.nav#mainNav a .menu-icon{display:inline-flex!important;width:30px!important;min-width:30px!important;height:24px!important;margin:0 12px 0 0!important;align-items:center!important;justify-content:center!important;font-size:21px!important;line-height:1!important;vertical-align:middle!important;}
+.nav#mainNav a .menu-text{display:inline-flex!important;align-items:center!important;min-height:24px!important;line-height:1.2!important;vertical-align:middle!important;}
+.nav#mainNav .menu-close{gap:12px!important;}
+.nav#mainNav .menu-close span{width:38px!important;height:38px!important;min-width:38px!important;border:1px solid #ddd!important;background:#f7f7f7!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:25px!important;line-height:1!important;font-weight:400!important;color:#222!important;box-sizing:border-box!important;box-shadow:0 1px 4px rgba(0,0,0,.06)!important;}
+@media(max-width:700px){
+  .nav#mainNav a .menu-icon{width:30px!important;min-width:30px!important;margin-right:12px!important;font-size:21px!important;}
+  .nav#mainNav .menu-close{padding:14px 16px!important;}
+  .nav#mainNav .menu-close span{width:38px!important;height:38px!important;min-width:38px!important;}
+}
+
+</style>
+<style id="header-whitespace-balance">
+/* Synced from index.html shared header/menu styling. */
+
+/* Header spacing balance: keep the approved large logo while reducing empty space and keeping menu/cart visually even. */
+.head{padding-top:7px!important;padding-bottom:8px!important;row-gap:6px!important;}
+@media(min-width:701px){
+  .head{padding-left:10px!important;padding-right:10px!important;}
+  .brand-logo{transform:scale(1.08);transform-origin:center center;}
+  .search{margin-top:0!important;}
+}
+@media(max-width:700px){
+  .head{padding:5px 8px 8px!important;column-gap:6px!important;row-gap:4px!important;}
+  .mobile-menu-bar{flex:0 0 42px!important;width:42px!important;padding:0!important;justify-content:center!important;}
+  .brand{flex:1 1 auto!important;min-width:0!important;justify-content:center!important;overflow:visible!important;}
+  /* Keep the approved 270px visual size, but use a compact layout width. */
+  .brand-logo{width:220px!important;max-width:220px!important;transform:scale(1.2273);transform-origin:center center;}
+  .head-actions{flex:0 0 42px!important;width:42px!important;gap:0!important;margin-left:0!important;justify-content:center!important;}
+  .icon-btn{width:42px!important;height:42px!important;}
+  .search{margin-top:-3px!important;max-width:calc(100% - 20px)!important;height:42px!important;}
+  .search input{height:42px!important;}
+}
+
+</style>
+<style id="header-content-spacing-final">
+/* Synced from index.html shared header/menu styling. */
+
+/* Final spacing + stacking: logo, search, banner and product cards form one clean vertical rhythm. */
+.head{padding-top:4px!important;padding-bottom:4px!important;row-gap:4px!important;}
+.search{position:relative!important;z-index:20!important;margin-top:1px!important;}
+.brand{position:relative!important;z-index:2!important;}
+#homeBanners{position:relative!important;z-index:1!important;margin-top:7px!important;margin-bottom:0!important;}
+.section{margin-top:24px!important;}
+@media(max-width:700px){
+  .head{padding:3px 8px 5px!important;row-gap:3px!important;}
+  .search{margin-top:2px!important;max-width:calc(100% - 20px)!important;}
+  #homeBanners{margin-top:6px!important;}
+  .section{margin-top:20px!important;}
+}
+
+</style>
+<style id="unified-menu-bottom-nav-lock">
+/* Synced from index.html shared header/menu styling. */
+
+/* All mobile pages: opening the side menu must dim and disable the bottom navigation. */
+@media(max-width:700px){
+  header{z-index:2000!important;}
+  body.menu-open .bottom-nav{pointer-events:none!important;}
+  body.menu-open .bottom-nav .bottom-item{pointer-events:none!important;}
+}
+
+</style>
+<style id="menu-cart-architecture">
+/* Synced from index.html shared header/menu styling. */
+
+/* Menu drawer architecture — synchronized with shared Cart drawer */
+@media(max-width:700px){
+  #menuBackdrop{
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+    transition:opacity .25s ease,visibility 0s linear .25s!important;
+    will-change:opacity;
+  }
+  #menuBackdrop.open{
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+    transition:opacity .25s ease!important;
+  }
+  .nav#mainNav{
+    display:flex!important;
+    position:fixed!important;
+    top:0!important;bottom:0!important;left:0!important;right:auto!important;
+    width:min(380px,88vw)!important;
+    height:100dvh!important;max-height:none!important;min-height:0!important;
+    margin:0!important;padding:0!important;
+    overflow-y:auto!important;overflow-x:hidden!important;
+    flex-direction:column!important;
+    z-index:2101!important;
+    background:#fff!important;color:#171717!important;
+    border-radius:0 22px 22px 0!important;
+    box-shadow:12px 0 30px rgba(0,0,0,.22)!important;
+    transform:translate3d(-105%,0,0)!important;
+    opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+    transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important;
+    will-change:transform,opacity;
+    backface-visibility:hidden!important;
+    -webkit-backface-visibility:hidden!important;
+  }
+  .nav#mainNav.open{
+    transform:translate3d(0,0,0)!important;
+    opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+    transition:transform .3s ease,opacity .3s ease,visibility 0s linear 0s!important;
+  }
+}
+
+</style>
+<style id="pet-menu-subcategories">
+/* Synced from index.html shared header/menu styling. */
+
+@media(max-width:700px){
+.nav#mainNav .menu-group{border-bottom:1px solid #eee}
+.nav#mainNav .menu-parent{display:flex;align-items:center;width:100%;box-sizing:border-box;background:#fff}
+.nav#mainNav .menu-parent>a{flex:1;border:0!important;padding:15px 8px 15px 20px!important}
+.nav#mainNav .menu-submenu{max-height:0;overflow:hidden;background:#fafafa;transition:max-height .28s ease}
+.nav#mainNav .menu-submenu.open{max-height:420px}
+.nav#mainNav .menu-submenu a{padding:12px 20px 12px 62px!important;background:#fafafa!important;border-bottom:1px solid #eee!important;color:#555!important;font-size:14px!important;font-weight:600!important}
+.nav#mainNav .menu-submenu a:last-child{border-bottom:0!important}
+}
+
+</style>
+<style id="submenu-chevron-clean">
+/* Synced from index.html shared header/menu styling. */
+
+.nav#mainNav .menu-sub-toggle{
+  width:40px!important;height:40px!important;min-width:40px!important;min-height:40px!important;
+  margin:0 16px 0 8px!important;padding:0!important;border:1px solid #d6d6d6!important;
+  border-radius:50%!important;background:#fff!important;display:flex!important;
+  align-items:center!important;justify-content:center!important;box-sizing:border-box!important;
+  font-size:0!important;line-height:0!important;transform:none!important;
+}
+.nav#mainNav .menu-sub-toggle span{
+  width:18px!important;height:18px!important;margin:0!important;padding:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  font-size:0!important;line-height:0!important;transform:none!important;
+}
+.nav#mainNav .menu-sub-toggle span::before,
+.nav#mainNav .menu-sub-toggle span::after{content:none!important;display:none!important;}
+.nav#mainNav .menu-sub-toggle svg{
+  display:block!important;width:16px!important;height:16px!important;margin:0!important;
+  fill:none!important;stroke:#666!important;stroke-width:1.9!important;
+  stroke-linecap:round!important;stroke-linejoin:round!important;
+  transform:rotate(0deg)!important;transform-origin:50% 50%!important;
+  transition:transform .22s ease!important;
+}
+.nav#mainNav .menu-sub-toggle[aria-expanded="true"] svg{
+  transform:rotate(90deg)!important;
+}
+
+</style>
+<style id="wow-desktop-menu-cart-polish-v2">
+/* Synced from index.html shared header/menu styling. */
+
+@media(min-width:701px){
+  body{padding-left:0!important;}
+  .head{grid-template-columns:180px minmax(280px,1fr) 180px!important;}
+  .mobile-menu-bar{display:flex!important;align-items:center!important;justify-content:flex-start!important;}
+  .mobile-menu-bar .menu-btn{width:112px!important;height:42px!important;padding:0 13px!important;border-radius:10px!important;}
+  #menuBackdrop{display:block!important;position:fixed!important;inset:0!important;background:rgba(0,0,0,.34)!important;z-index:2100!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:opacity .25s ease,visibility 0s linear .25s!important;}
+  #menuBackdrop.open{opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:opacity .25s ease!important;}
+  #mainNav{position:fixed!important;left:16px!important;top:82px!important;bottom:auto!important;width:min(380px,calc(100vw - 32px))!important;height:auto!important;max-height:calc(100vh - 110px)!important;overflow-y:auto!important;overflow-x:hidden!important;background:#fff!important;border:1px solid #e4e4e4!important;border-radius:18px!important;box-shadow:0 18px 45px rgba(0,0,0,.20)!important;padding:0!important;margin:0!important;z-index:2101!important;display:flex!important;flex-direction:column!important;transform:translateX(calc(-100% - 28px))!important;opacity:0!important;visibility:hidden!important;pointer-events:none!important;transition:transform .3s ease,opacity .25s ease,visibility 0s linear .3s!important;}
+  #mainNav.open{transform:translateX(0)!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transition:transform .3s ease,opacity .25s ease!important;}
+  #mainNav .menu-close{display:flex!important;position:sticky!important;top:0!important;align-items:center!important;justify-content:space-between!important;width:100%!important;box-sizing:border-box!important;padding:14px 16px!important;background:#fff!important;color:#171717!important;border:0!important;border-bottom:1px solid #eee!important;font:800 18px Arial,sans-serif!important;z-index:3!important;}
+  #mainNav>a,#mainNav .menu-parent>a{padding:12px 16px!important;font-size:13px!important;min-height:44px!important;box-sizing:border-box!important;}
+  #mainNav .menu-submenu{max-height:0!important;opacity:0!important;transform:translateY(-4px)!important;display:block!important;overflow:hidden!important;background:#fafafa!important;border-bottom:0!important;transition:max-height .26s ease,opacity .18s ease,transform .26s ease!important;}
+  #mainNav .menu-submenu.open{max-height:260px!important;opacity:1!important;transform:translateY(0)!important;border-bottom:1px solid #eee!important;}
+  #mainNav .menu-submenu a{padding:9px 14px 9px 48px!important;font-size:12px!important;min-height:38px!important;}
+  .cart{left:auto!important;right:20px!important;bottom:20px!important;top:auto!important;width:min(430px,calc(100vw - 40px))!important;height:min(68vh,570px)!important;max-height:570px!important;border:1px solid #d9d9d9!important;border-radius:18px!important;box-shadow:0 18px 45px rgba(0,0,0,.20)!important;}
+  .cart.open{transform:translateY(0)!important;}
+  .cart.closing{transform:translateY(calc(100% + 30px))!important;}
+  .cart-head{padding:13px 16px!important;}
+  .cart-items{padding:10px!important;}
+  .cart-foot{padding:11px 16px!important;}
+  .pcart{left:auto!important;right:20px!important;bottom:20px!important;top:auto!important;width:min(430px,calc(100vw - 40px))!important;height:min(68vh,570px)!important;max-height:570px!important;border-radius:18px!important;}
+}
+@media(max-width:700px){
+  .wow-animal-card img{object-position:center center!important;}
+}
+
+</style>
+<style id="wow-mobile-header-hero-final-v12">
+/* Synced from index.html shared header/menu styling. */
+
+/* V12: mobile-only header logo containment + larger hero frame. Desktop intentionally untouched. */
+@media(max-width:700px){
+  /* Keep the enlarged logo inside the header row; the previous transform could
+     visually spill its white image area upward into the offer ticker. */
+  header{overflow:visible!important;}
+  .head{overflow:visible!important;position:relative!important;z-index:5!important;}
+  .brand{overflow:visible!important;position:relative!important;z-index:6!important;}
+  .brand-logo{width:210px!important;max-width:210px!important;height:auto!important;transform:none!important;transform-origin:center!important;}
+
+  /* Make the mobile hero visually larger and remove the excessive gap below it. */
+  #homeBanners{margin:6px 0 8px!important;min-height:0!important;}
+  #homeBanners .wow-static-hero{height:215px!important;min-height:215px!important;border-radius:18px!important;overflow:hidden!important;}
+  #homeBanners .wow-static-hero-link,
+  #homeBanners .wow-static-hero picture{display:block!important;width:100%!important;height:100%!important;}
+  #homeBanners .wow-static-hero img{display:block!important;width:100%!important;height:100%!important;max-width:none!important;object-fit:cover!important;object-position:center!important;transform:none!important;margin:0!important;padding:0!important;}
+}
+
+</style>
+<style id="wow-mobile-header-hero-final-v13">
+/* Synced from index.html shared header/menu styling. */
+
+/* V13: tighten mobile-only header/search vertical spacing. Desktop untouched. */
+@media(max-width:700px){
+  /* Reduce the gap between the offer strip and the menu/logo/cart row. */
+  .head{padding-top:4px!important;padding-bottom:5px!important;row-gap:5px!important;gap:6px!important;}
+  /* Keep menu, logo and cart visually closer as one compact row. */
+  .mobile-menu-bar{flex-basis:38px!important;}
+  .head-actions{gap:5px!important;}
+  .icon-btn{width:38px!important;height:38px!important;}
+  .menu-icon{font-size:29px!important;}
+  /* Bring the search bar closer to the row above and make it slightly shorter. */
+  .search{margin-top:0!important;max-width:calc(100% - 18px)!important;height:40px!important;}
+  .search input{height:40px!important;padding-left:13px!important;padding-right:13px!important;}
+}
+
+</style>
+<style id="wow-mobile-header-hero-final-v14">
+/* Synced from index.html shared header/menu styling. */
+
+/* V14: preserve logo/icon sizes; only pull the mobile rows upward. Desktop untouched. */
+@media(max-width:700px){
+  .head{padding-top:0!important;padding-bottom:5px!important;row-gap:2px!important;gap:5px!important;}
+  .brand-logo{width:210px!important;max-width:210px!important;height:auto!important;}
+  .mobile-menu-bar,.brand,.head-actions{transform:translateY(-4px)!important;}
+  .search{margin-top:-6px!important;transform:translateY(-2px)!important;}
+}
+
+</style>
+<style id="wow-mobile-header-hero-final-v18">
+/* Synced from index.html shared header/menu styling. */
+
+/* V18: mobile-only search reset + larger logo. Desktop untouched. */
+@media(max-width:700px){
+  .search{
+    margin:0!important;
+    height:50px!important;
+    min-height:50px!important;
+    max-width:none!important;
+    width:100%!important;
+    padding:0!important;
+    box-sizing:border-box!important;
+    border-bottom:0!important;
+  }
+  .search input{
+    height:50px!important;
+    min-height:50px!important;
+    padding:0 13px!important;
+    box-sizing:border-box!important;
+    line-height:50px!important;
+  }
+  .brand-logo{
+    width:auto!important;
+    max-width:none!important;
+    height:65px!important;
+    max-height:65px!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    background:transparent!important;
+    margin:0!important;
+  }
+  .brand{
+    min-height:65px!important;
+    align-items:center!important;
+  }
+  .head{
+    padding-top:8px!important;
+    padding-bottom:0!important;
+    row-gap:10px!important;
+  }
+}
+
+</style>
+</head>
 <body>
 <header><div class="wow-offer-ticker" role="status" aria-label="WOW Pets offers"><div class="wow-offer-track"><span>✨ WOW Pets Launch Offers</span><span>•</span><span>💳 Cash on Delivery</span><span>•</span><span>💬 WhatsApp Order Support</span><span>•</span><span>🏪 Store Pickup — Rawalpindi</span><span>•</span><span>🐾 Food • Grooming • Medicines • Accessories</span></div></div><div class="head"><div class="mobile-menu-bar">
   <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
