@@ -5,6 +5,27 @@
   function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");return Array.isArray(a)?a.filter(x=>x&&x.id!=null&&String(x.id)!==""&&Number(x.q)>0).map(x=>({id:String(x.id),q:Number(x.q)})):[]}catch(e){return[]}}
   function write(a){try{localStorage.setItem(KEY,JSON.stringify(a))}catch(e){}}
   function products(){return Array.isArray(window.P)?window.P:(Array.isArray(window.productList)?window.productList:[])}
+  let catalogPromise=null;
+  function loadCatalog(){
+    if(products().length)return Promise.resolve(products());
+    if(catalogPromise)return catalogPromise;
+    const api="https://veskmrxhtqryffixzkoi.supabase.co/rest/v1/products?select=id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery&active=eq.true&order=created_at.desc";
+    const key="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+    catalogPromise=fetch(api,{headers:{apikey:key,Authorization:"Bearer "+key,Accept:"application/json"},cache:"no-store"})
+      .then(function(response){if(!response.ok)throw new Error("Cart catalog HTTP "+response.status);return response.json()})
+      .then(function(rows){
+        if(!Array.isArray(rows))throw new Error("Cart catalog response was not an array");
+        window.P=rows.map(function(r){
+          const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];
+          const image=r.image_url||r.image||gallery[0]||"🐾";
+          const cats=[r.category,r.subcategory].flatMap(function(v){return String(v??"").split(",")}).map(function(v){return v.trim()}).filter(Boolean);
+          return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),image,[...new Set(cats)].join(", ")||"Accessories",r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.brand??""];
+        });
+        return window.P;
+      })
+      .catch(function(error){catalogPromise=null;console.error("WOW shared cart catalog load failed:",error);return products()});
+    return catalogPromise;
+  }
   function productId(p){const n=norm(p);return n.id!=null?String(n.id):null}
   function migrate(){const ps=products();const liveReady=window.__wowLiveProductsReady===true;let raw=[];try{const a=JSON.parse(localStorage.getItem(KEY)||"[]");if(Array.isArray(a))raw=a}catch(e){}let changed=false;const out=[];raw.forEach(x=>{if(!x||Number(x.q)<=0)return;if(x.id!=null&&String(x.id)!==""){const id=String(x.id);const found=out.find(v=>v.id===id);if(found)found.q+=Number(x.q);else out.push({id,q:Number(x.q)});if(x.i!=null||x.p)changed=true;return}if(Number.isInteger(Number(x.i))&&ps[Number(x.i)]){const id=productId(ps[Number(x.i)]);if(id){const found=out.find(v=>v.id===id);if(found)found.q+=Number(x.q);else out.push({id,q:Number(x.q)});changed=true}}});if(changed||out.length!==raw.length)write(out);return out}
   function resolve(ps,x){return x&&x.id!=null?ps.findIndex(p=>productId(p)===String(x.id)):-1}
@@ -29,7 +50,7 @@
   function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
   function render(){ensure();const ps=products(),a=available(),box=document.getElementById("wowCartItems"),total=document.getElementById("wowCartTotal");let sum=0;if(!a.length){box.innerHTML='<div class="wow-cart-empty">Your cart is empty.</div>';total.textContent="PKR 0";badges();return}box.innerHTML=a.map(x=>{const i=resolve(ps,x),p=i>=0?norm(ps[i]):null;if(!p)return "";const pr=price(p);sum+=pr*x.q;return '<div class="wow-cart-row"><div class="wow-cart-img">'+(p.image?'<img src="'+esc(p.image)+'" alt="">':'🐾')+'</div><div class="wow-cart-info"><div class="wow-cart-name">'+esc(p.name||"Product")+'</div><div class="wow-cart-price">PKR '+pr.toLocaleString()+'</div></div><div class="wow-cart-qty"><button type="button" data-ci="'+esc(x.id)+'" data-d="-1">−</button><span>'+x.q+'</span><button type="button" data-ci="'+esc(x.id)+'" data-d="1">+</button></div></div>'}).join("");box.querySelectorAll("[data-ci]").forEach(b=>b.onclick=()=>change(String(b.dataset.ci),Number(b.dataset.d)));total.textContent="PKR "+sum.toLocaleString();badges()}
   function badges(){const n=migrate().reduce((s,x)=>s+Number(x.q||0),0);document.querySelectorAll(".cart-badge,.cart-count,.cart-btn .badge,.icon-btn .badge,.bottom-item .badge").forEach(e=>e.textContent=n);const b=document.getElementById("productBottomCount");if(b)b.textContent=n}
-  function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open");document.body.style.overflow="hidden"}
+  function open(){ensure();render();document.getElementById("wowCartOverlay").classList.add("open");document.getElementById("wowSharedCart").classList.add("open");document.body.style.overflow="hidden";loadCatalog().then(render)}
   function close(){const c=document.getElementById("wowSharedCart"),o=document.getElementById("wowCartOverlay");if(c)c.classList.remove("open");if(o)o.classList.remove("open");document.body.style.overflow=""}
   function change(id,d){const a=read(),x=a.find(v=>v.id===String(id));if(!x)return;x.q+=d;if(x.q<1)a.splice(a.indexOf(x),1);write(a);render()}
   function checkout(){const a=available();if(!a.length){alert("Your cart is empty.");return}const valid=a.filter(x=>resolve(products(),x)>=0).map(x=>({id:x.id,q:x.q}));if(!valid.length){alert("Your cart could not be loaded. Please refresh once and try again.");return}try{localStorage.setItem("wowPetsCart",JSON.stringify(valid));window.location.href="./index.html?openCheckout=1";}catch(e){console.error("Canonical checkout redirect error:",e);alert("Checkout could not be opened. Please try again.");}}
@@ -81,5 +102,6 @@
   document.addEventListener("DOMContentLoaded",bind);
   window.addEventListener("storage",()=>{render();badges()});
   setTimeout(bind,0);setTimeout(bind,1200);
+  loadCatalog().then(render);
   if(location.hash==="#cart")setTimeout(open,900);
 })();
