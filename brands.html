@@ -35,16 +35,16 @@ header{position:relative;background:#fff;border-bottom:1px solid #e5e5e5;z-index
 .menu-submenu.open{display:block}
 .menu-submenu a{display:block;padding:10px;border-radius:6px}
 .nav>a{white-space:nowrap}
-.wrap{max-width:1100px;margin:0 auto;padding:26px 16px 48px}
-.hero{background:#fff;border:1px solid #e5e5e5;border-radius:18px;padding:24px;margin-bottom:20px}
-.hero h1{margin:0 0 7px;font-size:30px}.hero p{margin:0;color:#666;line-height:1.5}
-.section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 12px}
-.section-heading h2{font-size:20px;margin:0}.section-heading p{font-size:12px;color:#777;margin:4px 0 0}
+.wrap{max-width:1100px;margin:0 auto;padding:22px 16px 48px}
+.hero{margin:0 0 18px;padding:0}
+.hero h1{margin:0;font-size:26px;font-weight:800}
+.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px}
+.section-heading h2{font-size:19px;margin:0}.section-heading p{display:none}
 .brands{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .brand-card{min-height:78px;background:#fff;border:1px solid #e5e5e5;border-radius:14px;padding:14px;text-decoration:none;color:#171717;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s}
 .brand-card:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(0,0,0,.07)}
 .brand-card.active{border:2px solid #e0b400;background:#fffdf3}
-.brand-card small{font-size:11px;color:#777;font-weight:600;margin-top:5px}
+.brand-card small{display:none}
 .products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
 .card{border:1px solid #eee;border-radius:13px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
 .pic{height:190px;background:#f5f5f5;display:grid;place-items:center;overflow:hidden;position:relative}
@@ -97,14 +97,14 @@ header{position:relative;background:#fff;border-bottom:1px solid #e5e5e5;z-index
 </div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
 <div id="menuBackdrop" onclick="toggleMenu(event)"></div><nav class="nav" id="mainNav"><button type="button" class="menu-close" onclick="toggleMenu(event)">MENU <span>×</span></button><a href="./track-order.html"><span class="menu-icon" aria-hidden="true">📦</span><span class="menu-text">TRACK ORDER</span></a><a href="./index.html#shop"><span class="menu-icon" aria-hidden="true">🎁</span><span class="menu-text">BUNDLES</span></a><a href="./brands.html"><span class="menu-icon" aria-hidden="true">🏷️</span><span class="menu-text">SHOP BY BRAND</span></a><div class="menu-group"><div class="menu-parent"><a href="./category.html?cat=Cats"><span class="menu-icon" aria-hidden="true">🐱</span><span class="menu-text">CATS</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="catSubmenu" onclick="toggleSubmenu('catSubmenu',this,event)" aria-label="Expand Cat categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="catSubmenu"><a href="./category.html?cat=Cats&sub=food"><span class="menu-sub-icon" aria-hidden="true">🍖</span><span class="menu-sub-text">Cat Food</span></a><a href="./category.html?cat=Cats&sub=litter"><span class="menu-sub-icon" aria-hidden="true">🪣</span><span class="menu-sub-text">Cat Litter</span></a><a href="./category.html?cat=Cats&sub=toys-accessories"><span class="menu-sub-icon" aria-hidden="true">🧶</span><span class="menu-sub-text">Cat Toys &amp; Accessories</span></a><a href="./category.html?cat=Cats&sub=grooming"><span class="menu-sub-icon menu-icon-grooming" aria-hidden="true">🧴</span><span class="menu-sub-text">Cat Grooming</span></a></div></div><div class="menu-group"><div class="menu-parent"><a href="./category.html?cat=Dogs"><span class="menu-icon" aria-hidden="true">🐶</span><span class="menu-text">DOGS</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="dogSubmenu" onclick="toggleSubmenu('dogSubmenu',this,event)" aria-label="Expand Dog categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="dogSubmenu"><a href="./category.html?cat=Dogs&sub=food"><span class="menu-sub-icon" aria-hidden="true">🍖</span><span class="menu-sub-text">Dog Food</span></a><a href="./category.html?cat=Dogs&sub=treats"><span class="menu-sub-icon" aria-hidden="true">🦴</span><span class="menu-sub-text">Dog Treats</span></a><a href="./category.html?cat=Dogs&sub=toys-accessories"><span class="menu-sub-icon" aria-hidden="true">🧸</span><span class="menu-sub-text">Dog Toys &amp; Accessories</span></a><a href="./category.html?cat=Dogs&sub=grooming"><span class="menu-sub-icon menu-icon-grooming" aria-hidden="true">🧴</span><span class="menu-sub-text">Dog Grooming</span></a></div></div><a href="./category.html?cat=Birds"><span class="menu-icon" aria-hidden="true">🦜</span><span class="menu-text">BIRDS</span></a><a href="./category.html?cat=Fish"><span class="menu-icon" aria-hidden="true">🐠</span><span class="menu-text">FISH</span></a><div class="menu-group"><div class="menu-parent"><a href="./category.html?cat=Pet%20Food"><span class="menu-icon" aria-hidden="true">🍖</span><span class="menu-text">PET FOOD</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="petFoodSubmenu" onclick="toggleSubmenu('petFoodSubmenu',this,event)" aria-label="Expand Pet Food categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="petFoodSubmenu"><a href="./category.html?cat=Pet%20Food&amp;sub=wet-food"><span class="menu-sub-icon" aria-hidden="true">🥫</span><span class="menu-sub-text">Wet Food</span></a><a href="./category.html?cat=Pet%20Food&amp;sub=dry-food"><span class="menu-sub-icon" aria-hidden="true">🥣</span><span class="menu-sub-text">Dry Food</span></a><a href="./category.html?cat=Pet%20Food&amp;sub=fish-feed"><span class="menu-sub-icon" aria-hidden="true">🐠</span><span class="menu-sub-text">Fish Feed</span></a><a href="./category.html?cat=Pet%20Food&amp;sub=bird-feed"><span class="menu-sub-icon" aria-hidden="true">🦜</span><span class="menu-sub-text">Bird Feed</span></a></div></div><a href="./category.html?cat=Medical%20Supplies"><span class="menu-icon" aria-hidden="true">🩺</span><span class="menu-text">MEDICAL SUPPLIES</span></a><a href="./medical-services.html"><span class="menu-icon" aria-hidden="true">👨‍⚕️</span><span class="menu-text">CONSULTANT DOCTOR</span></a></nav></header>
 <main class="wrap">
-<section class="hero"><h1>Shop by Brand</h1><p>Browse every brand with active products at WOW Pets. Select a brand to see its available products.</p></section>
+<section class="hero"><h1>Shop by Brand</h1></section>
 <div id="pageStatus" class="status" role="status">Loading available brands…</div>
-<section aria-labelledby="brandHeading">
- <div class="section-heading"><div><h2 id="brandHeading">Available Brands</h2><p id="brandCount">Loading…</p></div><button id="clearBrand" class="btn" type="button" hidden>All brands</button></div>
+<section aria-label="Available brands">
+ <div class="section-heading"><button id="clearBrand" class="btn" type="button" hidden>All brands</button></div>
  <div id="brands" class="brands"><div class="muted">Loading brands…</div></div>
 </section>
 <section id="brandProductsSection" aria-live="polite" hidden>
- <div class="section-heading"><div><h2 id="productsHeading">Brand Products</h2><p id="productsCount"></p></div></div>
+ <div class="section-heading"><div><h2 id="productsHeading">Products</h2></div></div>
  <div id="products" class="products"></div>
 </section>
 </main>
@@ -138,17 +138,17 @@ function productVisual(p){
 }
 function renderBrands(){
  const box=$("brands");
- if(!availableBrands.length){box.innerHTML='<div class="muted">No brands have active products yet. Add a brand to an active product in Admin and it will appear here.</div>';$("brandCount").textContent="0 brands";return;}
- $("brandCount").textContent=availableBrands.length+" brand"+(availableBrands.length===1?"":"s")+" available";
- box.innerHTML=availableBrands.map(b=>'<button type="button" class="brand-card'+(brandKey(b.name)===brandKey(selectedBrand)?" active":"")+'" data-brand="'+esc(b.name)+'"><span>'+esc(b.name)+'</span><small>'+b.count+' product'+(b.count===1?"":"s")+'</small></button>').join("");
+ if(!availableBrands.length){box.innerHTML='<div class="muted">No brands have active products yet. Add a brand to an active product in Admin and it will appear here.</div>';return;}
+ 
+ box.innerHTML=availableBrands.map(b=>'<button type="button" class="brand-card'+(brandKey(b.name)===brandKey(selectedBrand)?" active":"")+'" data-brand="'+esc(b.name)+'"><span>'+esc(b.name)+'</span></button>').join("");
 }
 function renderSelectedBrand(){
  const section=$("brandProductsSection"),box=$("products");
  if(!selectedBrand){section.hidden=true;$("clearBrand").hidden=true;return;}
  section.hidden=false;$("clearBrand").hidden=false;
  const matches=P.filter(p=>brandKey(p[11])===brandKey(selectedBrand));
- $("productsHeading").textContent=selectedBrand+" Products";
- $("productsCount").textContent=matches.length+" active product"+(matches.length===1?"":"s");
+ $("productsHeading").textContent=selectedBrand;
+ 
  box.innerHTML=matches.length?matches.map(p=>{
   const i=P.indexOf(p),sale=Number(p[9])>0&&Number(p[9])<Number(p[1]);
   const price=sale?'<span class="old-price">PKR '+Number(p[1]).toLocaleString()+'</span><span class="sale-price">PKR '+Number(p[9]).toLocaleString()+'</span>':'PKR '+Number(p[1]).toLocaleString();
@@ -175,7 +175,7 @@ async function loadCatalog(){
   availableBrands=[...grouped.values()].sort((a,b)=>a.name.localeCompare(b.name));
   $("pageStatus").textContent="";
   $("pageStatus").hidden=true;
-  $("brandCount").textContent=availableBrands.length+" brands available";
+  
   if(selectedBrand&&!availableBrands.some(b=>brandKey(b.name)===brandKey(selectedBrand)))selectedBrand="";
   renderBrands();renderSelectedBrand();
   if(window.WOWSharedCart)window.WOWSharedCart.render();
