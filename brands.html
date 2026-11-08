@@ -1,37 +1,235 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WOW Pets — Shop by Brand</title>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Explore available pet product brands at WOW Pets and shop their active products.">
+<meta name="robots" content="index,follow">
+<title>WOW Pets — Shop by Brand</title>
 <style>
-body{margin:0;font-family:Inter,Arial,sans-serif;color:#171717;background:#f8f8f8}.head{background:#fff;border-bottom:1px solid #ddd;padding:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:5}.logo{font-size:26px;font-weight:900}.logo span{color:#f7b900}.btn{display:inline-block;background:#ffd21c;color:#171717;text-decoration:none;border:0;border-radius:9px;padding:10px 14px;font-weight:800}.wrap{max-width:1000px;margin:0 auto;padding:28px 16px}.hero{background:#fff;border:1px solid #e5e5e5;border-radius:18px;padding:24px;margin-bottom:18px}.hero h1{margin:0 0 7px;font-size:30px}.hero p{margin:0;color:#666}.brands{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.brand-card{background:#fff;border:1px solid #e5e5e5;border-radius:14px;padding:18px;text-decoration:none;color:#171717;font-weight:800;min-height:70px;display:flex;align-items:center;justify-content:center;text-align:center;transition:.18s}.brand-card:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(0,0,0,.08)}.muted{text-align:center;color:#777;padding:35px}.count{font-size:12px;color:#777;font-weight:600;margin-top:5px}@media(max-width:700px){.brands{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:25px}}
-</style></head><body>
-<header><div class="wow-offer-ticker" role="status" aria-label="WOW Pets offers"><div class="wow-offer-track"><span>✨ WOW Pets Launch Offers</span><span>•</span><span>💳 Cash on Delivery</span><span>•</span><span>💬 WhatsApp Order Support</span><span>•</span><span>🏪 Store Pickup — Rawalpindi</span><span>•</span><span>🐾 Food • Grooming • Medicines • Accessories</span></div></div><div class="head"><div class="logo">WOW <span>PETS</span></div><a class="btn" href="./index.html">BACK TO STORE</a></header>
-<main class="wrap"><section class="hero"><h1>Shop by Brand</h1><p>Choose a brand to see all of its available products across cats, dogs and other categories.</p></section><section id="brands" class="brands"><div class="muted">Loading brands…</div></section></main>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co",SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
-const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY),box=document.getElementById("brands");
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Arial,sans-serif;color:#171717;background:#f8f8f8;padding-bottom:0}
+header{position:relative;background:#fff;border-bottom:1px solid #e5e5e5;z-index:50}
+.wow-offer-ticker{height:31px;display:flex;align-items:center;overflow:hidden;background:#171717;color:#fff;font-size:10px;font-weight:700;white-space:nowrap}
+.wow-offer-track{display:flex;align-items:center;gap:12px;padding:0 14px}
+.head{max-width:1100px;margin:auto;padding:12px 14px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mobile-menu-bar{display:flex;align-items:center;justify-content:center;flex:0 0 42px}
+.menu-btn{width:42px;height:42px;border:0;background:transparent;color:#171717;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.hamburger-lines{width:26px;display:flex;flex-direction:column;gap:5px}.hamburger-lines i{height:2.5px;width:25px;background:currentColor;border-radius:2px}
+.brand{display:flex;align-items:center;justify-content:center;flex:1;min-width:0}.brand-logo{display:block;width:200px;height:auto;max-width:100%;object-fit:contain}
+.head-actions{display:flex;align-items:center;gap:8px}.icon-btn{position:relative;width:42px;height:42px;border:0;background:transparent;font-size:27px;cursor:pointer}
+.icon-btn .badge{position:absolute;right:-1px;top:-3px;background:#f7b900;color:#111;border-radius:50%;min-width:19px;height:19px;font-size:11px;font-weight:900;display:grid;place-items:center}
+.search{flex:0 1 560px;max-width:560px;height:44px;margin:0 auto;display:flex;border:1px solid #dcdcdc;border-radius:12px;overflow:hidden;background:#fff}
+.search input{width:100%;min-width:0;border:0;outline:0;padding:0 14px;font-size:14px}
+#menuBackdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:49}
+#menuBackdrop.open{display:block}
+.nav{max-width:1100px;margin:0 auto;padding:0 14px 12px;display:flex;align-items:center;gap:16px;overflow:visible;font-size:12px;font-weight:800}
+.nav a{color:#222;text-decoration:none}
+.nav a:hover{color:#9a7600}
+.menu-close{display:none}
+.menu-group{position:relative}
+.menu-parent{display:flex;align-items:center;gap:4px}
+.menu-sub-toggle{border:0;background:transparent;cursor:pointer;padding:4px}
+.menu-sub-toggle svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+.menu-submenu{display:none;position:absolute;top:100%;left:0;min-width:210px;background:#fff;border:1px solid #eee;border-radius:10px;padding:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:60}
+.menu-submenu.open{display:block}
+.menu-submenu a{display:block;padding:10px;border-radius:6px}
+.nav>a{white-space:nowrap}
+.wrap{max-width:1100px;margin:0 auto;padding:26px 16px 48px}
+.hero{background:#fff;border:1px solid #e5e5e5;border-radius:18px;padding:24px;margin-bottom:20px}
+.hero h1{margin:0 0 7px;font-size:30px}.hero p{margin:0;color:#666;line-height:1.5}
+.section-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:24px 0 12px}
+.section-heading h2{font-size:20px;margin:0}.section-heading p{font-size:12px;color:#777;margin:4px 0 0}
+.brands{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.brand-card{min-height:78px;background:#fff;border:1px solid #e5e5e5;border-radius:14px;padding:14px;text-decoration:none;color:#171717;font-weight:800;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s}
+.brand-card:hover{transform:translateY(-2px);box-shadow:0 7px 20px rgba(0,0,0,.07)}
+.brand-card.active{border:2px solid #e0b400;background:#fffdf3}
+.brand-card small{font-size:11px;color:#777;font-weight:600;margin-top:5px}
+.products{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{border:1px solid #eee;border-radius:13px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+.pic{height:190px;background:#f5f5f5;display:grid;place-items:center;overflow:hidden;position:relative}
+.pic img{width:100%;height:100%;object-fit:contain;display:block}
+.info{padding:12px;display:flex;flex-direction:column;flex:1}
+.info>b{font-size:14px;line-height:1.35;min-height:38px}
+.price{font-size:16px;font-weight:900;margin:9px 0}
+.old-price{text-decoration:line-through;color:#888;font-size:12px;margin-right:6px}
+.sale-price{color:#c62828}
+.btn{border:0;border-radius:9px;background:#ffd21c;color:#171717;padding:11px 13px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.add-product{width:100%;margin-top:auto}
+.muted{grid-column:1/-1;text-align:center;color:#777;padding:32px 16px;background:#fff;border:1px dashed #ddd;border-radius:12px}
+.status{margin:12px 0;color:#777;font-size:13px}
+.bottom-nav{display:none}
+@media(min-width:701px){.mobile-menu-bar{display:none}.head{justify-content:space-between}.brand{flex:0 0 auto}.search{margin-left:auto;margin-right:12px}.nav{flex-wrap:wrap}}
+@media(max-width:700px){
+ body{padding-bottom:calc(64px + env(safe-area-inset-bottom))}
+ .head{padding:10px 12px;gap:8px}
+ .mobile-menu-bar{display:flex;order:0;flex:0 0 40px}
+ .brand{order:1;flex:1;justify-content:center}
+ .brand-logo{width:190px;max-width:100%}
+ .head-actions{order:2}
+ .search{order:3;flex:0 0 100%;max-width:none;height:42px;margin:3px 0 0}
+ .nav{display:none;position:absolute;left:0;right:0;top:100%;max-height:75vh;overflow:auto;background:#171717;color:#fff;padding:8px 14px 14px;flex-direction:column;align-items:stretch;gap:0;z-index:55}
+ .nav.open{display:flex}
+ .nav a{display:block;color:#fff;padding:12px 8px;border-bottom:1px solid #333}
+ .nav .menu-parent a{flex:1}
+ .menu-group{width:100%}.menu-parent{display:flex;justify-content:space-between}
+ .menu-sub-toggle{color:#fff;padding:10px}
+ .menu-submenu{position:static;min-width:0;background:#242424;border:0;border-radius:8px;box-shadow:none;padding:4px 10px}
+ .menu-submenu a{padding:10px 12px}
+ .menu-close{display:flex;justify-content:space-between;align-items:center;width:100%;padding:10px 8px;background:transparent;color:#fff;border:0;border-bottom:1px solid #444;font-weight:900}
+ .wrap{padding:18px 12px 30px}
+ .hero{padding:19px;border-radius:14px}.hero h1{font-size:25px}
+ .brands{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .brand-card{min-height:70px;padding:11px;font-size:14px}
+ .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .pic{height:175px}.info{padding:10px}.info>b{font-size:13px;min-height:36px}
+ .price{font-size:14px}
+ .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:64px;background:#fff;border-top:1px solid #eee;z-index:999;display:grid;grid-template-columns:repeat(5,1fr);padding:1px 0 env(safe-area-inset-bottom);box-shadow:0 -1px 5px rgba(0,0,0,.04)}
+ .bottom-item{border:0;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#222;font-size:11px;font-weight:600;line-height:1.15;text-decoration:none;cursor:pointer}
+ .bottom-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+ .bottom-item .badge{position:absolute;transform:translate(11px,-8px);width:18px;height:18px;border-radius:50%;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px}
+}
+</style>
+</head>
+<body>
+<header><div class="wow-offer-ticker" role="status" aria-label="WOW Pets offers"><div class="wow-offer-track"><span>✨ WOW Pets Launch Offers</span><span>•</span><span>💳 Cash on Delivery</span><span>•</span><span>💬 WhatsApp Order Support</span><span>•</span><span>🏪 Store Pickup — Rawalpindi</span><span>•</span><span>🐾 Food • Grooming • Medicines • Accessories</span></div></div><div class="head"><div class="mobile-menu-bar">
+  <button type="button" class="menu-btn" onclick="toggleMenu(event);return false;" aria-label="Open menu" aria-controls="mainNav" aria-expanded="false"><span class="hamburger-lines" aria-hidden="true"><i></i><i></i><i></i></span></button>
+</div><div class="brand"><a href="./index.html" aria-label="WOW Pets Home" style="display:flex;align-items:center;cursor:pointer"><img class="brand-logo" src="./wow-pets-logo.webp?v=20260922-2" width="155" height="35" alt="WOW Pets" loading="eager" decoding="sync"></a></div><div class="head-actions"><button class="icon-btn" onclick="openCart()" aria-label="Cart">🛒<span class="badge" id="count">0</span></button></div><div class="search"><input id="search" type="search" enterkeyhint="search" placeholder="Search for products..." aria-label="Search products" autocomplete="off"></div></div>
+<div id="menuBackdrop" onclick="toggleMenu(event)"></div><nav class="nav" id="mainNav"><button type="button" class="menu-close" onclick="toggleMenu(event)">MENU <span>×</span></button><a href="./track-order.html"><span class="menu-icon" aria-hidden="true">📦</span><span class="menu-text">TRACK ORDER</span></a><a href="./index.html#shop"><span class="menu-icon" aria-hidden="true">🎁</span><span class="menu-text">BUNDLES</span></a><a href="./brands.html"><span class="menu-icon" aria-hidden="true">🏷️</span><span class="menu-text">SHOP BY BRAND</span></a><div class="menu-group"><div class="menu-parent"><a href="./category.html?cat=Cats"><span class="menu-icon" aria-hidden="true">🐱</span><span class="menu-text">CATS</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="catSubmenu" onclick="toggleSubmenu('catSubmenu',this,event)" aria-label="Expand Cat categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="catSubmenu"><a href="./category.html?cat=Cats&sub=food"><span class="menu-sub-icon" aria-hidden="true">🍖</span><span class="menu-sub-text">Cat Food</span></a><a href="./category.html?cat=Cats&sub=litter"><span class="menu-sub-icon" aria-hidden="true">🪣</span><span class="menu-sub-text">Cat Litter</span></a><a href="./category.html?cat=Cats&sub=toys-accessories"><span class="menu-sub-icon" aria-hidden="true">🧶</span><span class="menu-sub-text">Cat Toys &amp; Accessories</span></a><a href="./category.html?cat=Cats&sub=grooming"><span class="menu-sub-icon menu-icon-grooming" aria-hidden="true">🧴</span><span class="menu-sub-text">Cat Grooming</span></a></div></div><div class="menu-group"><div class="menu-parent"><a href="./category.html?cat=Dogs"><span class="menu-icon" aria-hidden="true">🐶</span><span class="menu-text">DOGS</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="dogSubmenu" onclick="toggleSubmenu('dogSubmenu',this,event)" aria-label="Expand Dog categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="dogSubmenu"><a href="./category.html?cat=Dogs&sub=food"><span class="menu-sub-icon" aria-hidden="true">🍖</span><span class="menu-sub-text">Dog Food</span></a><a href="./category.html?cat=Dogs&sub=treats"><span class="menu-sub-icon" aria-hidden="true">🦴</span><span class="menu-sub-text">Dog Treats</span></a><a href="./category.html?cat=Dogs&sub=toys-accessories"><span class="menu-sub-icon" aria-hidden="true">🧸</span><span class="menu-sub-text">Dog Toys &amp; Accessories</span></a><a href="./category.html?cat=Dogs&sub=grooming"><span class="menu-sub-icon menu-icon-grooming" aria-hidden="true">🧴</span><span class="menu-sub-text">Dog Grooming</span></a></div></div><a href="./category.html?cat=Birds"><span class="menu-icon" aria-hidden="true">🦜</span><span class="menu-text">BIRDS</span></a><a href="./category.html?cat=Fish"><span class="menu-icon" aria-hidden="true">🐠</span><span class="menu-text">FISH</span></a><div class="menu-group"><div class="menu-parent"><a href="./category.html?cat=Pet%20Food"><span class="menu-icon" aria-hidden="true">🍖</span><span class="menu-text">PET FOOD</span></a><button type="button" class="menu-sub-toggle" aria-expanded="false" aria-controls="petFoodSubmenu" onclick="toggleSubmenu('petFoodSubmenu',this,event)" aria-label="Expand Pet Food categories"><span aria-hidden="true"><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path class="menu-sub-toggle-arrow" d="M7 5 L12 10 L7 15"></path></svg></span></button></div><div class="menu-submenu" id="petFoodSubmenu"><a href="./category.html?cat=Pet%20Food&amp;sub=wet-food"><span class="menu-sub-icon" aria-hidden="true">🥫</span><span class="menu-sub-text">Wet Food</span></a><a href="./category.html?cat=Pet%20Food&amp;sub=dry-food"><span class="menu-sub-icon" aria-hidden="true">🥣</span><span class="menu-sub-text">Dry Food</span></a><a href="./category.html?cat=Pet%20Food&amp;sub=fish-feed"><span class="menu-sub-icon" aria-hidden="true">🐠</span><span class="menu-sub-text">Fish Feed</span></a><a href="./category.html?cat=Pet%20Food&amp;sub=bird-feed"><span class="menu-sub-icon" aria-hidden="true">🦜</span><span class="menu-sub-text">Bird Feed</span></a></div></div><a href="./category.html?cat=Medical%20Supplies"><span class="menu-icon" aria-hidden="true">🩺</span><span class="menu-text">MEDICAL SUPPLIES</span></a><a href="./medical-services.html"><span class="menu-icon" aria-hidden="true">👨‍⚕️</span><span class="menu-text">CONSULTANT DOCTOR</span></a></nav></header>
+<main class="wrap">
+<section class="hero"><h1>Shop by Brand</h1><p>Browse every brand with active products at WOW Pets. Select a brand to see its available products.</p></section>
+<div id="pageStatus" class="status" role="status">Loading available brands…</div>
+<section aria-labelledby="brandHeading">
+ <div class="section-heading"><div><h2 id="brandHeading">Available Brands</h2><p id="brandCount">Loading…</p></div><button id="clearBrand" class="btn" type="button" hidden>All brands</button></div>
+ <div id="brands" class="brands"><div class="muted">Loading brands…</div></div>
+</section>
+<section id="brandProductsSection" aria-live="polite" hidden>
+ <div class="section-heading"><div><h2 id="productsHeading">Brand Products</h2><p id="productsCount"></p></div></div>
+ <div id="products" class="products"></div>
+</section>
+</main>
+<nav class="bottom-nav" aria-label="Mobile navigation">
+ <button type="button" class="bottom-item" onclick="location.href='./index.html';return false;"><svg viewBox="0 0 48 48"><path d="m6 23 18-15 18 15v19H29V30H19v12H6z"></path></svg><span>Home</span></button>
+ <button type="button" class="bottom-item" onclick="location.href='./search.html';return false;"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="13"></circle><path d="m31 31 10 10"></path></svg><span>Search</span></button>
+ <button type="button" class="bottom-item" onclick="location.href='./index.html#categories';return false;"><svg viewBox="0 0 48 48"><rect x="6" y="6" width="13" height="13" rx="2"></rect><rect x="29" y="6" width="13" height="13" rx="2"></rect><rect x="6" y="29" width="13" height="13" rx="2"></rect><rect x="29" y="29" width="13" height="13" rx="2"></rect></svg><span>Categories</span></button>
+ <button type="button" class="bottom-item" onclick="openCart();return false;" style="position:relative"><span class="badge" id="bottomCount">0</span><svg viewBox="0 0 48 48"><path d="M6 8h6l4 24h23l4-17H14"></path><circle cx="20" cy="40" r="2.5"></circle><circle cx="36" cy="40" r="2.5"></circle></svg><span>Cart</span></button>
+ <a class="bottom-item" href="https://api.whatsapp.com/send?phone=923465771099" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 48 48"><path d="M24 6c-10 0-18 7.8-18 17.5 0 3.2.9 6.2 2.6 8.8L6 42l10.2-2.5c2.3 1.2 4.9 1.8 7.8 1.8 10 0 18-7.8 18-17.5S34 6 24 6Z"></path><path d="M18 16c.5-1 1-1.1 1.7-1.1h1.2c.4 0 .8.2 1 .7l1.6 3.7c.2.5.1.9-.2 1.2l-1.2 1.4c1 1.8 2.5 3.3 4.3 4.3l1.4-1.2c.3-.3.8-.4 1.2-.2l3.7 1.6c.5.2.7.6.7 1v1.2c0 .7-.1 1.2-1.1 1.7-1.1.5-2.4.7-3.6.3-2.8-.9-5.5-2.5-7.6-4.6s-3.7-4.8-4.6-7.6c-.4-1.2-.2-2.5.3-3.6Z"></path></svg><span>WhatsApp</span></a>
+</nav>
+<script>
+"use strict";
+const SUPABASE_URL="https://veskmrxhtqryffixzkoi.supabase.co";
+const SUPABASE_KEY="sb_publishable_rmLcBS0XYQG8hpGNmm2a2g_gdvBIJts";
+const $=id=>document.getElementById(id);
 const esc=v=>String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-(async()=>{const {data,error}=await sb.from("products").select("brand").eq("active",true).not("brand","is",null).order("brand");if(error){box.innerHTML='<div class="muted">Could not load brands. Please try again.</div>';return}const brands=[...new Set((data||[]).map(x=>String(x.brand||"").trim()).filter(Boolean).sort((a,b)=>a.localeCompare(b)))];box.innerHTML=brands.length?brands.map(b=>'<a class="brand-card" href="./search.html?brand='+encodeURIComponent(b)+'">'+esc(b)+'</a>').join(""):'<div class="muted">No brands have been added yet. Add a brand to a product in Admin and it will appear here.</div>'})()
-</script><style id="wow-mobile-global-header-polish-v26">
-/* V26: mobile-only global header consistency. Desktop remains unchanged. */
-.wow-offer-ticker{display:none;}
-@media(max-width:700px){
-  header{border-bottom:0!important;box-shadow:none!important;}
-  .wow-offer-ticker{height:31px!important;min-height:31px!important;display:flex!important;align-items:center!important;overflow:hidden!important;background:#171717!important;color:#fff!important;font-size:10px!important;font-weight:700!important;white-space:nowrap!important;}
-  .wow-offer-track{display:flex!important;align-items:center!important;gap:9px!important;white-space:nowrap!important;animation:none!important;}
-  .head{padding-bottom:10px!important;}
-  .wow-offer-ticker + .head{border-top:0!important;}
+let P=[];
+let availableBrands=[];
+let selectedBrand="";
+function productRow(r){
+ const gallery=Array.isArray(r.image_gallery)?r.image_gallery:[];
+ const mainImage=r.image_url||r.image||r.imageUrl||gallery[0]||"";
+ const categories=[r.category,r.subcategory].flatMap(v=>String(v??"").split(",")).map(v=>v.trim()).filter(Boolean);
+ const categoryText=[...new Set(categories)].join(", ")||"Accessories";
+ return [r.name??r.product_name??r.title??"Product",Number(r.price??r.sale_price??0),mainImage,categoryText,r.id,r.description??r.details??"Quality pet product from WOW Pets.",r.sku,r.weight,r.weight_unit,r.sale_price,gallery,r.brand??""];
 }
-</style><style id="wow-mobile-logo-padding-layer-v27">
-/* V27: match homepage logo clipping/layering on every customer page. Mobile only. Desktop untouched. */
-@media(max-width:700px){
-  .wow-offer-ticker{position:relative!important;z-index:30!important;}
-  .head{position:relative!important;z-index:20!important;overflow:visible!important;}
-  .brand{position:relative!important;z-index:1!important;height:65px!important;min-height:65px!important;overflow:hidden!important;isolation:isolate!important;}
-  .brand-logo{
-    position:relative!important;z-index:0!important;height:65px!important;max-height:65px!important;
-    width:auto!important;max-width:none!important;object-fit:contain!important;object-position:center!important;
-    transform:scale(1.55)!important;transform-origin:center center!important;
-    background:transparent!important;mix-blend-mode:normal!important;
-  }
-  .search{position:relative!important;z-index:40!important;}
+function brandKey(v){return String(v??"").trim().toLocaleLowerCase();}
+function productVisual(p){
+ const src=String(p[2]||"");
+ return /^https?:\/\//i.test(src)?'<img loading="lazy" decoding="async" src="'+esc(src)+'" alt="'+esc(p[0])+'">':"🐾";
 }
-</style></body></html>
+function renderBrands(){
+ const box=$("brands");
+ if(!availableBrands.length){box.innerHTML='<div class="muted">No brands have active products yet. Add a brand to an active product in Admin and it will appear here.</div>';$("brandCount").textContent="0 brands";return;}
+ $("brandCount").textContent=availableBrands.length+" brand"+(availableBrands.length===1?"":"s")+" available";
+ box.innerHTML=availableBrands.map(b=>'<button type="button" class="brand-card'+(brandKey(b.name)===brandKey(selectedBrand)?" active":"")+'" data-brand="'+esc(b.name)+'"><span>'+esc(b.name)+'</span><small>'+b.count+' product'+(b.count===1?"":"s")+'</small></button>').join("");
+}
+function renderSelectedBrand(){
+ const section=$("brandProductsSection"),box=$("products");
+ if(!selectedBrand){section.hidden=true;$("clearBrand").hidden=true;return;}
+ section.hidden=false;$("clearBrand").hidden=false;
+ const matches=P.filter(p=>brandKey(p[11])===brandKey(selectedBrand));
+ $("productsHeading").textContent=selectedBrand+" Products";
+ $("productsCount").textContent=matches.length+" active product"+(matches.length===1?"":"s");
+ box.innerHTML=matches.length?matches.map(p=>{
+  const i=P.indexOf(p),sale=Number(p[9])>0&&Number(p[9])<Number(p[1]);
+  const price=sale?'<span class="old-price">PKR '+Number(p[1]).toLocaleString()+'</span><span class="sale-price">PKR '+Number(p[9]).toLocaleString()+'</span>':'PKR '+Number(p[1]).toLocaleString();
+  return '<article class="card"><a class="pic" href="./product.html?id='+encodeURIComponent(p[4])+'" aria-label="View '+esc(p[0])+'">'+productVisual(p)+'</a><div class="info"><b>'+esc(p[0])+'</b><div class="price">'+price+'</div><button type="button" class="btn add-product" data-add-index="'+i+'">ADD TO CART</button></div></article>';
+ }).join(""):'<div class="muted">No active products are currently available for this brand.</div>';
+}
+function selectBrand(name,updateUrl=true){
+ selectedBrand=String(name||"").trim();
+ renderBrands();renderSelectedBrand();
+ if(updateUrl){const u=new URL(location.href);if(selectedBrand)u.searchParams.set("brand",selectedBrand);else u.searchParams.delete("brand");history.replaceState(null,"",u.pathname+u.search+u.hash);}
+}
+async function loadCatalog(){
+ try{
+  const fields="id,sku,brand,name,category,size,price,stock,description,image_url,active,created_at,updated_at,weight,weight_unit,sale_price,image_gallery";
+  const url=SUPABASE_URL+"/rest/v1/products?select="+encodeURIComponent(fields)+"&active=eq.true&order=created_at.desc";
+  const res=await fetch(url,{method:"GET",headers:{apikey:SUPABASE_KEY,Authorization:"Bearer "+SUPABASE_KEY,Accept:"application/json","Cache-Control":"no-cache"},cache:"no-store"});
+  if(!res.ok)throw new Error("Products API returned HTTP "+res.status);
+  const data=await res.json();
+  if(!Array.isArray(data))throw new Error("Products API returned an invalid response.");
+  P=data.map(productRow).filter(p=>p&&p[4]!=null);
+  window.P=P;
+  const grouped=new Map();
+  P.forEach(p=>{const name=String(p[11]||"").trim();if(!name)return;const key=brandKey(name);if(!grouped.has(key))grouped.set(key,{name,count:0});grouped.get(key).count++;});
+  availableBrands=[...grouped.values()].sort((a,b)=>a.name.localeCompare(b.name));
+  $("pageStatus").textContent="";
+  $("pageStatus").hidden=true;
+  $("brandCount").textContent=availableBrands.length+" brands available";
+  if(selectedBrand&&!availableBrands.some(b=>brandKey(b.name)===brandKey(selectedBrand)))selectedBrand="";
+  renderBrands();renderSelectedBrand();
+  if(window.WOWSharedCart)window.WOWSharedCart.render();
+ }catch(error){
+  console.error("WOW Pets brand catalog load failed:",error);
+  $("pageStatus").hidden=false;
+  $("pageStatus").textContent="We couldn’t load the brand catalogue. Please refresh the page or try again shortly.";
+  $("brands").innerHTML='<div class="muted">Brand list temporarily unavailable.</div>';
+  $("brandCount").textContent="Could not load brands";
+  $("brandProductsSection").hidden=true;
+ }
+}
+$("brands").addEventListener("click",event=>{
+ const button=event.target.closest("[data-brand]");
+ if(button)selectBrand(button.dataset.brand);
+});
+$("products").addEventListener("click",event=>{
+ const button=event.target.closest("[data-add-index]");
+ if(!button)return;
+ const index=Number(button.dataset.addIndex);
+ if(Number.isInteger(index)&&P[index]&&window.WOWSharedCart)window.WOWSharedCart.add(index,1);
+});
+$("clearBrand").addEventListener("click",()=>selectBrand(""));
+$("search").addEventListener("keydown",event=>{
+ if(event.key==="Enter"){event.preventDefault();const q=String(event.currentTarget.value||"").trim();if(q)location.href="./search.html?q="+encodeURIComponent(q);}
+});
+function toggleMenu(event){
+ if(event){event.preventDefault();event.stopPropagation();}
+ const nav=$("mainNav"),backdrop=$("menuBackdrop"),button=document.querySelector(".menu-btn");
+ if(!nav)return false;
+ const open=!nav.classList.contains("open");
+ nav.classList.toggle("open",open);if(backdrop)backdrop.classList.toggle("open",open);
+ if(button)button.setAttribute("aria-expanded",open?"true":"false");
+ document.body.style.overflow=open?"hidden":"";
+ return false;
+}
+function toggleSubmenu(id,button,event){
+ if(event){event.preventDefault();event.stopPropagation();}
+ const submenu=$(id);if(!submenu||!button)return false;
+ const open=!submenu.classList.contains("open");
+ submenu.classList.toggle("open",open);button.setAttribute("aria-expanded",open?"true":"false");
+ return false;
+}
+document.addEventListener("keydown",event=>{
+ if(event.key==="Escape"){const nav=$("mainNav");if(nav&&nav.classList.contains("open"))toggleMenu(event);}
+});
+function openCart(){if(window.WOWSharedCart)window.WOWSharedCart.open();}
+function goHome(){location.href="./index.html";}
+function focusSearch(){const input=$("search");if(input){input.focus();input.scrollIntoView({behavior:"smooth",block:"center"});}}
+function toggleCategories(){location.href="./index.html#categories";}
+const params=new URLSearchParams(location.search);
+selectedBrand=String(params.get("brand")||"").trim();
+loadCatalog();
+</script>
+<script src="./shared-cart.js?v=20261004-3"></script>
+</body>
+</html>
