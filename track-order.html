@@ -116,10 +116,29 @@ async function track(){
  .bottom-item.active{color:#222}
  .bottom-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
  .bottom-item .badge{position:absolute;top:5px;left:calc(50% + 8px);width:18px;min-width:18px;height:18px;padding:0;border-radius:50%;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
- .nav#mainNav{transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important}
- .nav#mainNav.open{transition:transform .3s ease,opacity .3s ease,visibility 0s linear 0s!important}
- .nav#mainNav .menu-submenu{transition:max-height .26s ease,opacity .18s ease,transform .26s ease!important}
- .nav#mainNav .menu-sub-toggle svg{transition:transform .22s ease!important}
+ /* Fast, GPU-composited menu motion aligned with the responsive main-page drawer. */
+ @media(max-width:700px){
+  .nav#mainNav{
+   transform:translate3d(-105%,0,0)!important;
+   transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important;
+   will-change:transform,opacity!important;
+   backface-visibility:hidden!important;
+   -webkit-backface-visibility:hidden!important;
+  }
+  .nav#mainNav.open{
+   transform:translate3d(0,0,0)!important;
+   transition:transform .3s ease,opacity .3s ease,visibility 0s linear 0s!important;
+  }
+  .nav#mainNav .menu-submenu{
+   max-height:0!important;overflow:hidden!important;
+   transition:max-height .24s cubic-bezier(.22,1,.36,1),opacity .16s ease,transform .24s cubic-bezier(.22,1,.36,1)!important;
+   will-change:max-height,opacity,transform!important;
+  }
+  .nav#mainNav .menu-submenu.open{
+   max-height:420px!important;opacity:1!important;transform:translateY(0)!important;
+  }
+  .nav#mainNav .menu-sub-toggle svg{transition:transform .22s ease!important}
+ }
 }
 </style>
 <script src="./shared-cart.js?v=20261108-4"></script></body></html>

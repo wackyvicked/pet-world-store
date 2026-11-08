@@ -33,6 +33,31 @@
 </section>
 <section class="info" id="online-consultation"><h2>Online Vet Consultation</h2><p>Online consultation booking is not open yet. We are preparing a secure request, payment-verification and appointment-confirmation process before accepting bookings.</p><div class="notice">Please do not send any payment for an online consultation until the official booking option is announced. For urgent or life-threatening pet conditions, visit a veterinary clinic immediately instead of waiting for an online consultation.</div></section>
 </main>
+<style id="wow-menu-motion-parity">
+/* Fast, GPU-composited menu motion aligned with the responsive main-page drawer. */
+@media(max-width:700px){
+ .nav#mainNav{
+  transform:translate3d(-105%,0,0)!important;
+  transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important;
+  will-change:transform,opacity!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+ }
+ .nav#mainNav.open{
+  transform:translate3d(0,0,0)!important;
+  transition:transform .3s ease,opacity .3s ease,visibility 0s linear 0s!important;
+ }
+ .nav#mainNav .menu-submenu{
+  max-height:0!important;overflow:hidden!important;
+  transition:max-height .24s cubic-bezier(.22,1,.36,1),opacity .16s ease,transform .24s cubic-bezier(.22,1,.36,1)!important;
+  will-change:max-height,opacity,transform!important;
+ }
+ .nav#mainNav .menu-submenu.open{
+  max-height:420px!important;opacity:1!important;transform:translateY(0)!important;
+ }
+ .nav#mainNav .menu-sub-toggle svg{transition:transform .22s ease!important}
+}
+</style>
 <script src="./shared-cart.js?v=20261108-4"></script>
 </body>
 </html>
