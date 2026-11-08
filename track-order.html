@@ -99,4 +99,27 @@ async function track(){
   }
   .search{position:relative!important;z-index:40!important;}
 }
-</style><script src="./shared-cart.js?v=20261108-4"></script></body></html>
+</style><nav class="bottom-nav" aria-label="Mobile navigation">
+ <button type="button" class="bottom-item" onclick="location.href='./index.html';return false;"><svg viewBox="0 0 48 48"><path d="m6 23 18-15 18 15v19H29V30H19v12H6z"></path></svg><span>Home</span></button>
+ <button type="button" class="bottom-item" onclick="location.href='./search.html';return false;"><svg viewBox="0 0 48 48"><circle cx="21" cy="21" r="13"></circle><path d="m31 31 10 10"></path></svg><span>Search</span></button>
+ <button type="button" class="bottom-item" onclick="location.href='./index.html#categories';return false;"><svg viewBox="0 0 48 48"><rect x="6" y="6" width="13" height="13" rx="2"></rect><rect x="29" y="6" width="13" height="13" rx="2"></rect><rect x="6" y="29" width="13" height="13" rx="2"></rect><rect x="29" y="29" width="13" height="13" rx="2"></rect></svg><span>Categories</span></button>
+ <button type="button" class="bottom-item" onclick="openCart();return false;" style="position:relative"><span class="badge" id="bottomCount">0</span><svg viewBox="0 0 48 48"><path d="M6 8h6l4 24h23l4-17H14"></path><circle cx="20" cy="40" r="2.5"></circle><circle cx="36" cy="40" r="2.5"></circle></svg><span>Cart</span></button>
+ <a class="bottom-item" href="https://api.whatsapp.com/send?phone=923465771099" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 48 48"><path d="M24 6c-10 0-18 7.8-18 17.5 0 3.2.9 6.2 2.6 8.8L6 42l10.2-2.5c2.3 1.2 4.9 1.8 7.8 1.8 10 0 18-7.8 18-17.5S34 6 24 6Z"></path><path d="M18 16c.5-1 1-1.1 1.7-1.1h1.2c.4 0 .8.2 1 .7l1.6 3.7c.2.5.1.9-.2 1.2l-1.2 1.4c1 1.8 2.5 3.3 4.3 4.3l1.4-1.2c.3-.3.8-.4 1.2-.2l3.7 1.6c.5.2.7.6.7 1v1.2c0 .7-.1 1.2-1.1 1.7-1.1.5-2.4.7-3.6.3-2.8-.9-5.5-2.5-7.6-4.6s-3.7-4.8-4.6-7.6c-.4-1.2-.2-2.5.3-3.6Z"></path></svg><span>WhatsApp</span></a>
+</nav>
+<style id="track-order-bottom-nav-and-menu-standard">
+/* Match the homepage bottom navigation and menu animation timings. */
+.bottom-nav{display:none}
+@media(max-width:700px){
+ body{padding-bottom:64px}
+ .bottom-nav{position:fixed;left:0;right:0;bottom:0;height:64px;background:#fff;border-top:1px solid #eee;z-index:999;display:grid;grid-template-columns:repeat(5,1fr);padding:1px 0 env(safe-area-inset-bottom);box-shadow:0 -1px 5px rgba(0,0,0,.04)}
+ .bottom-item{position:relative;border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:#222;font:500 11px/1.15 Arial,sans-serif;text-decoration:none}
+ .bottom-item.active{color:#222}
+ .bottom-item svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+ .bottom-item .badge{position:absolute;top:5px;left:calc(50% + 8px);width:18px;min-width:18px;height:18px;padding:0;border-radius:50%;background:#222;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800}
+ .nav#mainNav{transition:transform .3s ease,opacity .3s ease,visibility 0s linear .3s!important}
+ .nav#mainNav.open{transition:transform .3s ease,opacity .3s ease,visibility 0s linear 0s!important}
+ .nav#mainNav .menu-submenu{transition:max-height .26s ease,opacity .18s ease,transform .26s ease!important}
+ .nav#mainNav .menu-sub-toggle svg{transition:transform .22s ease!important}
+}
+</style>
+<script src="./shared-cart.js?v=20261108-4"></script></body></html>
