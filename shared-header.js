@@ -29,7 +29,7 @@
     return false;
   };
   /* Open the canonical shared cart on the store page from standalone pages. */
-  window.openCart=function(){window.location.href="./index.html#cart";};
+  window.openCart=function(){if(window.WOWSharedCart&&typeof window.WOWSharedCart.open==="function"){window.WOWSharedCart.open();return;}window.location.href="./index.html#cart";};
   document.addEventListener("keydown",function(event){
     if(event.key==="Escape")setMenu(false);
   });
