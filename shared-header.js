@@ -28,8 +28,8 @@
     button.setAttribute("aria-expanded",open?"true":"false");
     return false;
   };
-  /* These standalone pages do not own the store cart; send customers to the store. */
-  window.openCart=function(){window.location.href="./index.html#shop";};
+  /* Open the canonical shared cart on the store page from standalone pages. */
+  window.openCart=function(){window.location.href="./index.html#cart";};
   document.addEventListener("keydown",function(event){
     if(event.key==="Escape")setMenu(false);
   });
